@@ -1,0 +1,2 @@
+const labels={active:'ใช้งาน',inactive:'ปิดใช้งาน',open:'รอมอบหมาย',assigned:'มอบหมายแล้ว',resolved:'แก้ไขแล้ว',created:'รอเริ่มงาน',in_progress:'กำลังดำเนินการ',completed:'เสร็จสิ้น',cancelled:'ยกเลิก',installation:'ติดตั้ง',repair:'ซ่อม',admin:'แอดมิน',technician:'ช่าง'};
+export default function StatusBadge({value}){return <span className={`badge badge-${value}`}>{labels[value]||value||'-'}</span>}

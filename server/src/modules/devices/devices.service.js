@@ -1,0 +1,1 @@
+const r=require('./devices.repository');Object.assign(exports,{models:r.models,createModel:r.createModel,updateModel:r.updateModel,removeModel:r.removeModel,units:r.units,createUnit:r.createUnit,updateUnit:r.updateUnit,removeUnit:r.removeUnit,warrantyAlerts:r.warrantyAlerts});

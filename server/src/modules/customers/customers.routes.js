@@ -1,0 +1,2 @@
+const r=require('express').Router(),c=require('./customers.controller'),{asyncHandler:a}=require('../../utils/response.util');
+r.get('/',a(c.list));r.post('/',a(c.create));r.put('/:id',a(c.update));r.delete('/:id',a(c.remove));module.exports=r;

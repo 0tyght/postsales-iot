@@ -1,0 +1,1 @@
+export default function Navbar({user,onLogout,onMenu}){return <header className="navbar"><button className="menu-button" onClick={onMenu}>☰</button><div className="navbar-user"><div><strong>{user?.full_name}</strong><small>{user?.role==='admin'?'ผู้ดูแลระบบ':user?.role}</small></div><button className="btn" onClick={onLogout}>ออกจากระบบ</button></div></header>}

@@ -1,0 +1,5 @@
+export default function DataTable({columns,rows,idKey,onEdit,onDelete,rowActions=[]}){
+ const hasActions=onEdit||onDelete||rowActions.length;
+ return <div className="table-wrap"><table><thead><tr>{columns.map(c=><th key={c.key}>{c.label}</th>)}{hasActions&&<th>จัดการ</th>}</tr></thead>
+ <tbody>{rows.length?rows.map(row=><tr key={row[idKey]}>{columns.map(c=><td key={c.key}>{c.render?c.render(row):row[c.key]??'-'}</td>)}{hasActions&&<td className="row-actions">{rowActions.filter(a=>!a.show||a.show(row)).map(a=><button key={a.label} className={`btn-icon ${a.className||''}`} onClick={()=>a.onClick(row)}>{a.label}</button>)}{onEdit&&<button className="btn-icon" onClick={()=>onEdit(row)}>แก้ไข</button>}{onDelete&&<button className="btn-icon danger" onClick={()=>onDelete(row)}>ลบ</button>}</td>}</tr>):<tr><td className="empty" colSpan={columns.length+(hasActions?1:0)}>ยังไม่มีข้อมูล</td></tr>}</tbody></table></div>;
+}
