@@ -1,0 +1,38 @@
+name: Build Technician APK
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "apps/technician-web/**"
+      - ".github/workflows/build-technician-apk.yml"
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/technician-web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: apps/technician-web/package-lock.json
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - uses: android-actions/setup-android@v3
+      - run: npm ci
+      - run: npm run build
+      - run: npx cap sync android
+      - run: chmod +x android/gradlew
+      - run: ./gradlew assembleDebug
+        working-directory: apps/technician-web/android
+      - uses: actions/upload-artifact@v4
+        with:
+          name: postsales-iot-technician-debug-apk
+          path: apps/technician-web/android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error

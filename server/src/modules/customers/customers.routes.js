@@ -1,2 +1,2 @@
-const r=require('express').Router(),c=require('./customers.controller'),{asyncHandler:a}=require('../../utils/response.util');
-r.get('/',a(c.list));r.post('/',a(c.create));r.put('/:id',a(c.update));r.delete('/:id',a(c.remove));module.exports=r;
+const r=require('express').Router(),c=require('./customers.controller'),role=require('../../middlewares/role.middleware'),{asyncHandler:a}=require('../../utils/response.util');
+r.get('/',a(c.list));r.post('/',role('admin'),a(c.create));r.put('/:id',role('admin'),a(c.update));r.delete('/:id',role('admin'),a(c.remove));module.exports=r;

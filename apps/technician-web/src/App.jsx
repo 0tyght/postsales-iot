@@ -1,122 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import {useEffect,useState} from 'react';
+import './App.css';
+const apiBase=()=>{const configured=localStorage.getItem('tech_api_url')?.replace(/\/$/,'');if(configured)return configured.endsWith('/api')?configured:`${configured}/api`;return import.meta.env.VITE_API_URL||'/api'};
+async function call(path,options={}){const token=localStorage.getItem('tech_token'),isForm=options.body instanceof FormData;const response=await fetch(`${apiBase()}${path}`,{...options,headers:{...(isForm?{}:{'Content-Type':'application/json'}),...(token?{Authorization:`Bearer ${token}`}:{})}});const payload=await response.json().catch(()=>({message:'เซิร์ฟเวอร์ตอบกลับไม่ถูกต้อง'}));if(response.status===401){localStorage.removeItem('tech_token');localStorage.removeItem('tech_user');location.reload()}if(!response.ok)throw new Error(payload.message||'ไม่สามารถดำเนินการได้');return payload.data}
+const labels={created:'รอเริ่มงาน',in_progress:'กำลังทำงาน',completed:'เสร็จแล้ว',cancelled:'ยกเลิก',installation:'ติดตั้ง',repair:'ซ่อม'};
 
-function App() {
-  const [count, setCount] = useState(0)
+function Login({onLogin}){const[form,setForm]=useState({username:'technician01',password:'',server_url:localStorage.getItem('tech_api_url')||''}),[error,setError]=useState(''),[busy,setBusy]=useState(false);const submit=async e=>{e.preventDefault();setBusy(true);setError('');const url=form.server_url.trim().replace(/\/$/,'');if(url)localStorage.setItem('tech_api_url',url);else localStorage.removeItem('tech_api_url');try{const data=await call('/auth/login',{method:'POST',body:JSON.stringify({username:form.username,password:form.password})});if(data.user.role!=='technician')throw new Error('หน้านี้สำหรับบัญชีช่างเท่านั้น');localStorage.setItem('tech_token',data.token);localStorage.setItem('tech_user',JSON.stringify(data.user));onLogin(data.user)}catch(x){setError(x.message)}finally{setBusy(false)}};return <main className="login"><form className="login-card" onSubmit={submit}><div className="mark">PS</div><h1>แอปสำหรับช่าง</h1><p>จัดการงานติดตั้งและซ่อมจากหน้างาน</p>{error&&<div className="alert error">{error}</div>}<label>Server URL <small>เว้นว่างเมื่อใช้ Wi-Fi เดียวกัน</small><input type="url" value={form.server_url} onChange={e=>setForm({...form,server_url:e.target.value})} placeholder="https://xxxx.trycloudflare.com"/></label><label>ชื่อผู้ใช้<input autoFocus value={form.username} onChange={e=>setForm({...form,username:e.target.value})}/></label><label>รหัสผ่าน<input type="password" value={form.password} onChange={e=>setForm({...form,password:e.target.value})}/></label><button className="primary" disabled={busy}>{busy?'กำลังเข้าสู่ระบบ...':'เข้าสู่ระบบ'}</button></form></main>}
 
-  return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+function JobList({jobs,onOpen,onCreate}){const[tab,setTab]=useState('active');const visible=jobs.filter(j=>tab==='active'?['created','in_progress'].includes(j.job_status):j.job_status===tab);return <><div className="page-title"><div><h1>งานของฉัน</h1><p>เลือกงานเพื่อเริ่มบันทึกหน้างาน</p></div><button className="primary compact" onClick={onCreate}>+ งานติดตั้ง</button></div><div className="tabs"><button className={tab==='active'?'active':''} onClick={()=>setTab('active')}>งานปัจจุบัน</button><button className={tab==='completed'?'active':''} onClick={()=>setTab('completed')}>เสร็จแล้ว</button><button className={tab==='cancelled'?'active':''} onClick={()=>setTab('cancelled')}>ยกเลิก</button></div><div className="job-list">{visible.map(j=><button className="job-card" key={j.job_id} onClick={()=>onOpen(j.job_id)}><div className="job-top"><span className={`type ${j.job_type}`}>{labels[j.job_type]}</span><span className={`state ${j.job_status}`}>{labels[j.job_status]}</span></div><h2>{j.customer_name}</h2><p>📍 {j.site_name}</p><small>{j.scheduled_at?new Date(j.scheduled_at).toLocaleString('th-TH'):'ยังไม่กำหนดวัน'} · งาน #{j.job_id}</small>{j.symptom_detail&&<div className="problem">อาการ: {j.symptom_detail}</div>}</button>)}{!visible.length&&<div className="empty">ไม่มีงานในหมวดนี้</div>}</div></>}
 
-      <div className="ticks"></div>
+function CreateJob({sites,onClose,onDone}){const[form,setForm]=useState({site_id:'',scheduled_at:'',job_note:''}),[error,setError]=useState(''),[busy,setBusy]=useState(false);const submit=async e=>{e.preventDefault();setBusy(true);try{await call('/jobs',{method:'POST',body:JSON.stringify({...form,job_type:'installation',job_status:'created'})});onDone()}catch(x){setError(x.message)}finally{setBusy(false)}};return <div className="backdrop"><form className="sheet" onSubmit={submit}><div className="sheet-head"><h2>สร้างงานติดตั้ง</h2><button type="button" className="icon" onClick={onClose}>×</button></div><p>สร้างรายการเมื่อลงพื้นที่ แล้วค่อยเพิ่มอุปกรณ์จริงที่ติดตั้ง</p>{error&&<div className="alert error">{error}</div>}<label>ลูกค้า / จุดติดตั้ง<select required value={form.site_id} onChange={e=>setForm({...form,site_id:e.target.value})}><option value="">-- เลือกจุดติดตั้ง --</option>{sites.filter(s=>s.site_status==='active').map(s=><option value={s.site_id} key={s.site_id}>{s.customer_name} — {s.site_name}</option>)}</select></label><label>วันเวลานัดหมาย<input type="datetime-local" value={form.scheduled_at} onChange={e=>setForm({...form,scheduled_at:e.target.value})}/></label><label>หมายเหตุ<textarea rows="3" value={form.job_note} onChange={e=>setForm({...form,job_note:e.target.value})}/></label><button className="primary full" disabled={busy}>{busy?'กำลังบันทึก...':'สร้างงานติดตั้ง'}</button></form></div>}
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+function Evidence({job,onReload}){const[files,setFiles]=useState([]),[type,setType]=useState('after'),[busy,setBusy]=useState(false),[error,setError]=useState('');const upload=async()=>{if(!files.length)return;setBusy(true);setError('');try{const body=new FormData();body.append('evidence_type',type);[...files].forEach(f=>body.append('photos',f));await call(`/jobs/${job.job_id}/evidence`,{method:'POST',body});setFiles([]);await onReload()}catch(x){setError(x.message)}finally{setBusy(false)}};const remove=async id=>{if(!confirm('ลบรูปนี้ใช่ไหม?'))return;await call(`/jobs/${job.job_id}/evidence/${id}`,{method:'DELETE'});onReload()};return <section className="work-card"><div className="section-title"><span className={job.evidence.length?'done':'todo'}>{job.evidence.length?'✓':'3'}</span><div><h3>รูปหลักฐาน</h3><p>อย่างน้อย 1 รูปก่อนปิดงาน</p></div></div>{error&&<div className="alert error">{error}</div>}<div className="evidence-grid">{job.evidence.map(x=><div className="evidence-item" key={x.evidence_id}><span>📷</span><div><b>{({before:'ก่อนทำ',during:'ระหว่างทำ',after:'หลังทำ',result:'ผลทดสอบ',other:'อื่น ๆ'})[x.evidence_type]}</b><small>{x.original_name}</small></div>{job.job_status!=='completed'&&<button onClick={()=>remove(x.evidence_id)}>ลบ</button>}</div>)}</div>{job.job_status!=='completed'&&<><div className="upload-row"><select value={type} onChange={e=>setType(e.target.value)}><option value="before">ก่อนทำ</option><option value="during">ระหว่างทำ</option><option value="after">หลังทำ</option><option value="result">ผลทดสอบ</option></select><label className="file-button">ถ่าย/เลือกรูป<input type="file" accept="image/jpeg,image/png,image/webp" capture="environment" multiple onChange={e=>setFiles(e.target.files)}/></label></div>{files.length>0&&<button className="primary full" disabled={busy} onClick={upload}>{busy?'กำลังอัปโหลด...':`อัปโหลด ${files.length} รูป`}</button>}</>}</section>}
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
-}
+function InstallationWork({job,models,onReload}){const[device,setDevice]=useState({model_id:'',serial_number:'',warranty_end_date:''}),[result,setResult]=useState({installation_result:job.installation_result||'',install_location_detail:job.install_location_detail||'',test_result:job.test_result||'',test_detail:job.test_detail||'',installation_note:job.installation_note||'',result_summary:job.result_summary||''}),[error,setError]=useState('');const installed=job.devices.filter(x=>x.installation_job_id===job.job_id);const add=async e=>{e.preventDefault();setError('');try{await call('/devices/units',{method:'POST',body:JSON.stringify({...device,site_id:job.site_id,installation_job_id:job.job_id,device_status:'active'})});setDevice({model_id:'',serial_number:'',warranty_end_date:''});onReload()}catch(x){setError(x.message)}};const save=async()=>{try{await call(`/jobs/${job.job_id}/result`,{method:'PUT',body:JSON.stringify(result)});onReload()}catch(x){setError(x.message)}};return <><section className="work-card"><div className="section-title"><span className={installed.length?'done':'todo'}>{installed.length?'✓':'1'}</span><div><h3>อุปกรณ์ที่ติดตั้ง</h3><p>{installed.length} ชิ้นในงานนี้</p></div></div>{installed.map(x=><div className="device-row" key={x.device_id}><div><b>{x.model_name}</b><small>SN: {x.serial_number}</small></div><span>ใช้งาน</span></div>)}{job.job_status!=='completed'&&<form className="inline-form" onSubmit={add}>{error&&<div className="alert error full-grid">{error}</div>}<label>รุ่นอุปกรณ์<select required value={device.model_id} onChange={e=>setDevice({...device,model_id:e.target.value})}><option value="">-- เลือกรุ่น --</option>{models.map(x=><option value={x.model_id} key={x.model_id}>{x.brand} {x.model_name}</option>)}</select></label><label>Serial Number<input required value={device.serial_number} onChange={e=>setDevice({...device,serial_number:e.target.value})}/></label><label>วันหมดประกัน<input type="date" value={device.warranty_end_date} onChange={e=>setDevice({...device,warranty_end_date:e.target.value})}/></label><button className="secondary add">+ เพิ่มอุปกรณ์</button></form>}</section><section className="work-card"><div className="section-title"><span className={result.installation_result&&result.test_result?'done':'todo'}>{result.installation_result&&result.test_result?'✓':'2'}</span><div><h3>ผลติดตั้งและทดสอบ</h3><p>บันทึกก่อนปิดงาน</p></div></div><div className="form-grid"><label>ผลติดตั้ง<select disabled={job.job_status==='completed'} value={result.installation_result} onChange={e=>setResult({...result,installation_result:e.target.value})}><option value="">-- เลือก --</option><option value="success">สำเร็จ</option><option value="failed">ไม่สำเร็จ</option></select></label><label>ผลทดสอบ<select disabled={job.job_status==='completed'} value={result.test_result} onChange={e=>setResult({...result,test_result:e.target.value})}><option value="">-- เลือก --</option><option value="pass">ผ่าน</option><option value="fail">ไม่ผ่าน</option></select></label><label className="wide">ตำแหน่งติดตั้ง<textarea disabled={job.job_status==='completed'} value={result.install_location_detail} onChange={e=>setResult({...result,install_location_detail:e.target.value})}/></label><label className="wide">รายละเอียดทดสอบ<textarea disabled={job.job_status==='completed'} value={result.test_detail} onChange={e=>setResult({...result,test_detail:e.target.value})}/></label><label className="wide">สรุปงาน<textarea disabled={job.job_status==='completed'} value={result.result_summary} onChange={e=>setResult({...result,result_summary:e.target.value})}/></label></div>{job.job_status!=='completed'&&<button className="secondary full" onClick={save}>บันทึกผล</button>}</section></>}
 
-export default App
+function RepairWork({job,onReload}){const[item,setItem]=useState({device_id:'',repair_method:'repair',replacement_device_id:'',device_problem_detail:'',device_action_detail:''}),[result,setResult]=useState({repair_summary:job.repair_summary||'',repair_note:job.repair_note||'',result_summary:job.result_summary||''}),[error,setError]=useState('');const add=async e=>{e.preventDefault();try{await call(`/jobs/${job.job_id}/problem-devices`,{method:'POST',body:JSON.stringify(item)});setItem({device_id:'',repair_method:'repair',replacement_device_id:'',device_problem_detail:'',device_action_detail:''});onReload()}catch(x){setError(x.message)}};const save=async()=>{try{await call(`/jobs/${job.job_id}/result`,{method:'PUT',body:JSON.stringify(result)});onReload()}catch(x){setError(x.message)}};return <><section className="work-card"><div className="section-title"><span className={job.problem_devices.length?'done':'todo'}>{job.problem_devices.length?'✓':'1'}</span><div><h3>อุปกรณ์ที่พบปัญหา</h3><p>เลือกหลังตรวจหน้างาน</p></div></div>{job.problem_devices.map(x=><div className="device-row" key={x.problem_device_id}><div><b>{x.model_name}</b><small>{x.serial_number} · {x.repair_method==='repair'?'ซ่อม':'เปลี่ยน'}</small></div></div>)}{job.job_status!=='completed'&&<form className="inline-form" onSubmit={add}>{error&&<div className="alert error full-grid">{error}</div>}<label>อุปกรณ์<select required value={item.device_id} onChange={e=>setItem({...item,device_id:e.target.value})}><option value="">-- เลือกอุปกรณ์ --</option>{job.devices.map(x=><option value={x.device_id} key={x.device_id}>{x.model_name} · {x.serial_number}</option>)}</select></label><label>วิธีดำเนินการ<select value={item.repair_method} onChange={e=>setItem({...item,repair_method:e.target.value})}><option value="repair">ซ่อม</option><option value="replace">เปลี่ยน</option></select></label>{item.repair_method==='replace'&&<label>อุปกรณ์ทดแทน<select required value={item.replacement_device_id} onChange={e=>setItem({...item,replacement_device_id:e.target.value})}><option value="">-- เลือก --</option>{job.devices.filter(x=>String(x.device_id)!==String(item.device_id)).map(x=><option value={x.device_id} key={x.device_id}>{x.serial_number}</option>)}</select></label>}<label className="wide">อาการที่ตรวจพบ<textarea value={item.device_problem_detail} onChange={e=>setItem({...item,device_problem_detail:e.target.value})}/></label><label className="wide">สิ่งที่ดำเนินการ<textarea value={item.device_action_detail} onChange={e=>setItem({...item,device_action_detail:e.target.value})}/></label><button className="secondary add">+ เพิ่มรายการซ่อม</button></form>}</section><section className="work-card"><div className="section-title"><span className={result.repair_summary?'done':'todo'}>{result.repair_summary?'✓':'2'}</span><div><h3>สรุปการซ่อม</h3><p>ผลที่ลูกค้าและแอดมินต้องทราบ</p></div></div><div className="form-grid"><label className="wide">สรุปการซ่อม<textarea disabled={job.job_status==='completed'} value={result.repair_summary} onChange={e=>setResult({...result,repair_summary:e.target.value})}/></label><label className="wide">หมายเหตุช่าง<textarea disabled={job.job_status==='completed'} value={result.repair_note} onChange={e=>setResult({...result,repair_note:e.target.value})}/></label></div>{job.job_status!=='completed'&&<button className="secondary full" onClick={save}>บันทึกผล</button>}</section></>}
+
+function JobDetail({id,models,onBack,onChanged}){const[job,setJob]=useState(null),[error,setError]=useState(''),[busy,setBusy]=useState(false);const load=()=>call(`/jobs/${id}`).then(setJob).catch(x=>setError(x.message));useEffect(()=>{let active=true;call(`/jobs/${id}`).then(x=>{if(active)setJob(x)}).catch(x=>{if(active)setError(x.message)});return()=>{active=false}},[id]);const action=async path=>{setBusy(true);setError('');try{await call(`/jobs/${id}/${path}`,{method:'POST'});await load();onChanged()}catch(x){setError(x.message)}finally{setBusy(false)}};if(!job)return <div className="loading">{error||'กำลังโหลดงาน...'}</div>;return <><button className="back" onClick={onBack}>‹ กลับไปงานของฉัน</button><div className="detail-hero"><div><span className={`type ${job.job_type}`}>{labels[job.job_type]}</span><h1>{job.customer_name}</h1><p>📍 {job.site_name}</p></div><span className={`state ${job.job_status}`}>{labels[job.job_status]}</span></div><div className="contact-card"><div><b>{job.customer_phone||'ไม่มีเบอร์โทร'}</b><small>{job.site_address||'ไม่มีที่อยู่'}</small></div>{job.customer_phone&&<a href={`tel:${job.customer_phone}`}>โทรหาลูกค้า</a>}</div>{job.symptom_detail&&<div className="alert problem-box"><b>อาการที่ลูกค้าแจ้ง</b><p>{job.symptom_detail}</p></div>}{error&&<div className="alert error">{error}</div>}{job.job_status==='created'?<div className="start-card"><h2>พร้อมเริ่มงานหรือยัง?</h2><p>เมื่อถึงหน้างาน กดเริ่มเพื่อบันทึกเวลาเริ่มงาน</p><button className="primary full" disabled={busy} onClick={()=>action('start')}>เริ่มงาน</button></div>:<>{job.job_type==='installation'?<InstallationWork job={job} models={models} onReload={load}/>:<RepairWork job={job} onReload={load}/>}<Evidence job={job} onReload={load}/>{job.job_status==='in_progress'&&<div className="complete-bar"><div><b>ตรวจข้อมูลให้ครบก่อนปิดงาน</b><small>ปิดแล้วจะแก้ไขจากหน้าช่างไม่ได้</small></div><button className="primary" disabled={busy} onClick={()=>action('complete')}>ปิดงาน</button></div>}{job.job_status==='completed'&&<div className="success-card">✓ งานนี้ปิดเรียบร้อยแล้ว</div>}</>}</>}
+
+export default function App(){const[user,setUser]=useState(()=>{try{return JSON.parse(localStorage.getItem('tech_user'))}catch{return null}}),[jobs,setJobs]=useState([]),[sites,setSites]=useState([]),[models,setModels]=useState([]),[selected,setSelected]=useState(null),[creating,setCreating]=useState(false),[error,setError]=useState('');const load=()=>Promise.all([call('/jobs'),call('/customer-sites'),call('/devices/models')]).then(([j,s,m])=>{setJobs(j);setSites(s);setModels(m)}).catch(x=>setError(x.message));useEffect(()=>{if(user)load()},[user]);if(!user)return <Login onLogin={setUser}/>;const logout=()=>{localStorage.removeItem('tech_token');localStorage.removeItem('tech_user');setUser(null)};return <div className="app"><header><div><b>Post-Sales IoT</b><small>{user.full_name}</small></div><button onClick={logout}>ออกจากระบบ</button></header><main>{error&&<div className="alert error">{error}</div>}{selected?<JobDetail id={selected} models={models} onBack={()=>setSelected(null)} onChanged={load}/>:<JobList jobs={jobs} onOpen={setSelected} onCreate={()=>setCreating(true)}/>}</main>{creating&&<CreateJob sites={sites} onClose={()=>setCreating(false)} onDone={()=>{setCreating(false);load()}}/>}</div>}

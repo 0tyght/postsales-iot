@@ -8,13 +8,14 @@ const {asyncHandler,success}=require('./utils/response.util');
 
 const app=express();
 app.use(cors({origin:true,credentials:true}));
-app.use(express.json());
+app.use(express.json({verify:(req,res,buffer)=>{req.rawBody=buffer;}}));
 app.use(express.urlencoded({extended:true}));
 
 app.get('/api/health',asyncHandler(async(req,res)=>{await db.query('SELECT 1');success(res,{database:'connected'}); }));
 app.use('/api/auth',require('./modules/auth/auth.routes'));
-app.use('/api',auth,role('admin'));
-app.get('/api/dashboard',asyncHandler(async(req,res)=>{
+app.use('/api/line',require('./modules/line/line.routes'));
+app.use('/api',auth);
+app.get('/api/dashboard',role('admin'),asyncHandler(async(req,res)=>{
   const [[counts],[jobs],[service],[warranty],[recent]] = await Promise.all([
     db.query(`SELECT (SELECT COUNT(*) FROM customers) customers,(SELECT COUNT(*) FROM customer_sites WHERE site_status='active') sites,
       (SELECT COUNT(*) FROM device_units WHERE device_status='active') devices,
@@ -28,12 +29,12 @@ app.get('/api/dashboard',asyncHandler(async(req,res)=>{
   ]);
   success(res,{...counts[0],jobs,service_due:service[0].due,warranty_due:warranty[0].due,recent_problems:recent});
 }));
-app.use('/api/users',require('./modules/users/users.routes'));
+app.use('/api/users',role('admin'),require('./modules/users/users.routes'));
 app.use('/api/customers',require('./modules/customers/customers.routes'));
 app.use('/api/customer-sites',require('./modules/customer-sites/customer-sites.routes'));
 app.use('/api/devices',require('./modules/devices/devices.routes'));
 app.use('/api/jobs',require('./modules/jobs/jobs.routes'));
-app.use('/api/problems',require('./modules/problems/problems.routes'));
+app.use('/api/problems',role('admin'),require('./modules/problems/problems.routes'));
 app.use((req,res)=>res.status(404).json({success:false,message:'ไม่พบ API ที่เรียก'}));
 app.use(errorHandler);
 module.exports=app;

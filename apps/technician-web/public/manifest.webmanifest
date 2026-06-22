@@ -1,0 +1,9 @@
+{
+  "name": "Post-Sales IoT Technician",
+  "short_name": "PS IoT Tech",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f3f6f8",
+  "theme_color": "#12384a",
+  "description": "แอปจัดการงานติดตั้งและซ่อมสำหรับช่าง"
+}

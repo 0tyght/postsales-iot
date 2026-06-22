@@ -1,0 +1,8 @@
+{
+  "appId": "com.postsales.iot.technician",
+  "appName": "Post-Sales IoT Technician",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https"
+  }
+}

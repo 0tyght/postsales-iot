@@ -1,0 +1,15 @@
+const repo=require('./job-workflow.repository');
+const jobs=require('./jobs.repository');
+const files=require('../../services/fileUpload.service');
+const line=require('../line/line.service');
+const fail=(message,status=400)=>{throw Object.assign(new Error(message),{status});};
+const notify=async id=>{const context=await jobs.notificationContext(id);if(!line.configured()||!context?.line_user_id)return;const status=context.job_status==='in_progress'?'ช่างเริ่มดำเนินงานแล้ว':'ดำเนินงานเสร็จเรียบร้อยแล้ว';try{await line.pushText(context.line_user_id,`อัปเดตงาน #${id}\n${status}\nจุดติดตั้ง: ${context.site_name}`)}catch(e){console.error(`LINE workflow notification failed for job ${id}:`,e.message)}};
+exports.detail=async(id,actor)=>await repo.detail(id,actor)||fail('ไม่พบงานหรือไม่มีสิทธิ์เข้าถึง',404);
+exports.start=async(id,actor)=>{if(!await repo.start(id,actor))fail('งานนี้เริ่มไม่ได้หรือเริ่มไปแล้ว',409);await notify(id);};
+exports.saveResult=async(id,data,actor)=>{if(!await repo.saveResult(id,data,actor))fail('ไม่พบงานหรือไม่มีสิทธิ์แก้ไข',404);};
+exports.addProblemDevice=async(id,data,actor)=>{if(!data.device_id||!['repair','replace'].includes(data.repair_method))fail('ข้อมูลอุปกรณ์ที่ซ่อมไม่ครบ');if(data.repair_method==='replace'&&!data.replacement_device_id)fail('กรุณาเลือกอุปกรณ์ทดแทน');const result=await repo.addProblemDevice(id,data,actor);if(!result)fail('เพิ่มรายการซ่อมได้เฉพาะงานซ่อมของคุณ',403);return result;};
+exports.removeProblemDevice=async(id,itemId,actor)=>{if(!await repo.removeProblemDevice(id,itemId,actor))fail('ไม่พบรายการซ่อม',404);};
+exports.upload=async(id,uploads,type,actor)=>{await exports.detail(id,actor);if(!uploads?.length)fail('กรุณาเลือกรูปอย่างน้อย 1 รูป');const saved=[];try{for(const upload of uploads){const stored=await files.save(id,upload);const evidenceId=await repo.addEvidence(id,{...upload,...stored},type||'other',actor.user_id);saved.push({evidence_id:evidenceId,...stored});}return saved.map(x=>({evidence_id:x.evidence_id}));}catch(e){await Promise.all(saved.map(x=>files.remove(x.storageKey)));throw e;}};
+exports.file=async(id,evidenceId,actor)=>{const item=await repo.evidence(id,evidenceId,actor);if(!item)fail('ไม่พบรูปหลักฐาน',404);return {...item,absolute:files.absolute(item.storage_key)};};
+exports.removeEvidence=async(id,evidenceId,actor)=>{const item=await repo.removeEvidence(id,evidenceId,actor);if(!item)fail('ไม่พบรูปหลักฐาน',404);await files.remove(item.storage_key);};
+exports.complete=async(id,actor)=>{const result=await repo.complete(id,actor);const messages={not_found:'ไม่พบงานหรือไม่มีสิทธิ์ปิดงาน',evidence:'ต้องมีรูปหลักฐานอย่างน้อย 1 รูป',device:'งานติดตั้งต้องเพิ่มอุปกรณ์ที่ติดตั้งอย่างน้อย 1 ชิ้น',result:'กรุณาบันทึกผลติดตั้งและผลทดสอบ',repair:'งานซ่อมต้องมีรายการอุปกรณ์และสรุปการซ่อม'};if(result.error)fail(messages[result.error],result.error==='not_found'?404:400);await notify(id);};

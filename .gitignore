@@ -4,4 +4,6 @@
 .docx-review/
 server/.env
 server/uploads/
+server/uploads/
 *.log
+.tools/
