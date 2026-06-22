@@ -1,6 +1,8 @@
 const db=require('../../config/db');
 exports.list=async actor=> (await db.query(
  `SELECT j.*,s.site_name,c.customer_name,c.phone customer_phone,u.full_name technician_name,
+  (SELECT COUNT(*) FROM job_evidence e WHERE e.job_id=j.job_id) evidence_count,
+  (SELECT MAX(e.created_at) FROM job_evidence e WHERE e.job_id=j.job_id) latest_evidence_at,
   CASE WHEN i.job_id IS NOT NULL THEN 'installation' WHEN r.job_id IS NOT NULL THEN 'repair' ELSE 'general' END job_type,
   i.installation_result,i.test_result,r.repair_summary,p.problem_id,p.symptom_detail
   FROM jobs j JOIN customer_sites s ON s.site_id=j.site_id JOIN customers c ON c.customer_id=s.customer_id
@@ -15,6 +17,7 @@ exports.notificationContext=async id=>(await db.query(
   LEFT JOIN users u ON u.user_id=j.technician_id LEFT JOIN installation_jobs i ON i.job_id=j.job_id
   LEFT JOIN repair_jobs r ON r.job_id=j.job_id WHERE j.job_id=?`,[id]
 ))[0][0];
+exports.evidenceKeys=async id=>(await db.query('SELECT storage_key FROM job_evidence WHERE job_id=?',[id]))[0].map(x=>x.storage_key);
 exports.create=async(d,userId)=>{const cn=await db.getConnection();try{await cn.beginTransaction();let siteId=d.site_id;
  if(d.job_type==='repair'){if(!d.problem_id){const e=new Error('งานซ่อมต้องสร้างจากเคสปัญหา');e.status=400;throw e;}const[[problem]]=await cn.query('SELECT site_id,job_id FROM problem_reports WHERE problem_id=? FOR UPDATE',[d.problem_id]);if(!problem){const e=new Error('ไม่พบเคสปัญหา');e.status=404;throw e;}if(problem.job_id){const e=new Error('เคสนี้มีงานที่รับผิดชอบแล้ว');e.status=409;throw e;}siteId=problem.site_id;}
  const [x]=await cn.query(

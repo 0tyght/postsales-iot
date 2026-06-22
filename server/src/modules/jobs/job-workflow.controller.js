@@ -3,6 +3,7 @@ exports.detail=async(q,r)=>success(r,await service.detail(q.params.id,q.user));
 exports.start=async(q,r)=>{await service.start(q.params.id,q.user);success(r,null,'เริ่มงานแล้ว');};
 exports.result=async(q,r)=>{await service.saveResult(q.params.id,q.body,q.user);success(r,null,'บันทึกผลงานแล้ว');};
 exports.addProblemDevice=async(q,r)=>success(r,{problem_device_id:await service.addProblemDevice(q.params.id,q.body,q.user)},'เพิ่มรายการอุปกรณ์แล้ว',201);
+exports.updateProblemDevice=async(q,r)=>{await service.updateProblemDevice(q.params.id,q.params.itemId,q.body,q.user);success(r,null,'แก้ไขรายการซ่อมแล้ว');};
 exports.removeProblemDevice=async(q,r)=>{await service.removeProblemDevice(q.params.id,q.params.itemId,q.user);success(r,null,'ลบรายการแล้ว');};
 exports.upload=async(q,r)=>success(r,await service.upload(q.params.id,q.files,q.body.evidence_type,q.user),'อัปโหลดรูปแล้ว',201);
 exports.file=async(q,r)=>{const item=await service.file(q.params.id,q.params.evidenceId,q.user);r.type(item.mime_type).sendFile(item.absolute);};
