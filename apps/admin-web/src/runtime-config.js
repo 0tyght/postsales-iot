@@ -1,6 +1,6 @@
 const CONFIG_URLS=import.meta.env.VITE_RUNTIME_CONFIG_URL?[import.meta.env.VITE_RUNTIME_CONFIG_URL]:[
- new URL('runtime-config.json',`${location.origin}${import.meta.env.BASE_URL}`).href,
  'https://raw.githubusercontent.com/0tyght/postsales-iot/main/runtime-config.json',
+ new URL('runtime-config.json',`${location.origin}${import.meta.env.BASE_URL}`).href,
 ];
 const CACHE_KEY='postsales_runtime_api_url';
 let pending;
