@@ -34,7 +34,7 @@ app.use('/api/customers',require('./modules/customers/customers.routes'));
 app.use('/api/customer-sites',require('./modules/customer-sites/customer-sites.routes'));
 app.use('/api/devices',require('./modules/devices/devices.routes'));
 app.use('/api/jobs',require('./modules/jobs/jobs.routes'));
-app.use('/api/problems',role('admin'),require('./modules/problems/problems.routes'));
+app.use('/api/problems',require('./modules/problems/problems.routes'));
 app.use((req,res)=>res.status(404).json({success:false,message:'ไม่พบ API ที่เรียก'}));
 app.use(errorHandler);
 module.exports=app;

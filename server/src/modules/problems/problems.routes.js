@@ -1,1 +1,7 @@
-const r=require('express').Router(),c=require('./problems.controller'),{asyncHandler:a}=require('../../utils/response.util');r.get('/',a(c.list));r.post('/',a(c.create));r.put('/:id',a(c.update));r.delete('/:id',a(c.remove));module.exports=r;
+const r=require('express').Router(),c=require('./problems.controller'),role=require('../../middlewares/role.middleware'),{asyncHandler:a}=require('../../utils/response.util');
+r.get('/',role('admin','technician'),a(c.list));
+r.post('/',role('admin'),a(c.create));
+r.post('/:id/claim',role('technician'),a(c.claim));
+r.put('/:id',role('admin'),a(c.update));
+r.delete('/:id',role('admin'),a(c.remove));
+module.exports=r;

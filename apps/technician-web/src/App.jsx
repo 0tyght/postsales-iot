@@ -10,9 +10,9 @@ const readUser=()=>{try{return JSON.parse(localStorage.getItem('tech_user'))}cat
 
 export default function App({session=null,onSessionLogout}){
  const[user,setUser]=useState(()=>session||readUser());
- const[jobs,setJobs]=useState([]),[sites,setSites]=useState([]),[models,setModels]=useState([]);
+ const[jobs,setJobs]=useState([]),[problems,setProblems]=useState([]),[sites,setSites]=useState([]),[models,setModels]=useState([]);
  const[selected,setSelected]=useState(null),[creating,setCreating]=useState(false),[error,setError]=useState('');
- const load=useCallback(()=>Promise.all([api('/jobs'),api('/customer-sites'),api('/devices/models')]).then(([jobData,siteData,modelData])=>{setJobs(jobData);setSites(siteData);setModels(modelData);setError('')}).catch(x=>setError(x.message)),[]);
+ const load=useCallback(()=>Promise.all([api('/jobs'),api('/problems'),api('/customer-sites'),api('/devices/models')]).then(([jobData,problemData,siteData,modelData])=>{setJobs(jobData);setProblems(problemData);setSites(siteData);setModels(modelData);setError('')}).catch(x=>setError(x.message)),[]);
 
  useEffect(()=>{
   if(!user)return;
@@ -31,7 +31,7 @@ export default function App({session=null,onSessionLogout}){
  const logout=()=>{['portal_token','portal_user','tech_token','tech_user'].forEach(key=>localStorage.removeItem(key));if(onSessionLogout)onSessionLogout();else setUser(null)};
  return <TechnicianLayout user={user} onLogout={logout}>
   {error&&<div className="alert error">{error}</div>}
-  <TechnicianRoutes jobs={jobs} models={models} selected={selected} onOpen={setSelected} onBack={()=>setSelected(null)} onCreate={()=>setCreating(true)} onChanged={load}/>
+  <TechnicianRoutes jobs={jobs} problems={problems} models={models} selected={selected} onOpen={setSelected} onBack={()=>setSelected(null)} onCreate={()=>setCreating(true)} onChanged={load} onClaim={async problemId=>{await api(`/problems/${problemId}/claim`,{method:'POST'});await load()}}/>
   {creating&&<CreateInstallationJob sites={sites} onClose={()=>setCreating(false)} onDone={()=>{setCreating(false);load()}}/>}
  </TechnicianLayout>;
 }

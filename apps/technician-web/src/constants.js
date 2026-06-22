@@ -5,4 +5,7 @@ export const labels={
  cancelled:'ยกเลิก',
  installation:'ติดตั้ง',
  repair:'ซ่อม',
+ open:'รอรับเคส',
+ assigned:'รับเคสแล้ว',
+ resolved:'แก้ไขแล้ว',
 };

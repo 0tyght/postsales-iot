@@ -14,6 +14,7 @@ const statusOptions=[
 const evidenceLabels={before:'ก่อนทำ',during:'ระหว่างทำ',after:'หลังทำ',result:'ผลทดสอบ',other:'อื่น ๆ'};
 const resultLabels={success:'สำเร็จ',partial:'สำเร็จบางส่วน',failed:'ไม่สำเร็จ',pass:'ผ่าน',fail:'ไม่ผ่าน'};
 const localDateTime=value=>value?String(value).replace(' ','T').slice(0,16):'';
+const linkedJob=()=>{const jobId=sessionStorage.getItem('admin_open_job_id');if(jobId)sessionStorage.removeItem('admin_open_job_id');return jobId?Number(jobId):null};
 
 function EvidenceImage({jobId,item,onOpen}){
  const[src,setSrc]=useState('');
@@ -62,7 +63,7 @@ function JobForm({row,lookups,onClose,onSaved}){
 
 export default function JobsPage(){
  const lookups=useLookups({sites:'/customer-sites',users:'/users',problems:'/problems'});
- const[rows,setRows]=useState([]),[loading,setLoading]=useState(true),[error,setError]=useState(''),[status,setStatus]=useState(''),[type,setType]=useState(''),[search,setSearch]=useState(''),[selected,setSelected]=useState(null),[editing,setEditing]=useState(undefined),[lastUpdated,setLastUpdated]=useState(null),[refreshing,setRefreshing]=useState(false);
+ const[rows,setRows]=useState([]),[loading,setLoading]=useState(true),[error,setError]=useState(''),[status,setStatus]=useState(''),[type,setType]=useState(''),[search,setSearch]=useState(''),[selected,setSelected]=useState(linkedJob),[editing,setEditing]=useState(undefined),[lastUpdated,setLastUpdated]=useState(null),[refreshing,setRefreshing]=useState(false);
  const load=useCallback(async(silent=false)=>{if(silent)setRefreshing(true);try{setRows(await api('/jobs'));setLastUpdated(new Date());setError('')}catch(e){setError(e.message)}finally{setLoading(false);setRefreshing(false)}},[]);
  useEffect(()=>{const initial=setTimeout(load,0),timer=setInterval(()=>{if(!document.hidden)load(true)},5000);return()=>{clearTimeout(initial);clearInterval(timer)}},[load]);
  const counts=useMemo(()=>Object.fromEntries(statusOptions.slice(1).map(x=>[x.value,rows.filter(r=>r.job_status===x.value).length])),[rows]);

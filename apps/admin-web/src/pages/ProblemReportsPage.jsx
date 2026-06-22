@@ -1,4 +1,46 @@
-import ResourcePage from '../components/ResourcePage';import StatusBadge from '../components/StatusBadge';import useLookups from '../hooks/useLookups';import{fmtDateTime}from'../services/api';
-const source={service_contact:'ตอบกลับจากรอบเซอร์วิส',customer_call:'ลูกค้าโทรแจ้ง',line_chat:'LINE Chat'},channel={phone:'โทรศัพท์',line:'LINE',dashboard:'เจ้าหน้าที่บันทึก'};
-const nowLocal=()=>{const d=new Date();return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,16)};
-export default function ProblemReportsPage(){const l=useLookups({sites:'/customer-sites'});return <ResourcePage title="เคสปัญหา" description="รับเรื่องจากลูกค้าและติดตามว่าเคสใดรอมอบหมาย กำลังดำเนินการ หรือแก้ไขแล้ว" createLabel="รับแจ้งปัญหา" modalTitle="เคสปัญหา" endpoint="/problems" idKey="problem_id" lookups={l} initialValues={{reported_at:nowLocal(),source_type:'line_chat',contact_channel:'line',problem_status:'open'}} filters={[{key:'problem_status',label:'สถานะเคส',options:[{value:'open',label:'รอมอบหมาย'},{value:'assigned',label:'มอบหมายแล้ว'},{value:'resolved',label:'แก้ไขแล้ว'},{value:'cancelled',label:'ยกเลิก'}]},{key:'source_type',label:'ช่องทางรับเรื่อง',options:Object.entries(source).map(([value,label])=>({value,label}))}]} columns={[{key:'problem_id',label:'เลขเคส',render:r=>`#${r.problem_id}`},{key:'customer_name',label:'ลูกค้า'},{key:'site_name',label:'จุดติดตั้ง'},{key:'symptom_detail',label:'อาการที่แจ้ง'},{key:'source_type',label:'รับเรื่องจาก',render:r=>source[r.source_type]},{key:'problem_status',label:'สถานะเคส',render:r=><StatusBadge value={r.problem_status}/>},{key:'technician_name',label:'ผู้รับผิดชอบ',render:r=>r.technician_name||'ยังไม่มอบหมาย'},{key:'reported_at',label:'วันที่รับแจ้ง',render:r=>fmtDateTime(r.reported_at)}]} fields={[{name:'site_id',label:'ลูกค้า / จุดติดตั้ง',type:'select',required:true,options:l=>l.sites?.filter(x=>x.site_status==='active').map(x=>({value:x.site_id,label:`${x.customer_name} · ${x.site_name}`}))||[]},{name:'symptom_detail',label:'รายละเอียดอาการที่ลูกค้าแจ้ง',type:'textarea',required:true,fullWidth:true,placeholder:'ระบุสิ่งที่เกิดขึ้น ช่วงเวลา และผลกระทบ'},{name:'reported_at',label:'วันที่และเวลาที่รับแจ้ง',type:'datetime-local',required:true},{name:'source_type',label:'เหตุที่ลูกค้าติดต่อ',type:'select',required:true,options:Object.entries(source).map(([value,label])=>({value,label}))},{name:'contact_channel',label:'ช่องทางที่รับเรื่อง',type:'select',required:true,options:Object.entries(channel).map(([value,label])=>({value,label}))},{name:'problem_status',label:'สถานะเคส',type:'select',hideOnCreate:true,required:true,options:[{value:'open',label:'รอมอบหมายงาน'},{value:'resolved',label:'แก้ไขโดยไม่ต้องลงพื้นที่'},{value:'cancelled',label:'ยกเลิกเคส'}]}]}/>}
+import ResourcePage from '../components/ResourcePage';
+import StatusBadge from '../components/StatusBadge';
+import useLookups from '../hooks/useLookups';
+import {fmtDateTime} from '../services/api';
+
+const sources={service_contact:'ตอบกลับจากรอบเซอร์วิส',customer_call:'ลูกค้าโทรแจ้ง',line_chat:'LINE Chat'};
+const channels={phone:'โทรศัพท์',line:'LINE',dashboard:'เจ้าหน้าที่บันทึก'};
+const nowLocal=()=>{const date=new Date();return new Date(date.getTime()-date.getTimezoneOffset()*60000).toISOString().slice(0,16)};
+
+export default function ProblemReportsPage(){
+ const lookups=useLookups({sites:'/customer-sites'});
+ const openJob=row=>{sessionStorage.setItem('admin_open_job_id',String(row.job_id));location.hash='/jobs'};
+ return <ResourcePage
+  title="เคสปัญหา"
+  description="รับเรื่องจากลูกค้า ติดตามผู้รับผิดชอบ และเปิดดูงานซ่อมที่เชื่อมโยงได้ทันที"
+  createLabel="รับแจ้งปัญหา"
+  modalTitle="เคสปัญหา"
+  endpoint="/problems"
+  idKey="problem_id"
+  lookups={lookups}
+  initialValues={{reported_at:nowLocal(),source_type:'line_chat',contact_channel:'line',problem_status:'open'}}
+  filters={[
+   {key:'problem_status',label:'สถานะเคส',options:[{value:'open',label:'รอมอบหมาย'},{value:'assigned',label:'มอบหมายแล้ว'},{value:'resolved',label:'แก้ไขแล้ว'},{value:'cancelled',label:'ยกเลิก'}]},
+   {key:'source_type',label:'ช่องทางรับเรื่อง',options:Object.entries(sources).map(([value,label])=>({value,label}))},
+  ]}
+  columns={[
+   {key:'problem_id',label:'เลขเคส',render:row=>`#${row.problem_id}`},
+   {key:'customer_name',label:'ลูกค้า'},
+   {key:'site_name',label:'จุดติดตั้ง'},
+   {key:'symptom_detail',label:'อาการที่แจ้ง'},
+   {key:'source_type',label:'รับเรื่องจาก',render:row=>sources[row.source_type]},
+   {key:'problem_status',label:'สถานะเคส',render:row=><StatusBadge value={row.problem_status}/>},
+   {key:'technician_name',label:'ผู้รับผิดชอบ',render:row=>row.technician_name||'ยังไม่มอบหมาย'},
+   {key:'reported_at',label:'วันที่รับแจ้ง',render:row=>fmtDateTime(row.reported_at)},
+  ]}
+  fields={[
+   {name:'site_id',label:'ลูกค้า / จุดติดตั้ง',type:'select',required:true,options:data=>data.sites?.filter(item=>item.site_status==='active').map(item=>({value:item.site_id,label:`${item.customer_name} · ${item.site_name}`}))||[]},
+   {name:'symptom_detail',label:'รายละเอียดอาการที่ลูกค้าแจ้ง',type:'textarea',required:true,fullWidth:true,placeholder:'ระบุสิ่งที่เกิดขึ้น ช่วงเวลา และผลกระทบ'},
+   {name:'reported_at',label:'วันที่และเวลาที่รับแจ้ง',type:'datetime-local',required:true},
+   {name:'source_type',label:'เหตุที่ลูกค้าติดต่อ',type:'select',required:true,options:Object.entries(sources).map(([value,label])=>({value,label}))},
+   {name:'contact_channel',label:'ช่องทางที่รับเรื่อง',type:'select',required:true,options:Object.entries(channels).map(([value,label])=>({value,label}))},
+   {name:'problem_status',label:'สถานะเคส',type:'select',hideOnCreate:true,required:true,options:[{value:'open',label:'รอมอบหมายงาน'},{value:'resolved',label:'แก้ไขโดยไม่ต้องลงพื้นที่'},{value:'cancelled',label:'ยกเลิกเคส'}]},
+  ]}
+  rowActions={[{key:'open-job',label:row=>`ดูงาน #${row.job_id}`,show:row=>Boolean(row.job_id),onClick:openJob}]}
+ />;
+}

@@ -7,14 +7,15 @@ const detectPlatform=()=>{
  const agent=window.navigator.userAgent.toLowerCase();
  if(agent.includes('android'))return 'android';
  if(/iphone|ipad|ipod/.test(agent)||(window.navigator.platform==='MacIntel'&&window.navigator.maxTouchPoints>1))return 'ios';
- return 'unknown';
+ if(/mobile|tablet/.test(agent)||window.navigator.maxTouchPoints>1)return 'unknown';
+ return 'desktop';
 };
 
 export default function InstallPrompt(){
  const[installed]=useState(isStandalone);
  const[dialog,setDialog]=useState('');
  const platform=detectPlatform();
- if(installed)return null;
+ if(installed||platform==='desktop')return null;
 
  const start=()=>{
   if(platform==='android'){window.location.assign(APK_URL);return}
@@ -37,11 +38,11 @@ export default function InstallPrompt(){
      <div className="install-guide-icon">PS</div><h2>เลือกโทรศัพท์ของคุณ</h2><p>ระบบตรวจชนิดเครื่องไม่ได้ กรุณาเลือกเพื่อดูวิธีที่ถูกต้อง</p>
      <div className="platform-choices"><button onClick={()=>choose('android')}><img src={asset('platform-android.svg')} alt="Android"/><b>Android</b><small>ดาวน์โหลด APK</small></button><button onClick={()=>choose('ios')}><img src={asset('platform-ios.svg')} alt="iOS"/><b>iOS</b><small>ดูวิธีเพิ่มแอป</small></button></div>
     </>:<>
-     <div className="install-guide-icon">PS</div><h2>เพิ่มแอปบน iOS</h2><p>ทำเพียงครั้งเดียว จากนั้นเปิดแอปจากหน้าจอโฮมได้เลย</p>
+     <div className="install-guide-icon">PS</div><h2>เพิ่มแอปบน iOS</h2><div className="safari-notice"><b>เริ่มต้น: เปิดลิงก์นี้ด้วย Safari</b><span>ขั้นตอนต่อไปให้ทำภายในเบราว์เซอร์ Safari เท่านั้น</span></div>
      <div className="ios-install-steps">
-      <div><span className="ios-step-number">1</span><b>แตะปุ่มแชร์</b><small>ปุ่มรูปสี่เหลี่ยมมีลูกศรชี้ขึ้น</small></div>
-      <div><span className="ios-step-number">2</span><b>เลือกเพิ่มไปยังหน้าจอโฮม</b><small>เลื่อนเมนูลงหากยังไม่พบ</small></div>
-      <div><span className="ios-step-number">3</span><b>กดเพิ่ม</b><small>ไอคอนแอปจะปรากฏบนหน้าจอโฮม</small></div>
+      <div className="ios-guide-step"><b>1. แตะปุ่มเมนูด้านล่าง</b><small>แตะปุ่มจุดสามจุดเพื่อเปิดเมนู</small><img src={asset('ios-step-menu.png')} alt="ตำแหน่งปุ่มเมนูบน iOS"/></div>
+      <div className="ios-guide-step"><b>2. แตะ แชร์</b><small>เลือกคำสั่งแชร์จากเมนู</small><img src={asset('ios-step-share.png')} alt="ตำแหน่งปุ่มแชร์บน iOS"/></div>
+      <div className="ios-guide-step"><b>3. เลื่อนเมนูลงด้านล่าง</b><small>จากนั้นแตะ “เพิ่มไปยังหน้าจอโฮม” และกดเพิ่ม</small><img src={asset('ios-step-add-home.png')} alt="ตำแหน่งเพิ่มไปยังหน้าจอโฮมบน iOS"/></div>
      </div>
      <button className="btn primary full" onClick={()=>setDialog('')}>เข้าใจแล้ว</button>
     </>}

@@ -19,7 +19,7 @@ exports.notificationContext=async id=>(await db.query(
 ))[0][0];
 exports.evidenceKeys=async id=>(await db.query('SELECT storage_key FROM job_evidence WHERE job_id=?',[id]))[0].map(x=>x.storage_key);
 exports.create=async(d,userId)=>{const cn=await db.getConnection();try{await cn.beginTransaction();let siteId=d.site_id;
- if(d.job_type==='repair'){if(!d.problem_id){const e=new Error('งานซ่อมต้องสร้างจากเคสปัญหา');e.status=400;throw e;}const[[problem]]=await cn.query('SELECT site_id,job_id FROM problem_reports WHERE problem_id=? FOR UPDATE',[d.problem_id]);if(!problem){const e=new Error('ไม่พบเคสปัญหา');e.status=404;throw e;}if(problem.job_id){const e=new Error('เคสนี้มีงานที่รับผิดชอบแล้ว');e.status=409;throw e;}siteId=problem.site_id;}
+ if(d.job_type==='repair'){if(!d.problem_id){const e=new Error('งานซ่อมต้องสร้างจากเคสปัญหา');e.status=400;throw e;}const[[problem]]=await cn.query('SELECT site_id,job_id,problem_status FROM problem_reports WHERE problem_id=? FOR UPDATE',[d.problem_id]);if(!problem){const e=new Error('ไม่พบเคสปัญหา');e.status=404;throw e;}if(problem.job_id||problem.problem_status!=='open'){const e=new Error('เคสนี้ถูกรับหรือปิดไปแล้ว กรุณารีเฟรชรายการ');e.status=409;throw e;}siteId=problem.site_id;}
  const [x]=await cn.query(
  `INSERT INTO jobs (site_id,technician_id,job_status,scheduled_at,job_note,result_summary,started_at,completed_at,created_by)
  VALUES (?,?,?,?,?,?,?,?,?)`,[siteId,d.technician_id||null,d.job_status||'created',d.scheduled_at||null,d.job_note||null,d.result_summary||null,d.started_at||null,d.completed_at||null,userId]);
