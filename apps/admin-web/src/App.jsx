@@ -2,6 +2,7 @@ import{lazy,Suspense,useEffect,useState}from'react';
 import LoginPage from './pages/LoginPage';
 import AdminLayout from './layouts/AdminLayout';
 import AdminRoutes from './routes/AdminRoutes';
+import InstallPrompt from './components/InstallPrompt';
 import'./styles/admin.css';
 
 const TechnicianApp=lazy(()=>import('../../technician-web/src/App.jsx'));
@@ -15,7 +16,7 @@ export default function App(){
  const clearHash=()=>history.replaceState(null,'',location.pathname+location.search);
  const logout=()=>{['portal_token','portal_user','admin_token','admin_user','tech_token','tech_user'].forEach(key=>localStorage.removeItem(key));setUser(null);clearHash()};
  const loggedIn=nextUser=>{setUser(nextUser);if(nextUser.role==='admin')navigate('dashboard');else clearHash()};
- if(!user)return <LoginPage onLogin={loggedIn}/>;
+ if(!user)return <><LoginPage onLogin={loggedIn}/><InstallPrompt/></>;
  if(user.role==='technician')return <Suspense fallback={<div className="portal-loading">กำลังเปิดพื้นที่ทำงานช่าง...</div>}><TechnicianApp session={user} onSessionLogout={logout}/></Suspense>;
  if(user.role!=='admin'){logout();return null}
  return <AdminLayout active={page} onNavigate={navigate} user={user} onLogout={logout}><AdminRoutes page={page}/></AdminLayout>;
