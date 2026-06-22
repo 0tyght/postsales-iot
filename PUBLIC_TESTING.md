@@ -12,6 +12,12 @@ APK และ PWA จะอ่าน URL ล่าสุดจาก:
 
 `https://raw.githubusercontent.com/0tyght/postsales-iot/main/runtime-config.json`
 
+PWA แบบลิงก์ถาวรติดตั้งจาก:
+
+`https://0tyght.github.io/postsales-iot/`
+
+ผู้ที่เคยติดตั้งจาก Quick Tunnel ต้องติดตั้งจากลิงก์ถาวรใหม่หนึ่งครั้ง หลังจากนั้นไม่ต้องเพิ่มหน้าจอหลักใหม่เมื่อมีการอัปเดต
+
 หากต้องการทดสอบสคริปต์โดยไม่ commit/push ให้เพิ่ม `-SkipGitPush`
 
 > Quick Tunnel ใช้สำหรับทดสอบชั่วคราวเท่านั้น เครื่องเซิร์ฟเวอร์ต้องเปิดอยู่ และห้ามใส่รหัสผ่านหรือ token ลงใน `runtime-config.json`

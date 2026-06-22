@@ -4,6 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "sync:pwa-assets": "node ../../scripts/copy-pwa-assets.mjs",
+    "predev": "npm run sync:pwa-assets",
+    "prebuild": "npm run sync:pwa-assets",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
