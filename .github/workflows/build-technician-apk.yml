@@ -7,6 +7,9 @@ on:
       - "apps/technician-web/**"
       - ".github/workflows/build-technician-apk.yml"
 
+permissions:
+  contents: write
+
 jobs:
   build-apk:
     runs-on: ubuntu-latest
@@ -36,3 +39,10 @@ jobs:
           name: postsales-iot-technician-debug-apk
           path: apps/technician-web/android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
+      - name: Publish stable APK download
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cp android/app/build/outputs/apk/debug/app-debug.apk postsales-iot-technician.apk
+          gh release view technician-latest >/dev/null 2>&1 || gh release create technician-latest --title "Post-Sales IoT Technician APK" --notes "ไฟล์ APK ล่าสุดสำหรับทดสอบบน Android"
+          gh release upload technician-latest postsales-iot-technician.apk --clobber
