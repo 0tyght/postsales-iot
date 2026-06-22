@@ -1,5 +1,6 @@
 param(
-  [switch]$SkipGitPush
+  [switch]$SkipGitPush,
+  [switch]$Background
 )
 
 $ErrorActionPreference = 'Stop'
@@ -11,6 +12,14 @@ if (-not (Test-Path $cloudflared)) { throw "cloudflared.exe not found: $cloudfla
 
 function Test-Port([int]$Port) {
   return [bool](Get-NetTCPConnection -LocalPort $Port -State Listen -ErrorAction SilentlyContinue)
+}
+
+function Stop-PortProcess([int]$Port) {
+  $processIds = Get-NetTCPConnection -LocalPort $Port -State Listen -ErrorAction SilentlyContinue |
+    Select-Object -ExpandProperty OwningProcess -Unique
+  foreach ($processId in $processIds) {
+    Stop-Process -Id $processId -Force -ErrorAction SilentlyContinue
+  }
 }
 
 if (-not (Test-Port 5000)) {
@@ -74,3 +83,42 @@ Write-Host 'Public test server is ready' -ForegroundColor Green
 Write-Host "Portal: $url"
 Write-Host "API:    $url/api"
 Write-Host "Config: https://raw.githubusercontent.com/0tyght/postsales-iot/main/runtime-config.json"
+
+if ($Background) {
+  Write-Host 'Mode: background (servers continue running after this window closes)'
+  return
+}
+
+Write-Host ''
+Write-Host 'Server monitor is running. Press Q to stop API, web server, and tunnel.' -ForegroundColor Cyan
+Write-Host 'You can also press Ctrl+C; the script will attempt to stop all services.' -ForegroundColor DarkGray
+
+try {
+  while ($true) {
+    $apiState = if (Test-Port 5000) { 'ONLINE' } else { 'OFFLINE' }
+    $webState = if (Test-Port 5173) { 'ONLINE' } else { 'OFFLINE' }
+    $tunnelState = if (Get-Process cloudflared -ErrorAction SilentlyContinue) { 'ONLINE' } else { 'OFFLINE' }
+    Write-Host ("[{0}] API: {1} | Web: {2} | Tunnel: {3}" -f (Get-Date -Format 'HH:mm:ss'),$apiState,$webState,$tunnelState)
+
+    for ($step = 0; $step -lt 10; $step++) {
+      try {
+        if ([Console]::KeyAvailable -and [Console]::ReadKey($true).Key -eq [ConsoleKey]::Q) {
+          throw [System.OperationCanceledException]::new('Stop requested')
+        }
+      } catch [System.OperationCanceledException] {
+        throw
+      } catch {
+        # Some non-interactive terminals do not expose keyboard state; Ctrl+C still works.
+      }
+      Start-Sleep -Milliseconds 500
+    }
+  }
+} catch [System.OperationCanceledException] {
+  Write-Host 'Stop requested.' -ForegroundColor Yellow
+} finally {
+  Write-Host 'Stopping public test server...' -ForegroundColor Yellow
+  Get-Process cloudflared -ErrorAction SilentlyContinue | Stop-Process -Force
+  Stop-PortProcess 5173
+  Stop-PortProcess 5000
+  Write-Host 'API, web server, and tunnel are stopped.' -ForegroundColor Green
+}

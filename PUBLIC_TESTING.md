@@ -6,7 +6,13 @@
 powershell -ExecutionPolicy Bypass -File .\scripts\start-public-test.ps1
 ```
 
-คำสั่งนี้จะเปิด API และหน้าเว็บ (ถ้ายังไม่เปิด), สร้าง Cloudflare Quick Tunnel ใหม่, เขียน URL ลง `runtime-config.json` และ push ไฟล์ขึ้นสาขา `main` โดยอัตโนมัติ
+คำสั่งนี้จะเปิด API และหน้าเว็บ (ถ้ายังไม่เปิด), สร้าง Cloudflare Quick Tunnel ใหม่, เขียน URL ลง `runtime-config.json` และ push ไฟล์ขึ้นสาขา `main` โดยอัตโนมัติ จากนั้นจะแสดงสถานะการทำงานต่อเนื่องในหน้าต่าง PowerShell กด `Q` เพื่อปิด API, หน้าเว็บ และ Tunnel พร้อมกัน
+
+หากต้องการให้ทำงานแบบซ่อนและคืน prompt ทันที ให้เพิ่ม `-Background`:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\start-public-test.ps1 -Background
+```
 
 APK และ PWA จะอ่าน URL ล่าสุดจาก:
 
