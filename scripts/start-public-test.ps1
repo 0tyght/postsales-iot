@@ -25,21 +25,17 @@ function Stop-PortProcess([int]$Port) {
 if (-not (Test-Port 5000)) {
   Start-Process -FilePath node -ArgumentList 'src/server.js' -WorkingDirectory (Join-Path $root 'server') -WindowStyle Hidden | Out-Null
 }
-if (-not (Test-Port 5173)) {
-  Start-Process -FilePath npm.cmd -ArgumentList 'run','dev' -WorkingDirectory (Join-Path $root 'apps\admin-web') -WindowStyle Hidden | Out-Null
-}
-
 $deadline = (Get-Date).AddSeconds(20)
-while ((-not (Test-Port 5000) -or -not (Test-Port 5173)) -and (Get-Date) -lt $deadline) {
+while ((-not (Test-Port 5000)) -and (Get-Date) -lt $deadline) {
   Start-Sleep -Milliseconds 500
 }
-if (-not (Test-Port 5000) -or -not (Test-Port 5173)) { throw 'API or web server failed to start' }
+if (-not (Test-Port 5000)) { throw 'API server failed to start' }
 
 Get-Process cloudflared -ErrorAction SilentlyContinue | Stop-Process -Force
 $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
 $outLog = Join-Path $root ".tools\portal-$stamp.out.log"
 $errorLog = Join-Path $root ".tools\portal-$stamp.err.log"
-Start-Process -FilePath $cloudflared -ArgumentList 'tunnel','--url','http://127.0.0.1:5173','--no-autoupdate' -WorkingDirectory $root -RedirectStandardOutput $outLog -RedirectStandardError $errorLog -WindowStyle Hidden | Out-Null
+Start-Process -FilePath $cloudflared -ArgumentList 'tunnel','--url','http://127.0.0.1:5000','--no-autoupdate' -WorkingDirectory $root -RedirectStandardOutput $outLog -RedirectStandardError $errorLog -WindowStyle Hidden | Out-Null
 
 $url = $null
 $deadline = (Get-Date).AddSeconds(45)
@@ -62,7 +58,7 @@ if (-not $health.success) { throw "Tunnel is running but API is unavailable: $ur
 
 $runtimeConfig = [ordered]@{
   apiBaseUrl = "$url/api"
-  portalUrl = $url
+  portalUrl = 'https://0tyght.github.io/postsales-iot/'
   updatedAt = (Get-Date).ToUniversalTime().ToString('o')
 } | ConvertTo-Json
 [IO.File]::WriteAllText($configPath, $runtimeConfig + [Environment]::NewLine, (New-Object Text.UTF8Encoding($false)))
@@ -80,7 +76,7 @@ if (-not $SkipGitPush) {
 
 Write-Host ''
 Write-Host 'Public test server is ready' -ForegroundColor Green
-Write-Host "Portal: $url"
+Write-Host 'Portal: https://0tyght.github.io/postsales-iot/'
 Write-Host "API:    $url/api"
 Write-Host "Config: https://raw.githubusercontent.com/0tyght/postsales-iot/main/runtime-config.json"
 
@@ -90,15 +86,14 @@ if ($Background) {
 }
 
 Write-Host ''
-Write-Host 'Server monitor is running. Press Q to stop API, web server, and tunnel.' -ForegroundColor Cyan
+Write-Host 'Server monitor is running. Press Q to stop API and tunnel.' -ForegroundColor Cyan
 Write-Host 'You can also press Ctrl+C; the script will attempt to stop all services.' -ForegroundColor DarkGray
 
 try {
   while ($true) {
     $apiState = if (Test-Port 5000) { 'ONLINE' } else { 'OFFLINE' }
-    $webState = if (Test-Port 5173) { 'ONLINE' } else { 'OFFLINE' }
     $tunnelState = if (Get-Process cloudflared -ErrorAction SilentlyContinue) { 'ONLINE' } else { 'OFFLINE' }
-    Write-Host ("[{0}] API: {1} | Web: {2} | Tunnel: {3}" -f (Get-Date -Format 'HH:mm:ss'),$apiState,$webState,$tunnelState)
+    Write-Host ("[{0}] API: {1} | Tunnel: {2}" -f (Get-Date -Format 'HH:mm:ss'),$apiState,$tunnelState)
 
     for ($step = 0; $step -lt 10; $step++) {
       try {
@@ -118,7 +113,6 @@ try {
 } finally {
   Write-Host 'Stopping public test server...' -ForegroundColor Yellow
   Get-Process cloudflared -ErrorAction SilentlyContinue | Stop-Process -Force
-  Stop-PortProcess 5173
   Stop-PortProcess 5000
-  Write-Host 'API, web server, and tunnel are stopped.' -ForegroundColor Green
+  Write-Host 'API and tunnel are stopped.' -ForegroundColor Green
 }
