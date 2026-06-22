@@ -32,20 +32,45 @@ while ((-not (Test-Port 5000)) -and (Get-Date) -lt $deadline) {
 if (-not (Test-Port 5000)) { throw 'API server failed to start' }
 
 Get-Process cloudflared -ErrorAction SilentlyContinue | Stop-Process -Force
-$stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
-$outLog = Join-Path $root ".tools\portal-$stamp.out.log"
-$errorLog = Join-Path $root ".tools\portal-$stamp.err.log"
-Start-Process -FilePath $cloudflared -ArgumentList 'tunnel','--url','http://127.0.0.1:5000','--no-autoupdate' -WorkingDirectory $root -RedirectStandardOutput $outLog -RedirectStandardError $errorLog -WindowStyle Hidden | Out-Null
-
 $url = $null
-$deadline = (Get-Date).AddSeconds(45)
-while (-not $url -and (Get-Date) -lt $deadline) {
-  Start-Sleep -Seconds 1
-  $logText = ((Get-Content $outLog,$errorLog -ErrorAction SilentlyContinue) -join "`n")
-  $match = [regex]::Match($logText, 'https://[a-z0-9-]+\.trycloudflare\.com')
-  if ($match.Success) { $url = $match.Value }
+$lastTunnelError = $null
+
+for ($attempt = 1; $attempt -le 4 -and -not $url; $attempt++) {
+  $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
+  $outLog = Join-Path $root ".tools\portal-$stamp-attempt$attempt.out.log"
+  $errorLog = Join-Path $root ".tools\portal-$stamp-attempt$attempt.err.log"
+  Write-Host "Starting Cloudflare Quick Tunnel (attempt $attempt/4)..." -ForegroundColor Cyan
+
+  $tunnelProcess = Start-Process -FilePath $cloudflared -ArgumentList 'tunnel','--url','http://127.0.0.1:5000','--no-autoupdate' -WorkingDirectory $root -RedirectStandardOutput $outLog -RedirectStandardError $errorLog -WindowStyle Hidden -PassThru
+  $deadline = (Get-Date).AddSeconds(45)
+
+  while (-not $url -and (Get-Date) -lt $deadline) {
+    Start-Sleep -Seconds 1
+    $logText = ((Get-Content $outLog,$errorLog -ErrorAction SilentlyContinue) -join "`n")
+    $match = [regex]::Match($logText, 'https://[a-z0-9-]+\.trycloudflare\.com')
+    if ($match.Success) {
+      $url = $match.Value
+      break
+    }
+
+    if ($tunnelProcess.HasExited) { break }
+  }
+
+  if (-not $url) {
+    if (-not $tunnelProcess.HasExited) {
+      Stop-Process -Id $tunnelProcess.Id -Force -ErrorAction SilentlyContinue
+    }
+    $lastTunnelError = ((Get-Content $errorLog -ErrorAction SilentlyContinue) -join "`n")
+    $summary = ($lastTunnelError -split "`n" | Where-Object { $_ -match 'ERR|failed|error code' } | Select-Object -Last 2) -join ' '
+    if (-not $summary) { $summary = 'Cloudflare did not return a tunnel URL in time.' }
+    Write-Warning "Cloudflare attempt $attempt failed: $summary"
+    if ($attempt -lt 4) { Start-Sleep -Seconds (5 * $attempt) }
+  }
 }
-if (-not $url) { throw 'Cloudflare Quick Tunnel failed to start' }
+
+if (-not $url) {
+  throw "Cloudflare Quick Tunnel failed after 4 attempts. This is usually a temporary Cloudflare error. Please wait a few minutes and run this command again. Latest log: $errorLog"
+}
 
 $deadline = (Get-Date).AddSeconds(45)
 do {
