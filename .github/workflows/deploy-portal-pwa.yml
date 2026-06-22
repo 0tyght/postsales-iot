@@ -9,6 +9,7 @@ on:
       - "apps/technician-web/src/**"
       - "apps/technician-web/public/icon-*.png"
       - "scripts/copy-pwa-assets.mjs"
+      - "runtime-config.json"
       - ".github/workflows/deploy-portal-pwa.yml"
 
 permissions:

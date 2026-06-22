@@ -9,3 +9,4 @@ server/uploads/
 .tools/
 apps/admin-web/public/icon-192.png
 apps/admin-web/public/icon-512.png
+apps/admin-web/public/runtime-config.json
