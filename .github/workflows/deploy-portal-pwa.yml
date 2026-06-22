@@ -37,8 +37,6 @@ jobs:
           cache: npm
           cache-dependency-path: apps/admin-web/package-lock.json
       - uses: actions/configure-pages@v5
-        with:
-          enablement: true
       - run: npm ci
       - run: npm run build
         env:
