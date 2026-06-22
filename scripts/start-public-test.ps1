@@ -36,6 +36,7 @@ $url = $null
 $lastTunnelError = $null
 
 for ($attempt = 1; $attempt -le 4 -and -not $url; $attempt++) {
+  $attemptFailure = $null
   $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
   $outLog = Join-Path $root ".tools\portal-$stamp-attempt$attempt.out.log"
   $errorLog = Join-Path $root ".tools\portal-$stamp-attempt$attempt.err.log"
@@ -56,12 +57,52 @@ for ($attempt = 1; $attempt -le 4 -and -not $url; $attempt++) {
     if ($tunnelProcess.HasExited) { break }
   }
 
+  if ($url) {
+    Write-Host 'Waiting for tunnel DNS and API health check...' -ForegroundColor DarkGray
+    $health = $null
+    $healthError = $null
+    $healthDeadline = (Get-Date).AddSeconds(60)
+    $tunnelHost = ([Uri]$url).Host
+    do {
+      try {
+        # Query a public resolver directly. Windows may cache the initial NXDOMAIN
+        # response while a new Quick Tunnel hostname is still propagating.
+        $tunnelIp = Resolve-DnsName $tunnelHost -Server '1.1.1.1' -DnsOnly -Type A -ErrorAction Stop |
+          Where-Object { $_.IPAddress } |
+          Select-Object -ExpandProperty IPAddress -First 1
+        if (-not $tunnelIp) { throw 'Cloudflare DNS has not published an IPv4 address yet.' }
+
+        $healthJson = & curl.exe --silent --show-error --fail --max-time 15 --resolve "${tunnelHost}:443:$tunnelIp" "$url/api/health" 2>&1
+        if ($LASTEXITCODE -ne 0) { throw ($healthJson -join ' ') }
+        $health = ($healthJson -join "`n") | ConvertFrom-Json
+        if ($health.success) {
+          Start-Sleep -Seconds 3
+          $confirmJson = & curl.exe --silent --show-error --fail --max-time 15 --resolve "${tunnelHost}:443:$tunnelIp" "$url/api/health" 2>&1
+          if ($LASTEXITCODE -eq 0 -and (($confirmJson -join "`n") | ConvertFrom-Json).success) { break }
+          $health = $null
+          throw 'Tunnel health confirmation failed.'
+        }
+      } catch {
+        $healthError = $_.Exception.Message
+        Start-Sleep -Seconds 3
+      }
+    } while ((-not $tunnelProcess.HasExited) -and (Get-Date) -lt $healthDeadline)
+
+    if (-not $health.success) {
+      $attemptFailure = "Tunnel URL was created but DNS/API was unavailable: $healthError"
+      $url = $null
+    }
+  }
+
   if (-not $url) {
     if (-not $tunnelProcess.HasExited) {
       Stop-Process -Id $tunnelProcess.Id -Force -ErrorAction SilentlyContinue
     }
     $lastTunnelError = ((Get-Content $errorLog -ErrorAction SilentlyContinue) -join "`n")
-    $summary = ($lastTunnelError -split "`n" | Where-Object { $_ -match 'ERR|failed|error code' } | Select-Object -Last 2) -join ' '
+    $summary = $attemptFailure
+    if (-not $summary) {
+      $summary = ($lastTunnelError -split "`n" | Where-Object { $_ -match 'ERR|failed|error code' } | Select-Object -Last 2) -join ' '
+    }
     if (-not $summary) { $summary = 'Cloudflare did not return a tunnel URL in time.' }
     Write-Warning "Cloudflare attempt $attempt failed: $summary"
     if ($attempt -lt 4) { Start-Sleep -Seconds (5 * $attempt) }
@@ -71,15 +112,6 @@ for ($attempt = 1; $attempt -le 4 -and -not $url; $attempt++) {
 if (-not $url) {
   throw "Cloudflare Quick Tunnel failed after 4 attempts. This is usually a temporary Cloudflare error. Please wait a few minutes and run this command again. Latest log: $errorLog"
 }
-
-$deadline = (Get-Date).AddSeconds(45)
-do {
-  try {
-    $health = Invoke-RestMethod -TimeoutSec 10 "$url/api/health"
-    if ($health.success) { break }
-  } catch { Start-Sleep -Seconds 2 }
-} while ((Get-Date) -lt $deadline)
-if (-not $health.success) { throw "Tunnel is running but API is unavailable: $url" }
 
 $runtimeConfig = [ordered]@{
   apiBaseUrl = "$url/api"
