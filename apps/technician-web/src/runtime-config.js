@@ -12,7 +12,7 @@ const normalize=value=>{
 
 export function clearRuntimeConfig(){pending=undefined}
 export async function getApiBase(force=false){
- const manual=normalize(localStorage.getItem('tech_api_url'));if(manual)return manual;
+ const manual=normalize(localStorage.getItem('tech_api_url'));if(manual&&!force)return manual;
  if(force)pending=undefined;
  if(!pending)pending=(async()=>{for(const configUrl of CONFIG_URLS){try{const response=await fetch(`${configUrl}?t=${Date.now()}`,{cache:'no-store'});if(!response.ok)continue;const remote=normalize((await response.json()).apiBaseUrl);if(!remote)continue;localStorage.setItem(CACHE_KEY,remote);return remote}catch{continue}}return normalize(localStorage.getItem(CACHE_KEY))||import.meta.env.VITE_API_URL||'/api'})();
  return pending;
