@@ -1,2 +1,2 @@
 const r=require('express').Router(),c=require('./customer-sites.controller'),role=require('../../middlewares/role.middleware'),{asyncHandler:a}=require('../../utils/response.util');
-r.get('/',a(c.list));r.get('/service-reminders',role('admin'),a(c.reminders));r.post('/',role('admin'),a(c.create));r.post('/:id/mark-contacted',role('admin'),a(c.markContacted));r.put('/:id',role('admin'),a(c.update));r.delete('/:id',role('admin'),a(c.remove));module.exports=r;
+r.get('/',a(c.list));r.get('/service-reminders',role('admin'),a(c.reminders));r.post('/',role('admin','technician'),a(c.create));r.post('/:id/mark-contacted',role('admin'),a(c.markContacted));r.put('/:id',role('admin'),a(c.update));r.delete('/:id',role('admin'),a(c.remove));module.exports=r;

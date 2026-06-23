@@ -104,6 +104,12 @@ input:focus,select:focus,textarea:focus{outline:0;border-color:var(--tech-blue);
 .customer-mode{border-radius:14px;background:#e8f0f4}
 .customer-mode button{border-radius:11px;font-weight:750}
 .customer-mode button.active{color:#112e42}
+.line-bind-card{display:grid;gap:12px;margin-top:14px;padding:16px;border:1px solid #bde8dc;border-radius:18px;background:#f2fffb;color:#173f35}
+.line-bind-card p{margin:0;color:#526f68;line-height:1.55}
+.line-bind-card code{display:block;padding:13px;border:1px dashed #8acbbd;border-radius:14px;background:#fff;color:#0e3b32;font-weight:900;overflow-wrap:anywhere}
+.line-bind-card small{color:#6f817c;line-height:1.5}
+.line-bind-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.link-button{display:grid;place-items:center;text-decoration:none;text-align:center}
 @media(max-width:600px){
  .app header{position:sticky;top:0;z-index:20;padding:12px 14px}
  .app header:before{width:40px;height:40px;border-radius:13px;margin-right:10px}
@@ -123,4 +129,144 @@ input:focus,select:focus,textarea:focus{outline:0;border-color:var(--tech-blue);
  .complete-bar>div{max-width:58%}
  .sheet{align-self:end;border-radius:24px 24px 0 0;margin:-18px;max-height:88vh}
  .login-card{margin-top:70px;padding:26px}
+ .line-bind-actions{grid-template-columns:1fr}
+}
+
+/* Technician layout frame v2 */
+.technician-app-frame{
+ display:grid;
+ grid-template-rows:auto minmax(0,1fr);
+ min-height:100dvh;
+ background:
+  radial-gradient(circle at 10% 0,#d9fbf2 0,#ffffff00 30%),
+  linear-gradient(180deg,#eef8f6 0,#f8fafc 42%,#edf4f7 100%);
+}
+.technician-topbar{
+ position:sticky;
+ top:0;
+ z-index:25;
+ display:flex;
+ align-items:center;
+ gap:12px;
+ min-height:78px;
+ padding:13px max(16px,calc((100% - 920px)/2));
+ border-bottom:1px solid #ffffff1f;
+}
+.technician-brand{
+ flex:1;
+ min-width:0;
+ display:grid;
+ gap:2px;
+}
+.technician-brand b,.technician-brand small{
+ overflow:hidden;
+ text-overflow:ellipsis;
+ white-space:nowrap;
+}
+.technician-workspace{
+ width:min(100%,920px);
+ margin:0 auto;
+ padding:18px 16px 118px!important;
+}
+.technician-primary-nav{
+ position:sticky;
+ top:92px;
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ margin:0 0 18px;
+ padding:7px;
+ border:1px solid #dce8ee;
+ border-radius:22px;
+ background:#edf4f6e8;
+ backdrop-filter:blur(14px);
+ box-shadow:0 14px 30px #14384f12;
+}
+.technician-primary-nav button{
+ display:grid;
+ gap:2px;
+ min-height:58px;
+ text-align:left;
+ padding:11px 13px;
+}
+.technician-primary-nav button b{
+ display:flex;
+ align-items:center;
+ gap:6px;
+ color:inherit;
+}
+.technician-primary-nav button small{
+ color:#6f8290;
+ font-size:11px;
+ font-weight:700;
+}
+.technician-primary-nav button.active small{color:#5d7582}
+.page-title{
+ display:grid;
+ grid-template-columns:minmax(0,1fr) auto;
+ gap:12px;
+ margin-bottom:14px;
+}
+.page-title>div{min-width:0}
+.page-title h1,.page-title p{
+ overflow:hidden;
+ text-overflow:ellipsis;
+}
+.job-list,.case-list{display:grid;gap:12px}
+.job-card,.case-card{
+ display:grid;
+ gap:10px;
+ text-align:left;
+}
+.job-top,.case-card-head{
+ display:flex;
+ align-items:flex-start;
+ justify-content:space-between;
+ gap:10px;
+}
+.work-card,.contact-card,.start-card,.info-card,.cancelled-card,.success-card{
+ margin-top:14px;
+}
+.sheet{
+ width:min(640px,100%);
+ padding:24px;
+}
+.backdrop{
+ align-items:center;
+ justify-items:center;
+ padding:18px;
+}
+.complete-bar{
+ left:50%;
+ right:auto;
+ transform:translateX(-50%);
+ width:min(100%,920px);
+ border:1px solid #dce8ee;
+ border-bottom:0;
+ border-radius:22px 22px 0 0;
+}
+@media(max-width:600px){
+ .technician-topbar{min-height:68px;padding:10px 14px}
+ .technician-workspace{padding:14px 12px 108px!important}
+ .technician-primary-nav{
+  top:68px;
+  margin-left:0;
+  margin-right:0;
+  border-radius:18px;
+ }
+ .technician-primary-nav button{
+  min-height:52px;
+  padding:9px 11px;
+ }
+ .technician-primary-nav button small{display:none}
+ .page-title{
+  grid-template-columns:1fr;
+  padding:16px;
+ }
+ .page-title .primary{width:100%}
+ .backdrop{align-items:end;padding:0}
+ .sheet{width:100%;border-radius:24px 24px 0 0;margin:0;max-height:90vh}
+ .complete-bar{
+  width:100%;
+  border-radius:18px 18px 0 0;
+ }
 }

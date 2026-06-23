@@ -138,3 +138,165 @@ tbody tr:hover{background:#f8fcff}
  .form-grid{grid-template-columns:1fr}
 }
 @media(max-width:480px){.stats-grid{grid-template-columns:1fr}.page-head h1{font-size:25px}.navbar-user{gap:10px}.navbar-user .btn{padding:8px 10px}.login-panel h1{font-size:32px}}
+
+/* Layout frame v2: clearer menu/content hierarchy */
+.ux-admin-frame{
+ display:grid;
+ grid-template-columns:280px minmax(0,1fr);
+ min-height:100vh;
+ background:
+  radial-gradient(circle at 0 0,#dff7f0 0,#ffffff00 26%),
+  linear-gradient(180deg,#f5f8fb 0,#eef5f7 100%);
+}
+.ux-admin-frame .sidebar{
+ position:sticky;
+ inset:auto;
+ top:0;
+ width:auto;
+ height:100vh;
+ display:grid;
+ grid-template-rows:auto minmax(0,1fr) auto;
+ gap:12px;
+ padding:18px 14px;
+ overflow:hidden;
+ border-right:1px solid #ffffff1c;
+ box-shadow:12px 0 36px #0b223817;
+}
+.ux-admin-frame .brand{flex:none;margin:0;padding:10px 10px 18px}
+.sidebar-menu{
+ min-height:0;
+ overflow:auto;
+ padding:2px 3px 10px;
+ scrollbar-width:thin;
+}
+.sidebar-footer{
+ display:grid;
+ gap:3px;
+ margin:4px 4px 0;
+ padding:12px;
+ border:1px solid #ffffff18;
+ border-radius:16px;
+ background:#ffffff10;
+ color:#d7edf3;
+ font-size:12px;
+ line-height:1.4;
+}
+.sidebar-footer small{color:#9fc0cf}
+.ux-admin-frame .main-shell{
+ min-width:0;
+ width:auto;
+ margin-left:0;
+ display:grid;
+ grid-template-rows:auto minmax(0,1fr);
+}
+.navbar{
+ justify-content:space-between;
+ gap:18px;
+ padding:12px 28px;
+ min-height:78px;
+ height:auto;
+}
+.navbar-left{display:flex;align-items:center;gap:14px;min-width:0}
+.navbar-page-title{display:grid;gap:2px;min-width:0}
+.navbar-page-title strong{
+ color:#102a43;
+ font-size:18px;
+ letter-spacing:-.02em;
+ overflow:hidden;
+ text-overflow:ellipsis;
+ white-space:nowrap;
+}
+.navbar-page-title small{
+ color:#718096;
+ overflow:hidden;
+ text-overflow:ellipsis;
+ white-space:nowrap;
+}
+.navbar-user{
+ flex:none;
+ padding:6px 0 6px 16px;
+ border-left:1px solid #dce8ef;
+}
+.admin-content-frame{
+ width:100%;
+ max-width:none!important;
+ margin:0!important;
+ padding:24px 28px 40px!important;
+ overflow-x:hidden;
+}
+.admin-content-inner{
+ width:min(100%,1460px);
+ margin:0 auto;
+ display:grid;
+ gap:18px;
+}
+.page-head{
+ display:grid;
+ grid-template-columns:minmax(0,1fr) auto;
+ gap:18px;
+ align-items:center;
+ margin-bottom:0;
+}
+.head-actions{align-items:center}
+.table-wrap{
+ max-width:100%;
+ overflow:auto;
+ border-radius:22px;
+}
+.table-tools{
+ display:grid;
+ grid-template-columns:minmax(0,1fr) auto;
+ align-items:center;
+ gap:12px;
+ padding:0;
+}
+.table-filters{min-width:0;flex-wrap:wrap}
+.table-tools input{min-width:min(340px,100%)}
+.modal-backdrop{
+ align-items:center;
+ justify-items:center;
+ padding:24px;
+}
+.modal{
+ width:min(820px,calc(100vw - 32px));
+ max-height:min(88vh,820px);
+ display:grid;
+ grid-template-rows:auto minmax(0,1fr);
+ overflow:hidden;
+}
+.modal form{
+ overflow:auto;
+ min-height:0;
+}
+@media(max-width:1024px){
+ .ux-admin-frame{grid-template-columns:1fr}
+ .ux-admin-frame .sidebar{
+  position:fixed;
+  inset:0 auto 0 0;
+  width:min(304px,86vw);
+  z-index:30;
+  transform:translateX(-105%);
+  transition:transform .2s ease;
+ }
+ .ux-admin-frame .sidebar.open{transform:translateX(0)}
+ .sidebar-overlay{z-index:25;background:#07192d99;backdrop-filter:blur(4px)}
+ .menu-button{display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:#edf5fa;color:#12384a}
+ .navbar{padding:10px 16px;min-height:70px}
+ .navbar-user{border-left:0;padding-left:0}
+ .navbar-user>div{display:none}
+ .admin-content-frame{padding:16px!important}
+ .page-head{grid-template-columns:1fr}
+ .head-actions{width:100%;display:grid;grid-template-columns:1fr}
+ .head-actions .btn{width:100%}
+ .table-tools{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+ .navbar-page-title small{display:none}
+ .navbar-user .btn{min-height:38px;padding:8px 11px}
+ .admin-content-frame{padding:12px!important}
+ .page-head{padding:16px;border-radius:20px}
+ .table-tools,.table-filters,.table-count{display:grid;width:100%;grid-template-columns:1fr}
+ .table-tools input,.table-tools select{width:100%;min-width:0}
+ .modal-backdrop{padding:0;align-items:end}
+ .modal{width:100%;max-height:92vh;border-radius:24px 24px 0 0}
+}

@@ -8,6 +8,15 @@ exports.customerByLineId=async lineUserId=>{
 };
 
 exports.lineIdByCustomerId=async customerId=>(await db.query('SELECT line_user_id FROM customers WHERE customer_id=?',[customerId]))[0][0]?.line_user_id;
+exports.customerById=async customerId=>(await db.query('SELECT customer_id,customer_name,line_user_id FROM customers WHERE customer_id=?',[customerId]))[0][0];
+exports.bindLineId=async(customerId,lineUserId)=>{
+  const customer=await exports.customerById(customerId);
+  if(!customer)return {ok:false,reason:'not_found'};
+  const linked=await exports.customerByLineId(lineUserId);
+  if(linked&&Number(linked.customer_id)!==Number(customerId))return {ok:false,reason:'used',customer:linked};
+  await db.query('UPDATE customers SET line_user_id=? WHERE customer_id=?',[lineUserId,customerId]);
+  return {ok:true,customer:{...customer,line_user_id:lineUserId}};
+};
 
 exports.createProblem=async(siteId,symptom)=>{
   const [recent]=await db.query(`SELECT problem_id FROM problem_reports WHERE site_id=? AND symptom_detail=?

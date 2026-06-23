@@ -1,6 +1,21 @@
 const crypto=require('crypto');
 const repo=require('./line.repository');
 const LINE_API='https://api.line.me/v2/bot/message';
+const secret=()=>process.env.LINE_BIND_SECRET||process.env.JWT_SECRET||process.env.LINE_CHANNEL_SECRET||'postsales-iot-local';
+const sign=customerId=>crypto.createHmac('sha256',secret()).update(String(customerId)).digest('base64url').slice(0,12).toUpperCase();
+const makeCode=customerId=>`PS-${customerId}-${sign(customerId)}`;
+const verifyCode=code=>{
+  const match=String(code||'').trim().toUpperCase().match(/^PS-(\d+)-([A-Z0-9_-]{8,})$/);
+  if(!match)return null;
+  const customerId=Number(match[1]);
+  return sign(customerId)===match[2]?customerId:null;
+};
+const officialAccountId=()=>process.env.LINE_OFFICIAL_ACCOUNT_ID||process.env.LINE_OA_ID||process.env.LINE_BASIC_ID||process.env.LINE_BOT_ID||'';
+const oaMessageUrl=text=>{
+  const accountId=officialAccountId();
+  if(!accountId)return '';
+  return `https://line.me/R/oaMessage/${encodeURIComponent(accountId)}/?${encodeURIComponent(text)}`;
+};
 
 exports.configured=()=>Boolean(process.env.LINE_CHANNEL_SECRET&&process.env.LINE_CHANNEL_ACCESS_TOKEN);
 exports.verifySignature=(rawBody,signature)=>{
@@ -20,6 +35,22 @@ exports.pushText=(to,text)=>send('push',{to,messages:[{type:'text',text:text.sli
 
 const help=customer=>`สวัสดี${customer?`คุณ ${customer.customer_name}`:''}\n\nแจ้งปัญหา: พิมพ์ “แจ้งปัญหา ตามด้วยอาการ”\nตรวจสถานะ: พิมพ์ “สถานะ”`;
 const statusLabel={open:'รอตรวจสอบ',assigned:'มอบหมายช่างแล้ว',resolved:'แก้ไขแล้ว',cancelled:'ยกเลิก'};
+exports.bindInfo=async customerId=>{
+  const customer=await repo.customerById(customerId);
+  if(!customer)throw Object.assign(new Error('ไม่พบลูกค้า'),{status:404});
+  const code=makeCode(customer.customer_id);
+  const registrationText=`ลงทะเบียน ${code}`;
+  return {
+    customer_id:customer.customer_id,
+    customer_name:customer.customer_name,
+    line_user_id:customer.line_user_id,
+    bind_code:code,
+    registration_text:registrationText,
+    add_friend_url:oaMessageUrl(registrationText),
+    configured:exports.configured(),
+    has_official_account_link:Boolean(officialAccountId()),
+  };
+};
 
 exports.handleEvent=async event=>{
   const lineUserId=event.source?.userId;
@@ -28,6 +59,15 @@ exports.handleEvent=async event=>{
   if(event.type==='follow')return exports.replyText(event.replyToken,customer?help(customer):`ขอบคุณที่เพิ่มเพื่อน\nLINE User ID ของคุณคือ\n${lineUserId}\n\nกรุณาส่งรหัสนี้ให้เจ้าหน้าที่เพื่อผูกกับข้อมูลลูกค้า`);
   if(event.type!=='message'||event.message?.type!=='text')return exports.replyText(event.replyToken,'ขณะนี้ระบบรับแจ้งปัญหาด้วยข้อความก่อนนะครับ');
   const text=event.message.text.trim();
+  const registration=text.match(/^ลงทะเบียน\s+(.+)$/i);
+  if(registration){
+    const customerId=verifyCode(registration[1]);
+    if(!customerId)return exports.replyText(event.replyToken,'รหัสลงทะเบียนไม่ถูกต้อง กรุณาขอรหัสใหม่จากช่างหรือเจ้าหน้าที่');
+    const result=await repo.bindLineId(customerId,lineUserId);
+    if(!result.ok&&result.reason==='used')return exports.replyText(event.replyToken,`LINE นี้ผูกกับลูกค้า ${result.customer.customer_name} อยู่แล้ว หากต้องการเปลี่ยน กรุณาติดต่อเจ้าหน้าที่`);
+    if(!result.ok)return exports.replyText(event.replyToken,'ไม่พบข้อมูลลูกค้าสำหรับรหัสนี้ กรุณาขอรหัสใหม่จากเจ้าหน้าที่');
+    return exports.replyText(event.replyToken,`ผูก LINE สำเร็จ\nลูกค้า: ${result.customer.customer_name}\n\n${help(result.customer)}`);
+  }
   if(!customer)return exports.replyText(event.replyToken,`ยังไม่พบข้อมูลลูกค้าที่ผูกกับ LINE นี้\nกรุณาส่งรหัสต่อไปนี้ให้เจ้าหน้าที่:\n${lineUserId}`);
   if(/^(ช่วยเหลือ|วิธีใช้|help|สวัสดี)$/i.test(text))return exports.replyText(event.replyToken,help(customer));
   if(text==='สถานะ'){
