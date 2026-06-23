@@ -22,9 +22,13 @@ function Stop-PortProcess([int]$Port) {
   }
 }
 
-if (-not (Test-Port 5000)) {
-  Start-Process -FilePath node -ArgumentList 'src/server.js' -WorkingDirectory (Join-Path $root 'server') -WindowStyle Hidden | Out-Null
+if (Test-Port 5000) {
+  Write-Host 'Restarting local API server to load the latest backend code...' -ForegroundColor Cyan
+  Stop-PortProcess 5000
+  Start-Sleep -Seconds 1
 }
+
+Start-Process -FilePath node -ArgumentList 'src/server.js' -WorkingDirectory (Join-Path $root 'server') -WindowStyle Hidden | Out-Null
 $deadline = (Get-Date).AddSeconds(20)
 while ((-not (Test-Port 5000)) -and (Get-Date) -lt $deadline) {
   Start-Sleep -Milliseconds 500
