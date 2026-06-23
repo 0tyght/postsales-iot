@@ -5,13 +5,13 @@ import { fmtDate } from '../services/api';
 export default function WarrantyAlertPage() {
   return <ResourcePage
     title="ประกันอุปกรณ์"
-    description="เรียงตามวันหมดประกัน เพื่อวางแผนติดต่อลูกค้าและต่ออายุบริการ"
+    description="ตรวจวันหมดประกันของอุปกรณ์แต่ละชิ้น เพื่อวางแผนเคลม ซ่อม หรือเปลี่ยนอุปกรณ์"
     endpoint="/devices/warranty-alerts"
     idKey="device_id"
     readOnly
     filters={[
       {
-        key: 'warranty_range', label: 'ช่วงประกัน',
+        key: 'warranty_range', label: 'สถานะประกัน',
         predicate: (row, value) => value === 'expired'
           ? row.days_remaining < 0
           : value === 'soon' ? row.days_remaining >= 0 && row.days_remaining <= 60 : row.days_remaining > 60,
@@ -35,7 +35,7 @@ export default function WarrantyAlertPage() {
       { key: 'customer_name', label: 'ลูกค้า' },
       { key: 'site_name', label: 'จุดติดตั้ง' },
       { key: 'device_status', label: 'สถานะ', render: row => <StatusBadge value={row.device_status} /> },
-      { key: 'warranty_end_date', label: 'หมดประกัน', render: row => fmtDate(row.warranty_end_date) },
+      { key: 'warranty_end_date', label: 'วันหมดประกันอุปกรณ์', render: row => fmtDate(row.warranty_end_date) },
       {
         key: 'days_remaining', label: 'ระยะเวลา',
         render: row => row.days_remaining < 0

@@ -120,6 +120,18 @@ tbody tr:hover{background:#f8fcff}
 .job-detail-head{background:linear-gradient(135deg,#fff,#f2f9ff)}
 .detail-section,.detail-info-grid>div,.result-grid>div{border-radius:16px;box-shadow:0 8px 22px #15324f0a}
 .install-card{border-radius:18px;box-shadow:0 18px 50px #102a4326}
+.workflow-note{margin-top:16px;padding:14px;border:1px solid #dbe9ef;border-radius:16px;background:#f6fbff;color:#40576a}
+.workflow-note b{color:#143047}
+.workflow-note ol{margin:8px 0 0;padding-left:20px}
+.workflow-note li{margin:5px 0;line-height:1.5}
+.customer-cell,.contact-cell{display:grid;gap:4px}
+.customer-cell strong{font-size:15px;color:#102a43}
+.customer-cell small,.contact-cell small{color:#718096;font-size:12px}
+.line-state{display:inline-flex;align-items:center;width:max-content;border-radius:999px;padding:5px 10px;font-size:12px;font-weight:800}
+.line-state.linked{background:#e3f8f1;color:#14775f}
+.line-state.unlinked{background:#fff2d9;color:#955d00}
+.linked-summary{display:flex;flex-wrap:wrap;gap:7px}
+.linked-summary span{display:inline-flex;border-radius:999px;padding:5px 9px;background:#eef6ff;color:#1f6bb3;font-size:12px;font-weight:750}
 @media(max-width:1200px){.stats-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:800px){
  .sidebar{width:min(286px,86vw)}

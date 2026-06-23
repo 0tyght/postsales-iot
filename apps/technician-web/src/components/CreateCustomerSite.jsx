@@ -23,18 +23,18 @@ export default function CreateCustomerSite({onClose,onCreated}){
   }catch(x){setError(x.message)}finally{setBusy(false)}
  };
  return <div className="backdrop nested-backdrop" onClick={onClose}><form className="sheet customer-site-sheet" onSubmit={submit} onClick={event=>event.stopPropagation()}>
-  <div className="sheet-head"><h2>เพิ่มลูกค้าและจุดติดตั้ง</h2><button type="button" className="icon" onClick={onClose}>×</button></div>
+  <div className="sheet-head"><h2>เพิ่มลูกค้า / จุดติดตั้ง</h2><button type="button" className="icon" onClick={onClose}>×</button></div>
   {error&&<div className="alert error">{error}</div>}
   {createdSite?<div className="line-bind-card">
-   <b>บันทึกลูกค้าและจุดติดตั้งแล้ว</b>
-   <p>ให้ลูกค้าเพิ่มเพื่อน LINE Official Account แล้วส่งข้อความลงทะเบียนด้านล่าง ระบบจะผูก LINE เข้ากับลูกค้าคนนี้อัตโนมัติ</p>
+   <b>ขั้นตอนถัดไป: ผูก LINE ลูกค้า</b>
+   <p>ให้ลูกค้าเพิ่มเพื่อน LINE Official Account แล้วส่งข้อความลงทะเบียนนี้ ระบบจะรู้ทันทีว่า LINE นี้เป็นของลูกค้าคนนี้</p>
    {lineBind?<><code>{lineBind.registration_text}</code><div className="line-bind-actions"><button type="button" className="secondary" onClick={()=>copy(lineBind.registration_text)}>{copied?'คัดลอกแล้ว':'คัดลอกข้อความ'}</button>{lineBind.add_friend_url&&<a className="primary link-button" href={lineBind.add_friend_url} target="_blank" rel="noreferrer">เปิด LINE</a>}</div>{!lineBind.has_official_account_link&&<small>หมายเหตุ: ยังไม่ได้ตั้งค่า LINE Official Account ID จึงยังเปิดแชตพร้อมข้อความอัตโนมัติไม่ได้ แต่ใช้ข้อความนี้ให้ลูกค้าส่งใน LINE ได้</small>}</>:<p className="muted">ยังไม่มีข้อมูลผูก LINE</p>}
-   <button type="button" className="primary full" onClick={()=>onCreated(createdSite)}>ใช้จุดติดตั้งนี้ต่อ</button>
+   <button type="button" className="primary full" onClick={()=>onCreated(createdSite)}>ใช้จุดติดตั้งนี้สร้างงานต่อ</button>
   </div>:<>
   <div className="customer-mode"><button type="button" className={mode==='new'?'active':''} onClick={()=>setMode('new')}>ลูกค้าใหม่</button><button type="button" className={mode==='existing'?'active':''} onClick={()=>setMode('existing')}>ลูกค้าเดิม</button></div>
-  {mode==='new'?<><label>ชื่อลูกค้า / บริษัท<input required value={form.customer_name} onChange={e=>change('customer_name',e.target.value)}/></label><label>เบอร์โทร<input required value={form.phone} onChange={e=>change('phone',e.target.value)}/></label><label>อีเมล<input type="email" value={form.email} onChange={e=>change('email',e.target.value)}/></label><label>ที่อยู่สำหรับติดต่อ<textarea rows="2" value={form.address} onChange={e=>change('address',e.target.value)}/></label></>:<label>เลือกลูกค้า<select required value={form.customer_id} onChange={e=>change('customer_id',e.target.value)}><option value="">-- เลือกลูกค้า --</option>{customers.map(item=><option key={item.customer_id} value={item.customer_id}>{item.customer_name} · {item.phone||'-'}</option>)}</select></label>}
-  <hr/><label>ชื่อจุดติดตั้ง<input required value={form.site_name} onChange={e=>change('site_name',e.target.value)} placeholder="เช่น บ้าน, สาขา, โกดัง"/></label><label>ที่อยู่หน้างาน<textarea required rows="3" value={form.site_address} onChange={e=>change('site_address',e.target.value)}/></label>
-  <button className="primary full" disabled={busy}>{busy?'กำลังบันทึก...':'บันทึกและเลือกจุดติดตั้งนี้'}</button>
+  {mode==='new'?<><label>ชื่อลูกค้า / บริษัท<input required value={form.customer_name} onChange={e=>change('customer_name',e.target.value)}/></label><label>เบอร์โทรลูกค้า<input required value={form.phone} onChange={e=>change('phone',e.target.value)}/></label><label>อีเมล<input type="email" value={form.email} onChange={e=>change('email',e.target.value)}/></label><label>ที่อยู่ติดต่อของลูกค้า<textarea rows="2" value={form.address} onChange={e=>change('address',e.target.value)}/></label></>:<label>เลือกลูกค้า<select required value={form.customer_id} onChange={e=>change('customer_id',e.target.value)}><option value="">-- เลือกลูกค้า --</option>{customers.map(item=><option key={item.customer_id} value={item.customer_id}>{item.customer_name} · {item.phone||'-'}</option>)}</select></label>}
+  <hr/><label>ชื่อจุดติดตั้ง<input required value={form.site_name} onChange={e=>change('site_name',e.target.value)} placeholder="เช่น บ้านหลัง A, สาขาพิษณุโลก, โกดัง"/></label><label>ที่อยู่หน้างาน<textarea required rows="3" value={form.site_address} onChange={e=>change('site_address',e.target.value)}/></label>
+  <button className="primary full" disabled={busy}>{busy?'กำลังบันทึก...':'บันทึกจุดติดตั้ง'}</button>
   </>}
  </form></div>;
 }

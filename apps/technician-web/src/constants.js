@@ -1,11 +1,11 @@
 export const labels={
  created:'รอเริ่มงาน',
  in_progress:'กำลังทำงาน',
- completed:'เสร็จแล้ว',
+ completed:'ปิดงานแล้ว',
  cancelled:'ยกเลิก',
- installation:'ติดตั้ง',
- repair:'ซ่อม',
+ installation:'งานติดตั้ง',
+ repair:'งานซ่อม',
  open:'รอรับเคส',
  assigned:'รับเคสแล้ว',
- resolved:'แก้ไขแล้ว',
+ resolved:'ปิดเคสแล้ว',
 };

@@ -13,7 +13,7 @@ const careStatus=row=>{
 const contactStatus=row=>{
  if(row.days_until_contact===null||row.days_until_contact===undefined)return '-';
  if(row.days_until_contact<0)return `เกินกำหนด ${Math.abs(row.days_until_contact)} วัน`;
- if(row.days_until_contact===0)return 'ครบกำหนดวันนี้';
+ if(row.days_until_contact===0)return 'ถึงกำหนดวันนี้';
  return `อีก ${row.days_until_contact} วัน`;
 };
 
@@ -55,7 +55,7 @@ export default function ServiceReminderPage(){
   <div className="page-head">
    <div>
     <h1>ระยะดูแล</h1>
-    <p>ดูว่าลูกค้าแต่ละจุดติดตั้งยังอยู่ในระยะการดูแลของทีมช่างหรือไม่ แยกจากประกันอุปกรณ์</p>
+    <p>ดูว่าจุดติดตั้งไหนยังอยู่ในระยะดูแลของเรา แยกจากประกันอุปกรณ์ที่ผูกกับอุปกรณ์แต่ละชิ้น</p>
    </div>
   </div>
   {error&&<div className="alert error">{error}</div>}
@@ -66,7 +66,7 @@ export default function ServiceReminderPage(){
      <option value="active">อยู่ในระยะดูแล</option>
      <option value="expiring">ใกล้หมดระยะดูแล 30 วัน</option>
      <option value="expired">หมดระยะดูแล</option>
-     <option value="contact_due">ครบกำหนดติดต่อ</option>
+     <option value="contact_due">ถึงกำหนดติดตามดูแล</option>
      <option value="all">ทั้งหมด</option>
     </select>
    </div>
@@ -82,10 +82,10 @@ export default function ServiceReminderPage(){
     {key:'service_start_date',label:'เริ่มดูแล',render:row=>fmtDate(row.service_start_date)},
     {key:'service_end_date',label:'สิ้นสุดระยะดูแล',render:row=>fmtDate(row.service_end_date)},
     {key:'days_until_service_end',label:'สถานะระยะดูแล',render:careStatus},
-    {key:'next_service_contact_date',label:'ติดต่อ/ตรวจครั้งถัดไป',render:row=>fmtDate(row.next_service_contact_date)},
-    {key:'days_until_contact',label:'สถานะการติดต่อ',render:contactStatus},
+    {key:'next_service_contact_date',label:'กำหนดติดตามครั้งถัดไป',render:row=>fmtDate(row.next_service_contact_date)},
+    {key:'days_until_contact',label:'สถานะการติดตาม',render:contactStatus},
    ]}
-   rowActions={[{label:'บันทึกว่าติดต่อแล้ว',show:row=>Boolean(row.next_service_contact_date),onClick:mark}]}
+   rowActions={[{label:'บันทึกว่าติดตามแล้ว',show:row=>Boolean(row.next_service_contact_date),onClick:mark}]}
   />}
  </section>;
 }

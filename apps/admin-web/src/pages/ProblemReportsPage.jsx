@@ -19,7 +19,7 @@ export default function ProblemReportsPage(){
   lookups={lookups}
   initialValues={{reported_at:nowLocal(),source_type:'line_chat',contact_channel:'line',problem_status:'open'}}
   filters={[
-   {key:'problem_status',label:'สถานะเคส',options:[{value:'open',label:'รอมอบหมาย'},{value:'assigned',label:'มอบหมายแล้ว'},{value:'resolved',label:'แก้ไขแล้ว'},{value:'cancelled',label:'ยกเลิก'}]},
+   {key:'problem_status',label:'สถานะเคส',options:[{value:'open',label:'รอรับเคส'},{value:'assigned',label:'รับเคสแล้ว'},{value:'resolved',label:'ปิดเคสแล้ว'},{value:'cancelled',label:'ยกเลิก'}]},
    {key:'source_type',label:'แจ้งทางไหน',options:Object.entries(sources).map(([value,label])=>({value,label}))},
   ]}
   columns={[
@@ -37,7 +37,7 @@ export default function ProblemReportsPage(){
    {name:'symptom_detail',label:'รายละเอียดอาการที่ลูกค้าแจ้ง',type:'textarea',required:true,fullWidth:true,placeholder:'ระบุสิ่งที่เกิดขึ้น ช่วงเวลา และผลกระทบ'},
    {name:'reported_at',label:'วันที่และเวลาที่รับแจ้ง',type:'datetime-local',required:true},
    {name:'source_type',label:'แจ้งทางไหน',type:'select',required:true,options:Object.entries(sources).map(([value,label])=>({value,label}))},
-   {name:'problem_status',label:'สถานะเคส',type:'select',hideOnCreate:true,required:true,options:[{value:'open',label:'รอมอบหมายงาน'},{value:'resolved',label:'แก้ไขโดยไม่ต้องลงพื้นที่'},{value:'cancelled',label:'ยกเลิกเคส'}]},
+   {name:'problem_status',label:'สถานะเคส',type:'select',hideOnCreate:true,required:true,options:[{value:'open',label:'รอรับเคส'},{value:'resolved',label:'ปิดเคสโดยไม่ต้องลงพื้นที่'},{value:'cancelled',label:'ยกเลิกเคส'}]},
   ]}
   rowActions={[{key:'open-job',label:row=>`ดูงาน #${row.job_id}`,show:row=>Boolean(row.job_id),onClick:openJob}]}
  />;

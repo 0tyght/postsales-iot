@@ -34,7 +34,7 @@ exports.replyText=(replyToken,text)=>send('reply',{replyToken,messages:[{type:'t
 exports.pushText=(to,text)=>send('push',{to,messages:[{type:'text',text:text.slice(0,5000)}]});
 
 const help=customer=>`สวัสดี${customer?`คุณ ${customer.customer_name}`:''}\n\nแจ้งปัญหา: พิมพ์ “แจ้งปัญหา ตามด้วยอาการ”\nตรวจสถานะ: พิมพ์ “สถานะ”`;
-const statusLabel={open:'รอตรวจสอบ',assigned:'มอบหมายช่างแล้ว',resolved:'แก้ไขแล้ว',cancelled:'ยกเลิก'};
+const statusLabel={open:'รอตรวจสอบ',assigned:'รับเคสแล้ว',resolved:'ปิดเคสแล้ว',cancelled:'ยกเลิก'};
 exports.bindInfo=async customerId=>{
   const customer=await repo.customerById(customerId);
   if(!customer)throw Object.assign(new Error('ไม่พบลูกค้า'),{status:404});
@@ -56,7 +56,7 @@ exports.handleEvent=async event=>{
   const lineUserId=event.source?.userId;
   if(!lineUserId||!event.replyToken)return;
   const customer=await repo.customerByLineId(lineUserId);
-  if(event.type==='follow')return exports.replyText(event.replyToken,customer?help(customer):`ขอบคุณที่เพิ่มเพื่อน\nLINE User ID ของคุณคือ\n${lineUserId}\n\nกรุณาส่งรหัสนี้ให้เจ้าหน้าที่เพื่อผูกกับข้อมูลลูกค้า`);
+  if(event.type==='follow')return exports.replyText(event.replyToken,customer?help(customer):'ขอบคุณที่เพิ่มเพื่อน\n\nหากช่างส่งข้อความลงทะเบียนให้แล้ว กรุณาส่งข้อความนั้นกลับมาในห้องแชตนี้ เพื่อผูก LINE กับข้อมูลลูกค้าอัตโนมัติ');
   if(event.type!=='message'||event.message?.type!=='text')return exports.replyText(event.replyToken,'ขณะนี้ระบบรับแจ้งปัญหาด้วยข้อความก่อนนะครับ');
   const text=event.message.text.trim();
   const registration=text.match(/^ลงทะเบียน\s+(.+)$/i);
@@ -68,7 +68,7 @@ exports.handleEvent=async event=>{
     if(!result.ok)return exports.replyText(event.replyToken,'ไม่พบข้อมูลลูกค้าสำหรับรหัสนี้ กรุณาขอรหัสใหม่จากเจ้าหน้าที่');
     return exports.replyText(event.replyToken,`ผูก LINE สำเร็จ\nลูกค้า: ${result.customer.customer_name}\n\n${help(result.customer)}`);
   }
-  if(!customer)return exports.replyText(event.replyToken,`ยังไม่พบข้อมูลลูกค้าที่ผูกกับ LINE นี้\nกรุณาส่งรหัสต่อไปนี้ให้เจ้าหน้าที่:\n${lineUserId}`);
+  if(!customer)return exports.replyText(event.replyToken,'ยังไม่พบข้อมูลลูกค้าที่ผูกกับ LINE นี้\nกรุณาขอข้อความลงทะเบียนจากช่างหรือเจ้าหน้าที่ แล้วส่งกลับมาในห้องแชตนี้');
   if(/^(ช่วยเหลือ|วิธีใช้|help|สวัสดี)$/i.test(text))return exports.replyText(event.replyToken,help(customer));
   if(text==='สถานะ'){
     const rows=await repo.customerStatus(customer.customer_id);
@@ -92,7 +92,7 @@ exports.handleEvent=async event=>{
 
 exports.push=async({customer_id,line_user_id,text})=>{
   const target=line_user_id||await repo.lineIdByCustomerId(customer_id);
-  if(!target)throw Object.assign(new Error('ลูกค้ายังไม่ได้ผูก LINE User ID'),{status:400});
+  if(!target)throw Object.assign(new Error('ลูกค้ายังไม่ได้ผูก LINE'),{status:400});
   if(!text?.trim())throw Object.assign(new Error('กรุณาระบุข้อความ'),{status:400});
   await exports.pushText(target,text.trim());
   return {sent:true,to:target};

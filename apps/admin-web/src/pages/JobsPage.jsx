@@ -8,7 +8,7 @@ const statusOptions=[
  {value:'',label:'ทั้งหมด'},
  {value:'created',label:'รอเริ่มงาน'},
  {value:'in_progress',label:'กำลังทำ'},
- {value:'completed',label:'เสร็จแล้ว'},
+ {value:'completed',label:'ปิดงานแล้ว'},
  {value:'cancelled',label:'ยกเลิก'},
 ];
 const evidenceLabels={before:'ก่อนทำ',during:'ระหว่างทำ',after:'หลังทำ',result:'ผลทดสอบ',other:'อื่น ๆ'};
@@ -26,7 +26,7 @@ function JobDetail({jobId,onClose,onChanged}){
  const[job,setJob]=useState(null),[error,setError]=useState(''),[lightbox,setLightbox]=useState(null);
  const load=useCallback(async()=>{try{setJob(await api(`/jobs/${jobId}`));setError('')}catch(e){setError(e.message)}},[jobId]);
  useEffect(()=>{const initial=setTimeout(load,0),timer=setInterval(load,5000);return()=>{clearTimeout(initial);clearInterval(timer)}},[load]);
- const timeline=[['สร้างงาน',job?.created_at,true],['เริ่มงาน',job?.started_at,Boolean(job?.started_at)],['เสร็จงาน',job?.completed_at,job?.job_status==='completed']];
+ const timeline=[['สร้างงาน',job?.created_at,true],['เริ่มงาน',job?.started_at,Boolean(job?.started_at)],['ปิดงาน',job?.completed_at,job?.job_status==='completed']];
  return <div className="modal-backdrop job-detail-backdrop" onMouseDown={onClose}><article className="job-detail-drawer" onMouseDown={e=>e.stopPropagation()}>
   <header className="job-detail-head"><div><span className="eyebrow">รายละเอียดงาน #{jobId}</span><h2>{job?`${job.customer_name} · ${job.site_name}`:'กำลังโหลด...'}</h2></div><button className="close-button" onClick={onClose}>×</button></header>
   {error&&<div className="alert error">{error}</div>}{!job?<div className="loading">กำลังโหลดรายละเอียด...</div>:<div className="job-detail-body">
@@ -54,7 +54,7 @@ function JobForm({row,lookups,onClose,onSaved}){
   {name:'job_status',label:'สถานะงาน',type:'select',hideOnCreate:true,required:true,options:statusOptions.slice(1).map(x=>({value:x.value,label:x.label}))},
   {name:'job_note',label:'รายละเอียดและคำแนะนำสำหรับช่าง',type:'textarea',fullWidth:true},
   {name:'result_summary',label:'สรุปผล',type:'textarea',fullWidth:true,hideOnCreate:true},
-  {name:'started_at',label:'เริ่มงานจริง',type:'datetime-local',hideOnCreate:true},{name:'completed_at',label:'เสร็จงานจริง',type:'datetime-local',hideOnCreate:true},
+  {name:'started_at',label:'เริ่มงานจริง',type:'datetime-local',hideOnCreate:true},{name:'completed_at',label:'เวลาปิดงานจริง',type:'datetime-local',hideOnCreate:true},
  ];
  const visible=fields.filter(f=>!(isEdit&&f.hideOnEdit)&&!(!isEdit&&f.hideOnCreate)&&(!f.showWhen||f.showWhen(form)));
  const save=async e=>{e.preventDefault();setSaving(true);setError('');try{await api(isEdit?`/jobs/${row.job_id}`:'/jobs',{method:isEdit?'PUT':'POST',body:JSON.stringify(form)});onSaved()}catch(x){setError(x.message)}finally{setSaving(false)}};

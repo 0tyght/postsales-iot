@@ -11,7 +11,7 @@ export default function TechnicianRoutes({jobs,problems,models,selected,onOpen,o
  return <>
   <nav className="technician-primary-nav" aria-label="เมนูงานช่าง">
    <button className={section==='jobs'?'active':''} onClick={()=>setSection('jobs')}><b>งานของฉัน</b><small>งานที่รับแล้ว</small></button>
-   <button className={section==='cases'?'active':''} onClick={()=>setSection('cases')}><b>เคสทั้งหมด {openCount>0&&<span>{openCount}</span>}</b><small>เคสรอรับงาน</small></button>
+   <button className={section==='cases'?'active':''} onClick={()=>setSection('cases')}><b>เคสรอรับ {openCount>0&&<span>{openCount}</span>}</b><small>รับแล้วจะเป็นงานซ่อม</small></button>
   </nav>
   {section==='jobs'?<MyJobsPage jobs={jobs} onOpen={onOpen} onCreate={onCreate}/>:<ProblemCasesPage problems={problems} onClaim={claim}/>}
  </>;
