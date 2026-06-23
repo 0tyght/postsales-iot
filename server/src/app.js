@@ -21,7 +21,7 @@ app.get('/api/dashboard',role('admin'),asyncHandler(async(req,res)=>{
       (SELECT COUNT(*) FROM device_units WHERE device_status='active') devices,
       (SELECT COUNT(*) FROM problem_reports WHERE problem_status IN ('open','assigned')) problems`),
     db.query(`SELECT job_status,COUNT(*) total FROM jobs GROUP BY job_status`),
-    db.query(`SELECT COUNT(*) due FROM customer_sites WHERE next_service_contact_date<=DATE_ADD(CURDATE(),INTERVAL 30 DAY)`),
+    db.query(`SELECT COUNT(*) due FROM customer_sites WHERE site_status='active' AND service_end_date IS NOT NULL AND service_end_date<=DATE_ADD(CURDATE(),INTERVAL 30 DAY)`),
     db.query(`SELECT COUNT(*) due FROM device_units WHERE warranty_end_date<=DATE_ADD(CURDATE(),INTERVAL 60 DAY)`),
     db.query(`SELECT p.problem_id,p.symptom_detail,p.problem_status,p.reported_at,s.site_name,c.customer_name,j.job_status
       FROM problem_reports p JOIN customer_sites s ON s.site_id=p.site_id JOIN customers c ON c.customer_id=s.customer_id LEFT JOIN jobs j ON j.job_id=p.job_id

@@ -1,2 +1,91 @@
-import{useEffect,useState}from'react';import DataTable from '../components/DataTable';import{api,fmtDate}from'../services/api';
-export default function ServiceReminderPage(){const[rows,setRows]=useState([]),[error,setError]=useState(''),[loading,setLoading]=useState(true),[view,setView]=useState('due'),[search,setSearch]=useState('');const load=()=>api('/customer-sites/service-reminders').then(setRows).catch(e=>setError(e.message)).finally(()=>setLoading(false));useEffect(()=>{load()},[]);const mark=async row=>{if(!confirm(`ยืนยันว่าติดต่อลูกค้า ${row.customer_name} แล้ว?`))return;try{await api(`/customer-sites/${row.site_id}/mark-contacted`,{method:'POST'});await load()}catch(e){setError(e.message)}};const visible=rows.filter(r=>(!search||`${r.customer_name} ${r.site_name} ${r.phone}`.toLowerCase().includes(search.toLowerCase()))&&(view==='all'||view==='due'&&r.days_until_contact<=0||view==='soon'&&r.days_until_contact>0&&r.days_until_contact<=30));return <section><div className="page-head"><div><h1>รอบเซอร์วิส</h1><p>เริ่มจากรายการเกินกำหนด เมื่อบันทึกแล้วระบบคำนวณรอบถัดไปอัตโนมัติ</p></div></div>{error&&<div className="alert error">{error}</div>}<div className="table-tools"><div className="table-filters"><input value={search} onChange={e=>setSearch(e.target.value)} placeholder="ค้นหาลูกค้า จุดติดตั้ง หรือเบอร์โทร..."/><select value={view} onChange={e=>setView(e.target.value)}><option value="due">เกินกำหนด / ถึงวันนี้</option><option value="soon">ภายใน 30 วัน</option><option value="all">ทั้งหมด</option></select></div><span>{visible.length} รายการ</span></div>{loading?<div className="loading">กำลังโหลดข้อมูล...</div>:<DataTable idKey="site_id" rows={visible} columns={[{key:'customer_name',label:'ลูกค้า'},{key:'site_name',label:'จุดติดตั้ง'},{key:'phone',label:'โทรศัพท์'},{key:'service_interval_days',label:'รอบติดต่อ',render:r=>`${r.service_interval_days} วัน`},{key:'last_service_contact_date',label:'ติดต่อล่าสุด',render:r=>fmtDate(r.last_service_contact_date)},{key:'next_service_contact_date',label:'กำหนดครั้งถัดไป',render:r=>fmtDate(r.next_service_contact_date)},{key:'days_until_contact',label:'สถานะ',render:r=>r.days_until_contact<0?`เกินกำหนด ${Math.abs(r.days_until_contact)} วัน`:r.days_until_contact===0?'ครบกำหนดวันนี้':`อีก ${r.days_until_contact} วัน`}]} rowActions={[{label:'บันทึกว่าติดต่อแล้ว',onClick:mark}]}/>}</section>}
+import {useEffect,useState} from 'react';
+import DataTable from '../components/DataTable';
+import {api,fmtDate} from '../services/api';
+
+const careStatus=row=>{
+ if(row.days_until_service_end===null||row.days_until_service_end===undefined)return 'ไม่ระบุวันสิ้นสุด';
+ if(row.days_until_service_end<0)return `หมดระยะดูแล ${Math.abs(row.days_until_service_end)} วัน`;
+ if(row.days_until_service_end===0)return 'หมดระยะดูแลวันนี้';
+ if(row.days_until_service_end<=30)return `ใกล้หมดระยะดูแล อีก ${row.days_until_service_end} วัน`;
+ return `อยู่ในระยะดูแล อีก ${row.days_until_service_end} วัน`;
+};
+
+const contactStatus=row=>{
+ if(row.days_until_contact===null||row.days_until_contact===undefined)return '-';
+ if(row.days_until_contact<0)return `เกินกำหนด ${Math.abs(row.days_until_contact)} วัน`;
+ if(row.days_until_contact===0)return 'ครบกำหนดวันนี้';
+ return `อีก ${row.days_until_contact} วัน`;
+};
+
+export default function ServiceReminderPage(){
+ const[rows,setRows]=useState([]);
+ const[error,setError]=useState('');
+ const[loading,setLoading]=useState(true);
+ const[view,setView]=useState('active');
+ const[search,setSearch]=useState('');
+
+ const load=()=>api('/customer-sites/service-reminders').then(setRows).catch(e=>setError(e.message)).finally(()=>setLoading(false));
+ useEffect(()=>{load()},[]);
+
+ const mark=async row=>{
+  if(!confirm(`ยืนยันว่าติดต่อลูกค้า ${row.customer_name} แล้ว?`))return;
+  try{
+   await api(`/customer-sites/${row.site_id}/mark-contacted`,{method:'POST'});
+   await load();
+  }catch(e){
+   setError(e.message);
+  }
+ };
+
+ const visible=rows.filter(row=>{
+  const keyword=`${row.customer_name} ${row.site_name} ${row.phone||''}`.toLowerCase();
+  const matchesSearch=!search||keyword.includes(search.toLowerCase());
+  const days=row.days_until_service_end;
+  const contact=row.days_until_contact;
+  const matchesView=
+   view==='all'||
+   (view==='active'&&(days===null||days===undefined||days>=0))||
+   (view==='expiring'&&days!==null&&days!==undefined&&days>=0&&days<=30)||
+   (view==='expired'&&days!==null&&days!==undefined&&days<0)||
+   (view==='contact_due'&&contact!==null&&contact!==undefined&&contact<=0);
+  return matchesSearch&&matchesView;
+ });
+
+ return <section>
+  <div className="page-head">
+   <div>
+    <h1>ระยะดูแล</h1>
+    <p>ดูว่าลูกค้าแต่ละจุดติดตั้งยังอยู่ในระยะการดูแลของทีมช่างหรือไม่ แยกจากประกันอุปกรณ์</p>
+   </div>
+  </div>
+  {error&&<div className="alert error">{error}</div>}
+  <div className="table-tools">
+   <div className="table-filters">
+    <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="ค้นหาลูกค้า จุดติดตั้ง หรือเบอร์โทร..."/>
+    <select value={view} onChange={e=>setView(e.target.value)}>
+     <option value="active">อยู่ในระยะดูแล</option>
+     <option value="expiring">ใกล้หมดระยะดูแล 30 วัน</option>
+     <option value="expired">หมดระยะดูแล</option>
+     <option value="contact_due">ครบกำหนดติดต่อ</option>
+     <option value="all">ทั้งหมด</option>
+    </select>
+   </div>
+   <span>{visible.length} รายการ</span>
+  </div>
+  {loading?<div className="loading">กำลังโหลดข้อมูล...</div>:<DataTable
+   idKey="site_id"
+   rows={visible}
+   columns={[
+    {key:'customer_name',label:'ลูกค้า'},
+    {key:'site_name',label:'จุดติดตั้ง'},
+    {key:'phone',label:'โทรศัพท์'},
+    {key:'service_start_date',label:'เริ่มดูแล',render:row=>fmtDate(row.service_start_date)},
+    {key:'service_end_date',label:'สิ้นสุดระยะดูแล',render:row=>fmtDate(row.service_end_date)},
+    {key:'days_until_service_end',label:'สถานะระยะดูแล',render:careStatus},
+    {key:'next_service_contact_date',label:'ติดต่อ/ตรวจครั้งถัดไป',render:row=>fmtDate(row.next_service_contact_date)},
+    {key:'days_until_contact',label:'สถานะการติดต่อ',render:contactStatus},
+   ]}
+   rowActions={[{label:'บันทึกว่าติดต่อแล้ว',show:row=>Boolean(row.next_service_contact_date),onClick:mark}]}
+  />}
+ </section>;
+}
