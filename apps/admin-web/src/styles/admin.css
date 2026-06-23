@@ -312,3 +312,138 @@ tbody tr:hover{background:#f8fcff}
  .modal-backdrop{padding:0;align-items:end}
  .modal{width:100%;max-height:92vh;border-radius:24px 24px 0 0}
 }
+
+/* Responsive completeness: desktop / tablet / mobile */
+html{font-size:16px}
+body{min-width:0;overflow-x:hidden}
+img,video{max-width:100%;height:auto}
+.admin-shell,.main-shell,.admin-content-frame,.admin-content-inner,section{min-width:0}
+button,.btn,.btn-icon,input,select,textarea{touch-action:manipulation}
+
+@media(min-width:1441px){
+ .ux-admin-frame{grid-template-columns:292px minmax(0,1fr)}
+ .admin-content-inner{width:min(100%,1540px)}
+ .stats-grid{grid-template-columns:repeat(6,minmax(0,1fr))}
+ .dashboard-grid{grid-template-columns:minmax(340px,.85fr) minmax(0,1.75fr)}
+}
+
+@media(min-width:1025px) and (max-width:1280px){
+ .ux-admin-frame{grid-template-columns:248px minmax(0,1fr)}
+ .ux-admin-frame .sidebar{padding:16px 10px}
+ .brand{font-size:16px}
+ .sidebar nav button{min-height:40px;padding:8px 10px}
+ .admin-content-frame{padding:20px!important}
+ .page-head{padding:19px;border-radius:22px}
+ .stats-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .dashboard-grid{grid-template-columns:1fr}
+ .monitor-main{grid-template-columns:88px minmax(210px,1.4fr) minmax(150px,1fr) 96px}
+ .monitor-state{display:none}
+}
+
+@media(min-width:641px) and (max-width:1024px){
+ .ux-admin-frame{grid-template-columns:1fr}
+ .admin-content-frame{padding:18px!important}
+ .admin-content-inner{gap:16px}
+ .navbar{position:sticky;top:0;min-height:72px}
+ .navbar-page-title strong{font-size:17px}
+ .page-head{grid-template-columns:minmax(0,1fr) auto;padding:18px}
+ .page-head h1{font-size:28px}
+ .head-actions{width:auto;display:flex}
+ .head-actions .btn{width:auto}
+ .stats-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .dashboard-grid{grid-template-columns:1fr}
+ .job-stat-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .job-toolbar{display:grid;grid-template-columns:minmax(0,1fr) 190px;align-items:stretch}
+ .job-toolbar .status-tabs{grid-column:1/-1;display:flex;gap:7px;overflow:auto;padding-bottom:2px}
+ .monitor-main{grid-template-columns:80px minmax(0,1fr) 132px;gap:12px}
+ .monitor-assignee{grid-column:2}
+ .monitor-evidence{grid-column:3;grid-row:1/3}
+ .monitor-state{display:none}
+ .job-detail-drawer{width:min(760px,88vw)}
+ .modal{width:min(820px,calc(100vw - 36px))}
+ .form-grid{grid-template-columns:1fr 1fr}
+}
+
+@media(max-width:760px){
+ .admin-content-frame{padding:12px!important}
+ .admin-content-inner{gap:14px}
+ .navbar{gap:10px;padding:9px 12px;min-height:64px}
+ .menu-button{width:40px;height:40px}
+ .navbar-page-title strong{font-size:16px}
+ .navbar-user{gap:8px}
+ .page-head{display:grid;grid-template-columns:1fr;gap:14px;padding:16px;border-radius:20px}
+ .page-head h1{font-size:25px}
+ .page-head p{font-size:13px}
+ .head-actions{width:100%;display:grid;grid-template-columns:1fr}
+ .head-actions .btn{width:100%;min-height:45px}
+ .stats-grid,.job-stat-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .stat-card,.job-stat-grid button{padding:14px;border-radius:16px}
+ .dashboard-grid{grid-template-columns:1fr;gap:12px}
+ .panel{padding:16px;border-radius:18px}
+ .metric-row,.recent-item{align-items:flex-start;gap:8px}
+ .table-tools{display:grid;grid-template-columns:1fr;gap:10px}
+ .table-filters,.table-count{display:grid;width:100%;grid-template-columns:1fr;gap:8px}
+ .table-tools input,.table-tools select{width:100%;min-width:0}
+ .pagination{justify-content:center;flex-wrap:wrap}
+ .job-toolbar{display:grid;grid-template-columns:1fr;gap:9px}
+ .job-toolbar select{width:100%}
+ .status-tabs{display:flex;gap:7px;overflow:auto;padding-bottom:3px}
+ .monitor-main{grid-template-columns:1fr;gap:10px;padding:16px}
+ .monitor-id{display:flex;align-items:center;justify-content:space-between}
+ .monitor-assignee,.monitor-evidence{grid-column:auto}
+ .monitor-evidence{display:flex;align-items:center;justify-content:space-between;border-top:1px solid #edf3f6;padding-top:9px}
+ .monitor-state{display:flex;align-items:center;justify-content:space-between}
+ .detail-status{align-items:flex-start;flex-wrap:wrap}
+ .detail-status .live-dot{margin-left:0}
+ .job-detail-backdrop{align-items:end;justify-items:center}
+ .job-detail-drawer{width:100%;height:min(92dvh,820px);border-radius:24px 24px 0 0}
+ .job-detail-head{padding:16px}
+ .job-detail-body{padding:14px}
+ .detail-info-grid,.result-grid{grid-template-columns:1fr}
+ .evidence-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .job-detail-footer{display:grid;grid-template-columns:1fr;gap:8px;padding:12px 14px}
+ .modal-backdrop{padding:0;align-items:end}
+ .modal{width:100%;max-height:92dvh;border-radius:24px 24px 0 0}
+ .modal-head{padding:17px}
+ .modal form{padding:17px}
+ .form-grid{grid-template-columns:1fr}
+ .modal-actions{display:grid;grid-template-columns:1fr;gap:8px}
+ .login-page{display:block;min-height:100dvh;padding:16px 0}
+ .login-panel{width:calc(100% - 28px);margin:92px auto 28px;padding:24px;border-radius:24px}
+ .login-panel h1{font-size:32px}
+ .login-visual{display:none}
+ .install-card{left:12px;right:12px;top:12px;bottom:auto;width:auto}
+}
+
+@media(max-width:640px){
+ .table-wrap{overflow:visible;background:transparent;border:0;box-shadow:none}
+ .table-wrap table,.table-wrap thead,.table-wrap tbody,.table-wrap tr,.table-wrap th,.table-wrap td{display:block;width:100%;min-width:0}
+ .table-wrap table{border-collapse:separate;border-spacing:0}
+ .table-wrap thead{display:none}
+ .table-wrap tbody{display:grid;gap:12px}
+ .table-wrap tr{border:1px solid #dce7ef;border-radius:18px;background:#fff;box-shadow:var(--shadow);overflow:hidden}
+ .table-wrap td{display:grid;grid-template-columns:minmax(104px,38%) minmax(0,1fr);gap:10px;align-items:start;padding:11px 13px;border-bottom:1px solid #edf3f6}
+ .table-wrap td:before{content:attr(data-label);color:#718096;font-size:12px;font-weight:800}
+ .table-wrap td:last-child{border-bottom:0}
+ .table-wrap td.row-actions{display:flex;flex-wrap:wrap;justify-content:flex-start;padding:13px}
+ .table-wrap td.row-actions:before{width:100%;flex:0 0 100%}
+ .row-actions .btn-icon{min-height:38px;padding:8px 12px}
+ .customer-cell strong{font-size:14px}
+ .linked-summary{gap:5px}
+ .lightbox{padding:14px}
+ .lightbox img{max-width:96vw;max-height:78vh}
+}
+
+@media(max-width:420px){
+ .admin-content-frame{padding:10px!important}
+ .navbar-page-title strong{max-width:46vw}
+ .navbar-user .btn{font-size:12px;padding:8px 9px}
+ .stats-grid,.job-stat-grid{grid-template-columns:1fr}
+ .page-head h1{font-size:23px}
+ .table-wrap td{grid-template-columns:1fr;gap:4px}
+ .table-wrap td:before{font-size:11px}
+ .evidence-gallery{grid-template-columns:1fr}
+ .install-card{display:grid;gap:10px}
+ .install-card button{width:100%}
+ .platform-choices{grid-template-columns:1fr}
+}
