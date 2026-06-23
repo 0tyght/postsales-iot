@@ -1,2 +1,119 @@
 @import '../App.css';
 @import '../technician-enhancements.css';
+
+/* Technician app UX refresh */
+:root{
+ --tech-ink:#122334;
+ --tech-muted:#6d7e8b;
+ --tech-bg:#f3f8fa;
+ --tech-card:#ffffff;
+ --tech-line:#dbe7ec;
+ --tech-primary:#168a72;
+ --tech-primary-2:#20b59a;
+ --tech-blue:#2878d0;
+ --tech-amber:#f2a63b;
+ --tech-red:#d94b4b;
+ --tech-radius:19px;
+ --tech-shadow:0 18px 45px #14384f14;
+ font-family:"Noto Sans Thai",Inter,system-ui,sans-serif;
+ color:var(--tech-ink);
+ background:var(--tech-bg);
+}
+body{background:radial-gradient(circle at 12% 0,#dffaf3 0,#ffffff00 25%),linear-gradient(180deg,#f5fbfd,#edf5f7);color:var(--tech-ink)}
+button,input,select,textarea{font-family:inherit}
+button{-webkit-tap-highlight-color:transparent}
+.app{min-height:100vh;background:linear-gradient(180deg,#eef8f6 0,#f7fafc 42%,#edf4f7 100%)}
+.app header{height:auto;min-height:82px;padding:14px max(16px,calc((100% - 920px)/2));background:linear-gradient(135deg,#0d2a3d,#12435b 58%,#106552);box-shadow:0 14px 40px #0c2b3d22}
+.app header:before{content:"PS";display:grid;place-items:center;width:44px;height:44px;margin-right:12px;border-radius:14px;background:linear-gradient(145deg,#48d7bf,#20a98f);color:#fff;font-weight:900;box-shadow:0 12px 30px #1bbb9844}
+.app header>div:first-child{flex:1}
+.app header b{font-size:18px;letter-spacing:-.02em}
+.app header small{margin-top:3px;color:#b9d7df}
+.app header button{border-color:#ffffff33;background:#ffffff12;color:#e8f6f8;border-radius:999px;padding:9px 13px;font-weight:750}
+.app header button:hover{background:#ffffff1f}
+.app main{max-width:920px;padding:22px 18px 104px}
+.login{align-items:start;padding:24px 18px;background:radial-gradient(circle at 15% 8%,#dffaf3 0,#ffffff00 30%),linear-gradient(145deg,#f6fbff,#edf8f5)}
+.login-card{position:relative;width:min(430px,100%);margin-top:min(10vh,74px);padding:30px;border:1px solid #deeaef;border-radius:28px;background:#fffffff2;box-shadow:0 26px 70px #12384a20}
+.login-card:before{content:"";position:absolute;left:-1px;right:-1px;top:-1px;height:7px;border-radius:28px 28px 0 0;background:linear-gradient(90deg,#20b59a,#2878d0)}
+.mark{width:58px;height:58px;border-radius:18px;background:linear-gradient(145deg,#48d7bf,#168a72);box-shadow:0 14px 34px #16a5863d}
+.login-card h1{font-size:34px;letter-spacing:-.045em;color:#122334}
+.login-card p,.sheet>p,.page-title p,.section-title p{line-height:1.6;color:var(--tech-muted)}
+.login-tips{display:grid;gap:4px;margin:18px 0 2px;padding:12px 14px;border:1px solid #d8e8ee;border-radius:16px;background:#f4fbff;color:#526879;font-size:13px;line-height:1.5}
+.login-tips b{color:#12384a}
+.login-card label,.sheet label,.inline-form label,.form-grid label{font-weight:750;color:#415465}
+input,select,textarea{min-height:45px;border-radius:14px;border-color:#cfdee6;background:#fff;transition:border-color .16s ease,box-shadow .16s ease}
+input:focus,select:focus,textarea:focus{outline:0;border-color:var(--tech-blue);box-shadow:0 0 0 4px #2878d01a}
+.primary,.secondary{min-height:45px;border-radius:14px;transition:transform .15s ease,box-shadow .15s ease,background .15s ease}
+.primary{background:linear-gradient(135deg,#168a72,#20b59a);box-shadow:0 14px 28px #168a7230}
+.primary:hover{box-shadow:0 18px 36px #168a7240}
+.primary:active,.secondary:active,.job-card:active,.case-card:active{transform:scale(.985)}
+.secondary{border-color:#d3e1e8;background:#fff;color:#29495b}
+.compact{min-height:42px;padding:10px 14px}
+.page-title{align-items:center;padding:18px;border:1px solid #dce8ee;border-radius:24px;background:linear-gradient(135deg,#fff,#f3fbf8);box-shadow:var(--tech-shadow);margin-bottom:16px}
+.page-title h1{font-size:clamp(24px,5vw,32px);letter-spacing:-.045em;color:#10283a}
+.page-title .primary{white-space:nowrap}
+.technician-primary-nav{position:sticky;top:92px;z-index:7;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 18px;padding:6px;border:1px solid #dce8ee;border-radius:18px;background:#e9f1f4cc;backdrop-filter:blur(12px);box-shadow:0 12px 26px #14384f0d}
+.technician-primary-nav button{border-radius:13px;padding:12px;color:#4f6574;transition:.16s ease}
+.technician-primary-nav button.active{background:#fff;color:#112e42;box-shadow:0 8px 18px #14384f16}
+.technician-primary-nav span{background:var(--tech-red)}
+.tabs{gap:8px;margin:18px 0 14px;padding-bottom:3px}
+.tabs button{border-radius:999px;padding:9px 15px;background:#e7eef2;color:#536775;font-weight:750}
+.tabs button.active{background:#12384a;color:#fff;box-shadow:0 10px 22px #12384a22}
+.job-list,.case-list{gap:14px}
+.job-card,.case-card,.contact-card,.start-card,.work-card,.success-card,.info-card,.cancelled-card,.repair-record,.repair-editor{border-color:#dce8ee;border-radius:var(--tech-radius);background:#fffffff5;box-shadow:var(--tech-shadow)}
+.job-card,.case-card{position:relative;overflow:hidden;padding:18px}
+.job-card:before,.case-card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:#20b59a}
+.job-card:hover,.case-card:hover{box-shadow:0 22px 50px #14384f1b}
+.job-top,.case-card-head{align-items:center}
+.type,.state{font-weight:800;padding:5px 10px}
+.type{background:#def8ef;color:#11765e}
+.type.repair{background:#fff1d8;color:#985f00}
+.state{background:#eef3f7;color:#637382}
+.state.in_progress{background:#e8f2ff;color:#2168ac}
+.state.completed{background:#def8ef;color:#11765e}
+.job-card h2,.case-card h2{font-size:19px;letter-spacing:-.02em;color:#122334}
+.job-card p,.case-site{color:#4f6574}
+.problem,.problem-box{border:1px solid #ffe1ad;background:#fff8ea;color:#76521a;border-radius:13px}
+.job-facts{gap:9px}
+.job-facts>div{border:1px solid #dce8ee;border-radius:14px;background:#f4f9fb}
+.contact-card a{border-radius:999px;background:#def8ef;color:#11765e;font-weight:800}
+.back{display:inline-flex;align-items:center;gap:6px;margin-bottom:14px;color:#236d95;font-weight:800}
+.detail-hero{padding:18px;border-radius:24px;background:linear-gradient(135deg,#fff,#f2fbf8);border:1px solid #dce8ee;box-shadow:var(--tech-shadow)}
+.detail-hero h1{letter-spacing:-.045em}
+.section-title span{box-shadow:inset 0 0 0 1px #ffffff80}
+.device-row,.evidence-item,.evidence-photo{border-bottom-color:#edf3f6}
+.upload-row{gap:10px}
+.file-button{border:1px dashed #98cbbf;border-radius:14px;background:#edfaf6}
+.complete-bar{padding:13px max(16px,calc((100% - 920px)/2));border-top-color:#dce8ee;box-shadow:0 -18px 40px #14384f14;backdrop-filter:blur(12px);background:#fffffff0}
+.complete-bar .primary{min-width:138px}
+.sheet{border-radius:24px;border:1px solid #ffffff80;box-shadow:0 30px 90px #07192d55}
+.backdrop{background:#102d3caa;backdrop-filter:blur(8px)}
+.sheet-head h2{letter-spacing:-.035em}
+.icon{width:38px;height:38px;border-radius:50%;background:#eef3f6;color:#243b4a}
+.empty,.loading{border:1px dashed #cddde5;border-radius:20px;background:#ffffffcc;color:#728391}
+.alert{border-radius:14px}
+.alert.error{border:1px solid #f1c9c9;background:#fff1f1;color:#a53b3b}
+.alert.success{border:1px solid #bde8dc;background:#e2f6ef;color:#14705b}
+.case-linked{border-radius:13px;background:#def8ef;color:#11765e}
+.customer-mode{border-radius:14px;background:#e8f0f4}
+.customer-mode button{border-radius:11px;font-weight:750}
+.customer-mode button.active{color:#112e42}
+@media(max-width:600px){
+ .app header{position:sticky;top:0;z-index:20;padding:12px 14px}
+ .app header:before{width:40px;height:40px;border-radius:13px;margin-right:10px}
+ .app header b{font-size:16px}
+ .app header button{padding:8px 10px;font-size:12px}
+ .app main{padding:16px 14px 108px}
+ .page-title{padding:16px;border-radius:21px;align-items:flex-start}
+ .page-title p{display:block;font-size:13px}
+ .page-title .primary{align-self:stretch}
+ .technician-primary-nav{top:72px;margin-left:-2px;margin-right:-2px}
+ .job-card,.case-card{padding:16px;border-radius:18px}
+ .job-card h2,.case-card h2{font-size:18px}
+ .detail-hero{border-radius:21px;padding:16px}
+ .contact-card{display:grid}
+ .contact-card a{text-align:center}
+ .complete-bar{padding:12px 14px}
+ .complete-bar>div{max-width:58%}
+ .sheet{align-self:end;border-radius:24px 24px 0 0;margin:-18px;max-height:88vh}
+ .login-card{margin-top:70px;padding:26px}
+}

@@ -17,8 +17,9 @@ export default function LoginPage({onLogin}){
   }catch(x){setError(x.message)}finally{setBusy(false)}
  };
  return <main className="login"><form className="login-card" onSubmit={submit}>
-  <div className="mark">PS</div><h1>แอปสำหรับช่าง</h1><p>จัดการงานติดตั้งและซ่อมจากหน้างาน</p>
+  <div className="mark">PS</div><h1>Post-Sales IoT</h1><p>เปิดงาน รับเคส แนบรูป และปิดงานจากหน้างานได้ทันที</p>
   {error&&<div className="alert error">{error}</div>}
+  <div className="login-tips"><b>สำหรับทีมช่าง</b><span>ถ้าไม่ได้รับลิงก์เซิร์ฟเวอร์พิเศษ ให้เว้นช่อง Server URL ว่างไว้ ระบบจะใช้ลิงก์ล่าสุดให้อัตโนมัติ</span></div>
   <label>Server URL <small>เว้นว่างเมื่อใช้ค่าจากระบบกลาง</small><input type="url" value={form.server_url} onChange={e=>setForm({...form,server_url:e.target.value})} placeholder="https://xxxx.trycloudflare.com"/></label>
   <label>ชื่อผู้ใช้<input autoFocus value={form.username} onChange={e=>setForm({...form,username:e.target.value})}/></label>
   <label>รหัสผ่าน<input type="password" value={form.password} onChange={e=>setForm({...form,password:e.target.value})}/></label>
