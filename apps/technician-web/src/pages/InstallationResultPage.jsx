@@ -37,13 +37,13 @@ function InstalledDeviceRow({item,job,models,editable,onReload,onError}){
  if(editing){
   return <form className="device-editor" onSubmit={save}>
    <div className="editor-title">
-    <b>แก้ไขอุปกรณ์ที่ติดตั้ง</b>
+    <b>แก้ไขอุปกรณ์</b>
     <button type="button" onClick={()=>setEditing(false)}>×</button>
    </div>
    <div className="form-grid">
-    <label>รุ่นอุปกรณ์
+    <label>โมเดล
      <select required value={form.model_id} onChange={e=>setForm({...form,model_id:e.target.value})}>
-      <option value="">-- เลือกรุ่น --</option>
+      <option value="">-- เลือกโมเดล --</option>
       {models.map(model=><option value={model.model_id} key={model.model_id}>{model.brand} {model.model_name}</option>)}
      </select>
     </label>
@@ -100,14 +100,14 @@ function AddInventoryDeviceDialog({models,onClose,onCreated,onError}){
  return <div className="backdrop nested-backdrop">
   <form className="sheet inventory-device-sheet" onSubmit={submit}>
    <div className="sheet-head">
-    <h2>เพิ่มอุปกรณ์จริงเข้าคลัง</h2>
+    <h2>เพิ่มอุปกรณ์เข้าคลัง</h2>
     <button type="button" className="icon" onClick={onClose}>×</button>
    </div>
-   <p>ใช้กรณีอุปกรณ์ที่นำมาติดตั้งยังไม่ถูกลงทะเบียนไว้ในระบบ รุ่นอุปกรณ์ให้เพิ่มจากเมนูรุ่นอุปกรณ์แยกต่างหาก</p>
+   <p>ใช้กรณีอุปกรณ์ที่นำมาติดตั้งยังไม่ถูกลงทะเบียนไว้ในระบบ ถ้ายังไม่มีโมเดล ให้เพิ่มจากเมนูโมเดลแยกต่างหาก</p>
    <div className="form-grid">
-    <label>รุ่นอุปกรณ์
+    <label>โมเดล
      <select required value={form.model_id} onChange={e=>setForm({...form,model_id:e.target.value})}>
-      <option value="">-- เลือกรุ่น --</option>
+      <option value="">-- เลือกโมเดล --</option>
       {models.map(model=><option value={model.model_id} key={model.model_id}>{model.brand} {model.model_name}</option>)}
      </select>
     </label>
@@ -143,7 +143,7 @@ export default function InstallationResultPage({job,models,onReload}){
  const attach=async event=>{
   event.preventDefault();
   const picked=availableDevices.find(item=>String(item.device_id)===String(selectedDeviceId));
-  if(!picked){setError('กรุณาเลือกอุปกรณ์จริงจากคลังก่อน');return;}
+  if(!picked){setError('กรุณาเลือกอุปกรณ์จากคลังก่อน');return;}
   setBusy(true);
   setError('');
   try{
@@ -188,19 +188,19 @@ export default function InstallationResultPage({job,models,onReload}){
   <section className="work-card">
    <div className="section-title">
     <span className={installed.length?'done':'todo'}>{installed.length?'✓':'1'}</span>
-    <div><h3>อุปกรณ์ที่ติดตั้ง</h3><p>{installed.length} ชิ้นในงานนี้ เลือกจากอุปกรณ์จริงในคลังที่ยังไม่ได้ติดตั้ง</p></div>
+    <div><h3>อุปกรณ์ที่ติดตั้ง</h3><p>{installed.length} ชิ้นในงานนี้ เลือกจากอุปกรณ์ในคลังที่ยังไม่ได้ติดตั้ง</p></div>
    </div>
    {error&&<div className="alert error">{error}</div>}
    {installed.map(item=><InstalledDeviceRow key={item.device_id} item={item} job={job} models={models} editable={editable} onReload={onReload} onError={setError}/>)}
    {editable&&<form className="inline-form install-device-picker" onSubmit={attach}>
-    <label className="wide">เลือกอุปกรณ์จริงที่ยังไม่ได้ติดตั้ง
+    <label className="wide">เลือกอุปกรณ์ที่ยังไม่ได้ติดตั้ง
      <select value={selectedDeviceId} onChange={e=>setSelectedDeviceId(e.target.value)}>
       <option value="">-- เลือกจากคลังอุปกรณ์ --</option>
       {availableDevices.map(item=><option value={item.device_id} key={item.device_id}>{deviceName(item)}</option>)}
      </select>
      <small>{availableDevices.length?`มีอุปกรณ์พร้อมติดตั้ง ${availableDevices.length} ชิ้น`:'ยังไม่มีอุปกรณ์ในคลังที่พร้อมติดตั้ง'}</small>
     </label>
-    <button type="button" className="secondary add-model-button" onClick={()=>setAddingDevice(true)}>+ เพิ่มอุปกรณ์จริง</button>
+    <button type="button" className="secondary add-model-button" onClick={()=>setAddingDevice(true)}>+ เพิ่มอุปกรณ์</button>
     <button className="secondary add" disabled={busy||!selectedDeviceId}>{busy?'กำลังผูกอุปกรณ์...':'+ ติดตั้งอุปกรณ์ที่เลือก'}</button>
    </form>}
   </section>

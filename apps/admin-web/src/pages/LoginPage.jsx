@@ -55,7 +55,7 @@ export default function LoginPage({onLogin}){
     <div className="login-benefits">
      <b>ติดตามสถานะงาน</b>
      <b>ดูรูปหน้างาน</b>
-     <b>จัดการอุปกรณ์จริง</b>
+     <b>จัดการอุปกรณ์</b>
     </div>
    </div>
   </div>

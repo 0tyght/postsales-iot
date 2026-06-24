@@ -15,10 +15,10 @@ const warrantyFilter=(row,value)=>{
 export default function DeviceUnitsPage(){
  const l=useLookups({models:'/devices/models',sites:'/customer-sites',jobs:'/jobs'});
  return <ResourcePage
-  title="อุปกรณ์จริง"
+  title="อุปกรณ์"
   description="คลังอุปกรณ์ตาม Serial Number เพิ่มตอนซื้อก่อน แล้วค่อยนำไปผูกกับจุดติดตั้งจากหน้างาน"
-  createLabel="เพิ่มอุปกรณ์จริง"
-  modalTitle="อุปกรณ์จริง"
+  createLabel="เพิ่มอุปกรณ์"
+  modalTitle="อุปกรณ์"
   endpoint="/devices/units"
   idKey="device_id"
   lookups={l}
@@ -39,7 +39,7 @@ export default function DeviceUnitsPage(){
    {key:'warranty_end_date',label:'หมดประกัน',render:r=>fmtDate(r.warranty_end_date)},
   ]}
   fields={[
-   {name:'model_id',label:'รุ่นอุปกรณ์',type:'select',required:true,options:l=>l.models?.map(x=>({value:x.model_id,label:`${x.brand||''} ${x.model_name}`.trim()}))||[]},
+   {name:'model_id',label:'โมเดล',type:'select',required:true,options:l=>l.models?.map(x=>({value:x.model_id,label:`${x.brand||''} ${x.model_name}`.trim()}))||[]},
    {name:'serial_number',label:'Serial Number',required:true,help:'หมายเลขต้องไม่ซ้ำกับอุปกรณ์ชิ้นอื่น'},
    {name:'purchase_date',label:'วันที่ซื้อ',type:'date',required:true},
    {name:'warranty_years',label:'ระยะเวลาประกันสินค้า (ปี)',type:'number',min:1,required:true,placeholder:'เช่น 1, 2, 3',help:'ระบบจะคำนวณวันหมดประกันให้อัตโนมัติจากวันที่ซื้อ'},

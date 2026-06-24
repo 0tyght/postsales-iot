@@ -465,6 +465,51 @@ button,input,select,textarea{touch-action:manipulation}
 .inventory-device-sheet{
  width:min(720px,calc(100vw - 32px));
 }
+.inventory-toolbar{
+ display:grid;
+ grid-template-columns:minmax(0,1fr) 220px;
+ gap:12px;
+ margin:12px 0 14px;
+}
+.inventory-list{
+ display:grid;
+ gap:10px;
+}
+.inventory-item{
+ display:grid;
+ grid-template-columns:minmax(0,1fr) auto;
+ align-items:center;
+ gap:12px;
+ padding:14px;
+ border:1px solid #dce8ee;
+ border-radius:18px;
+ background:#fff;
+}
+.inventory-item>div{
+ min-width:0;
+ display:grid;
+ gap:3px;
+}
+.inventory-item b,
+.inventory-item small{
+ overflow:hidden;
+ text-overflow:ellipsis;
+ white-space:nowrap;
+}
+.inventory-item .state{
+ max-width:220px;
+ overflow:hidden;
+ text-overflow:ellipsis;
+ white-space:nowrap;
+}
+.state.stock{
+ background:#e9fbf4;
+ color:#047857;
+}
+.state.installed{
+ background:#eef5ff;
+ color:#1d4ed8;
+}
 .complete-bar{
  width:min(1040px,calc(100vw - 28px))!important;
  min-height:0!important;
@@ -516,6 +561,14 @@ button,input,select,textarea{touch-action:manipulation}
  .install-device-picker button{
   grid-column:auto;
   width:100%;
+ }
+ .inventory-toolbar,
+ .inventory-item{
+  grid-template-columns:1fr;
+ }
+ .inventory-item .state{
+  max-width:100%;
+  justify-self:start;
  }
  .complete-bar{
   left:10px!important;
