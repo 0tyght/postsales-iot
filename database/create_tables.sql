@@ -112,6 +112,8 @@ CREATE TABLE device_units (
   installation_job_id INT,
   serial_number VARCHAR(150) NOT NULL UNIQUE,
   device_status ENUM('active','inactive') NOT NULL DEFAULT 'active',
+  purchase_date DATE,
+  warranty_years INT,
   warranty_end_date DATE,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

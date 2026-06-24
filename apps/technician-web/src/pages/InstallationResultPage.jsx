@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {api} from '../services/api';
 
-const emptyDevice={model_id:'',serial_number:'',warranty_end_date:''};
+const emptyDevice={model_id:'',serial_number:'',purchase_date:'',warranty_years:1};
 const emptyModel={brand:'',model_name:'',description:'',specification:''};
 const dateValue=value=>value?String(value).slice(0,10):'';
 
@@ -11,7 +11,8 @@ function InstalledDeviceRow({item,job,models,editable,onReload,onError}){
  const[form,setForm]=useState({
   model_id:item.model_id||'',
   serial_number:item.serial_number||'',
-  warranty_end_date:dateValue(item.warranty_end_date),
+  purchase_date:dateValue(item.purchase_date),
+  warranty_years:item.warranty_years||1,
   device_status:item.device_status||'active',
  });
 
@@ -39,15 +40,16 @@ function InstalledDeviceRow({item,job,models,editable,onReload,onError}){
    <div className="form-grid">
     <label>รุ่นอุปกรณ์<select required value={form.model_id} onChange={e=>setForm({...form,model_id:e.target.value})}><option value="">-- เลือกรุ่น --</option>{models.map(model=><option value={model.model_id} key={model.model_id}>{model.brand} {model.model_name}</option>)}</select></label>
     <label>Serial Number<input required value={form.serial_number} onChange={e=>setForm({...form,serial_number:e.target.value})}/></label>
-    <label>วันหมดประกัน<input type="date" value={form.warranty_end_date} onChange={e=>setForm({...form,warranty_end_date:e.target.value})}/></label>
-    <label>สถานะ<select value={form.device_status} onChange={e=>setForm({...form,device_status:e.target.value})}><option value="active">ใช้งาน</option><option value="inactive">ปิดใช้งาน</option><option value="repairing">รอซ่อม</option></select></label>
+    <label>วันที่ซื้อ<input required type="date" value={form.purchase_date} onChange={e=>setForm({...form,purchase_date:e.target.value})}/></label>
+    <label>ระยะประกัน (ปี)<input required type="number" min="1" value={form.warranty_years} onChange={e=>setForm({...form,warranty_years:e.target.value})}/></label>
+    <label>สถานะ<select value={form.device_status} onChange={e=>setForm({...form,device_status:e.target.value})}><option value="active">ใช้งาน</option><option value="inactive">ปิดใช้งาน</option></select></label>
    </div>
    <div className="editor-actions"><button type="button" className="secondary" onClick={()=>setEditing(false)}>ยกเลิก</button><button className="primary" disabled={saving}>{saving?'กำลังบันทึก...':'บันทึกอุปกรณ์'}</button></div>
   </form>;
  }
 
  return <div className="device-row device-row-editable">
-  <div><b>{item.model_name}</b><small>SN: {item.serial_number}</small>{item.warranty_end_date&&<small>ประกันถึง {new Date(item.warranty_end_date).toLocaleDateString('th-TH')}</small>}</div>
+  <div><b>{item.model_name}</b><small>SN: {item.serial_number}</small>{item.purchase_date&&<small>ซื้อเมื่อ {new Date(item.purchase_date).toLocaleDateString('th-TH')} · ประกัน {item.warranty_years||'-'} ปี</small>}{item.warranty_end_date&&<small>ระบบคำนวณหมดประกัน {new Date(item.warranty_end_date).toLocaleDateString('th-TH')}</small>}</div>
   <div className="device-actions"><span>{item.device_status==='active'?'ใช้งาน':item.device_status}</span>{editable&&<button type="button" onClick={()=>setEditing(true)}>แก้ไข</button>}</div>
  </div>;
 }
@@ -135,7 +137,8 @@ export default function InstallationResultPage({job,models,onReload,onModelsChan
     <form className="inline-form" onSubmit={add}>
      <label>รุ่นอุปกรณ์<select required value={device.model_id} onChange={e=>setDevice({...device,model_id:e.target.value})}><option value="">-- เลือกรุ่น --</option>{allModels.map(model=><option value={model.model_id} key={model.model_id}>{model.brand} {model.model_name}</option>)}</select></label>
      <label>Serial Number<input required value={device.serial_number} onChange={e=>setDevice({...device,serial_number:e.target.value})}/></label>
-     <label>วันหมดประกัน<input type="date" value={device.warranty_end_date} onChange={e=>setDevice({...device,warranty_end_date:e.target.value})}/></label>
+     <label>วันที่ซื้อ<input required type="date" value={device.purchase_date} onChange={e=>setDevice({...device,purchase_date:e.target.value})}/></label>
+     <label>ระยะประกัน (ปี)<input required type="number" min="1" value={device.warranty_years} onChange={e=>setDevice({...device,warranty_years:e.target.value})}/></label>
      <button type="button" className="secondary add-model-button" onClick={()=>setShowModelForm(true)}>+ เพิ่มโมเดลใหม่</button>
      <button className="secondary add" disabled={busy}>{busy?'กำลังเพิ่ม...':'+ เพิ่มอุปกรณ์'}</button>
     </form>

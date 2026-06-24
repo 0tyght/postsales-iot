@@ -28,7 +28,7 @@ export default function InstallPrompt(){
 
  return <>
   <div className="install-card">
-   <div><strong>ใช้งานบนแอปพลิเคชั่นโทรศัพท์</strong><small>{platform==='android'?'ดาวน์โหลด APK รุ่นล่าสุด':platform==='ios'?'เพิ่มแอปไว้บนหน้าจอโฮม':'รองรับทั้ง Android และ iOS'}</small></div>
+   <div className="install-card-copy"><strong>ใช้งานบนแอปพลิเคชั่นโทรศัพท์</strong><small>{platform==='android'?'ดาวน์โหลด APK รุ่นล่าสุด':platform==='ios'?'เพิ่มแอปไว้บนหน้าจอโฮม':'รองรับทั้ง Android และ iOS'}</small></div>
    <button type="button" onClick={start}>{platform==='android'?'ดาวน์โหลด APK':platform==='ios'?'วิธีติดตั้ง':'ใช้แบบแอป'}</button>
   </div>
   {dialog&&<div className="install-guide-backdrop" onClick={()=>setDialog('')}>

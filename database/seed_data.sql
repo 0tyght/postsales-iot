@@ -27,5 +27,5 @@ INSERT INTO installation_jobs
 VALUES (1, 'success', 'ห้องควบคุม', 'pass', 'เชื่อมต่อระบบสำเร็จ', 'ติดตั้งเรียบร้อย');
 
 INSERT INTO device_units
-  (model_id, site_id, installation_job_id, serial_number, device_status, warranty_end_date)
-VALUES (1, 1, 1, 'IOT-GW-0001', 'active', '2027-01-01');
+  (model_id, site_id, installation_job_id, serial_number, device_status, purchase_date, warranty_years, warranty_end_date)
+VALUES (1, 1, 1, 'IOT-GW-0001', 'active', '2026-01-02', 1, '2027-01-01');

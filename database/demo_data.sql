@@ -60,19 +60,19 @@ SET @dc=(SELECT model_id FROM device_models WHERE model_name='Door Contact DC-01
 SET @rt=(SELECT model_id FROM device_models WHERE model_name='Industrial 4G Router R40' LIMIT 1);
 SET @rc=(SELECT model_id FROM device_models WHERE model_name='Relay Controller RC-8' LIMIT 1);
 
-INSERT INTO device_units (model_id,site_id,serial_number,device_status,warranty_end_date) VALUES
-(@gw,@s1,'DEMO-GW-1001','active','2027-07-01'),(@em,@s1,'DEMO-EM-1001','active','2027-07-01'),
-(@em,@s1,'DEMO-EM-1002','active','2027-07-01'),(@th,@s1,'DEMO-TH-1001','active','2026-07-15'),
-(@th,@s1,'DEMO-TH-1002','active','2026-08-15'),(@rc,@s1,'DEMO-RC-1001','active','2027-06-30'),
-(@gw,@s2,'DEMO-GW-2001','active','2027-09-15'),(@th,@s2,'DEMO-TH-2001','active','2026-06-30'),
-(@th,@s2,'DEMO-TH-2002','active','2026-06-30'),(@th,@s2,'DEMO-TH-2003','inactive','2025-12-31'),
-(@dc,@s2,'DEMO-DC-2001','active','2027-01-15'),(@dc,@s2,'DEMO-DC-2002','active','2027-01-15'),
-(@gw,@s3,'DEMO-GW-3001','active','2028-01-10'),(@aq,@s3,'DEMO-AQ-3001','active','2027-01-10'),
-(@aq,@s3,'DEMO-AQ-3002','active','2027-01-10'),(@wl,@s3,'DEMO-WL-3001','active','2026-07-05'),
-(@wl,@s3,'DEMO-WL-3002','active','2026-07-05'),(@em,@s3,'DEMO-EM-3001','active','2028-01-10'),
-(@gw,@s4,'DEMO-GW-4001','active','2027-11-01'),(@aq,@s4,'DEMO-AQ-4001','active','2026-11-01'),
-(@aq,@s4,'DEMO-AQ-4002','active','2026-11-01'),(@rt,@s4,'DEMO-RT-4001','active','2027-05-01'),
-(@gw,@s5,'DEMO-GW-5001','active','2028-02-01'),(@th,@s5,'DEMO-TH-5001','active','2027-02-01'),
-(@th,@s5,'DEMO-TH-5002','active','2027-02-01'),(@wl,@s5,'DEMO-WL-5001','active','2026-06-25'),
-(@rc,@s5,'DEMO-RC-5001','active','2027-02-01'),(@rt,@s5,'DEMO-RT-5001','active','2027-02-01')
-ON DUPLICATE KEY UPDATE model_id=VALUES(model_id),site_id=VALUES(site_id),device_status=VALUES(device_status),warranty_end_date=VALUES(warranty_end_date);
+INSERT INTO device_units (model_id,site_id,serial_number,device_status,purchase_date,warranty_years,warranty_end_date) VALUES
+(@gw,@s1,'DEMO-GW-1001','active','2025-07-02',2,'2027-07-01'),(@em,@s1,'DEMO-EM-1001','active','2026-07-02',1,'2027-07-01'),
+(@em,@s1,'DEMO-EM-1002','active','2026-07-02',1,'2027-07-01'),(@th,@s1,'DEMO-TH-1001','active','2025-07-16',1,'2026-07-15'),
+(@th,@s1,'DEMO-TH-1002','active','2025-08-16',1,'2026-08-15'),(@rc,@s1,'DEMO-RC-1001','active','2026-07-01',1,'2027-06-30'),
+(@gw,@s2,'DEMO-GW-2001','active','2025-09-16',2,'2027-09-15'),(@th,@s2,'DEMO-TH-2001','active','2025-07-01',1,'2026-06-30'),
+(@th,@s2,'DEMO-TH-2002','active','2025-07-01',1,'2026-06-30'),(@th,@s2,'DEMO-TH-2003','inactive','2025-01-01',1,'2025-12-31'),
+(@dc,@s2,'DEMO-DC-2001','active','2026-01-16',1,'2027-01-15'),(@dc,@s2,'DEMO-DC-2002','active','2026-01-16',1,'2027-01-15'),
+(@gw,@s3,'DEMO-GW-3001','active','2026-01-11',2,'2028-01-10'),(@aq,@s3,'DEMO-AQ-3001','active','2026-01-11',1,'2027-01-10'),
+(@aq,@s3,'DEMO-AQ-3002','active','2026-01-11',1,'2027-01-10'),(@wl,@s3,'DEMO-WL-3001','active','2025-07-06',1,'2026-07-05'),
+(@wl,@s3,'DEMO-WL-3002','active','2025-07-06',1,'2026-07-05'),(@em,@s3,'DEMO-EM-3001','active','2026-01-11',2,'2028-01-10'),
+(@gw,@s4,'DEMO-GW-4001','active','2025-11-02',2,'2027-11-01'),(@aq,@s4,'DEMO-AQ-4001','active','2025-11-02',1,'2026-11-01'),
+(@aq,@s4,'DEMO-AQ-4002','active','2025-11-02',1,'2026-11-01'),(@rt,@s4,'DEMO-RT-4001','active','2026-05-02',1,'2027-05-01'),
+(@gw,@s5,'DEMO-GW-5001','active','2026-02-02',2,'2028-02-01'),(@th,@s5,'DEMO-TH-5001','active','2026-02-02',1,'2027-02-01'),
+(@th,@s5,'DEMO-TH-5002','active','2026-02-02',1,'2027-02-01'),(@wl,@s5,'DEMO-WL-5001','active','2025-06-26',1,'2026-06-25'),
+(@rc,@s5,'DEMO-RC-5001','active','2026-02-02',1,'2027-02-01'),(@rt,@s5,'DEMO-RT-5001','active','2026-02-02',1,'2027-02-01')
+ON DUPLICATE KEY UPDATE model_id=VALUES(model_id),site_id=VALUES(site_id),device_status=VALUES(device_status),purchase_date=VALUES(purchase_date),warranty_years=VALUES(warranty_years),warranty_end_date=VALUES(warranty_end_date);

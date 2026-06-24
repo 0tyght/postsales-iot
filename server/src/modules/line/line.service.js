@@ -1,14 +1,10 @@
-const crypto=require('crypto');
 const repo=require('./line.repository');
 const LINE_API='https://api.line.me/v2/bot/message';
-const secret=()=>process.env.LINE_BIND_SECRET||process.env.JWT_SECRET||process.env.LINE_CHANNEL_SECRET||'postsales-iot-local';
-const sign=customerId=>crypto.createHmac('sha256',secret()).update(String(customerId)).digest('base64url').slice(0,12).toUpperCase();
-const makeCode=customerId=>`PS-${customerId}-${sign(customerId)}`;
+const makeCode=customerId=>`TYTC${String(customerId).padStart(4,'0').slice(-4)}`;
 const verifyCode=code=>{
-  const match=String(code||'').trim().toUpperCase().match(/^PS-(\d+)-([A-Z0-9_-]{8,})$/);
+  const match=String(code||'').trim().toUpperCase().match(/^TYTC(\d{4})$/);
   if(!match)return null;
-  const customerId=Number(match[1]);
-  return sign(customerId)===match[2]?customerId:null;
+  return Number(match[1]);
 };
 const officialAccountId=()=>process.env.LINE_OFFICIAL_ACCOUNT_ID||process.env.LINE_OA_ID||process.env.LINE_BASIC_ID||process.env.LINE_BOT_ID||'';
 const oaMessageUrl=text=>{
@@ -20,6 +16,7 @@ const oaMessageUrl=text=>{
 exports.configured=()=>Boolean(process.env.LINE_CHANNEL_SECRET&&process.env.LINE_CHANNEL_ACCESS_TOKEN);
 exports.verifySignature=(rawBody,signature)=>{
   if(!process.env.LINE_CHANNEL_SECRET||!rawBody||!signature)return false;
+  const crypto=require('crypto');
   const expected=crypto.createHmac('sha256',process.env.LINE_CHANNEL_SECRET).update(rawBody).digest('base64');
   const a=Buffer.from(expected),b=Buffer.from(signature);
   return a.length===b.length&&crypto.timingSafeEqual(a,b);
@@ -39,7 +36,7 @@ exports.bindInfo=async customerId=>{
   const customer=await repo.customerById(customerId);
   if(!customer)throw Object.assign(new Error('ไม่พบลูกค้า'),{status:404});
   const code=makeCode(customer.customer_id);
-  const registrationText=`ลงทะเบียน ${code}`;
+  const registrationText=code;
   return {
     customer_id:customer.customer_id,
     customer_name:customer.customer_name,
@@ -59,7 +56,7 @@ exports.handleEvent=async event=>{
   if(event.type==='follow')return exports.replyText(event.replyToken,customer?help(customer):'ขอบคุณที่เพิ่มเพื่อน\n\nหากช่างส่งข้อความลงทะเบียนให้แล้ว กรุณาส่งข้อความนั้นกลับมาในห้องแชตนี้ เพื่อผูก LINE กับข้อมูลลูกค้าอัตโนมัติ');
   if(event.type!=='message'||event.message?.type!=='text')return exports.replyText(event.replyToken,'ขณะนี้ระบบรับแจ้งปัญหาด้วยข้อความก่อนนะครับ');
   const text=event.message.text.trim();
-  const registration=text.match(/^ลงทะเบียน\s+(.+)$/i);
+  const registration=text.match(/^(?:ลงทะเบียน\s+)?(TYTC\d{4})$/i);
   if(registration){
     const customerId=verifyCode(registration[1]);
     if(!customerId)return exports.replyText(event.replyToken,'รหัสลงทะเบียนไม่ถูกต้อง กรุณาขอรหัสใหม่จากช่างหรือเจ้าหน้าที่');
