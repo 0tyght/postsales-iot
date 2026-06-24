@@ -108,7 +108,7 @@ CREATE TABLE repair_jobs (
 CREATE TABLE device_units (
   device_id INT AUTO_INCREMENT PRIMARY KEY,
   model_id INT NOT NULL,
-  site_id INT NOT NULL,
+  site_id INT,
   installation_job_id INT,
   serial_number VARCHAR(150) NOT NULL UNIQUE,
   device_status ENUM('active','inactive') NOT NULL DEFAULT 'active',
@@ -120,7 +120,7 @@ CREATE TABLE device_units (
   CONSTRAINT fk_device_units_model FOREIGN KEY (model_id)
     REFERENCES device_models(model_id) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT fk_device_units_site FOREIGN KEY (site_id)
-    REFERENCES customer_sites(site_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    REFERENCES customer_sites(site_id) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT fk_device_units_installation_job FOREIGN KEY (installation_job_id)
     REFERENCES installation_jobs(job_id) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

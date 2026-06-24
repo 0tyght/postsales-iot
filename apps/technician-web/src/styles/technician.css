@@ -410,3 +410,123 @@ button,input,select,textarea{touch-action:manipulation}
  .login-card{padding:22px}
  .login-card h1{font-size:28px}
 }
+
+/* UX polish: keep cards, top stripes, forms, and the close-work bar inside their frames */
+.login-card,
+.page-title,
+.job-card,
+.case-card,
+.detail-hero,
+.work-card,
+.contact-card,
+.start-card,
+.info-card,
+.cancelled-card,
+.success-card,
+.sheet{
+ overflow:hidden;
+}
+.login-card::before,
+.page-title::before,
+.job-card::before,
+.case-card::before,
+.work-card::before{
+ left:0!important;
+ right:0!important;
+ max-width:100%!important;
+ border-radius:inherit;
+}
+.inline-form,
+.form-grid{
+ align-items:start;
+ row-gap:14px!important;
+ column-gap:14px!important;
+}
+.inline-form label,
+.form-grid label{
+ min-width:0;
+ margin:0;
+}
+.install-device-picker{
+ grid-template-columns:minmax(0,1fr) auto auto;
+ align-items:end;
+}
+.install-device-picker .wide{
+ grid-column:auto;
+}
+.install-device-picker button{
+ min-height:46px;
+ white-space:nowrap;
+}
+.nested-backdrop{
+ z-index:80;
+ background:rgba(7,31,45,.28);
+}
+.inventory-device-sheet{
+ width:min(720px,calc(100vw - 32px));
+}
+.complete-bar{
+ width:min(1040px,calc(100vw - 28px))!important;
+ min-height:0!important;
+ max-height:none!important;
+ display:grid!important;
+ grid-template-columns:minmax(0,1fr) auto!important;
+ align-items:center!important;
+ gap:16px!important;
+ padding:14px 18px!important;
+ background:rgba(255,255,255,.96)!important;
+ backdrop-filter:blur(14px);
+ box-shadow:0 -18px 42px rgba(15,42,55,.12)!important;
+}
+.complete-bar>div{
+ min-width:0!important;
+ max-width:none!important;
+ display:grid;
+ gap:2px;
+ line-height:1.35;
+}
+.complete-bar b,
+.complete-bar small{
+ writing-mode:horizontal-tb!important;
+ word-break:normal!important;
+ overflow-wrap:anywhere;
+ white-space:normal!important;
+}
+.complete-bar .primary{
+ min-width:150px;
+ min-height:48px;
+}
+
+@media(min-width:768px) and (max-width:1180px){
+ .install-device-picker{
+  grid-template-columns:1fr 1fr;
+ }
+ .install-device-picker .wide{
+  grid-column:1/-1;
+ }
+}
+
+@media(max-width:767px){
+ .inline-form,
+ .form-grid,
+ .install-device-picker{
+  grid-template-columns:1fr!important;
+ }
+ .install-device-picker .wide,
+ .install-device-picker button{
+  grid-column:auto;
+  width:100%;
+ }
+ .complete-bar{
+  left:10px!important;
+  right:10px!important;
+  width:auto!important;
+  transform:none!important;
+  grid-template-columns:1fr!important;
+  padding:12px!important;
+  border-radius:18px 18px 0 0!important;
+ }
+ .complete-bar .primary{
+  width:100%;
+ }
+}

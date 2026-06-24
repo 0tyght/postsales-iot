@@ -528,3 +528,80 @@ button,.btn,.btn-icon,input,select,textarea{touch-action:manipulation}
   font-size:12px;
  }
 }
+
+/* UX polish: prevent decorative bars and data sections from visually escaping cards */
+.login-panel,
+.page-head,
+.stat-card,
+.panel,
+.table-wrap,
+.modal{
+ overflow:hidden;
+}
+.login-panel::before,
+.page-head::before,
+.stat-card::before,
+.panel::before{
+ left:0!important;
+ right:0!important;
+ max-width:100%!important;
+ border-radius:inherit;
+}
+.admin-content-inner{
+ max-width:100%;
+}
+.stats-grid{
+ grid-template-columns:repeat(auto-fit,minmax(190px,1fr))!important;
+}
+.table-tools{
+ align-items:center;
+ gap:12px;
+}
+.table-filters{
+ min-width:0;
+}
+.table-filters input,
+.table-filters select{
+ max-width:100%;
+}
+.page-head{
+ align-items:center;
+}
+.page-head h1,
+.page-head p{
+ overflow-wrap:anywhere;
+}
+
+@media(min-width:761px){
+ .table-tools{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+ }
+ .table-filters{
+  display:flex;
+  flex-wrap:wrap;
+ }
+ .table-filters input{
+  flex:1 1 320px;
+ }
+}
+
+@media(max-width:760px){
+ .stats-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ }
+ .table-tools,
+ .table-filters,
+ .table-count{
+  width:100%;
+ }
+}
+
+@media(max-width:420px){
+ .stats-grid{
+  grid-template-columns:1fr!important;
+ }
+ .page-head{
+  padding:14px;
+ }
+}

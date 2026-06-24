@@ -32,6 +32,6 @@ export default function App({session=null,onSessionLogout}){
  return <TechnicianLayout user={user} onLogout={logout}>
   {error&&<div className="alert error">{error}</div>}
   <TechnicianRoutes jobs={jobs} problems={problems} models={models} selected={selected} onOpen={setSelected} onBack={()=>setSelected(null)} onCreate={()=>setCreating(true)} onChanged={load} onClaim={async problemId=>{await api(`/problems/${problemId}/claim`,{method:'POST'});await load()}}/>
-  {creating&&<CreateInstallationJob sites={sites} onClose={()=>setCreating(false)} onDone={()=>{setCreating(false);load()}}/>}
+  {creating&&<CreateInstallationJob sites={sites} onClose={()=>setCreating(false)} onDone={async jobId=>{setCreating(false);await load();if(jobId)setSelected(jobId)}}/>}
  </TechnicianLayout>;
 }
