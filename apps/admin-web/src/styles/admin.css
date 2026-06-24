@@ -452,3 +452,79 @@ button,.btn,.btn-icon,input,select,textarea{touch-action:manipulation}
  .install-card button{width:100%}
  .platform-choices{grid-template-columns:1fr}
 }
+
+/* Final mobile install prompt fix: compact single-row banner */
+@media(max-width:760px){
+ .install-card{
+  left:12px!important;
+  right:12px!important;
+  top:10px!important;
+  bottom:auto!important;
+  width:auto!important;
+  min-height:58px;
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:10px!important;
+  padding:10px 12px!important;
+  border-radius:18px!important;
+ }
+ .install-card-copy{
+  flex:1 1 auto;
+  min-width:0;
+  display:flex!important;
+  align-items:center!important;
+  gap:8px!important;
+  flex-wrap:nowrap!important;
+ }
+ .install-card-copy strong{
+  display:block!important;
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size:14px;
+ }
+ .install-card-copy small{
+  display:none!important;
+ }
+ .install-card button{
+  flex:0 0 auto!important;
+  width:auto!important;
+  min-width:auto!important;
+  min-height:42px;
+  white-space:nowrap;
+  padding:9px 13px!important;
+  border-radius:13px!important;
+  font-size:13px;
+ }
+ .login-panel{
+  margin-top:84px!important;
+ }
+}
+
+@media(min-width:520px) and (max-width:760px){
+ .install-card-copy small{
+  display:block!important;
+  margin:0!important;
+  padding-left:9px!important;
+  border-left:1px solid #cfe4de!important;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+ }
+ .login-panel{
+  margin-top:88px!important;
+ }
+}
+
+@media(max-width:360px){
+ .install-card-copy strong{
+  font-size:13px;
+ }
+ .install-card button{
+  padding:8px 10px!important;
+  font-size:12px;
+ }
+}
