@@ -13,8 +13,44 @@ const oaMessageUrl=text=>{
   const accountId=officialAccountId();
   return accountId?`https://line.me/R/oaMessage/${encodeURIComponent(accountId)}/?${encodeURIComponent(text)}`:'';
 };
+const webhookUrl=()=>process.env.LINE_WEBHOOK_URL||'https://blame-carbon-blemish.ngrok-free.dev/linebot/webhook.php';
 
 exports.configured=()=>Boolean(process.env.LINE_CHANNEL_SECRET&&process.env.LINE_CHANNEL_ACCESS_TOKEN);
+exports.webhookUrl=webhookUrl;
+
+exports.webhookHealth=async()=>{
+  const url=webhookUrl();
+  try{
+    const controller=new AbortController();
+    const timeout=setTimeout(()=>controller.abort(),8000);
+    const response=await fetch(url,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','ngrok-skip-browser-warning':'true'},
+      body:JSON.stringify({events:[]}),
+      signal:controller.signal,
+    });
+    clearTimeout(timeout);
+    const body=await response.text();
+    const isThisServer=response.status===401&&body.includes('LINE');
+    return {
+      url,
+      reachable:true,
+      status:response.status,
+      connected_to_this_server:isThisServer,
+      message:isThisServer?'Webhook ชี้เข้า server ระบบนี้แล้ว':'Webhook ตอบกลับได้ แต่ยังไม่ใช่ server ระบบนี้',
+      response_preview:body.slice(0,180),
+    };
+  }catch(error){
+    return {
+      url,
+      reachable:false,
+      status:null,
+      connected_to_this_server:false,
+      message:error.name==='AbortError'?'Webhook timeout':'Webhook ยังเรียกไม่สำเร็จ',
+      response_preview:error.message,
+    };
+  }
+};
 
 exports.verifySignature=(rawBody,signature)=>{
   if(!process.env.LINE_CHANNEL_SECRET||!rawBody||!signature)return false;

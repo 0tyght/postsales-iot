@@ -17,6 +17,11 @@ export default function LineSettingsPage(){
     <div className="metric-row"><span>Channel Access Token</span><strong>{status?.access_token?'พร้อม':'ยังไม่ตั้งค่า'}</strong></div>
     <p className="muted">Webhook URL ที่ต้องตั้งใน LINE Developers</p>
     <code>{status?.webhook_url||'https://blame-carbon-blemish.ngrok-free.dev/linebot/webhook.php'}</code>
+    <div className={`webhook-health ${status?.webhook_health?.connected_to_this_server?'ok':'bad'}`}>
+     <b>{status?.webhook_health?.connected_to_this_server?'Webhook พร้อมใช้งาน':'Webhook ยังไม่เข้าระบบนี้'}</b>
+     <span>{status?.webhook_health?.message||'กำลังตรวจสอบสถานะ webhook...'}</span>
+     {status?.webhook_health?.response_preview&&<small>ตอบกลับ: {status.webhook_health.response_preview}</small>}
+    </div>
     <div className="line-admin-qr"><img src={asset('line-add-friend-qr.jpg')} alt="QR code เพิ่มเพื่อน LINE Official Account"/><span>QR เพิ่มเพื่อน LINE Official Account สำหรับลูกค้าทุกคน</span></div>
     <p className="muted">ลูกค้าที่ผูก LINE แล้ว {customers.length} ราย</p>
     <div className="workflow-note"><b>ขั้นตอนใช้งานจริง</b><ol><li>ช่างเพิ่มลูกค้าหรือจุดติดตั้ง</li><li>ระบบสร้างรหัสสั้น เช่น TYTC0001</li><li>ลูกค้าเพิ่มเพื่อน LINE Official Account แล้วส่งรหัสนี้</li><li>ระบบผูก LINE เข้ากับลูกค้าอัตโนมัติ</li></ol></div>

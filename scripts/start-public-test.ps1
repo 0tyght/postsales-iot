@@ -1,14 +1,33 @@
 param(
   [switch]$SkipGitPush,
-  [switch]$Background
+  [switch]$Background,
+  [switch]$SkipLineNgrok
 )
 
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $cloudflared = Join-Path $root '.tools\cloudflared.exe'
 $configPath = Join-Path $root 'runtime-config.json'
+$envPath = Join-Path $root 'server\.env'
 
 if (-not (Test-Path $cloudflared)) { throw "cloudflared.exe not found: $cloudflared" }
+
+function Get-EnvValue([string]$Name) {
+  if (-not (Test-Path $envPath)) { return $null }
+  $line = Get-Content $envPath -ErrorAction SilentlyContinue | Where-Object { $_ -match "^$([regex]::Escape($Name))=" } | Select-Object -First 1
+  if (-not $line) { return $null }
+  return ($line -replace "^$([regex]::Escape($Name))=", '').Trim()
+}
+
+function Find-Ngrok {
+  $local = Join-Path $root '.tools\ngrok.exe'
+  if (Test-Path $local) { return $local }
+  $cmd = Get-Command ngrok.exe -ErrorAction SilentlyContinue
+  if ($cmd) { return $cmd.Source }
+  $cmd = Get-Command ngrok -ErrorAction SilentlyContinue
+  if ($cmd) { return $cmd.Source }
+  return $null
+}
 
 function Test-Port([int]$Port) {
   return [bool](Get-NetTCPConnection -LocalPort $Port -State Listen -ErrorAction SilentlyContinue)
@@ -36,8 +55,29 @@ while ((-not (Test-Port 5000)) -and (Get-Date) -lt $deadline) {
 if (-not (Test-Port 5000)) { throw 'API server failed to start' }
 
 Get-Process cloudflared -ErrorAction SilentlyContinue | Stop-Process -Force
+if (-not $SkipLineNgrok) {
+  Get-Process ngrok -ErrorAction SilentlyContinue | Stop-Process -Force
+}
 $url = $null
 $lastTunnelError = $null
+$lineNgrokProcess = $null
+$lineWebhookUrl = Get-EnvValue 'LINE_WEBHOOK_URL'
+$ngrokHost = $null
+
+if ($lineWebhookUrl -and $lineWebhookUrl -match '^https://([^/]+)') {
+  $ngrokHost = $matches[1]
+}
+
+if ((-not $SkipLineNgrok) -and $ngrokHost -and $ngrokHost -like '*.ngrok-free.dev') {
+  $ngrok = Find-Ngrok
+  if ($ngrok) {
+    Write-Host "Starting LINE ngrok tunnel: https://$ngrokHost -> http://127.0.0.1:5000" -ForegroundColor Cyan
+    $lineNgrokProcess = Start-Process -FilePath $ngrok -ArgumentList 'http',"--url=$ngrokHost",'5000' -WorkingDirectory $root -WindowStyle Hidden -PassThru
+    Start-Sleep -Seconds 3
+  } else {
+    Write-Warning "ngrok.exe was not found. LINE webhook auto tunnel skipped. Install ngrok or put ngrok.exe in $root\.tools"
+  }
+}
 
 for ($attempt = 1; $attempt -le 4 -and -not $url; $attempt++) {
   $attemptFailure = $null
@@ -140,6 +180,7 @@ Write-Host 'Public test server is ready' -ForegroundColor Green
 Write-Host 'Portal: https://0tyght.github.io/postsales-iot/'
 Write-Host "API:    $url/api"
 Write-Host "Config: https://raw.githubusercontent.com/0tyght/postsales-iot/main/runtime-config.json"
+if ($lineWebhookUrl) { Write-Host "LINE:   $lineWebhookUrl" }
 
 if ($Background) {
   Write-Host 'Mode: background (servers continue running after this window closes)'
@@ -154,7 +195,8 @@ try {
   while ($true) {
     $apiState = if (Test-Port 5000) { 'ONLINE' } else { 'OFFLINE' }
     $tunnelState = if (Get-Process cloudflared -ErrorAction SilentlyContinue) { 'ONLINE' } else { 'OFFLINE' }
-    Write-Host ("[{0}] API: {1} | Tunnel: {2}" -f (Get-Date -Format 'HH:mm:ss'),$apiState,$tunnelState)
+    $lineState = if ((-not $SkipLineNgrok) -and (Get-Process ngrok -ErrorAction SilentlyContinue)) { 'ONLINE' } elseif ($SkipLineNgrok) { 'SKIPPED' } else { 'OFFLINE' }
+    Write-Host ("[{0}] API: {1} | Web: {2} | LINE/ngrok: {3}" -f (Get-Date -Format 'HH:mm:ss'),$apiState,$tunnelState,$lineState)
 
     for ($step = 0; $step -lt 10; $step++) {
       try {
@@ -174,6 +216,7 @@ try {
 } finally {
   Write-Host 'Stopping public test server...' -ForegroundColor Yellow
   Get-Process cloudflared -ErrorAction SilentlyContinue | Stop-Process -Force
+  if (-not $SkipLineNgrok) { Get-Process ngrok -ErrorAction SilentlyContinue | Stop-Process -Force }
   Stop-PortProcess 5000
-  Write-Host 'API and tunnel are stopped.' -ForegroundColor Green
+  Write-Host 'API and tunnels are stopped.' -ForegroundColor Green
 }

@@ -679,6 +679,37 @@ button,.btn,.btn-icon,input,select,textarea{touch-action:manipulation}
  line-height:1.5;
  font-weight:750;
 }
+.webhook-health{
+ display:grid;
+ gap:4px;
+ margin:12px 0;
+ padding:12px 14px;
+ border-radius:16px;
+ border:1px solid #d8e8ee;
+ background:#f7fcff;
+ color:#40576a;
+}
+.webhook-health b{
+ color:#143047;
+}
+.webhook-health small{
+ color:#6b7d8b;
+ overflow-wrap:anywhere;
+}
+.webhook-health.ok{
+ border-color:#b9ead7;
+ background:#f0fff8;
+}
+.webhook-health.ok b{
+ color:#0f7a57;
+}
+.webhook-health.bad{
+ border-color:#ffd5c9;
+ background:#fff7f4;
+}
+.webhook-health.bad b{
+ color:#b23b20;
+}
 @media(max-width:520px){
  .line-admin-qr{
   grid-template-columns:1fr;

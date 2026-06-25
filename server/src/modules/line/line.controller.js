@@ -12,7 +12,8 @@ exports.webhook=async(req,res)=>{
 exports.status=async(req,res)=>success(res,{
   configured:service.configured(),
   webhook_path:'/linebot/webhook.php',
-  webhook_url:process.env.LINE_WEBHOOK_URL||'https://blame-carbon-blemish.ngrok-free.dev/linebot/webhook.php',
+  webhook_url:service.webhookUrl(),
+  webhook_health:await service.webhookHealth(),
   channel_secret:Boolean(process.env.LINE_CHANNEL_SECRET),
   access_token:Boolean(process.env.LINE_CHANNEL_ACCESS_TOKEN),
 });
