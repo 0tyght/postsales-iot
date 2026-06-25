@@ -22,6 +22,8 @@ function Get-EnvValue([string]$Name) {
 function Find-Ngrok {
   $local = Join-Path $root '.tools\ngrok.exe'
   if (Test-Path $local) { return $local }
+  $windowsApp = Join-Path $env:LOCALAPPDATA 'Microsoft\WindowsApps\ngrok.exe'
+  if (Test-Path $windowsApp) { return $windowsApp }
   $cmd = Get-Command ngrok.exe -ErrorAction SilentlyContinue
   if ($cmd) { return $cmd.Source }
   $cmd = Get-Command ngrok -ErrorAction SilentlyContinue
