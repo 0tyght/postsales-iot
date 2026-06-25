@@ -1,6 +1,8 @@
 import {useEffect,useState} from 'react';
 import {api} from '../services/api';
 
+const asset=name=>`${import.meta.env.BASE_URL}${name}`;
+
 export default function LineSettingsPage(){
  const[status,setStatus]=useState(null),[customers,setCustomers]=useState([]),[form,setForm]=useState({customer_id:'',text:''}),[message,setMessage]=useState(''),[error,setError]=useState(''),[sending,setSending]=useState(false);
  useEffect(()=>{Promise.all([api('/line/status'),api('/customers')]).then(([s,c])=>{setStatus(s);setCustomers(c.filter(x=>x.line_user_id))}).catch(e=>setError(e.message))},[]);
@@ -15,7 +17,7 @@ export default function LineSettingsPage(){
     <div className="metric-row"><span>Channel Access Token</span><strong>{status?.access_token?'พร้อม':'ยังไม่ตั้งค่า'}</strong></div>
     <p className="muted">Webhook URL ที่ต้องตั้งใน LINE Developers</p>
     <code>{status?.webhook_url||'https://blame-carbon-blemish.ngrok-free.dev/linebot/webhook.php'}</code>
-    <div className="line-admin-qr"><img src="./line-add-friend-qr.jpg" alt="QR code เพิ่มเพื่อน LINE Official Account"/><span>QR เพิ่มเพื่อน LINE Official Account สำหรับลูกค้าทุกคน</span></div>
+    <div className="line-admin-qr"><img src={asset('line-add-friend-qr.jpg')} alt="QR code เพิ่มเพื่อน LINE Official Account"/><span>QR เพิ่มเพื่อน LINE Official Account สำหรับลูกค้าทุกคน</span></div>
     <p className="muted">ลูกค้าที่ผูก LINE แล้ว {customers.length} ราย</p>
     <div className="workflow-note"><b>ขั้นตอนใช้งานจริง</b><ol><li>ช่างเพิ่มลูกค้าหรือจุดติดตั้ง</li><li>ระบบสร้างรหัสสั้น เช่น TYTC0001</li><li>ลูกค้าเพิ่มเพื่อน LINE Official Account แล้วส่งรหัสนี้</li><li>ระบบผูก LINE เข้ากับลูกค้าอัตโนมัติ</li></ol></div>
    </div>

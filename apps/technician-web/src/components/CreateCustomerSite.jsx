@@ -1,6 +1,8 @@
 import {useEffect,useState} from 'react';
 import {api} from '../services/api';
 
+const asset=name=>`${import.meta.env.BASE_URL}${name}`;
+
 export default function CreateCustomerSite({onClose,onCreated}){
  const[customers,setCustomers]=useState([]),[mode,setMode]=useState('new'),[busy,setBusy]=useState(false),[error,setError]=useState('');
  const[form,setForm]=useState({customer_id:'',customer_name:'',phone:'',email:'',address:'',site_name:'',site_address:''});
@@ -28,7 +30,7 @@ export default function CreateCustomerSite({onClose,onCreated}){
   {createdSite?<div className="line-bind-card">
    <b>ขั้นตอนถัดไป: ผูก LINE ลูกค้า</b>
    <p>ให้ลูกค้าเพิ่มเพื่อน LINE Official Account แล้วส่งรหัสสั้น ๆ นี้ ระบบจะรู้ทันทีว่า LINE นี้เป็นของลูกค้าคนนี้</p>
-   {lineBind?<><div className="line-bind-qr-wrap"><img className="line-add-qr" src="/line-add-friend-qr.jpg" alt="QR code เพิ่มเพื่อน LINE Official Account"/><span>ให้ลูกค้าสแกน QR นี้เพื่อเพิ่มเพื่อน แล้วส่งรหัสด้านล่างในแชต</span></div><code>{lineBind.registration_text}</code><div className="line-bind-actions"><button type="button" className="secondary" onClick={()=>copy(lineBind.registration_text)}>{copied?'คัดลอกแล้ว':'คัดลอกรหัส'}</button>{lineBind.add_friend_url&&<a className="primary link-button" href={lineBind.add_friend_url} target="_blank" rel="noreferrer">เปิด LINE</a>}</div>{!lineBind.has_official_account_link&&<small>หมายเหตุ: ยังไม่ได้ตั้งค่า LINE Official Account ID จึงยังเปิดแชตพร้อมรหัสอัตโนมัติไม่ได้ แต่ใช้รหัสนี้ให้ลูกค้าส่งใน LINE ได้</small>}</>:<p className="muted">ยังไม่มีข้อมูลผูก LINE</p>}
+   {lineBind?<><div className="line-bind-qr-wrap"><img className="line-add-qr" src={asset('line-add-friend-qr.jpg')} alt="QR code เพิ่มเพื่อน LINE Official Account"/><span>ให้ลูกค้าสแกน QR นี้เพื่อเพิ่มเพื่อน แล้วส่งรหัสด้านล่างในแชต</span></div><code>{lineBind.registration_text}</code><div className="line-bind-actions"><button type="button" className="secondary" onClick={()=>copy(lineBind.registration_text)}>{copied?'คัดลอกแล้ว':'คัดลอกรหัส'}</button>{lineBind.add_friend_url&&<a className="primary link-button" href={lineBind.add_friend_url} target="_blank" rel="noreferrer">เปิด LINE</a>}</div>{!lineBind.has_official_account_link&&<small>หมายเหตุ: ยังไม่ได้ตั้งค่า LINE Official Account ID จึงยังเปิดแชตพร้อมรหัสอัตโนมัติไม่ได้ แต่ใช้รหัสนี้ให้ลูกค้าส่งใน LINE ได้</small>}</>:<p className="muted">ยังไม่มีข้อมูลผูก LINE</p>}
    <button type="button" className="primary full" onClick={()=>onCreated(createdSite)}>ใช้จุดติดตั้งนี้สร้างงานต่อ</button>
   </div>:<>
   <div className="customer-mode"><button type="button" className={mode==='new'?'active':''} onClick={()=>setMode('new')}>ลูกค้าใหม่</button><button type="button" className={mode==='existing'?'active':''} onClick={()=>setMode('existing')}>ลูกค้าเดิม</button></div>

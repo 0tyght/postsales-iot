@@ -2,6 +2,8 @@ import {useState} from 'react';
 import {api} from '../services/api';
 import CreateCustomerSite from '../components/CreateCustomerSite';
 
+const asset=name=>`${import.meta.env.BASE_URL}${name}`;
+
 export default function CustomersPage({customers,onChanged}){
  const[search,setSearch]=useState('');
  const[adding,setAdding]=useState(false);
@@ -54,7 +56,7 @@ export default function CustomersPage({customers,onChanged}){
     <div className="line-bind-card">
      <b>{bind.customer_name}</b>
      <p>{bind.line_user_id?'ลูกค้าคนนี้ผูก LINE แล้ว':'ให้ลูกค้าเพิ่มเพื่อน LINE Official Account แล้วส่งรหัสนี้ในแชต'}</p>
-     <div className="line-bind-qr-wrap"><img className="line-add-qr" src="/line-add-friend-qr.jpg" alt="QR code เพิ่มเพื่อน LINE Official Account"/><span>ให้ลูกค้าสแกน QR นี้เพื่อเพิ่มเพื่อน แล้วส่งรหัสด้านล่างในแชต</span></div>
+     <div className="line-bind-qr-wrap"><img className="line-add-qr" src={asset('line-add-friend-qr.jpg')} alt="QR code เพิ่มเพื่อน LINE Official Account"/><span>ให้ลูกค้าสแกน QR นี้เพื่อเพิ่มเพื่อน แล้วส่งรหัสด้านล่างในแชต</span></div>
      <code>{bind.registration_text}</code>
      <div className="line-bind-actions">
       <button className="secondary" onClick={()=>copy(bind.registration_text)}>คัดลอกรหัส</button>
