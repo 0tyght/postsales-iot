@@ -65,6 +65,8 @@ $lastTunnelError = $null
 $lineNgrokProcess = $null
 $lineWebhookUrl = Get-EnvValue 'LINE_WEBHOOK_URL'
 $ngrokHost = $null
+$lineNgrokOutLog = $null
+$lineNgrokErrLog = $null
 
 if ($lineWebhookUrl -and $lineWebhookUrl -match '^https://([^/]+)') {
   $ngrokHost = $matches[1]
@@ -74,8 +76,15 @@ if ((-not $SkipLineNgrok) -and $ngrokHost -and $ngrokHost -like '*.ngrok-free.de
   $ngrok = Find-Ngrok
   if ($ngrok) {
     Write-Host "Starting LINE ngrok tunnel: https://$ngrokHost -> http://127.0.0.1:5000" -ForegroundColor Cyan
-    $lineNgrokProcess = Start-Process -FilePath $ngrok -ArgumentList 'http',"--url=$ngrokHost",'5000' -WorkingDirectory $root -WindowStyle Hidden -PassThru
+    $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
+    $lineNgrokOutLog = Join-Path $root ".tools\line-ngrok-$stamp.out.log"
+    $lineNgrokErrLog = Join-Path $root ".tools\line-ngrok-$stamp.err.log"
+    $lineNgrokProcess = Start-Process -FilePath $ngrok -ArgumentList 'http',"--url=$ngrokHost",'5000' -WorkingDirectory $root -RedirectStandardOutput $lineNgrokOutLog -RedirectStandardError $lineNgrokErrLog -WindowStyle Hidden -PassThru
     Start-Sleep -Seconds 3
+    if ($lineNgrokProcess.HasExited) {
+      Write-Warning "LINE ngrok tunnel stopped immediately. Latest error:"
+      Get-Content $lineNgrokErrLog -ErrorAction SilentlyContinue | Select-Object -Last 12 | ForEach-Object { Write-Warning $_ }
+    }
   } else {
     Write-Warning "ngrok.exe was not found. LINE webhook auto tunnel skipped. Install ngrok or put ngrok.exe in $root\.tools"
   }
