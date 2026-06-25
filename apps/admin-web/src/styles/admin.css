@@ -655,3 +655,34 @@ button,.btn,.btn-icon,input,select,textarea{touch-action:manipulation}
   white-space:nowrap;
  }
 }
+.line-admin-qr{
+ display:grid;
+ grid-template-columns:112px minmax(0,1fr);
+ align-items:center;
+ gap:12px;
+ margin:14px 0;
+ padding:12px;
+ border:1px solid #d8e8ee;
+ border-radius:16px;
+ background:#f7fcff;
+}
+.line-admin-qr img{
+ width:112px;
+ height:112px;
+ object-fit:contain;
+ border-radius:12px;
+ background:#fff;
+ border:1px solid #e1eaf0;
+}
+.line-admin-qr span{
+ color:#526879;
+ line-height:1.5;
+ font-weight:750;
+}
+@media(max-width:520px){
+ .line-admin-qr{
+  grid-template-columns:1fr;
+  justify-items:center;
+  text-align:center;
+ }
+}

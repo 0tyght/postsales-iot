@@ -613,6 +613,29 @@ button,input,select,textarea{touch-action:manipulation}
 .line-bind-sheet{
  width:min(560px,calc(100vw - 32px));
 }
+.line-bind-qr-wrap{
+ display:grid;
+ grid-template-columns:118px minmax(0,1fr);
+ align-items:center;
+ gap:12px;
+ padding:12px;
+ border:1px solid #c8efe5;
+ border-radius:16px;
+ background:#fff;
+}
+.line-add-qr{
+ width:118px;
+ height:118px;
+ object-fit:contain;
+ border-radius:12px;
+ border:1px solid #e2ece9;
+ background:#fff;
+}
+.line-bind-qr-wrap span{
+ color:#41635b;
+ line-height:1.5;
+ font-weight:750;
+}
 @media(min-width:768px){
  .technician-primary-nav{
   grid-template-columns:repeat(4,minmax(0,1fr));
@@ -625,5 +648,10 @@ button,input,select,textarea{touch-action:manipulation}
  }
  .customer-toolbar{
   grid-template-columns:1fr!important;
+ }
+ .line-bind-qr-wrap{
+  grid-template-columns:1fr;
+  justify-items:center;
+  text-align:center;
  }
 }
