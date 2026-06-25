@@ -8,5 +8,8 @@ router.post('/webhook',asyncHandler(controller.webhook));
 router.post('/webhook.php',asyncHandler(controller.webhook));
 router.get('/status',auth,role('admin'),asyncHandler(controller.status));
 router.get('/bind/:customerId',auth,role('admin','technician'),asyncHandler(controller.bindInfo));
+router.get('/templates',auth,role('admin'),asyncHandler(controller.templates));
+router.put('/templates/:key',auth,role('admin'),asyncHandler(controller.updateTemplate));
 router.post('/push',auth,role('admin'),asyncHandler(controller.push));
+router.post('/service-reminder',auth,role('admin'),asyncHandler(controller.sendServiceReminder));
 module.exports=router;

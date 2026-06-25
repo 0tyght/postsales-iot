@@ -20,3 +20,6 @@ exports.status=async(req,res)=>success(res,{
 
 exports.bindInfo=async(req,res)=>success(res,await service.bindInfo(req.params.customerId));
 exports.push=async(req,res)=>success(res,await service.push(req.body),'ส่งข้อความ LINE แล้ว');
+exports.templates=async(req,res)=>success(res,await service.templates());
+exports.updateTemplate=async(req,res)=>success(res,await service.updateTemplate(req.params.key,req.body),'บันทึกข้อความ LINE แล้ว');
+exports.sendServiceReminder=async(req,res)=>success(res,await service.sendServiceReminder(req.body.site_id),'ส่งข้อความติดตามรอบ service แล้ว');

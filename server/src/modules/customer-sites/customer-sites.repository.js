@@ -18,7 +18,7 @@ exports.update=async(id,d)=>db.query(
 );
 exports.remove=async id=>db.query('DELETE FROM customer_sites WHERE site_id=?',[id]);
 exports.reminders=async()=> (await db.query(
- `SELECT s.*,c.customer_name,c.phone,c.email,
+ `SELECT s.*,c.customer_name,c.phone,c.email,c.line_user_id,
   DATEDIFF(s.service_end_date,CURDATE()) days_until_service_end,
   DATEDIFF(s.next_service_contact_date,CURDATE()) days_until_contact
   FROM customer_sites s JOIN customers c ON c.customer_id=s.customer_id

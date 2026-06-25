@@ -2,12 +2,14 @@ const crypto=require('crypto');
 const repo=require('./line.repository');
 
 const LINE_API='https://api.line.me/v2/bot/message';
+const COMPANY_NAME=process.env.COMPANY_NAME||'Post-Sales IoT';
 
 const makeCode=customerId=>`TYTC${String(customerId).padStart(4,'0').slice(-4)}`;
 const verifyCode=code=>{
   const match=String(code||'').trim().toUpperCase().match(/^TYTC(\d{4})$/);
   return match?Number(match[1]):null;
 };
+
 const officialAccountId=()=>process.env.LINE_OFFICIAL_ACCOUNT_ID||process.env.LINE_OA_ID||process.env.LINE_BASIC_ID||process.env.LINE_BOT_BASIC_ID||process.env.LINE_BOT_ID||'';
 const oaMessageUrl=text=>{
   const accountId=officialAccountId();
@@ -17,6 +19,10 @@ const webhookUrl=()=>process.env.LINE_WEBHOOK_URL||'';
 
 exports.configured=()=>Boolean(process.env.LINE_CHANNEL_SECRET&&process.env.LINE_CHANNEL_ACCESS_TOKEN);
 exports.webhookUrl=webhookUrl;
+
+const render=(body,vars={})=>String(body||'').replace(/\{\{\s*([a-zA-Z0-9_]+)\s*\}\}/g,(_,key)=>vars[key]??'');
+const templates=async()=>repo.templatesMap();
+const textFrom=async(key,vars={},fallback='')=>render((await templates())[key]||fallback,vars);
 
 exports.webhookHealth=async()=>{
   const url=webhookUrl();
@@ -89,19 +95,21 @@ const quickMenu={
 
 const textMessage=(text,withMenu=false)=>({
   type:'text',
-  text:text.slice(0,5000),
+  text:String(text||'').slice(0,5000),
   ...(withMenu?{quickReply:quickMenu}:{}),
 });
 
 exports.replyText=(replyToken,text,withMenu=false)=>send('reply',{replyToken,messages:[textMessage(text,withMenu)]});
 exports.replyMenu=(replyToken,text)=>exports.replyText(replyToken,text,true);
-exports.pushText=(to,text)=>send('push',{to,messages:[{type:'text',text:text.slice(0,5000)}]});
+exports.pushText=(to,text)=>send('push',{to,messages:[textMessage(text,false)]});
 
-const help=customer=>`สวัสดี${customer?`คุณ ${customer.customer_name}`:''}
+const help=async customer=>textFrom('help',{
+  customer_name:customer?.customer_name?`คุณ ${customer.customer_name}`:'',
+},`สวัสดี${customer?.customer_name?`คุณ ${customer.customer_name}`:''}
 
-แจ้งปัญหา: พิมพ์ “แจ้งปัญหา ตามด้วยอาการ”
-ตรวจสถานะ: พิมพ์ “สถานะ”
-ถ้ามีหลายจุดติดตั้ง ให้พิมพ์ “#รหัสจุดติดตั้ง อาการ”`;
+แจ้งปัญหา: พิมพ์ “แจ้งปัญหา” ตามด้วยอาการ
+ดูสถานะ: พิมพ์ “สถานะ”
+หากมีหลายจุดติดตั้ง ให้พิมพ์ “#รหัสจุดติดตั้ง อาการ”`);
 
 const statusLabel={open:'รอตรวจสอบ',assigned:'รับเคสแล้ว',resolved:'ปิดเคสแล้ว',cancelled:'ยกเลิก'};
 
@@ -122,41 +130,51 @@ exports.bindInfo=async customerId=>{
 };
 
 exports.handleEvent=async event=>{
+  await repo.ensureTemplates();
   const lineUserId=event.source?.userId;
   if(!lineUserId||!event.replyToken)return;
   const customer=await repo.customerByLineId(lineUserId);
 
   if(event.type==='follow'){
-    return exports.replyMenu(event.replyToken,customer?help(customer):'ขอบคุณที่เพิ่มเพื่อน\n\nกรุณาส่งรหัสลงทะเบียนที่ได้รับจากช่าง เช่น TYTC0001 เพื่อผูก LINE กับข้อมูลลูกค้าของคุณ');
+    const message=customer
+      ?await help(customer)
+      :await textFrom('follow_unbound',{company_name:COMPANY_NAME,sample_code:'TYTC0001'},'ขอบคุณที่เพิ่มเพื่อน\n\nกรุณาส่งรหัสลงทะเบียน เช่น TYTC0001');
+    return exports.replyMenu(event.replyToken,message);
   }
   if(event.type!=='message'||event.message?.type!=='text'){
-    return exports.replyText(event.replyToken,'ตอนนี้ระบบรับข้อความตัวอักษรก่อนนะครับ');
+    return exports.replyText(event.replyToken,await textFrom('unsupported_message',{},'ตอนนี้ระบบรับข้อความตัวอักษรก่อนนะครับ'));
   }
 
   const text=event.message.text.trim();
   const registration=text.match(/^(?:ลงทะเบียน\s+)?(TYTC\d{4})$/i);
   if(registration){
     const customerId=verifyCode(registration[1]);
-    if(!customerId)return exports.replyText(event.replyToken,'รหัสลงทะเบียนไม่ถูกต้อง กรุณาขอรหัสใหม่จากช่าง');
+    if(!customerId)return exports.replyText(event.replyToken,await textFrom('bind_not_found',{bind_code:registration[1]},'รหัสลงทะเบียนไม่ถูกต้อง'));
     const result=await repo.bindLineId(customerId,lineUserId);
-    if(!result.ok&&result.reason==='used')return exports.replyText(event.replyToken,`LINE นี้ผูกกับลูกค้า ${result.customer.customer_name} อยู่แล้ว หากต้องการเปลี่ยน กรุณาติดต่อเจ้าหน้าที่`);
-    if(!result.ok)return exports.replyText(event.replyToken,'ไม่พบข้อมูลลูกค้าสำหรับรหัสนี้ กรุณาขอรหัสใหม่จากช่าง');
-    return exports.replyMenu(event.replyToken,`ผูก LINE สำเร็จ\nลูกค้า: ${result.customer.customer_name}\n\n${help(result.customer)}`);
+    if(!result.ok&&result.reason==='used')return exports.replyText(event.replyToken,await textFrom('bind_used',{customer_name:result.customer.customer_name},'LINE นี้ผูกกับลูกค้ารายอื่นอยู่แล้ว'));
+    if(!result.ok)return exports.replyText(event.replyToken,await textFrom('bind_not_found',{bind_code:registration[1]},'ไม่พบข้อมูลลูกค้าสำหรับรหัสนี้'));
+    return exports.replyMenu(event.replyToken,await textFrom('bind_success',{
+      customer_name:result.customer.customer_name,
+      help_text:await help(result.customer),
+    },`ผูก LINE สำเร็จ\nลูกค้า: ${result.customer.customer_name}`));
   }
 
   if(!customer){
-    return exports.replyMenu(event.replyToken,'ยังไม่พบข้อมูลลูกค้าที่ผูกกับ LINE นี้\nกรุณาขอรหัส TYTC จากช่าง แล้วส่งรหัสกลับมาในแชตนี้');
+    return exports.replyMenu(event.replyToken,await textFrom('unbound_help',{},'กรุณาขอรหัส TYTC จากช่าง แล้วส่งรหัสกลับมาในแชตนี้'));
   }
 
-  if(/^(ช่วยเหลือ|วิธีใช้|help|สวัสดี|เมนู)$/i.test(text))return exports.replyMenu(event.replyToken,help(customer));
-  if(text==='ติดต่อเจ้าหน้าที่')return exports.replyMenu(event.replyToken,'เจ้าหน้าที่ได้รับข้อความของคุณแล้ว\nหากต้องการแจ้งปัญหา ให้กด “แจ้งปัญหา” แล้วพิมพ์อาการต่อท้ายได้เลย');
+  if(/^(ช่วยเหลือ|วิธีใช้|help|สวัสดี|เมนู)$/i.test(text))return exports.replyMenu(event.replyToken,await help(customer));
+  if(text==='ติดต่อเจ้าหน้าที่')return exports.replyMenu(event.replyToken,await textFrom('contact_staff',{},'เจ้าหน้าที่ได้รับข้อความของคุณแล้ว'));
 
   if(text==='สถานะ'){
     const rows=await repo.customerStatus(customer.customer_id);
-    const message=rows.length
-      ?rows.map(x=>`เคส #${x.problem_id}: ${statusLabel[x.problem_status]||x.problem_status}${x.technician_name?` (${x.technician_name})`:''}`).join('\n')
-      :'ยังไม่มีเคสปัญหาในระบบ';
-    return exports.replyMenu(event.replyToken,message);
+    if(!rows.length)return exports.replyMenu(event.replyToken,await textFrom('status_empty',{},'ยังไม่มีเคสปัญหาในระบบ'));
+    const lines=await Promise.all(rows.map(x=>textFrom('status_line',{
+      case_id:x.problem_id,
+      status:statusLabel[x.problem_status]||x.problem_status,
+      technician_text:x.technician_name?` (${x.technician_name})`:'',
+    },`เคส #${x.problem_id}: ${statusLabel[x.problem_status]||x.problem_status}${x.technician_name?` (${x.technician_name})`:''}`)));
+    return exports.replyMenu(event.replyToken,lines.join('\n'));
   }
 
   const selected=text.match(/^#(\d+)\s+(.+)/s);
@@ -168,20 +186,25 @@ exports.handleEvent=async event=>{
   }else if(text.startsWith('แจ้งปัญหา')&&customer.sites.length===1){
     site=customer.sites[0];
   }else if(!text.startsWith('แจ้งปัญหา')){
-    return exports.replyMenu(event.replyToken,help(customer));
+    return exports.replyMenu(event.replyToken,await textFrom('fallback',{},await help(customer)));
   }
 
   if(!site){
-    if(!customer.sites.length)return exports.replyText(event.replyToken,'บัญชีของคุณยังไม่มีจุดติดตั้งที่เปิดใช้งาน กรุณาติดต่อเจ้าหน้าที่');
-    return exports.replyMenu(event.replyToken,`กรุณาเลือกจุดติดตั้ง แล้วพิมพ์ “#รหัส อาการ”\n${customer.sites.map(x=>`#${x.site_id} ${x.site_name}`).join('\n')}`);
+    if(!customer.sites.length)return exports.replyText(event.replyToken,await textFrom('no_active_site',{},'บัญชีของคุณยังไม่มีจุดติดตั้งที่เปิดใช้งาน'));
+    return exports.replyMenu(event.replyToken,await textFrom('select_site',{
+      site_list:customer.sites.map(x=>`#${x.site_id} ${x.site_name}`).join('\n'),
+    },`กรุณาเลือกจุดติดตั้ง\n${customer.sites.map(x=>`#${x.site_id} ${x.site_name}`).join('\n')}`));
   }
-  if(symptom.length<3)return exports.replyText(event.replyToken,'กรุณาระบุอาการหรือปัญหาให้ละเอียดขึ้นเล็กน้อย');
+  if(symptom.length<3)return exports.replyText(event.replyToken,await textFrom('symptom_too_short',{},'กรุณาระบุอาการหรือปัญหาให้ละเอียดขึ้นเล็กน้อย'));
 
   const result=await repo.createProblem(site.site_id,symptom);
-  return exports.replyMenu(event.replyToken,`${result.duplicate?'รับข้อมูลไว้แล้ว':'รับแจ้งปัญหาเรียบร้อย'}
+  return exports.replyMenu(event.replyToken,await textFrom('problem_received',{
+    received_text:result.duplicate?'รับข้อมูลไว้แล้ว':'รับแจ้งปัญหาเรียบร้อย',
+    case_id:result.problemId,
+    site_name:site.site_name,
+  },`${result.duplicate?'รับข้อมูลไว้แล้ว':'รับแจ้งปัญหาเรียบร้อย'}
 เลขเคส #${result.problemId}
-จุดติดตั้ง: ${site.site_name}
-เจ้าหน้าที่จะตรวจสอบและอัปเดตสถานะให้ทราบครับ`);
+จุดติดตั้ง: ${site.site_name}`));
 };
 
 exports.push=async({customer_id,line_user_id,text})=>{
@@ -190,4 +213,24 @@ exports.push=async({customer_id,line_user_id,text})=>{
   if(!text?.trim())throw Object.assign(new Error('กรุณาระบุข้อความ'),{status:400});
   await exports.pushText(target,text.trim());
   return {sent:true,to:target};
+};
+
+exports.templates=()=>repo.listTemplates();
+exports.updateTemplate=async(key,data)=>{
+  await repo.updateTemplate(key,data);
+  return {updated:true};
+};
+
+exports.sendServiceReminder=async siteId=>{
+  const site=await repo.serviceSite(siteId);
+  if(!site)throw Object.assign(new Error('ไม่พบจุดติดตั้ง'),{status:404});
+  if(!site.line_user_id)throw Object.assign(new Error('ลูกค้ายังไม่ได้ผูก LINE'),{status:400});
+  const text=await textFrom('service_reminder',{
+    customer_name:site.customer_name,
+    site_name:site.site_name,
+    service_end_date:site.service_end_date||'',
+    next_service_contact_date:site.next_service_contact_date||'',
+  });
+  await exports.pushText(site.line_user_id,text);
+  return {sent:true,site_id:site.site_id,customer_name:site.customer_name};
 };

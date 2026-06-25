@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS repair_jobs;
 DROP TABLE IF EXISTS installation_jobs;
 DROP TABLE IF EXISTS jobs;
 DROP TABLE IF EXISTS device_models;
+DROP TABLE IF EXISTS line_message_templates;
 DROP TABLE IF EXISTS customer_sites;
 DROP TABLE IF EXISTS customers;
 DROP TABLE IF EXISTS users;
@@ -142,6 +143,16 @@ CREATE TABLE problem_reports (
     REFERENCES jobs(job_id) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT fk_problem_reports_recorded_by FOREIGN KEY (recorded_by)
     REFERENCES users(user_id) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE line_message_templates (
+  template_key VARCHAR(80) PRIMARY KEY,
+  template_name VARCHAR(150) NOT NULL,
+  template_group VARCHAR(80) NOT NULL,
+  template_body TEXT NOT NULL,
+  variables TEXT,
+  is_active TINYINT(1) NOT NULL DEFAULT 1,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE job_evidence (
