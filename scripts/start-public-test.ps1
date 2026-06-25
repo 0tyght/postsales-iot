@@ -20,6 +20,27 @@ function Get-EnvValue([string]$Name) {
   return ($line -replace "^$([regex]::Escape($Name))=", '').Trim()
 }
 
+function Set-EnvValue([string]$Name, [string]$Value) {
+  $lines = @()
+  if (Test-Path $envPath) {
+    $lines = @(Get-Content $envPath -ErrorAction SilentlyContinue)
+  }
+  $pattern = "^$([regex]::Escape($Name))="
+  $updated = $false
+  $lines = $lines | ForEach-Object {
+    if ($_ -match $pattern) {
+      $updated = $true
+      "$Name=$Value"
+    } else {
+      $_
+    }
+  }
+  if (-not $updated) {
+    $lines += "$Name=$Value"
+  }
+  [IO.File]::WriteAllText($envPath, ($lines -join [Environment]::NewLine) + [Environment]::NewLine, (New-Object Text.UTF8Encoding($false)))
+}
+
 function Find-Ngrok {
   $local = Join-Path $root '.tools\ngrok.exe'
   if (Test-Path $local) { return $local }
@@ -169,10 +190,22 @@ if (-not $url) {
   throw "Cloudflare Quick Tunnel failed after 4 attempts. This is usually a temporary Cloudflare error. Please wait a few minutes and run this command again. Latest log: $errorLog"
 }
 
+$cloudflareLineWebhookUrl = "$url/linebot/webhook.php"
+Set-EnvValue 'LINE_WEBHOOK_URL' $cloudflareLineWebhookUrl
+Write-Host 'Restarting local API server to load the latest LINE webhook URL...' -ForegroundColor Cyan
+Stop-PortProcess 5000
+Start-Sleep -Seconds 1
+Start-Process -FilePath node -ArgumentList 'src/server.js' -WorkingDirectory (Join-Path $root 'server') -WindowStyle Hidden | Out-Null
+$deadline = (Get-Date).AddSeconds(20)
+while ((-not (Test-Port 5000)) -and (Get-Date) -lt $deadline) {
+  Start-Sleep -Milliseconds 500
+}
+if (-not (Test-Port 5000)) { throw 'API server failed to restart after updating LINE webhook URL' }
+
 $runtimeConfig = [ordered]@{
   apiBaseUrl = "$url/api"
   portalUrl = 'https://0tyght.github.io/postsales-iot/'
-  lineWebhookUrl = "$url/linebot/webhook.php"
+  lineWebhookUrl = $cloudflareLineWebhookUrl
   updatedAt = (Get-Date).ToUniversalTime().ToString('o')
 } | ConvertTo-Json
 [IO.File]::WriteAllText($configPath, $runtimeConfig + [Environment]::NewLine, (New-Object Text.UTF8Encoding($false)))
@@ -194,10 +227,8 @@ Write-Host 'Portal: https://0tyght.github.io/postsales-iot/'
 Write-Host "API:    $url/api"
 Write-Host "Config: https://raw.githubusercontent.com/0tyght/postsales-iot/main/runtime-config.json"
 Write-Host "LINE Webhook URL:"
-Write-Host "$url/linebot/webhook.php" -ForegroundColor Yellow
-if ($lineWebhookUrl -and $lineWebhookUrl -ne "$url/linebot/webhook.php") {
-  Write-Host "LINE .env: $lineWebhookUrl" -ForegroundColor DarkGray
-}
+Write-Host $cloudflareLineWebhookUrl -ForegroundColor Yellow
+Write-Host 'LINE .env has been updated to this URL for this test run.' -ForegroundColor DarkGray
 
 if ($Background) {
   Write-Host 'Mode: background (servers continue running after this window closes)'

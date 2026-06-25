@@ -16,7 +16,7 @@ export default function LineSettingsPage(){
     <div className="metric-row"><span>Channel Secret</span><strong>{status?.channel_secret?'พร้อม':'ยังไม่ตั้งค่า'}</strong></div>
     <div className="metric-row"><span>Channel Access Token</span><strong>{status?.access_token?'พร้อม':'ยังไม่ตั้งค่า'}</strong></div>
     <p className="muted">Webhook URL ที่ต้องตั้งใน LINE Developers</p>
-    <code>{status?.webhook_url||'https://blame-carbon-blemish.ngrok-free.dev/linebot/webhook.php'}</code>
+    <code>{status?.webhook_url||'ยังไม่ได้ตั้งค่า LINE Webhook URL'}</code>
     <div className={`webhook-health ${status?.webhook_health?.connected_to_this_server?'ok':'bad'}`}>
      <b>{status?.webhook_health?.connected_to_this_server?'Webhook พร้อมใช้งาน':'Webhook ยังไม่เข้าระบบนี้'}</b>
      <span>{status?.webhook_health?.message||'กำลังตรวจสอบสถานะ webhook...'}</span>

@@ -13,13 +13,21 @@ const oaMessageUrl=text=>{
   const accountId=officialAccountId();
   return accountId?`https://line.me/R/oaMessage/${encodeURIComponent(accountId)}/?${encodeURIComponent(text)}`:'';
 };
-const webhookUrl=()=>process.env.LINE_WEBHOOK_URL||'https://blame-carbon-blemish.ngrok-free.dev/linebot/webhook.php';
+const webhookUrl=()=>process.env.LINE_WEBHOOK_URL||'';
 
 exports.configured=()=>Boolean(process.env.LINE_CHANNEL_SECRET&&process.env.LINE_CHANNEL_ACCESS_TOKEN);
 exports.webhookUrl=webhookUrl;
 
 exports.webhookHealth=async()=>{
   const url=webhookUrl();
+  if(!url)return {
+    url:'',
+    reachable:false,
+    status:null,
+    connected_to_this_server:false,
+    message:'ยังไม่ได้ตั้งค่า LINE_WEBHOOK_URL',
+    response_preview:'',
+  };
   try{
     const controller=new AbortController();
     const timeout=setTimeout(()=>controller.abort(),8000);
