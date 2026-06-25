@@ -34,7 +34,23 @@ const send=async(path,body)=>{
   if(!response.ok)throw Object.assign(new Error(`LINE API ตอบกลับ ${response.status}: ${await response.text()}`),{status:502});
 };
 
-exports.replyText=(replyToken,text)=>send('reply',{replyToken,messages:[{type:'text',text:text.slice(0,5000)}]});
+const quickMenu={
+  items:[
+    {type:'action',action:{type:'message',label:'แจ้งปัญหา',text:'แจ้งปัญหา '}},
+    {type:'action',action:{type:'message',label:'ดูสถานะ',text:'สถานะ'}},
+    {type:'action',action:{type:'message',label:'วิธีใช้',text:'วิธีใช้'}},
+    {type:'action',action:{type:'message',label:'ติดต่อเจ้าหน้าที่',text:'ติดต่อเจ้าหน้าที่'}},
+  ],
+};
+
+const textMessage=(text,withMenu=false)=>({
+  type:'text',
+  text:text.slice(0,5000),
+  ...(withMenu?{quickReply:quickMenu}:{}),
+});
+
+exports.replyText=(replyToken,text,withMenu=false)=>send('reply',{replyToken,messages:[textMessage(text,withMenu)]});
+exports.replyMenu=(replyToken,text)=>exports.replyText(replyToken,text,true);
 exports.pushText=(to,text)=>send('push',{to,messages:[{type:'text',text:text.slice(0,5000)}]});
 
 const help=customer=>`สวัสดี${customer?`คุณ ${customer.customer_name}`:''}
@@ -67,7 +83,7 @@ exports.handleEvent=async event=>{
   const customer=await repo.customerByLineId(lineUserId);
 
   if(event.type==='follow'){
-    return exports.replyText(event.replyToken,customer?help(customer):'ขอบคุณที่เพิ่มเพื่อน\n\nกรุณาส่งรหัสลงทะเบียนที่ได้รับจากช่าง เช่น TYTC0001 เพื่อผูก LINE กับข้อมูลลูกค้าของคุณ');
+    return exports.replyMenu(event.replyToken,customer?help(customer):'ขอบคุณที่เพิ่มเพื่อน\n\nกรุณาส่งรหัสลงทะเบียนที่ได้รับจากช่าง เช่น TYTC0001 เพื่อผูก LINE กับข้อมูลลูกค้าของคุณ');
   }
   if(event.type!=='message'||event.message?.type!=='text'){
     return exports.replyText(event.replyToken,'ตอนนี้ระบบรับข้อความตัวอักษรก่อนนะครับ');
@@ -81,21 +97,22 @@ exports.handleEvent=async event=>{
     const result=await repo.bindLineId(customerId,lineUserId);
     if(!result.ok&&result.reason==='used')return exports.replyText(event.replyToken,`LINE นี้ผูกกับลูกค้า ${result.customer.customer_name} อยู่แล้ว หากต้องการเปลี่ยน กรุณาติดต่อเจ้าหน้าที่`);
     if(!result.ok)return exports.replyText(event.replyToken,'ไม่พบข้อมูลลูกค้าสำหรับรหัสนี้ กรุณาขอรหัสใหม่จากช่าง');
-    return exports.replyText(event.replyToken,`ผูก LINE สำเร็จ\nลูกค้า: ${result.customer.customer_name}\n\n${help(result.customer)}`);
+    return exports.replyMenu(event.replyToken,`ผูก LINE สำเร็จ\nลูกค้า: ${result.customer.customer_name}\n\n${help(result.customer)}`);
   }
 
   if(!customer){
-    return exports.replyText(event.replyToken,'ยังไม่พบข้อมูลลูกค้าที่ผูกกับ LINE นี้\nกรุณาขอรหัส TYTC จากช่าง แล้วส่งรหัสกลับมาในแชตนี้');
+    return exports.replyMenu(event.replyToken,'ยังไม่พบข้อมูลลูกค้าที่ผูกกับ LINE นี้\nกรุณาขอรหัส TYTC จากช่าง แล้วส่งรหัสกลับมาในแชตนี้');
   }
 
-  if(/^(ช่วยเหลือ|วิธีใช้|help|สวัสดี)$/i.test(text))return exports.replyText(event.replyToken,help(customer));
+  if(/^(ช่วยเหลือ|วิธีใช้|help|สวัสดี|เมนู)$/i.test(text))return exports.replyMenu(event.replyToken,help(customer));
+  if(text==='ติดต่อเจ้าหน้าที่')return exports.replyMenu(event.replyToken,'เจ้าหน้าที่ได้รับข้อความของคุณแล้ว\nหากต้องการแจ้งปัญหา ให้กด “แจ้งปัญหา” แล้วพิมพ์อาการต่อท้ายได้เลย');
 
   if(text==='สถานะ'){
     const rows=await repo.customerStatus(customer.customer_id);
     const message=rows.length
       ?rows.map(x=>`เคส #${x.problem_id}: ${statusLabel[x.problem_status]||x.problem_status}${x.technician_name?` (${x.technician_name})`:''}`).join('\n')
       :'ยังไม่มีเคสปัญหาในระบบ';
-    return exports.replyText(event.replyToken,message);
+    return exports.replyMenu(event.replyToken,message);
   }
 
   const selected=text.match(/^#(\d+)\s+(.+)/s);
@@ -107,17 +124,17 @@ exports.handleEvent=async event=>{
   }else if(text.startsWith('แจ้งปัญหา')&&customer.sites.length===1){
     site=customer.sites[0];
   }else if(!text.startsWith('แจ้งปัญหา')){
-    return exports.replyText(event.replyToken,help(customer));
+    return exports.replyMenu(event.replyToken,help(customer));
   }
 
   if(!site){
     if(!customer.sites.length)return exports.replyText(event.replyToken,'บัญชีของคุณยังไม่มีจุดติดตั้งที่เปิดใช้งาน กรุณาติดต่อเจ้าหน้าที่');
-    return exports.replyText(event.replyToken,`กรุณาเลือกจุดติดตั้ง แล้วพิมพ์ “#รหัส อาการ”\n${customer.sites.map(x=>`#${x.site_id} ${x.site_name}`).join('\n')}`);
+    return exports.replyMenu(event.replyToken,`กรุณาเลือกจุดติดตั้ง แล้วพิมพ์ “#รหัส อาการ”\n${customer.sites.map(x=>`#${x.site_id} ${x.site_name}`).join('\n')}`);
   }
   if(symptom.length<3)return exports.replyText(event.replyToken,'กรุณาระบุอาการหรือปัญหาให้ละเอียดขึ้นเล็กน้อย');
 
   const result=await repo.createProblem(site.site_id,symptom);
-  return exports.replyText(event.replyToken,`${result.duplicate?'รับข้อมูลไว้แล้ว':'รับแจ้งปัญหาเรียบร้อย'}
+  return exports.replyMenu(event.replyToken,`${result.duplicate?'รับข้อมูลไว้แล้ว':'รับแจ้งปัญหาเรียบร้อย'}
 เลขเคส #${result.problemId}
 จุดติดตั้ง: ${site.site_name}
 เจ้าหน้าที่จะตรวจสอบและอัปเดตสถานะให้ทราบครับ`);
