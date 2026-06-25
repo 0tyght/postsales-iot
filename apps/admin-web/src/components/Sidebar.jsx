@@ -8,7 +8,7 @@ const groups=[
 ];
 export default function Sidebar({active,onNavigate,open}){
  return <aside className={`sidebar ${open?'open':''}`}>
-  <div className="brand"><span>PS</span><div>Post-Sales<small>IoT Support</small></div></div>
+  <div className="brand"><span className="app-logo-mark" aria-label="THIC logo"></span><div>Post-Sales<small>IoT Support</small></div></div>
   <nav className="sidebar-menu">{groups.map(group=><div className="nav-section" key={group.label}><small>{group.label}</small>{group.items.map(([id,icon,label])=><button key={id} className={active===id?'active':''} onClick={()=>onNavigate(id)}><i>{icon}</i><span>{label}</span></button>)}</div>)}</nav>
   <div className="sidebar-footer"><b>ระบบทดลอง</b><small>ข้อมูลจริงควรสำรองก่อนทดสอบ</small></div>
  </aside>;

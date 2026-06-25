@@ -17,7 +17,7 @@ export default function LoginPage({onLogin}){
   }catch(x){setError(x.message)}finally{setBusy(false)}
  };
  return <main className="login"><form className="login-card" onSubmit={submit}>
-  <div className="mark">PS</div><h1>Post-Sales IoT</h1><p>เปิดงาน รับเคส แนบรูป และปิดงานจากหน้างานได้ทันที</p>
+  <div className="mark app-logo-mark" aria-label="THIC logo"></div><h1>Post-Sales IoT</h1><p>เปิดงาน รับเคส แนบรูป และปิดงานจากหน้างานได้ทันที</p>
   {error&&<div className="alert error">{error}</div>}
   <div className="login-tips"><b>สำหรับทีมช่าง</b><span>ปกติไม่ต้องกรอกลิงก์เซิร์ฟเวอร์ ระบบจะใช้ลิงก์ล่าสุดให้อัตโนมัติ กรอกเฉพาะกรณีที่ผู้ดูแลระบบส่งลิงก์ทดสอบให้เท่านั้น</span></div>
   <label>ลิงก์เซิร์ฟเวอร์ทดสอบ <small>เว้นว่างเมื่อใช้งานปกติ</small><input type="url" value={form.server_url} onChange={e=>setForm({...form,server_url:e.target.value})} placeholder="https://xxxx.trycloudflare.com"/></label>

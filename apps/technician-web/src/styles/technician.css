@@ -583,3 +583,47 @@ button,input,select,textarea{touch-action:manipulation}
   width:100%;
  }
 }
+
+/* Brand logo */
+.app header:before,
+.mark.app-logo-mark{
+ content:""!important;
+ color:transparent!important;
+ background:#fff center/86% auto no-repeat url('/brand-logo.png')!important;
+ box-shadow:0 12px 30px rgba(11,99,206,.16)!important;
+ border:1px solid rgba(16,84,170,.12);
+}
+.model-shortcut{
+ margin:12px 0 2px;
+}
+.customer-line-actions{
+ display:flex;
+ align-items:center;
+ justify-content:flex-end;
+ gap:8px;
+ min-width:0;
+}
+.customer-count{
+ display:inline-flex;
+ align-items:center;
+ color:#6f8290;
+ font-weight:800;
+ white-space:nowrap;
+}
+.line-bind-sheet{
+ width:min(560px,calc(100vw - 32px));
+}
+@media(min-width:768px){
+ .technician-primary-nav{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+ }
+}
+@media(max-width:767px){
+ .customer-line-actions{
+  justify-content:flex-start;
+  flex-wrap:wrap;
+ }
+ .customer-toolbar{
+  grid-template-columns:1fr!important;
+ }
+}

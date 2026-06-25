@@ -605,3 +605,53 @@ button,.btn,.btn-icon,input,select,textarea{touch-action:manipulation}
   padding:14px;
  }
 }
+
+/* Brand logo */
+.app-logo-mark,
+.brand>span.app-logo-mark,
+.login-mark.app-logo-mark,
+.install-guide-icon.app-logo-mark{
+ color:transparent!important;
+ background:#fff center/86% auto no-repeat url('/brand-logo.png')!important;
+ box-shadow:0 12px 30px rgba(11,99,206,.16)!important;
+ border:1px solid rgba(16,84,170,.12);
+}
+.install-guide-icon.app-logo-mark{
+ width:54px;
+ height:54px;
+ border-radius:18px;
+ margin-bottom:10px;
+}
+
+/* Layout breathing room and compact filters */
+.page-head{
+ margin-bottom:18px!important;
+}
+.page-head + .stats-grid,
+.page-head + .table-tools,
+.stats-grid + .dashboard-grid{
+ margin-top:14px!important;
+}
+.table-tools{
+ margin:12px 0 18px!important;
+}
+@media(min-width:761px){
+ .table-filters{
+  gap:10px!important;
+  align-items:center!important;
+ }
+ .table-filters input{
+  flex:0 1 420px!important;
+  width:min(420px,100%)!important;
+ }
+ .table-filters select{
+  flex:0 0 190px!important;
+  width:190px!important;
+ }
+ .table-count{
+  display:flex!important;
+  align-items:center!important;
+  gap:8px!important;
+  white-space:nowrap;
+ }
+}

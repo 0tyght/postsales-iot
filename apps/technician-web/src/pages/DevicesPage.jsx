@@ -2,6 +2,7 @@ import {useMemo,useState} from 'react';
 import {api} from '../services/api';
 
 const emptyDevice={model_id:'',serial_number:'',purchase_date:'',warranty_years:1};
+const emptyModel={brand:'',model_name:'',description:'',specification:''};
 const dateText=value=>value?new Date(value).toLocaleDateString('th-TH'):'-';
 const modelName=(models,id)=>{
  const model=models.find(item=>String(item.model_id)===String(id));
@@ -11,6 +12,9 @@ const modelName=(models,id)=>{
 export default function DevicesPage({devices,models,onChanged}){
  const[form,setForm]=useState(emptyDevice);
  const[creating,setCreating]=useState(false);
+ const[addingModel,setAddingModel]=useState(false);
+ const[modelForm,setModelForm]=useState(emptyModel);
+ const[modelBusy,setModelBusy]=useState(false);
  const[error,setError]=useState('');
  const[filter,setFilter]=useState('stock');
  const[search,setSearch]=useState('');
@@ -40,6 +44,23 @@ export default function DevicesPage({devices,models,onChanged}){
   }
  };
 
+ const createModel=async event=>{
+  event.preventDefault();
+  setModelBusy(true);
+  setError('');
+  try{
+   const data=await api('/devices/models',{method:'POST',body:JSON.stringify(modelForm)});
+   setForm(current=>({...current,model_id:String(data.model_id)}));
+   setModelForm(emptyModel);
+   setAddingModel(false);
+   await onChanged();
+  }catch(x){
+   setError(x.message);
+  }finally{
+   setModelBusy(false);
+  }
+ };
+
  return <>
   <div className="page-title">
    <div>
@@ -53,6 +74,7 @@ export default function DevicesPage({devices,models,onChanged}){
     <span className="todo">+</span>
     <div><h3>เพิ่มอุปกรณ์</h3><p>กรอกของจริงเป็นรายชิ้น เช่น Serial Number วันที่ซื้อ และระยะประกัน</p></div>
    </div>
+   <button type="button" className="secondary compact model-shortcut" onClick={()=>setAddingModel(true)}>+ เพิ่มโมเดล</button>
    <form className="form-grid" onSubmit={submit}>
     <label>โมเดล
      <select required value={form.model_id} onChange={e=>setForm({...form,model_id:e.target.value})}>
@@ -66,6 +88,19 @@ export default function DevicesPage({devices,models,onChanged}){
     <button className="primary full" disabled={creating}>{creating?'กำลังเพิ่มอุปกรณ์...':'เพิ่มอุปกรณ์เข้าคลัง'}</button>
    </form>
   </section>
+  {addingModel&&<div className="backdrop nested-backdrop" onClick={()=>setAddingModel(false)}>
+   <form className="sheet inventory-device-sheet" onSubmit={createModel} onClick={e=>e.stopPropagation()}>
+    <div className="sheet-head"><h2>เพิ่มโมเดล</h2><button type="button" className="icon" onClick={()=>setAddingModel(false)}>×</button></div>
+    <p>โมเดลคือข้อมูลรุ่น/สเปกกลาง ใช้เลือกตอนเพิ่มอุปกรณ์จริง</p>
+    <div className="form-grid">
+     <label>ชื่อโมเดล<input required value={modelForm.model_name} onChange={e=>setModelForm({...modelForm,model_name:e.target.value})}/></label>
+     <label>ยี่ห้อ<input value={modelForm.brand} onChange={e=>setModelForm({...modelForm,brand:e.target.value})}/></label>
+     <label className="wide">รายละเอียด<textarea rows="2" value={modelForm.description} onChange={e=>setModelForm({...modelForm,description:e.target.value})}/></label>
+     <label className="wide">สเปก<textarea rows="2" value={modelForm.specification} onChange={e=>setModelForm({...modelForm,specification:e.target.value})}/></label>
+    </div>
+    <div className="editor-actions"><button type="button" className="secondary" onClick={()=>setAddingModel(false)}>ยกเลิก</button><button className="primary" disabled={modelBusy}>{modelBusy?'กำลังเพิ่ม...':'เพิ่มโมเดล'}</button></div>
+   </form>
+  </div>}
   <section className="work-card inventory-list-card">
    <div className="section-title">
     <span className="done">{visible.length}</span>

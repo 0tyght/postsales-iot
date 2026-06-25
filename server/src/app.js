@@ -14,6 +14,7 @@ app.use(express.urlencoded({extended:true}));
 app.get('/api/health',asyncHandler(async(req,res)=>{await db.query('SELECT 1');success(res,{database:'connected'}); }));
 app.use('/api/auth',require('./modules/auth/auth.routes'));
 app.use('/api/line',require('./modules/line/line.routes'));
+app.use('/linebot',require('./modules/line/line.routes'));
 app.use('/api',auth);
 app.get('/api/dashboard',role('admin'),asyncHandler(async(req,res)=>{
   const [[counts],[jobs],[service],[warranty],[recent]] = await Promise.all([

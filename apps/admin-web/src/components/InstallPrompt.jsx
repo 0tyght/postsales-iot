@@ -35,10 +35,10 @@ export default function InstallPrompt(){
    <div className="install-guide" role="dialog" aria-modal="true" onClick={event=>event.stopPropagation()}>
     <button className="install-guide-close" onClick={()=>setDialog('')} aria-label="ปิด">×</button>
     {dialog==='choose'?<>
-     <div className="install-guide-icon">PS</div><h2>เลือกโทรศัพท์ของคุณ</h2><p>ระบบตรวจชนิดเครื่องไม่ได้ กรุณาเลือกเพื่อดูวิธีที่ถูกต้อง</p>
+     <div className="install-guide-icon app-logo-mark"></div><h2>เลือกโทรศัพท์ของคุณ</h2><p>ระบบตรวจชนิดเครื่องไม่ได้ กรุณาเลือกเพื่อดูวิธีที่ถูกต้อง</p>
      <div className="platform-choices"><button onClick={()=>choose('android')}><img src={asset('platform-android.svg')} alt="Android"/><b>Android</b><small>ดาวน์โหลด APK</small></button><button onClick={()=>choose('ios')}><img src={asset('platform-ios.svg')} alt="iOS"/><b>iOS</b><small>ดูวิธีเพิ่มแอป</small></button></div>
     </>:<>
-     <div className="install-guide-icon">PS</div><h2>เพิ่มแอปบน iOS</h2><div className="safari-notice"><b>เริ่มต้น: เปิดลิงก์นี้ด้วย Safari</b><span>ขั้นตอนต่อไปให้ทำภายในเบราว์เซอร์ Safari เท่านั้น</span></div>
+     <div className="install-guide-icon app-logo-mark"></div><h2>เพิ่มแอปบน iOS</h2><div className="safari-notice"><b>เริ่มต้น: เปิดลิงก์นี้ด้วย Safari</b><span>ขั้นตอนต่อไปให้ทำภายในเบราว์เซอร์ Safari เท่านั้น</span></div>
      <div className="ios-install-steps">
       <div className="ios-guide-step"><b>1. แตะปุ่มเมนูด้านล่าง</b><small>แตะปุ่มจุดสามจุดเพื่อเปิดเมนู</small><img src={asset('ios-step-menu.png')} alt="ตำแหน่งปุ่มเมนูบน iOS"/></div>
       <div className="ios-guide-step"><b>2. แตะ แชร์</b><small>เลือกคำสั่งแชร์จากเมนู</small><img src={asset('ios-step-share.png')} alt="ตำแหน่งปุ่มแชร์บน iOS"/></div>
