@@ -1,7 +1,8 @@
 param(
   [switch]$SkipGitPush,
   [switch]$Background,
-  [switch]$SkipLineNgrok
+  [switch]$SkipLineNgrok,
+  [switch]$UseLineNgrok
 )
 
 $ErrorActionPreference = 'Stop'
@@ -57,7 +58,7 @@ while ((-not (Test-Port 5000)) -and (Get-Date) -lt $deadline) {
 if (-not (Test-Port 5000)) { throw 'API server failed to start' }
 
 Get-Process cloudflared -ErrorAction SilentlyContinue | Stop-Process -Force
-if (-not $SkipLineNgrok) {
+if ($UseLineNgrok -and (-not $SkipLineNgrok)) {
   Get-Process ngrok -ErrorAction SilentlyContinue | Stop-Process -Force
 }
 $url = $null
@@ -72,7 +73,7 @@ if ($lineWebhookUrl -and $lineWebhookUrl -match '^https://([^/]+)') {
   $ngrokHost = $matches[1]
 }
 
-if ((-not $SkipLineNgrok) -and $ngrokHost -and $ngrokHost -like '*.ngrok-free.dev') {
+if ($UseLineNgrok -and (-not $SkipLineNgrok) -and $ngrokHost -and $ngrokHost -like '*.ngrok-free.dev') {
   $ngrok = Find-Ngrok
   if ($ngrok) {
     Write-Host "Starting LINE ngrok tunnel: https://$ngrokHost -> http://127.0.0.1:5000" -ForegroundColor Cyan
@@ -171,6 +172,7 @@ if (-not $url) {
 $runtimeConfig = [ordered]@{
   apiBaseUrl = "$url/api"
   portalUrl = 'https://0tyght.github.io/postsales-iot/'
+  lineWebhookUrl = "$url/linebot/webhook.php"
   updatedAt = (Get-Date).ToUniversalTime().ToString('o')
 } | ConvertTo-Json
 [IO.File]::WriteAllText($configPath, $runtimeConfig + [Environment]::NewLine, (New-Object Text.UTF8Encoding($false)))
@@ -191,7 +193,11 @@ Write-Host 'Public test server is ready' -ForegroundColor Green
 Write-Host 'Portal: https://0tyght.github.io/postsales-iot/'
 Write-Host "API:    $url/api"
 Write-Host "Config: https://raw.githubusercontent.com/0tyght/postsales-iot/main/runtime-config.json"
-if ($lineWebhookUrl) { Write-Host "LINE:   $lineWebhookUrl" }
+Write-Host "LINE Webhook URL:"
+Write-Host "$url/linebot/webhook.php" -ForegroundColor Yellow
+if ($lineWebhookUrl -and $lineWebhookUrl -ne "$url/linebot/webhook.php") {
+  Write-Host "LINE .env: $lineWebhookUrl" -ForegroundColor DarkGray
+}
 
 if ($Background) {
   Write-Host 'Mode: background (servers continue running after this window closes)'
@@ -206,8 +212,12 @@ try {
   while ($true) {
     $apiState = if (Test-Port 5000) { 'ONLINE' } else { 'OFFLINE' }
     $tunnelState = if (Get-Process cloudflared -ErrorAction SilentlyContinue) { 'ONLINE' } else { 'OFFLINE' }
-    $lineState = if ((-not $SkipLineNgrok) -and (Get-Process ngrok -ErrorAction SilentlyContinue)) { 'ONLINE' } elseif ($SkipLineNgrok) { 'SKIPPED' } else { 'OFFLINE' }
-    Write-Host ("[{0}] API: {1} | Web: {2} | LINE/ngrok: {3}" -f (Get-Date -Format 'HH:mm:ss'),$apiState,$tunnelState,$lineState)
+    $lineState = if ($UseLineNgrok -and (-not $SkipLineNgrok)) {
+      if (Get-Process ngrok -ErrorAction SilentlyContinue) { 'NGROK ONLINE' } else { 'NGROK OFFLINE' }
+    } else {
+      'USE CLOUDFLARE URL ABOVE'
+    }
+    Write-Host ("[{0}] API: {1} | Web: {2} | LINE: {3}" -f (Get-Date -Format 'HH:mm:ss'),$apiState,$tunnelState,$lineState)
 
     for ($step = 0; $step -lt 10; $step++) {
       try {
@@ -227,7 +237,7 @@ try {
 } finally {
   Write-Host 'Stopping public test server...' -ForegroundColor Yellow
   Get-Process cloudflared -ErrorAction SilentlyContinue | Stop-Process -Force
-  if (-not $SkipLineNgrok) { Get-Process ngrok -ErrorAction SilentlyContinue | Stop-Process -Force }
+  if ($UseLineNgrok -and (-not $SkipLineNgrok)) { Get-Process ngrok -ErrorAction SilentlyContinue | Stop-Process -Force }
   Stop-PortProcess 5000
   Write-Host 'API and tunnels are stopped.' -ForegroundColor Green
 }
