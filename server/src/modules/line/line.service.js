@@ -3,6 +3,7 @@ const repo=require('./line.repository');
 
 const LINE_API='https://api.line.me/v2/bot/message';
 const COMPANY_NAME=process.env.COMPANY_NAME||'Post-Sales IoT';
+const SUPPORT_PHONE=process.env.SUPPORT_PHONE||process.env.COMPANY_PHONE||'เบอร์โทรบริษัท';
 
 const makeCode=customerId=>`TYTC${String(customerId).padStart(4,'0').slice(-4)}`;
 const verifyCode=code=>{
@@ -164,7 +165,13 @@ exports.handleEvent=async event=>{
   }
 
   if(/^(ช่วยเหลือ|วิธีใช้|help|สวัสดี|เมนู)$/i.test(text))return exports.replyMenu(event.replyToken,await help(customer));
-  if(text==='ติดต่อเจ้าหน้าที่')return exports.replyMenu(event.replyToken,await textFrom('contact_staff',{},'เจ้าหน้าที่ได้รับข้อความของคุณแล้ว'));
+  if(/^(มีปัญหา|มี|พบปัญหา|มีครับ|มีค่ะ)$/i.test(text)){
+    return exports.replyMenu(event.replyToken,await textFrom('service_has_problem',{support_phone:SUPPORT_PHONE},`ขอบคุณที่แจ้งให้เราทราบครับ\nรบกวนโทรแจ้งรายละเอียดเพิ่มเติมได้ที่ ${SUPPORT_PHONE} หรือพิมพ์ “แจ้งปัญหา” ตามด้วยอาการในแชตนี้ได้เลยครับ`));
+  }
+  if(/^(ไม่มีปัญหา|ไม่มี|ปกติ|ใช้งานได้ปกติ|ไม่มีครับ|ไม่มีค่ะ)$/i.test(text)){
+    return exports.replyMenu(event.replyToken,await textFrom('service_no_problem',{},'ขอบคุณมากครับที่อัปเดตให้เรา ดีใจที่ระบบยังใช้งานได้ปกติครับ'));
+  }
+  if(text==='ติดต่อเจ้าหน้าที่')return exports.replyMenu(event.replyToken,await textFrom('contact_staff',{support_phone:SUPPORT_PHONE},`หากต้องการให้ทีมงานช่วยดูแลเพิ่มเติม สามารถโทรแจ้งได้ที่ ${SUPPORT_PHONE}`));
 
   if(text==='สถานะ'){
     const rows=await repo.customerStatus(customer.customer_id);
@@ -228,6 +235,9 @@ exports.sendServiceReminder=async siteId=>{
   const text=await textFrom('service_reminder',{
     customer_name:site.customer_name,
     site_name:site.site_name,
+    days_in_service:site.days_in_service??'-',
+    support_phone:SUPPORT_PHONE,
+    service_start_date:site.service_start_date||'',
     service_end_date:site.service_end_date||'',
     next_service_contact_date:site.next_service_contact_date||'',
   });

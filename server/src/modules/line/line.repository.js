@@ -8,14 +8,16 @@ const defaultTemplates=[
   ['help','วิธีใช้งาน LINE','help','สวัสดี{{customer_name}}\n\nแจ้งปัญหา: พิมพ์ “แจ้งปัญหา” ตามด้วยอาการ\nดูสถานะ: พิมพ์ “สถานะ”\nหากมีหลายจุดติดตั้ง ให้พิมพ์ “#รหัสจุดติดตั้ง อาการ”','customer_name'],
   ['unbound_help','ยังไม่ได้ผูก LINE','help','ยังไม่พบข้อมูลลูกค้าที่ผูกกับ LINE นี้\nกรุณาขอรหัส TYTC จากช่าง แล้วส่งรหัสกลับมาในแชตนี้',''],
   ['unsupported_message','ข้อความที่ระบบยังไม่รองรับ','fallback','ตอนนี้ระบบรับข้อความตัวอักษรก่อนนะครับ หากต้องการแจ้งปัญหา กรุณาพิมพ์รายละเอียดอาการเป็นข้อความ',''],
-  ['contact_staff','ติดต่อเจ้าหน้าที่','support','เจ้าหน้าที่ได้รับข้อความของคุณแล้ว\nหากต้องการแจ้งปัญหา ให้กด “แจ้งปัญหา” แล้วพิมพ์อาการต่อท้ายได้เลย',''],
+  ['contact_staff','ติดต่อเจ้าหน้าที่','support','หากต้องการให้ทีมงานช่วยดูแลเพิ่มเติม สามารถโทรแจ้งได้ที่ {{support_phone}} หรือพิมพ์ “แจ้งปัญหา” ตามด้วยรายละเอียดอาการในแชตนี้ได้เลยครับ','support_phone'],
   ['status_empty','ไม่มีเคสค้าง','status','ยังไม่มีเคสปัญหาในระบบ',''],
   ['status_line','บรรทัดสถานะเคส','status','เคส #{{case_id}}: {{status}}{{technician_text}}','case_id,status,technician_text'],
   ['select_site','ให้เลือกรหัสจุดติดตั้ง','problem','กรุณาเลือกจุดติดตั้ง แล้วพิมพ์ “#รหัส อาการ”\n{{site_list}}','site_list'],
   ['no_active_site','ไม่มีจุดติดตั้งที่เปิดใช้งาน','problem','บัญชีของคุณยังไม่มีจุดติดตั้งที่เปิดใช้งาน กรุณาติดต่อเจ้าหน้าที่',''],
   ['symptom_too_short','รายละเอียดปัญหาสั้นเกินไป','problem','กรุณาระบุอาการหรือปัญหาให้ละเอียดขึ้นเล็กน้อย',''],
   ['problem_received','รับแจ้งปัญหาแล้ว','problem','{{received_text}}\nเลขเคส #{{case_id}}\nจุดติดตั้ง: {{site_name}}\nเจ้าหน้าที่จะตรวจสอบและอัปเดตสถานะให้ทราบครับ','received_text,case_id,site_name'],
-  ['service_reminder','แจ้งเตือนรอบ service','service','สวัสดีคุณ {{customer_name}}\n\nถึงรอบติดตามบริการของจุดติดตั้ง {{site_name}} แล้วครับ\nช่วงนี้ระบบใช้งานเป็นอย่างไรบ้าง หากพบปัญหาสามารถตอบกลับในแชตนี้ได้เลย','customer_name,site_name,service_end_date,next_service_contact_date'],
+  ['service_reminder','แจ้งเตือนรอบ service','service','ขอบคุณคุณ {{customer_name}} ที่ใช้บริการของเรามา {{days_in_service}} วันแล้วครับ\n\nตอนนี้จุดติดตั้ง {{site_name}} ใช้งานเป็นอย่างไรบ้าง มีปัญหาอะไรให้เราช่วยดูแลไหมครับ\n\nถ้ามีปัญหา พิมพ์ “มีปัญหา” หรือโทรแจ้งได้ที่ {{support_phone}}\nถ้าไม่มีปัญหา พิมพ์ “ไม่มีปัญหา” ได้เลยครับ','customer_name,site_name,days_in_service,support_phone,service_start_date,service_end_date,next_service_contact_date'],
+  ['service_has_problem','ลูกค้าตอบว่ามีปัญหา','service','ขอบคุณที่แจ้งให้เราทราบครับ\n\nรบกวนโทรแจ้งรายละเอียดเพิ่มเติมได้ที่ {{support_phone}} หรือพิมพ์ “แจ้งปัญหา” ตามด้วยอาการในแชตนี้ เช่น “แจ้งปัญหา กล้องไม่ออนไลน์”\n\nทีมงานจะรีบตรวจสอบและดูแลให้ครับ','support_phone'],
+  ['service_no_problem','ลูกค้าตอบว่าไม่มีปัญหา','service','ขอบคุณมากครับที่อัปเดตให้เรา\n\nดีใจที่ระบบยังใช้งานได้ปกติ ทีมงานจะคอยดูแลตามรอบ service ถัดไป หากมีปัญหาระหว่างนี้สามารถติดต่อเราได้ทุกเมื่อครับ',''],
   ['service_thank_you','ขอบคุณหลังติดตาม service','service','ขอบคุณสำหรับข้อมูลครับ ทีมงานจะบันทึกการติดตามรอบ service ของ {{site_name}} ไว้ในระบบ','site_name'],
   ['job_completed_thank_you','ขอบคุณหลังปิดงาน','job','งาน {{job_type}} ของจุดติดตั้ง {{site_name}} เสร็จเรียบร้อยแล้ว\nขอบคุณที่ใช้บริการครับ','job_type,site_name'],
   ['fallback','ระบบไม่เข้าใจข้อความ','fallback','ขออภัยครับ ระบบยังไม่เข้าใจข้อความนี้\nพิมพ์ “วิธีใช้” เพื่อดูเมนูการใช้งานได้เลย',''],
@@ -101,6 +103,7 @@ exports.customerStatus=async customerId=>(await db.query(`SELECT p.problem_id,p.
   LEFT JOIN jobs j ON j.job_id=p.job_id LEFT JOIN users u ON u.user_id=j.technician_id
   WHERE s.customer_id=? ORDER BY p.problem_id DESC LIMIT 3`,[customerId]))[0];
 
-exports.serviceSite=async siteId=>(await db.query(`SELECT s.*,c.customer_id,c.customer_name,c.line_user_id,c.phone
+exports.serviceSite=async siteId=>(await db.query(`SELECT s.*,c.customer_id,c.customer_name,c.line_user_id,c.phone,
+  CASE WHEN s.service_start_date IS NULL THEN NULL ELSE DATEDIFF(CURDATE(),s.service_start_date) END days_in_service
   FROM customer_sites s JOIN customers c ON c.customer_id=s.customer_id
   WHERE s.site_id=?`,[siteId]))[0][0];
