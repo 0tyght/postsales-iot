@@ -11,6 +11,7 @@ const warrantyFilter=(row,value)=>{
  if(value==='soon')return days>=0&&days<=90;
  return days>90;
 };
+const canDeleteDevice=row=>!row.site_id&&!row.installation_job_id&&Number(row.problem_device_count||0)===0;
 
 export default function DeviceUnitsPage(){
  const l=useLookups({models:'/devices/models',sites:'/customer-sites',jobs:'/jobs'});
@@ -21,6 +22,9 @@ export default function DeviceUnitsPage(){
   modalTitle="อุปกรณ์"
   endpoint="/devices/units"
   idKey="device_id"
+  allowDelete
+  canDelete={canDeleteDevice}
+  deleteBlockedMessage="ลบอุปกรณ์ไม่ได้ เพราะติดตั้งแล้วหรือมีประวัติงาน/เคสซ่อม ให้แก้สถานะเป็นเลิกใช้งานแทน"
   lookups={l}
   initialValues={{device_status:'active',warranty_years:1}}
   filters={[
