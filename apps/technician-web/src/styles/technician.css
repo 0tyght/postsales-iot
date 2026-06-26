@@ -655,3 +655,281 @@ button,input,select,textarea{touch-action:manipulation}
   text-align:center;
  }
 }
+
+/* Responsive final pass: technician PWA on desktop, tablet and phone */
+*,*::before,*::after{box-sizing:border-box}
+html,body,#root{width:100%;min-width:0}
+body{overflow-x:hidden}
+.technician-app-frame,
+.technician-topbar,
+.technician-workspace,
+.technician-primary-nav,
+.page-title,
+.job-list,
+.case-list,
+.job-card,
+.case-card,
+.detail-hero,
+.contact-card,
+.work-card,
+.start-card,
+.info-card,
+.cancelled-card,
+.success-card,
+.repair-record,
+.repair-editor,
+.sheet,
+.complete-bar{min-width:0}
+.technician-workspace{overflow-x:clip}
+.technician-workspace>*{min-width:0}
+.technician-brand,
+.page-title>div,
+.job-card>div,
+.case-card>div,
+.detail-hero>div,
+.contact-card>div,
+.device-row>div,
+.evidence-item>div,
+.repair-record>div{min-width:0}
+.page-title h1,
+.page-title p,
+.job-card h2,
+.job-card p,
+.case-card h2,
+.case-site,
+.detail-hero h1,
+.detail-hero p,
+.device-row b,
+.device-row small,
+.repair-record dd,
+.evidence-item small{
+ overflow-wrap:anywhere;
+}
+.technician-topbar button,
+.primary,
+.secondary,
+.compact,
+.tabs button,
+.technician-primary-nav button{
+ white-space:nowrap;
+}
+.inline-form,
+.form-grid,
+.nested-form,
+.device-editor{
+ max-width:100%;
+ min-width:0;
+}
+.inline-form label,
+.form-grid label,
+.nested-form label,
+.device-editor label,
+input,select,textarea{
+ min-width:0;
+}
+.job-facts>div{
+ min-width:0;
+}
+.job-facts b,
+.job-facts small{
+ overflow:hidden;
+ text-overflow:ellipsis;
+ white-space:nowrap;
+}
+.tabs{
+ scrollbar-width:thin;
+}
+.tabs button{
+ flex:0 0 auto;
+}
+.sheet{
+ display:grid;
+ grid-template-rows:auto minmax(0,1fr);
+}
+.sheet>form,
+.sheet>.sheet-body{
+ min-height:0;
+ overflow:auto;
+}
+
+@media(min-width:1181px){
+ .technician-workspace{
+  width:min(100%,1080px);
+ }
+ .job-list,.case-list{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+ }
+ .page-title{
+  padding:22px;
+ }
+ .work-card,
+ .contact-card,
+ .start-card,
+ .info-card,
+ .cancelled-card,
+ .success-card{
+  padding:20px;
+ }
+ .complete-bar{
+  width:min(1080px,calc(100vw - 32px))!important;
+ }
+}
+
+@media(min-width:768px) and (max-width:1180px){
+ .technician-workspace{
+  width:100%;
+  padding-inline:20px!important;
+ }
+ .technician-primary-nav{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+ }
+ .job-list,.case-list{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+ }
+ .job-card,.case-card{
+  min-height:0;
+ }
+ .page-title{
+  grid-template-columns:minmax(0,1fr) auto;
+ }
+ .page-title .primary,
+ .page-title button{
+  width:auto;
+ }
+ .inline-form,
+ .form-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+ }
+ .upload-row{
+  grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);
+ }
+ .complete-bar{
+  width:calc(100vw - 32px)!important;
+ }
+}
+
+@media(max-width:767px){
+ .technician-topbar{
+  width:100%;
+ }
+ .technician-topbar button{
+  max-width:34vw;
+  overflow:hidden;
+  text-overflow:ellipsis;
+ }
+ .technician-workspace{
+  overflow-x:hidden;
+ }
+ .page-title{
+  margin-bottom:12px;
+ }
+ .technician-primary-nav{
+  overflow:hidden;
+ }
+ .technician-primary-nav button{
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+ }
+ .tabs{
+  display:flex;
+  overflow-x:auto;
+  gap:7px;
+  -webkit-overflow-scrolling:touch;
+ }
+ .job-list,.case-list{
+  width:100%;
+ }
+ .job-card,.case-card{
+  width:100%;
+ }
+ .job-top,.case-card-head{
+  gap:8px;
+ }
+ .type,.state{
+  max-width:48vw;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+ }
+ .job-facts{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ }
+ .contact-card,
+ .device-row,
+ .evidence-item,
+ .repair-record-head,
+ .editor-title{
+  grid-template-columns:1fr;
+ }
+ .contact-card a,
+ .device-actions button,
+ .record-actions button,
+ .editor-actions button,
+ .danger-action{
+  width:100%;
+ }
+ .record-actions,
+ .editor-actions{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:8px;
+ }
+ .upload-row,
+ .inline-form,
+ .form-grid,
+ .nested-form,
+ .device-editor{
+  grid-template-columns:1fr!important;
+ }
+ .sheet{
+  max-height:91dvh;
+  overflow:hidden;
+ }
+ .sheet>form{
+  overflow:auto;
+  padding-bottom:env(safe-area-inset-bottom);
+ }
+ .complete-bar{
+  bottom:0;
+  padding-bottom:calc(12px + env(safe-area-inset-bottom))!important;
+ }
+ .complete-bar b,
+ .complete-bar small{
+  display:block;
+ }
+}
+
+@media(max-width:430px){
+ .technician-workspace{
+  padding-inline:10px!important;
+ }
+ .technician-brand small{
+  display:none;
+ }
+ .technician-topbar button{
+  max-width:31vw;
+ }
+ .technician-primary-nav{
+  grid-template-columns:1fr 1fr;
+ }
+ .page-title h1{
+  font-size:22px;
+ }
+ .job-facts{
+  grid-template-columns:1fr!important;
+ }
+ .job-top,
+ .case-card-head{
+  grid-template-columns:1fr;
+ }
+ .type,.state{
+  max-width:100%;
+  justify-self:start;
+ }
+ .line-bind-card,
+ .nested-form,
+ .device-editor{
+  padding:12px;
+ }
+}
