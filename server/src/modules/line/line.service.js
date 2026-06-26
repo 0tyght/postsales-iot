@@ -93,16 +93,24 @@ const quickMenu={
     {type:'action',action:{type:'message',label:'ติดต่อเจ้าหน้าที่',text:'ติดต่อเจ้าหน้าที่'}},
   ],
 };
+const serviceCareMenu={
+  items:[
+    {type:'action',action:{type:'message',label:'มีปัญหา',text:'มีปัญหา'}},
+    {type:'action',action:{type:'message',label:'ไม่มีปัญหา',text:'ไม่มีปัญหา'}},
+    {type:'action',action:{type:'message',label:'แจ้งปัญหา',text:'แจ้งปัญหา '}},
+    {type:'action',action:{type:'message',label:'ติดต่อเจ้าหน้าที่',text:'ติดต่อเจ้าหน้าที่'}},
+  ],
+};
 
-const textMessage=(text,withMenu=false)=>({
+const textMessage=(text,menu=false)=>({
   type:'text',
   text:String(text||'').slice(0,5000),
-  ...(withMenu?{quickReply:quickMenu}:{}),
+  ...(menu?{quickReply:menu===true?quickMenu:menu}:{}),
 });
 
 exports.replyText=(replyToken,text,withMenu=false)=>send('reply',{replyToken,messages:[textMessage(text,withMenu)]});
 exports.replyMenu=(replyToken,text)=>exports.replyText(replyToken,text,true);
-exports.pushText=(to,text)=>send('push',{to,messages:[textMessage(text,false)]});
+exports.pushText=(to,text,menu=false)=>send('push',{to,messages:[textMessage(text,menu)]});
 
 const help=async customer=>textFrom('help',{
   customer_name:customer?.customer_name?`คุณ ${customer.customer_name}`:'',
@@ -232,7 +240,12 @@ exports.sendServiceReminder=async siteId=>{
   const site=await repo.serviceSite(siteId);
   if(!site)throw Object.assign(new Error('ไม่พบจุดติดตั้ง'),{status:404});
   if(!site.line_user_id)throw Object.assign(new Error('ลูกค้ายังไม่ได้ผูก LINE'),{status:400});
-  const text=await textFrom('service_reminder',{
+  const text=await buildServiceReminderText(site);
+  await exports.pushText(site.line_user_id,text,serviceCareMenu);
+  return {sent:true,site_id:site.site_id,customer_name:site.customer_name};
+};
+
+const buildServiceReminderText=async site=>textFrom('service_reminder',{
     customer_name:site.customer_name,
     site_name:site.site_name,
     days_in_service:site.days_in_service??'-',
@@ -241,6 +254,21 @@ exports.sendServiceReminder=async siteId=>{
     service_end_date:site.service_end_date||'',
     next_service_contact_date:site.next_service_contact_date||'',
   });
-  await exports.pushText(site.line_user_id,text);
-  return {sent:true,site_id:site.site_id,customer_name:site.customer_name};
+
+exports.sendDueServiceReminders=async(limit=20)=>{
+  if(!exports.configured())return {sent:0,skipped:true,reason:'LINE is not configured'};
+  const sites=await repo.dueServiceSites(limit);
+  let sent=0;
+  const errors=[];
+  for(const site of sites){
+    try{
+      const text=await buildServiceReminderText(site);
+      await exports.pushText(site.line_user_id,text,serviceCareMenu);
+      await repo.markServiceReminderSent(site.site_id);
+      sent+=1;
+    }catch(error){
+      errors.push({site_id:site.site_id,message:error.message});
+    }
+  }
+  return {sent,total:sites.length,errors};
 };

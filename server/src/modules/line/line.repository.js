@@ -107,3 +107,19 @@ exports.serviceSite=async siteId=>(await db.query(`SELECT s.*,c.customer_id,c.cu
   CASE WHEN s.service_start_date IS NULL THEN NULL ELSE DATEDIFF(CURDATE(),s.service_start_date) END days_in_service
   FROM customer_sites s JOIN customers c ON c.customer_id=s.customer_id
   WHERE s.site_id=?`,[siteId]))[0][0];
+
+exports.dueServiceSites=async(limit=20)=>(await db.query(`SELECT s.*,c.customer_id,c.customer_name,c.line_user_id,c.phone,
+  CASE WHEN s.service_start_date IS NULL THEN NULL ELSE DATEDIFF(CURDATE(),s.service_start_date) END days_in_service
+  FROM customer_sites s JOIN customers c ON c.customer_id=s.customer_id
+  WHERE s.site_status='active'
+    AND c.line_user_id IS NOT NULL
+    AND s.next_service_contact_date IS NOT NULL
+    AND s.next_service_contact_date<=CURDATE()
+  ORDER BY s.next_service_contact_date ASC
+  LIMIT ?`,[Number(limit)||20]))[0];
+
+exports.markServiceReminderSent=async siteId=>db.query(
+  `UPDATE customer_sites SET last_service_contact_date=CURDATE(),
+   next_service_contact_date=DATE_ADD(CURDATE(),INTERVAL service_interval_days DAY)
+   WHERE site_id=?`,[siteId]
+);
