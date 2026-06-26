@@ -107,10 +107,26 @@ const textMessage=(text,menu=false)=>({
   text:String(text||'').slice(0,5000),
   ...(menu?{quickReply:menu===true?quickMenu:menu}:{}),
 });
+const serviceCareButtons=()=>({
+  type:'template',
+  altText:'กรุณาเลือกสถานะการใช้งาน',
+  template:{
+    type:'buttons',
+    title:'สถานะการใช้งาน',
+    text:'ตอนนี้ระบบใช้งานเป็นอย่างไรบ้างครับ',
+    actions:[
+      {type:'message',label:'มีปัญหา',text:'มีปัญหา'},
+      {type:'message',label:'ไม่มีปัญหา',text:'ไม่มีปัญหา'},
+      {type:'message',label:'แจ้งปัญหา',text:'แจ้งปัญหา '},
+      {type:'message',label:'ติดต่อเจ้าหน้าที่',text:'ติดต่อเจ้าหน้าที่'},
+    ],
+  },
+});
 
 exports.replyText=(replyToken,text,withMenu=false)=>send('reply',{replyToken,messages:[textMessage(text,withMenu)]});
 exports.replyMenu=(replyToken,text,menu=true)=>exports.replyText(replyToken,text,menu);
 exports.pushText=(to,text,menu=false)=>send('push',{to,messages:[textMessage(text,menu)]});
+const pushServiceCare=async(to,text)=>send('push',{to,messages:[textMessage(text,serviceCareMenu),serviceCareButtons()]});
 
 const help=async customer=>textFrom('help',{
   customer_name:customer?.customer_name?`คุณ ${customer.customer_name}`:'',
@@ -241,14 +257,21 @@ exports.sendServiceReminder=async siteId=>{
   if(!site)throw Object.assign(new Error('ไม่พบจุดติดตั้ง'),{status:404});
   if(!site.line_user_id)throw Object.assign(new Error('ลูกค้ายังไม่ได้ผูก LINE'),{status:400});
   const text=await buildServiceReminderText(site);
-  await exports.pushText(site.line_user_id,text,serviceCareMenu);
+  await pushServiceCare(site.line_user_id,text);
   return {sent:true,site_id:site.site_id,customer_name:site.customer_name};
+};
+
+const serviceDaysText=site=>{
+  if(site.days_in_service===null||site.days_in_service===undefined)return 'ระยะหนึ่ง';
+  const days=Number(site.days_in_service);
+  if(!Number.isFinite(days))return 'ระยะหนึ่ง';
+  return `${Math.max(0,days)} วัน`;
 };
 
 const buildServiceReminderText=async site=>textFrom('service_reminder',{
     customer_name:site.customer_name,
     site_name:site.site_name,
-    days_in_service:site.days_in_service??'-',
+    days_in_service:serviceDaysText(site),
     support_phone:SUPPORT_PHONE,
     service_start_date:site.service_start_date||'',
     service_end_date:site.service_end_date||'',
@@ -263,7 +286,7 @@ exports.sendDueServiceReminders=async(limit=20)=>{
   for(const site of sites){
     try{
       const text=await buildServiceReminderText(site);
-      await exports.pushText(site.line_user_id,text,serviceCareMenu);
+      await pushServiceCare(site.line_user_id,text);
       await repo.markServiceReminderSent(site.site_id);
       sent+=1;
     }catch(error){
