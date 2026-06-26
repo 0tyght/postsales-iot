@@ -32,4 +32,5 @@ INSERT INTO line_message_templates (template_key, template_name, template_group,
 ON DUPLICATE KEY UPDATE
   template_name=VALUES(template_name),
   template_group=VALUES(template_group),
+  template_body=IF(template_body LIKE '%??%', VALUES(template_body), template_body),
   variables=VALUES(variables);

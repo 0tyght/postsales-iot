@@ -36,7 +36,11 @@ exports.ensureTemplates=async()=>{
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci`);
     await db.query(`INSERT INTO line_message_templates (template_key,template_name,template_group,template_body,variables)
       VALUES ?
-      ON DUPLICATE KEY UPDATE template_name=VALUES(template_name),template_group=VALUES(template_group),variables=VALUES(variables)`,[defaultTemplates]);
+      ON DUPLICATE KEY UPDATE
+        template_name=VALUES(template_name),
+        template_group=VALUES(template_group),
+        template_body=IF(template_body LIKE '%??%', VALUES(template_body), template_body),
+        variables=VALUES(variables)`,[defaultTemplates]);
   })();
   return templatesReady;
 };
