@@ -109,7 +109,7 @@ const textMessage=(text,menu=false)=>({
 });
 
 exports.replyText=(replyToken,text,withMenu=false)=>send('reply',{replyToken,messages:[textMessage(text,withMenu)]});
-exports.replyMenu=(replyToken,text)=>exports.replyText(replyToken,text,true);
+exports.replyMenu=(replyToken,text,menu=true)=>exports.replyText(replyToken,text,menu);
 exports.pushText=(to,text,menu=false)=>send('push',{to,messages:[textMessage(text,menu)]});
 
 const help=async customer=>textFrom('help',{
@@ -174,10 +174,10 @@ exports.handleEvent=async event=>{
 
   if(/^(ช่วยเหลือ|วิธีใช้|help|สวัสดี|เมนู)$/i.test(text))return exports.replyMenu(event.replyToken,await help(customer));
   if(/^(มีปัญหา|มี|พบปัญหา|มีครับ|มีค่ะ)$/i.test(text)){
-    return exports.replyMenu(event.replyToken,await textFrom('service_has_problem',{support_phone:SUPPORT_PHONE},`ขอบคุณที่แจ้งให้เราทราบครับ\nรบกวนโทรแจ้งรายละเอียดเพิ่มเติมได้ที่ ${SUPPORT_PHONE} หรือพิมพ์ “แจ้งปัญหา” ตามด้วยอาการในแชตนี้ได้เลยครับ`));
+    return exports.replyMenu(event.replyToken,await textFrom('service_has_problem',{support_phone:SUPPORT_PHONE},`ขอบคุณที่แจ้งให้เราทราบครับ\nรบกวนโทรแจ้งรายละเอียดเพิ่มเติมได้ที่ ${SUPPORT_PHONE} หรือพิมพ์ “แจ้งปัญหา” ตามด้วยอาการในแชตนี้ได้เลยครับ`),quickMenu);
   }
   if(/^(ไม่มีปัญหา|ไม่มี|ปกติ|ใช้งานได้ปกติ|ไม่มีครับ|ไม่มีค่ะ)$/i.test(text)){
-    return exports.replyMenu(event.replyToken,await textFrom('service_no_problem',{},'ขอบคุณมากครับที่อัปเดตให้เรา ดีใจที่ระบบยังใช้งานได้ปกติครับ'));
+    return exports.replyMenu(event.replyToken,await textFrom('service_no_problem',{},'ขอบคุณมากครับที่อัปเดตให้เรา ดีใจที่ระบบยังใช้งานได้ปกติครับ'),quickMenu);
   }
   if(text==='ติดต่อเจ้าหน้าที่')return exports.replyMenu(event.replyToken,await textFrom('contact_staff',{support_phone:SUPPORT_PHONE},`หากต้องการให้ทีมงานช่วยดูแลเพิ่มเติม สามารถโทรแจ้งได้ที่ ${SUPPORT_PHONE}`));
 
@@ -226,7 +226,7 @@ exports.push=async({customer_id,line_user_id,text})=>{
   const target=line_user_id||await repo.lineIdByCustomerId(customer_id);
   if(!target)throw Object.assign(new Error('ลูกค้ายังไม่ได้ผูก LINE'),{status:400});
   if(!text?.trim())throw Object.assign(new Error('กรุณาระบุข้อความ'),{status:400});
-  await exports.pushText(target,text.trim());
+  await exports.pushText(target,text.trim(),quickMenu);
   return {sent:true,to:target};
 };
 
