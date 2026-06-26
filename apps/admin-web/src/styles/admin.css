@@ -876,3 +876,63 @@ button,.btn,.btn-icon,input,select,textarea{touch-action:manipulation}
   width:100%;
  }
 }
+
+/* Service reminder table: keep desktop/tablet rows compact and avoid forced wrapping */
+.service-page .table-wrap{
+ overflow:auto!important;
+}
+.service-page .table-wrap table{
+ min-width:980px;
+ table-layout:fixed;
+}
+.service-page .table-wrap th,
+.service-page .table-wrap td{
+ padding:12px 14px;
+ font-size:13px;
+ vertical-align:middle;
+}
+.service-page .table-wrap th:nth-child(1),
+.service-page .table-wrap td:nth-child(1),
+.service-page .table-wrap th:nth-child(2),
+.service-page .table-wrap td:nth-child(2){
+ width:150px;
+}
+.service-page .table-wrap th:nth-child(3),
+.service-page .table-wrap td:nth-child(3){
+ width:108px;
+}
+.service-page .table-wrap th:nth-child(4),
+.service-page .table-wrap td:nth-child(4),
+.service-page .table-wrap th:nth-child(5),
+.service-page .table-wrap td:nth-child(5),
+.service-page .table-wrap th:nth-child(7),
+.service-page .table-wrap td:nth-child(7){
+ width:100px;
+}
+.service-page .table-wrap th:nth-child(6),
+.service-page .table-wrap td:nth-child(6),
+.service-page .table-wrap th:nth-child(8),
+.service-page .table-wrap td:nth-child(8){
+ width:72px;
+ text-align:center;
+}
+.service-page .table-wrap th:nth-child(9),
+.service-page .table-wrap td:nth-child(9){
+ width:188px;
+}
+@media(min-width:641px){
+ .service-page .table-wrap td:not(.row-actions){
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+ }
+ .service-page .row-actions{
+  gap:6px;
+  flex-wrap:nowrap;
+ }
+ .service-page .row-actions .btn-icon{
+  padding:7px 10px;
+  font-size:13px;
+  white-space:nowrap;
+ }
+}
