@@ -97,6 +97,10 @@ const serviceCareMenu={
   items:[
     {type:'action',action:{type:'message',label:'มีปัญหา',text:'มีปัญหา'}},
     {type:'action',action:{type:'message',label:'ไม่มีปัญหา',text:'ไม่มีปัญหา'}},
+  ],
+};
+const problemFollowupMenu={
+  items:[
     {type:'action',action:{type:'message',label:'แจ้งปัญหา',text:'แจ้งปัญหา '}},
     {type:'action',action:{type:'message',label:'ติดต่อเจ้าหน้าที่',text:'ติดต่อเจ้าหน้าที่'}},
   ],
@@ -117,8 +121,6 @@ const serviceCareButtons=()=>({
     actions:[
       {type:'message',label:'มีปัญหา',text:'มีปัญหา'},
       {type:'message',label:'ไม่มีปัญหา',text:'ไม่มีปัญหา'},
-      {type:'message',label:'แจ้งปัญหา',text:'แจ้งปัญหา '},
-      {type:'message',label:'ติดต่อเจ้าหน้าที่',text:'ติดต่อเจ้าหน้าที่'},
     ],
   },
 });
@@ -190,7 +192,7 @@ exports.handleEvent=async event=>{
 
   if(/^(ช่วยเหลือ|วิธีใช้|help|สวัสดี|เมนู)$/i.test(text))return exports.replyMenu(event.replyToken,await help(customer));
   if(/^(มีปัญหา|มี|พบปัญหา|มีครับ|มีค่ะ)$/i.test(text)){
-    return exports.replyMenu(event.replyToken,await textFrom('service_has_problem',{support_phone:SUPPORT_PHONE},`ขอบคุณที่แจ้งให้เราทราบครับ\nรบกวนโทรแจ้งรายละเอียดเพิ่มเติมได้ที่ ${SUPPORT_PHONE} หรือพิมพ์ “แจ้งปัญหา” ตามด้วยอาการในแชตนี้ได้เลยครับ`),quickMenu);
+    return exports.replyMenu(event.replyToken,await textFrom('service_has_problem',{support_phone:SUPPORT_PHONE},`ขอบคุณที่แจ้งให้เราทราบครับ\nรบกวนโทรแจ้งรายละเอียดเพิ่มเติมได้ที่ ${SUPPORT_PHONE} หรือพิมพ์ “แจ้งปัญหา” ตามด้วยอาการในแชตนี้ได้เลยครับ`),problemFollowupMenu);
   }
   if(/^(ไม่มีปัญหา|ไม่มี|ปกติ|ใช้งานได้ปกติ|ไม่มีครับ|ไม่มีค่ะ)$/i.test(text)){
     return exports.replyMenu(event.replyToken,await textFrom('service_no_problem',{},'ขอบคุณมากครับที่อัปเดตให้เรา ดีใจที่ระบบยังใช้งานได้ปกติครับ'),quickMenu);
