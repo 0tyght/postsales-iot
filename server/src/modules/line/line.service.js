@@ -201,7 +201,7 @@ exports.handleEvent=async event=>{
 
   if(text==='สถานะ'){
     const rows=await repo.customerStatus(customer.customer_id);
-    if(!rows.length)return exports.replyMenu(event.replyToken,await textFrom('status_empty',{},'ยังไม่มีเคสปัญหาในระบบ'));
+    if(!rows.length)return exports.replyMenu(event.replyToken,await textFrom('status_empty',{},'ยังไม่มีเคสบริการในระบบ'));
     const lines=await Promise.all(rows.map(x=>textFrom('status_line',{
       case_id:x.problem_id,
       status:statusLabel[x.problem_status]||x.problem_status,

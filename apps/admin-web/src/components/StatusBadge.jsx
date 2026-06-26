@@ -1,2 +1,2 @@
-const labels={active:'ใช้งานอยู่',inactive:'ปิดใช้งาน',open:'รอรับเคส',assigned:'รับเคสแล้ว',resolved:'ปิดเคสแล้ว',created:'รอเริ่มงาน',in_progress:'กำลังทำงาน',completed:'ปิดงานแล้ว',cancelled:'ยกเลิก',installation:'งานติดตั้ง',repair:'งานซ่อม',admin:'ผู้ดูแลระบบ',technician:'ช่าง'};
+const labels={active:'ใช้งานอยู่',inactive:'ปิดใช้งาน',open:'รอรับเคส',assigned:'รับเคสแล้ว',resolved:'ปิดเคสแล้ว',created:'รอเริ่มงาน',in_progress:'กำลังทำงาน',completed:'ปิดงานแล้ว',cancelled:'ยกเลิก',installation:'งานติดตั้ง',repair:'งานบริการ',admin:'ผู้ดูแลระบบ',technician:'ช่าง'};
 export default function StatusBadge({value}){return <span className={`badge badge-${value}`}>{labels[value]||value||'-'}</span>}

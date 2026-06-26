@@ -636,6 +636,27 @@ button,input,select,textarea{touch-action:manipulation}
  line-height:1.5;
  font-weight:750;
 }
+.flow-note{
+ margin:0 0 14px!important;
+ padding:12px 14px;
+ border:1px solid #cfe8df;
+ border-radius:16px;
+ background:#f3fffb;
+ color:#355f54!important;
+ line-height:1.55;
+}
+.floating-error{
+ position:fixed;
+ left:50%;
+ top:16px;
+ z-index:160;
+ width:min(520px,calc(100vw - 24px));
+ transform:translateX(-50%);
+ box-shadow:0 18px 48px rgba(17,43,58,.18);
+}
+.service-case-sheet{
+ width:min(640px,100%)!important;
+}
 @media(min-width:768px){
  .technician-primary-nav{
   grid-template-columns:repeat(4,minmax(0,1fr));

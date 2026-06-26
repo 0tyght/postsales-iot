@@ -9,7 +9,7 @@
   "theme_color": "#12384a",
   "orientation": "portrait-primary",
   "categories": ["business", "productivity"],
-  "description": "แอปจัดการงานติดตั้งและซ่อมสำหรับช่าง",
+  "description": "แอปจัดการงานติดตั้งและบริการสำหรับช่าง",
   "icons": [
     {"src":"/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
     {"src":"/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}

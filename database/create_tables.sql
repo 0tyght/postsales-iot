@@ -174,7 +174,7 @@ CREATE TABLE problem_devices (
   problem_device_id INT AUTO_INCREMENT PRIMARY KEY,
   job_id INT NOT NULL,
   device_id INT NOT NULL,
-  repair_method ENUM('repair','replace') NOT NULL,
+  repair_method ENUM('repair','replace','add','remove') NOT NULL,
   replacement_device_id INT,
   device_problem_detail TEXT,
   device_action_detail TEXT,
@@ -188,6 +188,6 @@ CREATE TABLE problem_devices (
     REFERENCES device_units(device_id) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT chk_replacement_device CHECK (
     (repair_method = 'replace' AND replacement_device_id IS NOT NULL)
-    OR repair_method = 'repair'
+    OR repair_method IN ('repair','add','remove')
   )
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

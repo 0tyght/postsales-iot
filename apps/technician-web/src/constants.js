@@ -4,7 +4,7 @@ export const labels={
  completed:'ปิดงานแล้ว',
  cancelled:'ยกเลิก',
  installation:'งานติดตั้ง',
- repair:'งานซ่อม',
+ repair:'งานบริการ',
  open:'รอรับเคส',
  assigned:'รับเคสแล้ว',
  resolved:'ปิดเคสแล้ว',

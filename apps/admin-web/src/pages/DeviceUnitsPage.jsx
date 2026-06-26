@@ -24,7 +24,7 @@ export default function DeviceUnitsPage(){
   idKey="device_id"
   allowDelete
   canDelete={canDeleteDevice}
-  deleteBlockedMessage="ลบอุปกรณ์ไม่ได้ เพราะติดตั้งแล้วหรือมีประวัติงาน/เคสซ่อม ให้แก้สถานะเป็นเลิกใช้งานแทน"
+  deleteBlockedMessage="ลบอุปกรณ์ไม่ได้ เพราะติดตั้งแล้วหรือมีประวัติงาน/เคสบริการ ให้แก้สถานะเป็นเลิกใช้งานแทน"
   lookups={l}
   initialValues={{device_status:'active',warranty_years:1}}
   filters={[

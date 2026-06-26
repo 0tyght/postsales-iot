@@ -26,7 +26,7 @@ export default function LoginPage({onLogin}){
   <div className="login-panel">
    <div className="login-mark app-logo-mark" aria-label="THIC logo"></div>
    <h1>Post-Sales IoT</h1>
-   <p>เข้าสู่ระบบเพื่อดูแลลูกค้า งานซ่อม งานติดตั้ง และสถานะหน้างานในที่เดียว</p>
+   <p>เข้าสู่ระบบเพื่อดูแลลูกค้า งานบริการ งานติดตั้ง และสถานะหน้างานในที่เดียว</p>
 
    {error&&<div className="alert error">{error}</div>}
 

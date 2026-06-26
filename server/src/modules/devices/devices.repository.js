@@ -46,7 +46,7 @@ exports.removeUnit=async id=>{
   if(!device)throw Object.assign(new Error('ไม่พบอุปกรณ์'),{status:404});
   if(device.site_id)throw Object.assign(new Error('ลบอุปกรณ์ไม่ได้ เพราะติดตั้งกับจุดติดตั้งแล้ว ให้แก้สถานะเป็นเลิกใช้งานแทน'),{status:400});
   if(device.installation_job_id)throw Object.assign(new Error('ลบอุปกรณ์ไม่ได้ เพราะผูกกับงานติดตั้งแล้ว'),{status:400});
-  if(Number(device.problem_device_count)>0)throw Object.assign(new Error('ลบอุปกรณ์ไม่ได้ เพราะมีประวัติเคสซ่อมหรือการเปลี่ยนอุปกรณ์'),{status:400});
+  if(Number(device.problem_device_count)>0)throw Object.assign(new Error('ลบอุปกรณ์ไม่ได้ เพราะมีประวัติเคสบริการหรือการเปลี่ยนอุปกรณ์'),{status:400});
   await db.query('DELETE FROM device_units WHERE device_id=?',[id]);
 };
 exports.warrantyAlerts=async()=> (await db.query(
