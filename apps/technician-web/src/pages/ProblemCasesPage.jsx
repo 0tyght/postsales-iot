@@ -9,6 +9,7 @@ const serviceTypes=[
  {value:'replace_device',label:'เปลี่ยนอุปกรณ์',prefix:'เปลี่ยนอุปกรณ์'},
 ];
 const nowLocal=()=>{const date=new Date();return new Date(date.getTime()-date.getTimezoneOffset()*60000).toISOString().slice(0,16)};
+const fmtDateTime=value=>value?new Date(String(value).replace(' ','T')).toLocaleString('th-TH',{dateStyle:'medium',timeStyle:'short'}):'-';
 
 function CreateServiceCase({sites,onClose,onCreated}){
  const[form,setForm]=useState({site_id:'',service_type:'add_device',detail:'',reported_at:nowLocal()});
@@ -74,7 +75,12 @@ export default function ProblemCasesPage({problems,sites,onClaim,onCreated}){
   <div className="case-list">{visible.map(item=><article className="case-card" key={item.problem_id}>
    <div className="case-card-head"><div><span>เคส #{item.problem_id} · {caseType(item)}</span><h2>{item.customer_name}</h2></div><JobStatusButton value={item.problem_status}/></div>
    <p className="case-site">📍 {item.site_name}</p><p>{item.symptom_detail}</p>
-   <div className="case-meta"><span>รับแจ้ง {item.reported_at?new Date(String(item.reported_at).replace(' ','T')).toLocaleString('th-TH'):'-'}</span>{item.technician_name&&<span>ผู้รับผิดชอบ: {item.technician_name}</span>}</div>
+   <div className="case-meta">
+    {item.reported_device_serial&&<span>อุปกรณ์: {item.reported_device_brand||''} {item.reported_device_model||''} · {item.reported_device_serial}</span>}
+    {item.issue_type&&<span>ประเภท: {item.issue_type}</span>}
+    <span>นัดหมาย: {item.preferred_appointment_at?fmtDateTime(item.preferred_appointment_at):(item.preferred_appointment_note||'-')}</span>
+    <span>รับแจ้ง {fmtDateTime(item.reported_at)}</span>{item.technician_name&&<span>ผู้รับผิดชอบ: {item.technician_name}</span>}
+   </div>
    {item.problem_status==='open'?<button className="primary full" disabled={claiming===item.problem_id} onClick={()=>claim(item)}>{claiming===item.problem_id?'กำลังสร้างงาน...':'รับเคสเป็นงานของฉัน'}</button>:item.job_id&&<div className="case-linked">สร้างเป็นงานบริการแล้ว · งาน #{item.job_id}</div>}
   </article>)}{!visible.length&&<div className="empty">ไม่มีเคสในรายการนี้</div>}</div>
   {creating&&<CreateServiceCase sites={sites} onClose={()=>setCreating(false)} onCreated={async()=>{setCreating(false);await onCreated?.()}}/>}

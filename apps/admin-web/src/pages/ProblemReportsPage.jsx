@@ -7,7 +7,7 @@ const sources={line_chat:'LINE Chat',customer_call:'โทรศัพท์',se
 const nowLocal=()=>{const date=new Date();return new Date(date.getTime()-date.getTimezoneOffset()*60000).toISOString().slice(0,16)};
 
 export default function ProblemReportsPage(){
- const lookups=useLookups({sites:'/customer-sites'});
+ const lookups=useLookups({sites:'/customer-sites',devices:'/devices/units'});
  const openJob=row=>{sessionStorage.setItem('admin_open_job_id',String(row.job_id));location.hash='/jobs'};
  return <ResourcePage
   title="เคสบริการ"
@@ -26,7 +26,10 @@ export default function ProblemReportsPage(){
    {key:'problem_id',label:'เลขเคส',render:row=>`#${row.problem_id}`},
    {key:'customer_name',label:'ลูกค้า'},
    {key:'site_name',label:'จุดติดตั้ง'},
+   {key:'reported_device_serial',label:'อุปกรณ์',render:row=>row.reported_device_serial?`${row.reported_device_brand||''} ${row.reported_device_model||''} · ${row.reported_device_serial}`:'ไม่ระบุ'},
+   {key:'issue_type',label:'ประเภท',render:row=>row.issue_type||'-'},
    {key:'symptom_detail',label:'รายละเอียดเคส'},
+   {key:'preferred_appointment_at',label:'นัดหมาย',render:row=>row.preferred_appointment_at?fmtDateTime(row.preferred_appointment_at):(row.preferred_appointment_note||'-')},
    {key:'source_type',label:'แจ้งทางไหน',render:row=>sources[row.source_type]||row.source_type},
    {key:'problem_status',label:'สถานะเคส',render:row=><StatusBadge value={row.problem_status}/>},
    {key:'technician_name',label:'ผู้รับผิดชอบ',render:row=>row.technician_name||'ยังไม่มอบหมาย'},
@@ -34,7 +37,11 @@ export default function ProblemReportsPage(){
   ]}
   fields={[
    {name:'site_id',label:'ลูกค้า / จุดติดตั้ง',type:'select',required:true,options:data=>data.sites?.filter(item=>item.site_status==='active').map(item=>({value:item.site_id,label:`${item.customer_name} · ${item.site_name}`}))||[]},
+   {name:'reported_device_id',label:'อุปกรณ์ที่แจ้ง',type:'select',options:data=>data.devices?.filter(item=>item.site_id).map(item=>({value:item.device_id,label:`${item.customer_name||''} · ${item.site_name||''} · ${item.brand||''} ${item.model_name} · ${item.serial_number}`}))||[]},
+   {name:'issue_type',label:'ประเภทปัญหา',type:'select',options:[{value:'ใช้งานไม่ได้',label:'ใช้งานไม่ได้'},{value:'สัญญาณหาย',label:'สัญญาณหาย'},{value:'ภาพ/เสียงผิดปกติ',label:'ภาพ/เสียงผิดปกติ'},{value:'ไฟไม่เข้า',label:'ไฟไม่เข้า'},{value:'แจ้งเตือนผิดปกติ',label:'แจ้งเตือนผิดปกติ'},{value:'อื่นๆ',label:'อื่นๆ'}]},
    {name:'symptom_detail',label:'รายละเอียดเคสบริการ',type:'textarea',required:true,fullWidth:true,placeholder:'ระบุว่าต้องซ่อม เพิ่ม ถอด หรือเปลี่ยนอุปกรณ์ พร้อมรายละเอียดที่ช่างควรรู้'},
+   {name:'preferred_appointment_at',label:'วันเวลานัดหมายที่ลูกค้าสะดวก',type:'datetime-local'},
+   {name:'preferred_appointment_note',label:'หมายเหตุนัดหมาย',placeholder:'เช่น ยังไม่สะดวกนัด / โทรนัดอีกครั้ง'},
    {name:'reported_at',label:'วันที่และเวลาที่รับแจ้ง',type:'datetime-local',required:true},
    {name:'source_type',label:'แจ้งทางไหน',type:'select',required:true,options:Object.entries(sources).map(([value,label])=>({value,label}))},
    {name:'problem_status',label:'สถานะเคส',type:'select',hideOnCreate:true,required:true,options:[{value:'open',label:'รอรับเคส'},{value:'resolved',label:'ปิดเคสโดยไม่ต้องลงพื้นที่'},{value:'cancelled',label:'ยกเลิกเคส'}]},

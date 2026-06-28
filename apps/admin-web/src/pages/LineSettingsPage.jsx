@@ -29,6 +29,7 @@ export default function LineSettingsPage(){
     </div>
     <div className="line-admin-qr"><img src={asset('line-add-friend-qr.jpg')} alt="QR code เพิ่มเพื่อน LINE Official Account"/><span>QR เพิ่มเพื่อน LINE Official Account ใช้ QR เดียวกันทุกคน แล้วแยกตัวลูกค้าด้วยรหัส TYTC</span></div>
     <div className="workflow-note"><b>ขั้นตอนใช้งานจริง</b><ol><li>ช่างหรือแอดมินเพิ่มลูกค้า</li><li>ระบบสร้างรหัส เช่น TYTC0005</li><li>ลูกค้าเพิ่มเพื่อน LINE OA และส่งรหัสในแชต</li><li>ระบบผูก LINE User ID เข้ากับลูกค้าอัตโนมัติ</li></ol></div>
+    <div className="workflow-note"><b>LINE ทีมช่าง</b><ol><li>ตั้งค่า Channel Access Token ของ OA ทีมช่างใน <code>LINE_TECH_CHANNEL_ACCESS_TOKEN</code></li><li>ตั้งค่า Group/User ID ปลายทางใน <code>LINE_TECH_TARGET_ID</code></li><li>เมื่อมีเคสบริการใหม่ ระบบจะ push แจ้งทีมช่างทันที</li></ol><p className={status?.technician_team?.configured?'line-ok':'line-bad'}>{status?.technician_team?.configured?'พร้อมแจ้งเตือนทีมช่าง':'ยังไม่ได้ตั้งค่าแจ้งเตือนทีมช่าง'}</p></div>
    </div>
    <div className="panel">
     <h2>ส่งข้อความหาลูกค้า</h2>

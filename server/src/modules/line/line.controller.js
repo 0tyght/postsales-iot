@@ -16,6 +16,11 @@ exports.status=async(req,res)=>success(res,{
   webhook_health:await service.webhookHealth(),
   channel_secret:Boolean(process.env.LINE_CHANNEL_SECRET),
   access_token:Boolean(process.env.LINE_CHANNEL_ACCESS_TOKEN),
+  technician_team:{
+    configured:service.teamConfigured(),
+    access_token:Boolean(process.env.LINE_TECH_CHANNEL_ACCESS_TOKEN||process.env.LINE_TEAM_CHANNEL_ACCESS_TOKEN),
+    target_id:Boolean(process.env.LINE_TECH_TARGET_ID||process.env.LINE_TEAM_TARGET_ID||process.env.LINE_TECH_GROUP_ID||process.env.LINE_TEAM_GROUP_ID),
+  },
 });
 
 exports.bindInfo=async(req,res)=>success(res,await service.bindInfo(req.params.customerId));

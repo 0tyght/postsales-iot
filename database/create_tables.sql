@@ -3,6 +3,7 @@ USE postsales_iot;
 SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS problem_devices;
 DROP TABLE IF EXISTS job_evidence;
+DROP TABLE IF EXISTS line_report_sessions;
 DROP TABLE IF EXISTS problem_reports;
 DROP TABLE IF EXISTS device_units;
 DROP TABLE IF EXISTS repair_jobs;
@@ -130,7 +131,11 @@ CREATE TABLE problem_reports (
   problem_id INT AUTO_INCREMENT PRIMARY KEY,
   site_id INT NOT NULL,
   job_id INT UNIQUE,
+  reported_device_id INT,
+  issue_type VARCHAR(80),
   symptom_detail TEXT NOT NULL,
+  preferred_appointment_at DATETIME,
+  preferred_appointment_note VARCHAR(255),
   problem_status ENUM('open','assigned','resolved','cancelled') NOT NULL DEFAULT 'open',
   reported_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   recorded_by INT,
@@ -141,8 +146,21 @@ CREATE TABLE problem_reports (
     REFERENCES customer_sites(site_id) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT fk_problem_reports_job FOREIGN KEY (job_id)
     REFERENCES jobs(job_id) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT fk_problem_reports_device FOREIGN KEY (reported_device_id)
+    REFERENCES device_units(device_id) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT fk_problem_reports_recorded_by FOREIGN KEY (recorded_by)
     REFERENCES users(user_id) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE line_report_sessions (
+  line_user_id VARCHAR(120) PRIMARY KEY,
+  customer_id INT NOT NULL,
+  step VARCHAR(40) NOT NULL,
+  data_json TEXT,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  expires_at DATETIME,
+  CONSTRAINT fk_line_report_sessions_customer FOREIGN KEY (customer_id)
+    REFERENCES customers(customer_id) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE line_message_templates (

@@ -127,6 +127,9 @@ tbody tr:hover{background:#f8fcff}
 .workflow-note b{color:#143047}
 .workflow-note ol{margin:8px 0 0;padding-left:20px}
 .workflow-note li{margin:5px 0;line-height:1.5}
+.line-ok,.line-bad{margin:10px 0 0;font-weight:800}
+.line-ok{color:#0b8f70}
+.line-bad{color:#c2410c}
 .customer-cell,.contact-cell{display:grid;gap:4px}
 .customer-cell strong{font-size:15px;color:#102a43}
 .customer-cell small,.contact-cell small{color:#718096;font-size:12px}
