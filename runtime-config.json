@@ -1,6 +1,6 @@
 {
-    "apiBaseUrl":  "https://efficiently-rewards-wichita-permitted.trycloudflare.com/api",
+    "apiBaseUrl":  "https://invalid-demo-del-dynamic.trycloudflare.com/api",
     "portalUrl":  "https://0tyght.github.io/postsales-iot/",
-    "lineWebhookUrl":  "https://efficiently-rewards-wichita-permitted.trycloudflare.com/linebot/webhook.php",
-    "updatedAt":  "2026-06-28T09:59:01.4925694Z"
+    "lineWebhookUrl":  "https://invalid-demo-del-dynamic.trycloudflare.com/linebot/webhook.php",
+    "updatedAt":  "2026-06-30T05:18:52.4890529Z"
 }
