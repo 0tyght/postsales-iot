@@ -14,3 +14,4 @@ release/
 installer/config.json
 installer/build/
 *.license
+~$*.docx

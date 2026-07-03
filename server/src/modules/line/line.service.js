@@ -4,8 +4,31 @@ const repo=require('./line.repository');
 const LINE_API='https://api.line.me/v2/bot/message';
 const COMPANY_NAME=process.env.COMPANY_NAME||'Post-Sales IoT';
 const SUPPORT_PHONE=process.env.SUPPORT_PHONE||process.env.COMPANY_PHONE||'เบอร์โทรบริษัท';
-const TEAM_LINE_TOKEN=process.env.LINE_TECH_CHANNEL_ACCESS_TOKEN||process.env.LINE_TEAM_CHANNEL_ACCESS_TOKEN||'';
-const TEAM_LINE_TARGET=process.env.LINE_TECH_TARGET_ID||process.env.LINE_TEAM_TARGET_ID||process.env.LINE_TECH_GROUP_ID||process.env.LINE_TEAM_GROUP_ID||'';
+const cachedSettings={value:null,loadedAt:0};
+const getSettings=async()=>{
+  if(cachedSettings.value&&Date.now()-cachedSettings.loadedAt<10000)return cachedSettings.value;
+  cachedSettings.value=await repo.systemSettingsMap();
+  cachedSettings.loadedAt=Date.now();
+  return cachedSettings.value;
+};
+exports.clearConfigCache=()=>{cachedSettings.value=null;cachedSettings.loadedAt=0;};
+const firstValue=(...values)=>values.find(value=>String(value||'').trim())||'';
+const customerLineConfig=async()=>{
+  const settings=await getSettings();
+  return {
+    channelSecret:firstValue(settings.line_customer_channel_secret,process.env.LINE_CHANNEL_SECRET),
+    channelAccessToken:firstValue(settings.line_customer_channel_access_token,process.env.LINE_CHANNEL_ACCESS_TOKEN),
+    basicId:firstValue(settings.line_customer_basic_id,settings.line_customer_official_account_id,process.env.LINE_OFFICIAL_ACCOUNT_ID,process.env.LINE_OA_ID,process.env.LINE_BASIC_ID,process.env.LINE_BOT_BASIC_ID,process.env.LINE_BOT_ID),
+    webhookUrl:firstValue(settings.line_customer_webhook_url,process.env.LINE_WEBHOOK_URL),
+  };
+};
+const teamLineConfig=async()=>{
+  const settings=await getSettings();
+  return {
+    channelAccessToken:firstValue(settings.line_team_channel_access_token,process.env.LINE_TECH_CHANNEL_ACCESS_TOKEN,process.env.LINE_TEAM_CHANNEL_ACCESS_TOKEN),
+    targetId:firstValue(settings.line_team_target_id,process.env.LINE_TECH_TARGET_ID,process.env.LINE_TEAM_TARGET_ID,process.env.LINE_TECH_GROUP_ID,process.env.LINE_TEAM_GROUP_ID),
+  };
+};
 
 const makeCode=customerId=>`TYTC${String(customerId).padStart(4,'0').slice(-4)}`;
 const verifyCode=code=>{
@@ -13,14 +36,14 @@ const verifyCode=code=>{
   return match?Number(match[1]):null;
 };
 
-const officialAccountId=()=>process.env.LINE_OFFICIAL_ACCOUNT_ID||process.env.LINE_OA_ID||process.env.LINE_BASIC_ID||process.env.LINE_BOT_BASIC_ID||process.env.LINE_BOT_ID||'';
-const oaMessageUrl=text=>{
-  const accountId=officialAccountId();
+const officialAccountId=async()=>(await customerLineConfig()).basicId;
+const oaMessageUrl=async text=>{
+  const accountId=await officialAccountId();
   return accountId?`https://line.me/R/oaMessage/${encodeURIComponent(accountId)}/?${encodeURIComponent(text)}`:'';
 };
-const webhookUrl=()=>process.env.LINE_WEBHOOK_URL||'';
+const webhookUrl=async()=>(await customerLineConfig()).webhookUrl;
 
-exports.configured=()=>Boolean(process.env.LINE_CHANNEL_SECRET&&process.env.LINE_CHANNEL_ACCESS_TOKEN);
+exports.configured=async()=>{const cfg=await customerLineConfig();return Boolean(cfg.channelSecret&&cfg.channelAccessToken);};
 exports.webhookUrl=webhookUrl;
 
 const render=(body,vars={})=>String(body||'').replace(/\{\{\s*([a-zA-Z0-9_]+)\s*\}\}/g,(_,key)=>vars[key]??'');
@@ -28,7 +51,7 @@ const templates=async()=>repo.templatesMap();
 const textFrom=async(key,vars={},fallback='')=>render((await templates())[key]||fallback,vars);
 
 exports.webhookHealth=async()=>{
-  const url=webhookUrl();
+  const url=await webhookUrl();
   if(!url)return {
     url:'',
     reachable:false,
@@ -69,19 +92,21 @@ exports.webhookHealth=async()=>{
   }
 };
 
-exports.verifySignature=(rawBody,signature)=>{
-  if(!process.env.LINE_CHANNEL_SECRET||!rawBody||!signature)return false;
-  const expected=crypto.createHmac('sha256',process.env.LINE_CHANNEL_SECRET).update(rawBody).digest('base64');
+exports.verifySignature=async(rawBody,signature)=>{
+  const cfg=await customerLineConfig();
+  if(!cfg.channelSecret||!rawBody||!signature)return false;
+  const expected=crypto.createHmac('sha256',cfg.channelSecret).update(rawBody).digest('base64');
   const a=Buffer.from(expected);
   const b=Buffer.from(signature);
   return a.length===b.length&&crypto.timingSafeEqual(a,b);
 };
 
 const send=async(path,body)=>{
-  if(!process.env.LINE_CHANNEL_ACCESS_TOKEN)throw Object.assign(new Error('ยังไม่ได้ตั้งค่า LINE_CHANNEL_ACCESS_TOKEN'),{status:503});
+  const cfg=await customerLineConfig();
+  if(!cfg.channelAccessToken)throw Object.assign(new Error('ยังไม่ได้ตั้งค่า LINE ลูกค้า Channel Access Token'),{status:503});
   const response=await fetch(`${LINE_API}/${path}`,{
     method:'POST',
-    headers:{Authorization:`Bearer ${process.env.LINE_CHANNEL_ACCESS_TOKEN}`,'Content-Type':'application/json'},
+    headers:{Authorization:`Bearer ${cfg.channelAccessToken}`,'Content-Type':'application/json'},
     body:JSON.stringify(body),
   });
   if(!response.ok)throw Object.assign(new Error(`LINE API ตอบกลับ ${response.status}: ${await response.text()}`),{status:502});
@@ -159,11 +184,37 @@ exports.replyText=(replyToken,text,withMenu=false)=>send('reply',{replyToken,mes
 exports.replyMenu=(replyToken,text,menu=true)=>exports.replyText(replyToken,text,menu);
 exports.pushText=(to,text,menu=false)=>send('push',{to,messages:[textMessage(text,menu)]});
 const pushServiceCare=async(to,text)=>send('push',{to,messages:[textMessage(text,serviceCareMenu),serviceCareButtons()]});
-exports.teamConfigured=()=>Boolean(TEAM_LINE_TOKEN&&TEAM_LINE_TARGET);
+exports.teamConfigured=async()=>{const cfg=await teamLineConfig();return Boolean(cfg.channelAccessToken&&cfg.targetId);};
 exports.pushTeamText=async text=>{
-  if(!exports.teamConfigured())return {sent:false,skipped:true,reason:'ยังไม่ได้ตั้งค่า LINE ทีมช่าง'};
-  await sendWithToken(TEAM_LINE_TOKEN,'push',{to:TEAM_LINE_TARGET,messages:[textMessage(text)]});
-  return {sent:true,to:TEAM_LINE_TARGET};
+  const cfg=await teamLineConfig();
+  if(!cfg.channelAccessToken||!cfg.targetId)return {sent:false,skipped:true,reason:'ยังไม่ได้ตั้งค่า LINE ทีมช่าง'};
+  await sendWithToken(cfg.channelAccessToken,'push',{to:cfg.targetId,messages:[textMessage(text)]});
+  return {sent:true,to:cfg.targetId};
+};
+
+exports.configSummary=async()=>{
+  const customer=await customerLineConfig();
+  const team=await teamLineConfig();
+  return {
+    customer_oa:{
+      configured:Boolean(customer.channelSecret&&customer.channelAccessToken),
+      channel_secret:Boolean(customer.channelSecret),
+      access_token:Boolean(customer.channelAccessToken),
+      basic_id:Boolean(customer.basicId),
+      webhook_url:customer.webhookUrl,
+      webhook_path:'/linebot/webhook.php',
+    },
+    technician_team:{
+      configured:Boolean(team.channelAccessToken&&team.targetId),
+      access_token:Boolean(team.channelAccessToken),
+      target_id:Boolean(team.targetId),
+    },
+  };
+};
+
+exports.testTeam=async(payload={})=>{
+  const text=String(payload.text||'ทดสอบแจ้งเตือนทีมช่างจาก Post-Sales IoT\nหากเห็นข้อความนี้ แปลว่าการเชื่อมต่อ LINE ทีมช่างพร้อมใช้งาน').trim();
+  return exports.pushTeamText(text);
 };
 
 const help=async customer=>textFrom('help',{
@@ -200,7 +251,7 @@ const problemTextFromData=(data,detail)=>{
 };
 
 const notifyTeamNewProblem=async problemId=>{
-  if(!exports.teamConfigured())return {sent:false,skipped:true};
+  if(!await exports.teamConfigured())return {sent:false,skipped:true};
   const item=await repo.problemNotificationContext(problemId);
   if(!item)return {sent:false,skipped:true,reason:'problem_not_found'};
   const device=item.reported_device_id?`${item.reported_device_brand||''} ${item.reported_device_model||''} · ${item.reported_device_serial||''}`.trim():'ไม่ระบุ/ไม่แน่ใจ';
@@ -332,9 +383,9 @@ exports.bindInfo=async customerId=>{
     line_user_id:customer.line_user_id,
     bind_code:code,
     registration_text:code,
-    add_friend_url:oaMessageUrl(code),
-    configured:exports.configured(),
-    has_official_account_link:Boolean(officialAccountId()),
+    add_friend_url:await oaMessageUrl(code),
+    configured:await exports.configured(),
+    has_official_account_link:Boolean(await officialAccountId()),
   };
 };
 
@@ -477,7 +528,7 @@ const buildServiceReminderText=async site=>textFrom('service_reminder',{
   });
 
 exports.sendDueServiceReminders=async(limit=20)=>{
-  if(!exports.configured())return {sent:0,skipped:true,reason:'LINE is not configured'};
+  if(!await exports.configured())return {sent:0,skipped:true,reason:'LINE is not configured'};
   const sites=await repo.dueServiceSites(limit);
   let sent=0;
   const errors=[];

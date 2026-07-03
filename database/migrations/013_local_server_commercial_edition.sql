@@ -17,5 +17,11 @@ INSERT INTO system_settings (setting_key, setting_value, setting_group, is_secre
 ('license_plan', '', 'license', 0),
 ('license_expires_at', '', 'license', 0),
 ('license_checked_at', '', 'license', 0),
-('license_server_url', '', 'license', 0)
+('license_server_url', '', 'license', 0),
+('line_customer_channel_secret', '', 'line', 1),
+('line_customer_channel_access_token', '', 'line', 1),
+('line_customer_basic_id', '', 'line', 0),
+('line_customer_webhook_url', '', 'line', 0),
+('line_team_channel_access_token', '', 'line', 1),
+('line_team_target_id', '', 'line', 1)
 ON DUPLICATE KEY UPDATE setting_key = setting_key;

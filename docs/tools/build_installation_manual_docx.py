@@ -12,6 +12,7 @@ from docx.shared import Inches, Pt, RGBColor
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "docs" / "customer-local-installation-manual.md"
 OUTPUT = ROOT / "docs" / "Post-Sales-IoT-Local-Server-Installation-Manual.docx"
+FALLBACK_OUTPUT = ROOT / "docs" / "Post-Sales-IoT-Local-Server-Installation-Manual-v2.docx"
 
 
 def set_cell_shading(cell, fill):
@@ -212,8 +213,12 @@ def main():
     add_cover(doc)
     parse_markdown(doc, SOURCE.read_text(encoding="utf-8"))
     add_footer(doc)
-    doc.save(OUTPUT)
-    print(OUTPUT)
+    try:
+        doc.save(OUTPUT)
+        print(OUTPUT)
+    except PermissionError:
+        doc.save(FALLBACK_OUTPUT)
+        print(FALLBACK_OUTPUT)
 
 
 if __name__ == "__main__":

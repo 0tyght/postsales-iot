@@ -115,6 +115,22 @@ exports.saveReportSession=async(lineUserId,customerId,step,data={})=>{
 
 exports.clearReportSession=async lineUserId=>db.query('DELETE FROM line_report_sessions WHERE line_user_id=?',[lineUserId]);
 
+exports.systemSettingsMap=async()=>{
+  try{
+    await db.query(`CREATE TABLE IF NOT EXISTS system_settings (
+      setting_key VARCHAR(120) PRIMARY KEY,
+      setting_value TEXT,
+      setting_group VARCHAR(80) NOT NULL DEFAULT 'general',
+      is_secret TINYINT(1) NOT NULL DEFAULT 0,
+      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci`);
+    const [rows]=await db.query('SELECT setting_key,setting_value FROM system_settings');
+    return Object.fromEntries(rows.map(row=>[row.setting_key,row.setting_value||'']));
+  }catch{
+    return {};
+  }
+};
+
 exports.lineIdByCustomerId=async customerId=>(await db.query('SELECT line_user_id FROM customers WHERE customer_id=?',[customerId]))[0][0]?.line_user_id;
 exports.customerById=async customerId=>(await db.query('SELECT customer_id,customer_name,line_user_id FROM customers WHERE customer_id=?',[customerId]))[0][0];
 exports.bindLineId=async(customerId,lineUserId)=>{

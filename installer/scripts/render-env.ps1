@@ -39,6 +39,7 @@ $values = @{
   ADMIN_PHONE = [string]$config.admin.phone
   PUBLIC_APP_URL = ([string]$config.domain.publicUrl).TrimEnd('/')
   PORTAL_DIST_DIR = Join-Path ([string]$config.server.installDir) "apps\portal-web"
+  LINE_CUSTOMER_WEBHOOK_URL = if ($config.line.customerWebhookUrl) { [string]$config.line.customerWebhookUrl } else { "$(([string]$config.domain.publicUrl).TrimEnd('/'))/linebot/webhook.php" }
   LINE_CUSTOMER_CHANNEL_SECRET = [string]$config.line.customerChannelSecret
   LINE_CUSTOMER_CHANNEL_ACCESS_TOKEN = [string]$config.line.customerChannelAccessToken
   LINE_CUSTOMER_BASIC_ID = [string]$config.line.customerBasicId

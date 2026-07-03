@@ -348,6 +348,13 @@ powershell -ExecutionPolicy Bypass -File C:\PostSalesIoT\installer\scripts\insta
 
 ## 10. การตั้งค่า LINE OA
 
+ระบบแยก LINE เป็น 2 ส่วนชัดเจน:
+
+| ส่วน | ใช้สำหรับ | ต้องมี Webhook ไหม |
+|---|---|---|
+| LINE OA ลูกค้า | ลูกค้าเพิ่มเพื่อน ผูกบัญชี แจ้งปัญหา รับข้อความ service และรับสถานะงาน | ต้องมี |
+| LINE ทีมช่าง | แจ้งเตือนเคสใหม่เข้ากลุ่มหรือบัญชีทีมช่าง | ไม่จำเป็น ถ้าใช้แค่ส่งแจ้งเตือน |
+
 ### 10.1 ค่าที่ต้องใช้
 
 | ค่า | ใช้ทำอะไร |
@@ -361,6 +368,18 @@ Webhook URL ต้องเป็น:
 
 ```text
 https://service.customercompany.com/linebot/webhook.php
+```
+
+ค่าในระบบ:
+
+```env
+LINE_CHANNEL_SECRET=ค่าของ LINE OA ลูกค้า
+LINE_CHANNEL_ACCESS_TOKEN=ค่าของ LINE OA ลูกค้า
+LINE_BOT_BASIC_ID=@ของ LINE OA ลูกค้า
+LINE_WEBHOOK_URL=https://service.customercompany.com/linebot/webhook.php
+
+LINE_TECH_CHANNEL_ACCESS_TOKEN=Token ของ LINE ทีมช่าง
+LINE_TECH_TARGET_ID=Group ID หรือ Target ID ของทีมช่าง
 ```
 
 ### 10.2 ขั้นตอนใน LINE Developers
@@ -405,6 +424,8 @@ TYTC0005
 - Team Channel Access Token หรือ Channel สำหรับทีมช่าง
 - Team Target ID หรือ Group ID
 - รูปแบบข้อความแจ้งเตือน
+
+ในหน้า Admin > เซิร์ฟเวอร์ โดเมน และ LINE จะมีส่วน “LINE ทีมช่าง” สำหรับใส่ Token และ Target ID พร้อมปุ่ม “ทดสอบส่งเข้าทีมช่าง”
 
 ตัวอย่างข้อความแจ้งเตือนทีมช่าง:
 

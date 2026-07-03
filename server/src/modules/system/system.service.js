@@ -31,6 +31,7 @@ exports.status = async () => {
   const license = await licenseClient.current();
   const safeLicense = { ...license };
   delete safeLicense.raw_license_key;
+  const lineSummary = await lineService.configSummary();
   return {
     edition: edition.edition(),
     edition_name: edition.commercialName(),
@@ -41,11 +42,7 @@ exports.status = async () => {
     line_webhook_url: deployment.lineWebhookUrl(),
     lan_urls: deployment.localLanUrls(),
     database,
-    line: {
-      customer_oa_configured: lineService.configured(),
-      team_oa_configured: lineService.teamConfigured(),
-      webhook_url: deployment.lineWebhookUrl(),
-    },
+    line: lineSummary,
     license: safeLicense,
     settings: settingMap,
   };
@@ -67,6 +64,8 @@ exports.updateSettings = async (payload = {}) => {
     ['cloudflare_tunnel_name', 'deployment'],
     ['line_customer_channel_secret', 'line', true],
     ['line_customer_channel_access_token', 'line', true],
+    ['line_customer_basic_id', 'line'],
+    ['line_customer_webhook_url', 'line'],
     ['line_team_channel_access_token', 'line', true],
     ['line_team_target_id', 'line', true],
     ['license_key', 'license', true],
@@ -84,6 +83,7 @@ exports.updateSettings = async (payload = {}) => {
 
   const result = await repository.upsertMany(items);
   licenseClient.clearCache();
+  lineService.clearConfigCache?.();
   if (payload.refresh_license) await licenseClient.checkRemote({ force: true });
   return result;
 };

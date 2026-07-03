@@ -12,4 +12,5 @@ router.get('/templates',auth,role('admin'),asyncHandler(controller.templates));
 router.put('/templates/:key',auth,role('admin'),asyncHandler(controller.updateTemplate));
 router.post('/push',auth,role('admin'),asyncHandler(controller.push));
 router.post('/service-reminder',auth,role('admin'),asyncHandler(controller.sendServiceReminder));
+router.post('/team/test',auth,role('admin'),asyncHandler(controller.testTeam));
 module.exports=router;

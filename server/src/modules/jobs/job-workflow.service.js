@@ -13,7 +13,7 @@ const validateRepairItem=data=>{
  if(method!=='replace'&&data.replacement_device_id)data.replacement_device_id=null;
  if(String(data.device_id)===String(data.replacement_device_id))fail('อุปกรณ์เดิมและอุปกรณ์ทดแทนต้องไม่ใช่เครื่องเดียวกัน');
 };
-const notify=async id=>{const context=await jobs.notificationContext(id);if(!line.configured()||!context?.line_user_id)return;const status=context.job_status==='in_progress'?'ช่างเริ่มดำเนินงานแล้ว':'ดำเนินงานเสร็จเรียบร้อยแล้ว';try{await line.pushText(context.line_user_id,`อัปเดตงาน #${id}\n${status}\nจุดติดตั้ง: ${context.site_name}`)}catch(e){console.error(`LINE workflow notification failed for job ${id}:`,e.message)}};
+const notify=async id=>{const context=await jobs.notificationContext(id);if(!await line.configured()||!context?.line_user_id)return;const status=context.job_status==='in_progress'?'ช่างเริ่มดำเนินงานแล้ว':'ดำเนินงานเสร็จเรียบร้อยแล้ว';try{await line.pushText(context.line_user_id,`อัปเดตงาน #${id}\n${status}\nจุดติดตั้ง: ${context.site_name}`)}catch(e){console.error(`LINE workflow notification failed for job ${id}:`,e.message)}};
 exports.detail=async(id,actor)=>await repo.detail(id,actor)||fail('ไม่พบงานหรือไม่มีสิทธิ์เข้าถึง',404);
 exports.start=async(id,actor)=>{if(!await repo.start(id,actor))fail('งานนี้เริ่มไม่ได้หรือเริ่มไปแล้ว',409);await notify(id);};
 exports.saveResult=async(id,data,actor)=>{await editable(id,actor);if(!await repo.saveResult(id,data,actor))fail('ไม่พบงานหรือไม่มีสิทธิ์แก้ไข',404);};

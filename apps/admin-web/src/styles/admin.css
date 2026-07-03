@@ -1519,4 +1519,8 @@ body{overflow-x:hidden}
 .server-url-list>div{display:grid;grid-template-columns:160px 1fr auto;gap:12px;align-items:center;padding:12px;border:1px solid #dce8ef;border-radius:12px;background:#f8fbfd}
 .server-url-list code{white-space:normal;word-break:break-all;color:#143955}
 .setup-steps{display:grid;gap:10px;margin:0;padding-left:22px;color:#263849}
-@media(max-width:900px){.server-settings-grid{grid-template-columns:1fr}.server-url-list>div{grid-template-columns:1fr}.server-url-list .btn{justify-self:start}}
+.line-config-sections{display:grid;gap:16px;margin-top:18px}
+.line-config-card{padding:16px;border:1px solid #dce8ef;border-radius:16px;background:#f8fbfd}
+.line-config-card h3{margin:0 0 4px;font-size:17px}
+.line-config-card p{margin:0;color:#6d7e91;line-height:1.55}
+@media(max-width:900px){.server-settings-grid{grid-template-columns:1fr}.server-url-list>div{grid-template-columns:1fr}.server-url-list .btn{justify-self:start}.line-config-card .section-heading{align-items:flex-start;gap:10px;flex-direction:column}}
