@@ -1,8 +1,11 @@
 const express=require('express');
 const cors=require('cors');
+const path=require('path');
+const fs=require('fs');
 const db=require('./config/db');
 const auth=require('./middlewares/auth.middleware');
 const role=require('./middlewares/role.middleware');
+const licenseGuard=require('./middlewares/license.middleware');
 const errorHandler=require('./middlewares/error.middleware');
 const {asyncHandler,success}=require('./utils/response.util');
 
@@ -10,12 +13,15 @@ const app=express();
 app.use(cors({origin:true,credentials:true}));
 app.use(express.json({verify:(req,res,buffer)=>{req.rawBody=buffer;}}));
 app.use(express.urlencoded({extended:true}));
+const portalDir=process.env.PORTAL_DIST_DIR||path.resolve(__dirname,'..','..','apps','portal-web');
+if(fs.existsSync(portalDir))app.use(express.static(portalDir));
 
 app.get('/api/health',asyncHandler(async(req,res)=>{await db.query('SELECT 1');success(res,{database:'connected'}); }));
 app.use('/api/auth',require('./modules/auth/auth.routes'));
 app.use('/api/line',require('./modules/line/line.routes'));
 app.use('/linebot',require('./modules/line/line.routes'));
 app.use('/api',auth);
+app.use('/api',licenseGuard);
 app.get('/api/dashboard',role('admin'),asyncHandler(async(req,res)=>{
   const [[counts],[jobs],[service],[warranty],[recent]] = await Promise.all([
     db.query(`SELECT (SELECT COUNT(*) FROM customers) customers,(SELECT COUNT(*) FROM customer_sites WHERE site_status='active') sites,
@@ -31,11 +37,13 @@ app.get('/api/dashboard',role('admin'),asyncHandler(async(req,res)=>{
   success(res,{...counts[0],jobs,service_due:service[0].due,warranty_due:warranty[0].due,recent_problems:recent});
 }));
 app.use('/api/users',role('admin'),require('./modules/users/users.routes'));
+app.use('/api/system',role('admin'),require('./modules/system/system.routes'));
 app.use('/api/customers',require('./modules/customers/customers.routes'));
 app.use('/api/customer-sites',require('./modules/customer-sites/customer-sites.routes'));
 app.use('/api/devices',require('./modules/devices/devices.routes'));
 app.use('/api/jobs',require('./modules/jobs/jobs.routes'));
 app.use('/api/problems',require('./modules/problems/problems.routes'));
+if(fs.existsSync(portalDir))app.get(/^(?!\/api|\/linebot).*/, (req,res)=>res.sendFile(path.join(portalDir,'index.html')));
 app.use((req,res)=>res.status(404).json({success:false,message:'ไม่พบ API ที่เรียก'}));
 app.use(errorHandler);
 module.exports=app;

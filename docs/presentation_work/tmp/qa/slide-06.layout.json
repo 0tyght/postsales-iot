@@ -1,0 +1,1206 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/1bf5uu",
+    "id": "1bf5uu",
+    "slide": 6,
+    "layoutId": "da57c945-64c3-4acc-8bec-2814acf33ffc",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "a4ffe993-f33a-4c6f-8567-efa2746cb739",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#F4FBFF",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "da57c945-64c3-4acc-8bec-2814acf33ffc",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "a4ffe993-f33a-4c6f-8567-efa2746cb739",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "a4ffe993-f33a-4c6f-8567-efa2746cb739",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/a1gvy90j",
+      "id": "1",
+      "bbox": [
+        62,
+        44,
+        780,
+        48
+      ],
+      "geometry": "rect",
+      "text": "เคสซ่อมและงานบริการเดินต่อได้โดยไม่หลุดคิว",
+      "textPreview": "เคสซ่อมและงานบริการเดินต่อได้โดยไม่หลุดคิว",
+      "resolvedFontSize": 36,
+      "resolvedTextStyle": {
+        "fontSize": 36,
+        "typeface": "+mn-lt",
+        "color": "#0B1F3A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "เคสซ่อมและงานบริการเดินต่อได้โดยไม่หลุดคิว"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "เคสซ่อมและงานบริการเดินต่อได้โดยไม่หลุดคิว",
+          "resolvedTextStyle": {
+            "fontSize": 36,
+            "color": "#0B1F3A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "เคสซ่อมและงานบริการเดินต่อได้โดยไม่หลุดคิว",
+              "fontSize": 36,
+              "color": "#0B1F3A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/hoza1gvy",
+      "id": "2",
+      "bbox": [
+        64,
+        94,
+        820,
+        34
+      ],
+      "geometry": "rect",
+      "text": "ลูกค้าแจ้งเองได้ แอดมินสร้างเองได้ และช่างรับงานต่อได้ทันที",
+      "textPreview": "ลูกค้าแจ้งเองได้ แอดมินสร้างเองได้ และช่างรับงานต่อได้ทันที",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#607086",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ลูกค้าแจ้งเองได้ แอดมินสร้างเองได้ และช่างรับงานต่อได้ทันที"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ลูกค้าแจ้งเองได้ แอดมินสร้างเองได้ และช่างรับงานต่อได้ทันที",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#607086"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ลูกค้าแจ้งเองได้ แอดมินสร้างเองได้ และช่างรับงานต่อได้ทันที",
+              "fontSize": 18,
+              "color": "#607086"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/s36hcrmh",
+      "id": "3",
+      "bbox": [
+        1160,
+        48,
+        60,
+        24
+      ],
+      "geometry": "rect",
+      "text": "06",
+      "textPreview": "06",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#607086",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "06"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "06",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#607086"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "06",
+              "fontSize": 13,
+              "color": "#607086"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/za1gvy90",
+      "id": "4",
+      "bbox": [
+        78,
+        180,
+        300,
+        145
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#CFE1EF",
+      "lineWidth": 1
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ap4r65wj",
+      "id": "5",
+      "bbox": [
+        78,
+        180,
+        8,
+        145
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#EF4444",
+      "lineColor": "#EF4444",
+      "lineWidth": 1
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/hgn29gr2",
+      "id": "6",
+      "bbox": [
+        102,
+        202,
+        252,
+        32
+      ],
+      "geometry": "rect",
+      "text": "รับแจ้งปัญหา",
+      "textPreview": "รับแจ้งปัญหา",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#0B1F3A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "รับแจ้งปัญหา"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "รับแจ้งปัญหา",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#0B1F3A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "รับแจ้งปัญหา",
+              "fontSize": 22,
+              "color": "#0B1F3A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/svu9knih",
+      "id": "7",
+      "bbox": [
+        102,
+        244,
+        252,
+        69
+      ],
+      "geometry": "rect",
+      "text": "ผ่าน LINE OA หรือแอดมินบันทึกให้ลูกค้า",
+      "textPreview": "ผ่าน LINE OA หรือแอดมินบันทึกให้ลูกค้า",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#607086",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ผ่าน LINE OA"
+          },
+          {
+            "index": 2,
+            "text": "หรือแอดมินบันทึกให้ลูกค้า"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ผ่าน LINE OA หรือแอดมินบันทึกให้ลูกค้า",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#607086"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ผ่าน LINE OA หรือแอดมินบันทึกให้ลูกค้า",
+              "fontSize": 17,
+              "color": "#607086"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3ylc7u54",
+      "id": "8",
+      "bbox": [
+        490,
+        180,
+        300,
+        145
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#CFE1EF",
+      "lineWidth": 1
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/adsji5sn",
+      "id": "9",
+      "bbox": [
+        490,
+        180,
+        8,
+        145
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#F59E0B",
+      "lineColor": "#F59E0B",
+      "lineWidth": 1
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/w7mp0bi9",
+      "id": "10",
+      "bbox": [
+        514,
+        202,
+        252,
+        32
+      ],
+      "geometry": "rect",
+      "text": "สร้างเคสบริการ",
+      "textPreview": "สร้างเคสบริการ",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#0B1F3A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "สร้างเคสบริการ"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "สร้างเคสบริการ",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#0B1F3A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "สร้างเคสบริการ",
+              "fontSize": 22,
+              "color": "#0B1F3A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/psfil0rq",
+      "id": "11",
+      "bbox": [
+        514,
+        244,
+        252,
+        69
+      ],
+      "geometry": "rect",
+      "text": "เลือกจุดติดตั้ง อุปกรณ์ที่มีปัญหา และเวลานัดหมาย",
+      "textPreview": "เลือกจุดติดตั้ง อุปกรณ์ที่มีปัญหา และเวลานัดหมาย",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#607086",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "เลือกจุดติดตั้ง อุปกรณ์ที่มีปัญหา"
+          },
+          {
+            "index": 2,
+            "text": "และเวลานัดหมาย"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "เลือกจุดติดตั้ง อุปกรณ์ที่มีปัญหา และเวลานัดหมาย",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#607086"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "เลือกจุดติดตั้ง อุปกรณ์ที่มีปัญหา และเวลานัดหมาย",
+              "fontSize": 17,
+              "color": "#607086"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/e1w7mp0b",
+      "id": "12",
+      "bbox": [
+        902,
+        180,
+        300,
+        145
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#CFE1EF",
+      "lineWidth": 1
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7mp0bi9s",
+      "id": "13",
+      "bbox": [
+        902,
+        180,
+        8,
+        145
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#19A88A",
+      "lineColor": "#19A88A",
+      "lineWidth": 1
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wval87ed",
+      "id": "14",
+      "bbox": [
+        926,
+        202,
+        252,
+        32
+      ],
+      "geometry": "rect",
+      "text": "ทีมช่างรับงาน",
+      "textPreview": "ทีมช่างรับงาน",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#0B1F3A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ทีมช่างรับงาน"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ทีมช่างรับงาน",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#0B1F3A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ทีมช่างรับงาน",
+              "fontSize": 22,
+              "color": "#0B1F3A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pg3ex0nu",
+      "id": "15",
+      "bbox": [
+        926,
+        244,
+        252,
+        69
+      ],
+      "geometry": "rect",
+      "text": "ระบบแจ้งเตือนและช่างกดรับเคสเข้าหน้างานของฉัน",
+      "textPreview": "ระบบแจ้งเตือนและช่างกดรับเคสเข้าหน้างานของฉัน",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#607086",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ระบบแจ้งเตือนและช่างกดรับเคสเข้าห"
+          },
+          {
+            "index": 2,
+            "text": "น้างานของฉัน"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ระบบแจ้งเตือนและช่างกดรับเคสเข้าหน้างานของฉัน",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#607086"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ระบบแจ้งเตือนและช่างกดรับเคสเข้าหน้างานของฉัน",
+              "fontSize": 17,
+              "color": "#607086"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/epkzupwb",
+      "id": "16",
+      "bbox": [
+        405,
+        230,
+        46,
+        34
+      ],
+      "geometry": "rect",
+      "text": "→",
+      "textPreview": "→",
+      "resolvedFontSize": 28,
+      "resolvedTextStyle": {
+        "fontSize": 28,
+        "typeface": "+mn-lt",
+        "color": "#2378D8",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "→"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "→",
+          "resolvedTextStyle": {
+            "fontSize": 28,
+            "color": "#2378D8",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "→",
+              "fontSize": 28,
+              "color": "#2378D8",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7adsji5s",
+      "id": "17",
+      "bbox": [
+        817,
+        230,
+        46,
+        34
+      ],
+      "geometry": "rect",
+      "text": "→",
+      "textPreview": "→",
+      "resolvedFontSize": 28,
+      "resolvedTextStyle": {
+        "fontSize": 28,
+        "typeface": "+mn-lt",
+        "color": "#2378D8",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "→"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "→",
+          "resolvedTextStyle": {
+            "fontSize": 28,
+            "color": "#2378D8",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "→",
+              "fontSize": 28,
+              "color": "#2378D8",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wra5gbq1",
+      "id": "18",
+      "bbox": [
+        180,
+        410,
+        390,
+        150
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#CFE1EF",
+      "lineWidth": 1
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lc7u54zi",
+      "id": "19",
+      "bbox": [
+        180,
+        410,
+        8,
+        150
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#2378D8",
+      "lineColor": "#2378D8",
+      "lineWidth": 1
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/p4r65wju",
+      "id": "20",
+      "bbox": [
+        204,
+        432,
+        342,
+        32
+      ],
+      "geometry": "rect",
+      "text": "บันทึกหน้างาน",
+      "textPreview": "บันทึกหน้างาน",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#0B1F3A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "บันทึกหน้างาน"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "บันทึกหน้างาน",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#0B1F3A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "บันทึกหน้างาน",
+              "fontSize": 22,
+              "color": "#0B1F3A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wjudg7ad",
+      "id": "21",
+      "bbox": [
+        204,
+        474,
+        342,
+        74
+      ],
+      "geometry": "rect",
+      "text": "อาการซ่อม รูปหลักฐาน อุปกรณ์ที่เปลี่ยน เพิ่ม หรือลด",
+      "textPreview": "อาการซ่อม รูปหลักฐาน อุปกรณ์ที่เปลี่ยน เพิ่ม หรือลด",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#607086",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "อาการซ่อม รูปหลักฐาน อุปกรณ์ที่เปลี่ยน เพิ่ม"
+          },
+          {
+            "index": 2,
+            "text": "หรือลด"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "อาการซ่อม รูปหลักฐาน อุปกรณ์ที่เปลี่ยน เพิ่ม หรือลด",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#607086"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "อาการซ่อม รูปหลักฐาน อุปกรณ์ที่เปลี่ยน เพิ่ม หรือลด",
+              "fontSize": 17,
+              "color": "#607086"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7y1kre1w",
+      "id": "22",
+      "bbox": [
+        710,
+        410,
+        390,
+        150
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#CFE1EF",
+      "lineWidth": 1
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ed8v6psf",
+      "id": "23",
+      "bbox": [
+        710,
+        410,
+        8,
+        150
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#0B1F3A",
+      "lineColor": "#0B1F3A",
+      "lineWidth": 1
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pwb2hwfy",
+      "id": "24",
+      "bbox": [
+        734,
+        432,
+        342,
+        32
+      ],
+      "geometry": "rect",
+      "text": "ปิดงานและดูย้อนหลัง",
+      "textPreview": "ปิดงานและดูย้อนหลัง",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#0B1F3A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ปิดงานและดูย้อนหลัง"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ปิดงานและดูย้อนหลัง",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#0B1F3A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ปิดงานและดูย้อนหลัง",
+              "fontSize": 22,
+              "color": "#0B1F3A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0bi9s36h",
+      "id": "25",
+      "bbox": [
+        734,
+        474,
+        342,
+        74
+      ],
+      "geometry": "rect",
+      "text": "แอดมินเห็นสถานะ รูป และสรุปงานแบบเรียลไทม์",
+      "textPreview": "แอดมินเห็นสถานะ รูป และสรุปงานแบบเรียลไทม์",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#607086",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "แอดมินเห็นสถานะ รูป และสรุปงานแบบเรียลไทม์"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "แอดมินเห็นสถานะ รูป และสรุปงานแบบเรียลไทม์",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#607086"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "แอดมินเห็นสถานะ รูป และสรุปงานแบบเรียลไทม์",
+              "fontSize": 17,
+              "color": "#607086"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 26,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7qpg3ex0",
+      "id": "26",
+      "bbox": [
+        602,
+        462,
+        46,
+        34
+      ],
+      "geometry": "rect",
+      "text": "→",
+      "textPreview": "→",
+      "resolvedFontSize": 28,
+      "resolvedTextStyle": {
+        "fontSize": 28,
+        "typeface": "+mn-lt",
+        "color": "#2378D8",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "→"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "→",
+          "resolvedTextStyle": {
+            "fontSize": 28,
+            "color": "#2378D8",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "→",
+              "fontSize": 28,
+              "color": "#2378D8",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

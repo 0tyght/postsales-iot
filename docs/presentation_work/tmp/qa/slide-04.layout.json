@@ -1,0 +1,1106 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/q6yji6",
+    "id": "q6yji6",
+    "slide": 4,
+    "layoutId": "da57c945-64c3-4acc-8bec-2814acf33ffc",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "a4ffe993-f33a-4c6f-8567-efa2746cb739",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#F4FBFF",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "da57c945-64c3-4acc-8bec-2814acf33ffc",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "a4ffe993-f33a-4c6f-8567-efa2746cb739",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "a4ffe993-f33a-4c6f-8567-efa2746cb739",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/re1w7mp0",
+      "id": "1",
+      "bbox": [
+        62,
+        44,
+        780,
+        48
+      ],
+      "geometry": "rect",
+      "text": "แต่ละบทบาททำงานของตัวเองได้ชัดเจน",
+      "textPreview": "แต่ละบทบาททำงานของตัวเองได้ชัดเจน",
+      "resolvedFontSize": 36,
+      "resolvedTextStyle": {
+        "fontSize": 36,
+        "typeface": "+mn-lt",
+        "color": "#0B1F3A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "แต่ละบทบาททำงานของตัวเองได้ชัดเจน"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "แต่ละบทบาททำงานของตัวเองได้ชัดเจน",
+          "resolvedTextStyle": {
+            "fontSize": 36,
+            "color": "#0B1F3A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "แต่ละบทบาททำงานของตัวเองได้ชัดเจน",
+              "fontSize": 36,
+              "color": "#0B1F3A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kzupwb2h",
+      "id": "2",
+      "bbox": [
+        64,
+        94,
+        820,
+        34
+      ],
+      "geometry": "rect",
+      "text": "ระบบแยกสิทธิ์จากบัญชี และลดงานถามซ้ำระหว่างทีม",
+      "textPreview": "ระบบแยกสิทธิ์จากบัญชี และลดงานถามซ้ำระหว่างทีม",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#607086",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ระบบแยกสิทธิ์จากบัญชี และลดงานถามซ้ำระหว่างทีม"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ระบบแยกสิทธิ์จากบัญชี และลดงานถามซ้ำระหว่างทีม",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#607086"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ระบบแยกสิทธิ์จากบัญชี และลดงานถามซ้ำระหว่างทีม",
+              "fontSize": 18,
+              "color": "#607086"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9knih4by",
+      "id": "3",
+      "bbox": [
+        1160,
+        48,
+        60,
+        24
+      ],
+      "geometry": "rect",
+      "text": "04",
+      "textPreview": "04",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#607086",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "04"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "04",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#607086"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "04",
+              "fontSize": 13,
+              "color": "#607086"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/25kb6xkf",
+      "id": "4",
+      "bbox": [
+        70,
+        170,
+        270,
+        340
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#CFE1EF",
+      "lineWidth": 1
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rqd4vmtw",
+      "id": "5",
+      "bbox": [
+        70,
+        170,
+        8,
+        340
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#2378D8",
+      "lineColor": "#2378D8",
+      "lineWidth": 1
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kb6xkf6d",
+      "id": "6",
+      "bbox": [
+        94,
+        192,
+        222,
+        32
+      ],
+      "geometry": "rect",
+      "text": "แอดมิน",
+      "textPreview": "แอดมิน",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#0B1F3A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "แอดมิน"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "แอดมิน",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#0B1F3A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "แอดมิน",
+              "fontSize": 22,
+              "color": "#0B1F3A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9w3m94fu",
+      "id": "7",
+      "bbox": [
+        94,
+        234,
+        222,
+        264
+      ],
+      "geometry": "rect",
+      "text": "ดู Dashboard\nจัดการลูกค้าและจุดติดตั้ง\nติดตามเคสแบบเรียลไทม์\nตั้งค่าข้อความ LINE",
+      "textPreview": "ดู Dashboard | จัดการลูกค้าและจุดติดตั้ง | ติดตามเคสแบบเรียลไทม์ | ตั้งค่าข้อความ LINE",
+      "resolvedFontSize": 19,
+      "resolvedTextStyle": {
+        "fontSize": 19,
+        "typeface": "+mn-lt",
+        "color": "#607086",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ดู Dashboard"
+          },
+          {
+            "index": 2,
+            "text": "จัดการลูกค้าและจุดติดตั้ง"
+          },
+          {
+            "index": 3,
+            "text": "ติดตามเคสแบบเรียลไทม์"
+          },
+          {
+            "index": 4,
+            "text": "ตั้งค่าข้อความ LINE"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ดู Dashboard",
+          "resolvedTextStyle": {
+            "fontSize": 19,
+            "color": "#607086"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ดู Dashboard",
+              "fontSize": 19,
+              "color": "#607086"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "จัดการลูกค้าและจุดติดตั้ง",
+          "resolvedTextStyle": {
+            "fontSize": 19,
+            "color": "#607086"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "จัดการลูกค้าและจุดติดตั้ง",
+              "fontSize": 19,
+              "color": "#607086"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "ติดตามเคสแบบเรียลไทม์",
+          "resolvedTextStyle": {
+            "fontSize": 19,
+            "color": "#607086"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ติดตามเคสแบบเรียลไทม์",
+              "fontSize": 19,
+              "color": "#607086"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "ตั้งค่าข้อความ LINE",
+          "resolvedTextStyle": {
+            "fontSize": 19,
+            "color": "#607086"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ตั้งค่าข้อความ LINE",
+              "fontSize": 19,
+              "color": "#607086"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2hwfyxob",
+      "id": "8",
+      "bbox": [
+        370,
+        170,
+        270,
+        340
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#CFE1EF",
+      "lineWidth": 1
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/r2p8nqxs",
+      "id": "9",
+      "bbox": [
+        370,
+        170,
+        8,
+        340
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#19A88A",
+      "lineColor": "#19A88A",
+      "lineWidth": 1
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7ed8bat4",
+      "id": "10",
+      "bbox": [
+        394,
+        192,
+        222,
+        32
+      ],
+      "geometry": "rect",
+      "text": "ช่าง",
+      "textPreview": "ช่าง",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#0B1F3A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ช่าง"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ช่าง",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#0B1F3A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ช่าง",
+              "fontSize": 22,
+              "color": "#0B1F3A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/itgfmlkj",
+      "id": "11",
+      "bbox": [
+        394,
+        234,
+        222,
+        264
+      ],
+      "geometry": "rect",
+      "text": "รับงานจากมือถือ\nเพิ่มอุปกรณ์จริงและรูป\nบันทึกผลซ่อม/ติดตั้ง\nปิดงานจากหน้างาน",
+      "textPreview": "รับงานจากมือถือ | เพิ่มอุปกรณ์จริงและรูป | บันทึกผลซ่อม/ติดตั้ง | ปิดงานจากหน้างาน",
+      "resolvedFontSize": 19,
+      "resolvedTextStyle": {
+        "fontSize": 19,
+        "typeface": "+mn-lt",
+        "color": "#607086",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "รับงานจากมือถือ"
+          },
+          {
+            "index": 2,
+            "text": "เพิ่มอุปกรณ์จริงและรูป"
+          },
+          {
+            "index": 3,
+            "text": "บันทึกผลซ่อม/ติดตั้ง"
+          },
+          {
+            "index": 4,
+            "text": "ปิดงานจากหน้างาน"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "รับงานจากมือถือ",
+          "resolvedTextStyle": {
+            "fontSize": 19,
+            "color": "#607086"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "รับงานจากมือถือ",
+              "fontSize": 19,
+              "color": "#607086"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "เพิ่มอุปกรณ์จริงและรูป",
+          "resolvedTextStyle": {
+            "fontSize": 19,
+            "color": "#607086"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "เพิ่มอุปกรณ์จริงและรูป",
+              "fontSize": 19,
+              "color": "#607086"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "บันทึกผลซ่อม/ติดตั้ง",
+          "resolvedTextStyle": {
+            "fontSize": 19,
+            "color": "#607086"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "บันทึกผลซ่อม/ติดตั้ง",
+              "fontSize": 19,
+              "color": "#607086"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "ปิดงานจากหน้างาน",
+          "resolvedTextStyle": {
+            "fontSize": 19,
+            "color": "#607086"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ปิดงานจากหน้างาน",
+              "fontSize": 19,
+              "color": "#607086"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pkzupwb2",
+      "id": "12",
+      "bbox": [
+        670,
+        170,
+        270,
+        340
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#CFE1EF",
+      "lineWidth": 1
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0z61032l",
+      "id": "13",
+      "bbox": [
+        670,
+        170,
+        8,
+        340
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#F59E0B",
+      "lineColor": "#F59E0B",
+      "lineWidth": 1
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/72x4nap4",
+      "id": "14",
+      "bbox": [
+        694,
+        192,
+        222,
+        32
+      ],
+      "geometry": "rect",
+      "text": "ลูกค้า",
+      "textPreview": "ลูกค้า",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#0B1F3A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ลูกค้า"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ลูกค้า",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#0B1F3A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ลูกค้า",
+              "fontSize": 22,
+              "color": "#0B1F3A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ih4byhgn",
+      "id": "15",
+      "bbox": [
+        694,
+        234,
+        222,
+        264
+      ],
+      "geometry": "rect",
+      "text": "ผูก LINE ด้วยรหัสสั้น\nแจ้งปัญหาและนัดหมาย\nรับข้อความดูแลตามรอบ\nติดต่อทีมได้ง่ายขึ้น",
+      "textPreview": "ผูก LINE ด้วยรหัสสั้น | แจ้งปัญหาและนัดหมาย | รับข้อความดูแลตามรอบ | ติดต่อทีมได้ง่ายขึ้น",
+      "resolvedFontSize": 19,
+      "resolvedTextStyle": {
+        "fontSize": 19,
+        "typeface": "+mn-lt",
+        "color": "#607086",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ผูก LINE ด้วยรหัสสั้น"
+          },
+          {
+            "index": 2,
+            "text": "แจ้งปัญหาและนัดหมาย"
+          },
+          {
+            "index": 3,
+            "text": "รับข้อความดูแลตามรอบ"
+          },
+          {
+            "index": 4,
+            "text": "ติดต่อทีมได้ง่ายขึ้น"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ผูก LINE ด้วยรหัสสั้น",
+          "resolvedTextStyle": {
+            "fontSize": 19,
+            "color": "#607086"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ผูก LINE ด้วยรหัสสั้น",
+              "fontSize": 19,
+              "color": "#607086"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "แจ้งปัญหาและนัดหมาย",
+          "resolvedTextStyle": {
+            "fontSize": 19,
+            "color": "#607086"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "แจ้งปัญหาและนัดหมาย",
+              "fontSize": 19,
+              "color": "#607086"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "รับข้อความดูแลตามรอบ",
+          "resolvedTextStyle": {
+            "fontSize": 19,
+            "color": "#607086"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "รับข้อความดูแลตามรอบ",
+              "fontSize": 19,
+              "color": "#607086"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "ติดต่อทีมได้ง่ายขึ้น",
+          "resolvedTextStyle": {
+            "fontSize": 19,
+            "color": "#607086"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ติดต่อทีมได้ง่ายขึ้น",
+              "fontSize": 19,
+              "color": "#607086"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/p8nqxs72",
+      "id": "16",
+      "bbox": [
+        970,
+        170,
+        240,
+        340
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#CFE1EF",
+      "lineWidth": 1
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0nuxc3yl",
+      "id": "17",
+      "bbox": [
+        970,
+        170,
+        8,
+        340
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#06C755",
+      "lineColor": "#06C755",
+      "lineWidth": 1
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7y1kre1w",
+      "id": "18",
+      "bbox": [
+        994,
+        192,
+        192,
+        32
+      ],
+      "geometry": "rect",
+      "text": "LINE OA",
+      "textPreview": "LINE OA",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#0B1F3A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "LINE OA"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "LINE OA",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#0B1F3A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "LINE OA",
+              "fontSize": 22,
+              "color": "#0B1F3A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ed8v6psf",
+      "id": "19",
+      "bbox": [
+        994,
+        234,
+        192,
+        264
+      ],
+      "geometry": "rect",
+      "text": "รับแจ้งปัญหา\nส่งเตือนรอบ service\nตอบกลับอัตโนมัติ\nแจ้งทีมช่างเมื่อมีเคสใหม่",
+      "textPreview": "รับแจ้งปัญหา | ส่งเตือนรอบ service | ตอบกลับอัตโนมัติ | แจ้งทีมช่างเมื่อมีเคสใหม่",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#607086",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "รับแจ้งปัญหา"
+          },
+          {
+            "index": 2,
+            "text": "ส่งเตือนรอบ service"
+          },
+          {
+            "index": 3,
+            "text": "ตอบกลับอัตโนมัติ"
+          },
+          {
+            "index": 4,
+            "text": "แจ้งทีมช่างเมื่อมีเคสใหม่"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "รับแจ้งปัญหา",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#607086"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "รับแจ้งปัญหา",
+              "fontSize": 18,
+              "color": "#607086"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "ส่งเตือนรอบ service",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#607086"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ส่งเตือนรอบ service",
+              "fontSize": 18,
+              "color": "#607086"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "ตอบกลับอัตโนมัติ",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#607086"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ตอบกลับอัตโนมัติ",
+              "fontSize": 18,
+              "color": "#607086"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "แจ้งทีมช่างเมื่อมีเคสใหม่",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#607086"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "แจ้งทีมช่างเมื่อมีเคสใหม่",
+              "fontSize": 18,
+              "color": "#607086"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

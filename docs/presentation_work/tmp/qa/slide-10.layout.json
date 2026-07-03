@@ -1,0 +1,747 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/e84ojk",
+    "id": "e84ojk",
+    "slide": 10,
+    "layoutId": "da57c945-64c3-4acc-8bec-2814acf33ffc",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "a4ffe993-f33a-4c6f-8567-efa2746cb739",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#F4FBFF",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "da57c945-64c3-4acc-8bec-2814acf33ffc",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "a4ffe993-f33a-4c6f-8567-efa2746cb739",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "a4ffe993-f33a-4c6f-8567-efa2746cb739",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3q5o7qpg",
+      "id": "1",
+      "bbox": [
+        62,
+        44,
+        780,
+        48
+      ],
+      "geometry": "rect",
+      "text": "เริ่มใช้ระบบได้จากข้อมูลพื้นฐาน แล้วค่อยขยายตามงานจริง",
+      "textPreview": "เริ่มใช้ระบบได้จากข้อมูลพื้นฐาน แล้วค่อยขยายตามงานจริง",
+      "resolvedFontSize": 36,
+      "resolvedTextStyle": {
+        "fontSize": 36,
+        "typeface": "+mn-lt",
+        "color": "#0B1F3A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "เริ่มใช้ระบบได้จากข้อมูลพื้นฐาน"
+          },
+          {
+            "index": 2,
+            "text": "แล้วค่อยขยายตามงานจริง"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "เริ่มใช้ระบบได้จากข้อมูลพื้นฐาน แล้วค่อยขยายตามงานจริง",
+          "resolvedTextStyle": {
+            "fontSize": 36,
+            "color": "#0B1F3A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "เริ่มใช้ระบบได้จากข้อมูลพื้นฐาน แล้วค่อยขยายตามงานจริง",
+              "fontSize": 36,
+              "color": "#0B1F3A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wb2hwfyx",
+      "id": "2",
+      "bbox": [
+        64,
+        94,
+        820,
+        34
+      ],
+      "geometry": "rect",
+      "text": "เหมาะกับธุรกิจที่ต้องดูแลลูกค้าหลังติดตั้งอย่างต่อเนื่อง",
+      "textPreview": "เหมาะกับธุรกิจที่ต้องดูแลลูกค้าหลังติดตั้งอย่างต่อเนื่อง",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#607086",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "เหมาะกับธุรกิจที่ต้องดูแลลูกค้าหลังติดตั้งอย่างต่อเนื่อง"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "เหมาะกับธุรกิจที่ต้องดูแลลูกค้าหลังติดตั้งอย่างต่อเนื่อง",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#607086"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "เหมาะกับธุรกิจที่ต้องดูแลลูกค้าหลังติดตั้งอย่างต่อเนื่อง",
+              "fontSize": 18,
+              "color": "#607086"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lwval87e",
+      "id": "3",
+      "bbox": [
+        1160,
+        48,
+        60,
+        24
+      ],
+      "geometry": "rect",
+      "text": "10",
+      "textPreview": "10",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#607086",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "10"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "10",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#607086"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "10",
+              "fontSize": 13,
+              "color": "#607086"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ex0nuxc3",
+      "id": "4",
+      "bbox": [
+        92,
+        165,
+        440,
+        42
+      ],
+      "geometry": "rect",
+      "text": "สิ่งที่ระบบช่วยให้ดีขึ้น",
+      "textPreview": "สิ่งที่ระบบช่วยให้ดีขึ้น",
+      "resolvedFontSize": 32,
+      "resolvedTextStyle": {
+        "fontSize": 32,
+        "typeface": "+mn-lt",
+        "color": "#0B1F3A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "สิ่งที่ระบบช่วยให้ดีขึ้น"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "สิ่งที่ระบบช่วยให้ดีขึ้น",
+          "resolvedTextStyle": {
+            "fontSize": 32,
+            "color": "#0B1F3A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "สิ่งที่ระบบช่วยให้ดีขึ้น",
+              "fontSize": 32,
+              "color": "#0B1F3A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3itgfmlk",
+      "id": "5",
+      "bbox": [
+        105,
+        230,
+        450,
+        230
+      ],
+      "geometry": "rect",
+      "text": "ลดงานหลุด\nเห็นสถานะตรงกัน\nมีรูปหลักฐานครบ\nดูแลลูกค้าตามรอบ\nติดต่อผ่าน LINE ได้ถูกคน",
+      "textPreview": "ลดงานหลุด | เห็นสถานะตรงกัน | มีรูปหลักฐานครบ | ดูแลลูกค้าตามรอบ | ติดต่อผ่าน LINE ได้ถูกคน",
+      "resolvedFontSize": 27,
+      "resolvedTextStyle": {
+        "fontSize": 27,
+        "typeface": "+mn-lt",
+        "color": "#132238",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 5,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ลดงานหลุด"
+          },
+          {
+            "index": 2,
+            "text": "เห็นสถานะตรงกัน"
+          },
+          {
+            "index": 3,
+            "text": "มีรูปหลักฐานครบ"
+          },
+          {
+            "index": 4,
+            "text": "ดูแลลูกค้าตามรอบ"
+          },
+          {
+            "index": 5,
+            "text": "ติดต่อผ่าน LINE ได้ถูกคน"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ลดงานหลุด",
+          "resolvedTextStyle": {
+            "fontSize": 27,
+            "color": "#132238"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ลดงานหลุด",
+              "fontSize": 27,
+              "color": "#132238"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "เห็นสถานะตรงกัน",
+          "resolvedTextStyle": {
+            "fontSize": 27,
+            "color": "#132238"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "เห็นสถานะตรงกัน",
+              "fontSize": 27,
+              "color": "#132238"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "มีรูปหลักฐานครบ",
+          "resolvedTextStyle": {
+            "fontSize": 27,
+            "color": "#132238"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "มีรูปหลักฐานครบ",
+              "fontSize": 27,
+              "color": "#132238"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "ดูแลลูกค้าตามรอบ",
+          "resolvedTextStyle": {
+            "fontSize": 27,
+            "color": "#132238"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ดูแลลูกค้าตามรอบ",
+              "fontSize": 27,
+              "color": "#132238"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 5,
+          "text": "ติดต่อผ่าน LINE ได้ถูกคน",
+          "resolvedTextStyle": {
+            "fontSize": 27,
+            "color": "#132238"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ติดต่อผ่าน LINE ได้ถูกคน",
+              "fontSize": 27,
+              "color": "#132238"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/w3m94fu1",
+      "id": "6",
+      "bbox": [
+        660,
+        160,
+        455,
+        330
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#CFE1EF",
+      "lineWidth": 1
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/loj2t83i",
+      "id": "7",
+      "bbox": [
+        710,
+        208,
+        250,
+        36
+      ],
+      "geometry": "rect",
+      "text": "ขั้นตอนเริ่มต้น",
+      "textPreview": "ขั้นตอนเริ่มต้น",
+      "resolvedFontSize": 30,
+      "resolvedTextStyle": {
+        "fontSize": 30,
+        "typeface": "+mn-lt",
+        "color": "#0B1F3A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ขั้นตอนเริ่มต้น"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ขั้นตอนเริ่มต้น",
+          "resolvedTextStyle": {
+            "fontSize": 30,
+            "color": "#0B1F3A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ขั้นตอนเริ่มต้น",
+              "fontSize": 30,
+              "color": "#0B1F3A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/at47y1kr",
+      "id": "8",
+      "bbox": [
+        712,
+        275,
+        330,
+        180
+      ],
+      "geometry": "rect",
+      "text": "1. เพิ่มผู้ใช้และทีมช่าง\n2. เพิ่มลูกค้าและจุดติดตั้ง\n3. ลงทะเบียนโมเดลและอุปกรณ์จริง\n4. เชื่อม LINE OA\n5. ทดลองสร้างงานติดตั้งและเคสซ่อม",
+      "textPreview": "1. เพิ่มผู้ใช้และทีมช่าง | 2. เพิ่มลูกค้าและจุดติดตั้ง | 3. ลงทะเบียนโมเดลและอุปกรณ์จริง | 4. เชื่อม LINE OA | 5. ทดลองสร้างงานติดตั้งและ...",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#132238",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 5,
+        "lines": [
+          {
+            "index": 1,
+            "text": "1. เพิ่มผู้ใช้และทีมช่าง"
+          },
+          {
+            "index": 2,
+            "text": "2. เพิ่มลูกค้าและจุดติดตั้ง"
+          },
+          {
+            "index": 3,
+            "text": "3. ลงทะเบียนโมเดลและอุปกรณ์จริง"
+          },
+          {
+            "index": 4,
+            "text": "4. เชื่อม LINE OA"
+          },
+          {
+            "index": 5,
+            "text": "5. ทดลองสร้างงานติดตั้งและเคสซ่อม"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "1. เพิ่มผู้ใช้และทีมช่าง",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#132238"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "1. เพิ่มผู้ใช้และทีมช่าง",
+              "fontSize": 22,
+              "color": "#132238"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "2. เพิ่มลูกค้าและจุดติดตั้ง",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#132238"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "2. เพิ่มลูกค้าและจุดติดตั้ง",
+              "fontSize": 22,
+              "color": "#132238"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "3. ลงทะเบียนโมเดลและอุปกรณ์จริง",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#132238"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "3. ลงทะเบียนโมเดลและอุปกรณ์จริง",
+              "fontSize": 22,
+              "color": "#132238"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "4. เชื่อม LINE OA",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#132238"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "4. เชื่อม LINE OA",
+              "fontSize": 22,
+              "color": "#132238"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 5,
+          "text": "5. ทดลองสร้างงานติดตั้งและเคสซ่อม",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#132238"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "5. ทดลองสร้างงานติดตั้งและเคสซ่อม",
+              "fontSize": 22,
+              "color": "#132238"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3ex0nuxc",
+      "id": "9",
+      "bbox": [
+        88,
+        565,
+        1030,
+        60
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#19A88A",
+      "lineColor": "#19A88A",
+      "lineWidth": 1
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3itgfmlk",
+      "id": "10",
+      "bbox": [
+        150,
+        580,
+        910,
+        30
+      ],
+      "geometry": "rect",
+      "text": "Post-Sales IoT Support เปลี่ยนงานบริการหลังขายให้ติดตามได้จริงตั้งแต่วันแรก",
+      "textPreview": "Post-Sales IoT Support เปลี่ยนงานบริการหลังขายให้ติดตามได้จริงตั้งแต่วันแรก",
+      "resolvedFontSize": 23,
+      "resolvedTextStyle": {
+        "fontSize": 23,
+        "typeface": "+mn-lt",
+        "color": "#FFFFFF",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Post-Sales IoT Support เปลี่ยนงานบริการหลังขายให้ติดตามได้จริงตั้งแต่วันแรก"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Post-Sales IoT Support เปลี่ยนงานบริการหลังขายให้ติดตามได้จริงตั้งแต่วันแรก",
+          "resolvedTextStyle": {
+            "fontSize": 23,
+            "color": "#FFFFFF",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Post-Sales IoT Support เปลี่ยนงานบริการหลังขายให้ติดตามได้จริงตั้งแต่วันแรก",
+              "fontSize": 23,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

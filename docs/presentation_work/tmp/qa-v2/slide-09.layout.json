@@ -1,0 +1,1050 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/ax28tl",
+    "id": "ax28tl",
+    "slide": 9,
+    "layoutId": "2a8629f9-53d9-4cf8-b482-91422b81c9b0",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "f44a7b7d-44ec-49ef-9331-8f36ad048916",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#F6FAFD",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "2a8629f9-53d9-4cf8-b482-91422b81c9b0",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "f44a7b7d-44ec-49ef-9331-8f36ad048916",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "f44a7b7d-44ec-49ef-9331-8f36ad048916",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3q5o7qpg",
+      "id": "1",
+      "bbox": [
+        52,
+        40,
+        54,
+        54
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#071B33",
+      "lineColor": "#071B33",
+      "lineWidth": 1
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wb2hwfyx",
+      "id": "2",
+      "bbox": [
+        62,
+        56,
+        34,
+        20
+      ],
+      "geometry": "rect",
+      "text": "TYT",
+      "textPreview": "TYT",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "+mn-lt",
+        "color": "#FFFFFF",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TY"
+          },
+          {
+            "index": 2,
+            "text": "T"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TYT",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "color": "#FFFFFF",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "TYT",
+              "fontSize": 14,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lwval87e",
+      "id": "3",
+      "bbox": [
+        1168,
+        48,
+        42,
+        20
+      ],
+      "geometry": "rect",
+      "text": "09",
+      "textPreview": "09",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#5C6F86",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "09"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "09",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#5C6F86"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "09",
+              "fontSize": 13,
+              "color": "#5C6F86"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ex0nuxc3",
+      "id": "4",
+      "bbox": [
+        76,
+        118,
+        820,
+        86
+      ],
+      "geometry": "rect",
+      "text": "สิ่งที่ทำให้ระบบนี้ต่างจาก LINE กลุ่มและ Excel",
+      "textPreview": "สิ่งที่ทำให้ระบบนี้ต่างจาก LINE กลุ่มและ Excel",
+      "resolvedFontSize": 40,
+      "resolvedTextStyle": {
+        "fontSize": 40,
+        "typeface": "+mn-lt",
+        "color": "#071B33",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "สิ่งที่ทำให้ระบบนี้ต่างจาก LINE กลุ่มและ Excel"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "สิ่งที่ทำให้ระบบนี้ต่างจาก LINE กลุ่มและ Excel",
+          "resolvedTextStyle": {
+            "fontSize": 40,
+            "color": "#071B33",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "สิ่งที่ทำให้ระบบนี้ต่างจาก LINE กลุ่มและ Excel",
+              "fontSize": 40,
+              "color": "#071B33",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3itgfmlk",
+      "id": "5",
+      "bbox": [
+        78,
+        214,
+        770,
+        48
+      ],
+      "geometry": "rect",
+      "text": "ไม่ใช่แค่บันทึกข้อมูล แต่เปลี่ยนข้อมูลให้กลายเป็นงานที่ตามต่อได้",
+      "textPreview": "ไม่ใช่แค่บันทึกข้อมูล แต่เปลี่ยนข้อมูลให้กลายเป็นงานที่ตามต่อได้",
+      "resolvedFontSize": 20,
+      "resolvedTextStyle": {
+        "fontSize": 20,
+        "typeface": "+mn-lt",
+        "color": "#5C6F86",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ไม่ใช่แค่บันทึกข้อมูล แต่เปลี่ยนข้อมูลให้กลายเป็นงานที่ตามต่อได้"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ไม่ใช่แค่บันทึกข้อมูล แต่เปลี่ยนข้อมูลให้กลายเป็นงานที่ตามต่อได้",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "color": "#5C6F86"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ไม่ใช่แค่บันทึกข้อมูล แต่เปลี่ยนข้อมูลให้กลายเป็นงานที่ตามต่อได้",
+              "fontSize": 20,
+              "color": "#5C6F86"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/w3m94fu1",
+      "id": "6",
+      "bbox": [
+        90,
+        210,
+        320,
+        220
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFF0F0",
+      "lineColor": "#FFCACA",
+      "lineWidth": 1
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/loj2t83i",
+      "id": "7",
+      "bbox": [
+        90,
+        210,
+        8,
+        220
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#EF4444",
+      "lineColor": "#EF4444",
+      "lineWidth": 1
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/at47y1kr",
+      "id": "8",
+      "bbox": [
+        114,
+        234,
+        272,
+        36
+      ],
+      "geometry": "rect",
+      "text": "LINE กลุ่ม",
+      "textPreview": "LINE กลุ่ม",
+      "resolvedFontSize": 27,
+      "resolvedTextStyle": {
+        "fontSize": 27,
+        "typeface": "+mn-lt",
+        "color": "#071B33",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "LINE กลุ่ม"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "LINE กลุ่ม",
+          "resolvedTextStyle": {
+            "fontSize": 27,
+            "color": "#071B33",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "LINE กลุ่ม",
+              "fontSize": 27,
+              "color": "#071B33",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3ex0nuxc",
+      "id": "9",
+      "bbox": [
+        114,
+        282,
+        272,
+        136
+      ],
+      "geometry": "rect",
+      "text": "คุยเร็ว แต่ค้นประวัติยาก\nรูปไหลหาย\nไม่รู้เจ้าของงาน\nวัดผลทีมไม่ได้",
+      "textPreview": "คุยเร็ว แต่ค้นประวัติยาก | รูปไหลหาย | ไม่รู้เจ้าของงาน | วัดผลทีมไม่ได้",
+      "resolvedFontSize": 20,
+      "resolvedTextStyle": {
+        "fontSize": 20,
+        "typeface": "+mn-lt",
+        "color": "#5C6F86",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "คุยเร็ว แต่ค้นประวัติยาก"
+          },
+          {
+            "index": 2,
+            "text": "รูปไหลหาย"
+          },
+          {
+            "index": 3,
+            "text": "ไม่รู้เจ้าของงาน"
+          },
+          {
+            "index": 4,
+            "text": "วัดผลทีมไม่ได้"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "คุยเร็ว แต่ค้นประวัติยาก",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "color": "#5C6F86"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "คุยเร็ว แต่ค้นประวัติยาก",
+              "fontSize": 20,
+              "color": "#5C6F86"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "รูปไหลหาย",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "color": "#5C6F86"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "รูปไหลหาย",
+              "fontSize": 20,
+              "color": "#5C6F86"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "ไม่รู้เจ้าของงาน",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "color": "#5C6F86"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ไม่รู้เจ้าของงาน",
+              "fontSize": 20,
+              "color": "#5C6F86"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "วัดผลทีมไม่ได้",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "color": "#5C6F86"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "วัดผลทีมไม่ได้",
+              "fontSize": 20,
+              "color": "#5C6F86"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3itgfmlk",
+      "id": "10",
+      "bbox": [
+        480,
+        210,
+        320,
+        220
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFF5E2",
+      "lineColor": "#FFE0A3",
+      "lineWidth": 1
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ex0nuxc3",
+      "id": "11",
+      "bbox": [
+        480,
+        210,
+        8,
+        220
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#F59E0B",
+      "lineColor": "#F59E0B",
+      "lineWidth": 1
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/loj2t83i",
+      "id": "12",
+      "bbox": [
+        504,
+        234,
+        272,
+        36
+      ],
+      "geometry": "rect",
+      "text": "Excel / Sheet",
+      "textPreview": "Excel / Sheet",
+      "resolvedFontSize": 27,
+      "resolvedTextStyle": {
+        "fontSize": 27,
+        "typeface": "+mn-lt",
+        "color": "#071B33",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Excel / Sheet"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Excel / Sheet",
+          "resolvedTextStyle": {
+            "fontSize": 27,
+            "color": "#071B33",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Excel / Sheet",
+              "fontSize": 27,
+              "color": "#071B33",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/w3m94fu1",
+      "id": "13",
+      "bbox": [
+        504,
+        282,
+        272,
+        136
+      ],
+      "geometry": "rect",
+      "text": "เก็บข้อมูลได้\nแต่ไม่เชื่อมรูปหน้างาน\nไม่แจ้งเตือนลูกค้า\nไม่ใช่ workflow จริง",
+      "textPreview": "เก็บข้อมูลได้ | แต่ไม่เชื่อมรูปหน้างาน | ไม่แจ้งเตือนลูกค้า | ไม่ใช่ workflow จริง",
+      "resolvedFontSize": 20,
+      "resolvedTextStyle": {
+        "fontSize": 20,
+        "typeface": "+mn-lt",
+        "color": "#5C6F86",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "เก็บข้อมูลได้"
+          },
+          {
+            "index": 2,
+            "text": "แต่ไม่เชื่อมรูปหน้างาน"
+          },
+          {
+            "index": 3,
+            "text": "ไม่แจ้งเตือนลูกค้า"
+          },
+          {
+            "index": 4,
+            "text": "ไม่ใช่ workflow จริง"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "เก็บข้อมูลได้",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "color": "#5C6F86"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "เก็บข้อมูลได้",
+              "fontSize": 20,
+              "color": "#5C6F86"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "แต่ไม่เชื่อมรูปหน้างาน",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "color": "#5C6F86"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "แต่ไม่เชื่อมรูปหน้างาน",
+              "fontSize": 20,
+              "color": "#5C6F86"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "ไม่แจ้งเตือนลูกค้า",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "color": "#5C6F86"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ไม่แจ้งเตือนลูกค้า",
+              "fontSize": 20,
+              "color": "#5C6F86"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "ไม่ใช่ workflow จริง",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "color": "#5C6F86"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ไม่ใช่ workflow จริง",
+              "fontSize": 20,
+              "color": "#5C6F86"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3q5o7qpg",
+      "id": "14",
+      "bbox": [
+        870,
+        210,
+        320,
+        220
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#E8FAF6",
+      "lineColor": "#AEEBDE",
+      "lineWidth": 1
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/e9cvixcz",
+      "id": "15",
+      "bbox": [
+        870,
+        210,
+        8,
+        220
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#12B497",
+      "lineColor": "#12B497",
+      "lineWidth": 1
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lwval87e",
+      "id": "16",
+      "bbox": [
+        894,
+        234,
+        272,
+        36
+      ],
+      "geometry": "rect",
+      "text": "Post-Sales IoT",
+      "textPreview": "Post-Sales IoT",
+      "resolvedFontSize": 27,
+      "resolvedTextStyle": {
+        "fontSize": 27,
+        "typeface": "+mn-lt",
+        "color": "#071B33",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Post-Sales IoT"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Post-Sales IoT",
+          "resolvedTextStyle": {
+            "fontSize": 27,
+            "color": "#071B33",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Post-Sales IoT",
+              "fontSize": 27,
+              "color": "#071B33",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wb2hwfyx",
+      "id": "17",
+      "bbox": [
+        894,
+        282,
+        272,
+        136
+      ],
+      "geometry": "rect",
+      "text": "ข้อมูล + สถานะ + รูป\nเชื่อม LINE OA\nช่างรับงานเอง\nติดตาม service ต่อได้",
+      "textPreview": "ข้อมูล + สถานะ + รูป | เชื่อม LINE OA | ช่างรับงานเอง | ติดตาม service ต่อได้",
+      "resolvedFontSize": 20,
+      "resolvedTextStyle": {
+        "fontSize": 20,
+        "typeface": "+mn-lt",
+        "color": "#5C6F86",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ข้อมูล + สถานะ + รูป"
+          },
+          {
+            "index": 2,
+            "text": "เชื่อม LINE OA"
+          },
+          {
+            "index": 3,
+            "text": "ช่างรับงานเอง"
+          },
+          {
+            "index": 4,
+            "text": "ติดตาม service ต่อได้"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ข้อมูล + สถานะ + รูป",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "color": "#5C6F86"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ข้อมูล + สถานะ + รูป",
+              "fontSize": 20,
+              "color": "#5C6F86"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "เชื่อม LINE OA",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "color": "#5C6F86"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "เชื่อม LINE OA",
+              "fontSize": 20,
+              "color": "#5C6F86"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "ช่างรับงานเอง",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "color": "#5C6F86"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ช่างรับงานเอง",
+              "fontSize": 20,
+              "color": "#5C6F86"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "ติดตาม service ต่อได้",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "color": "#5C6F86"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ติดตาม service ต่อได้",
+              "fontSize": 20,
+              "color": "#5C6F86"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/32lszqtc",
+      "id": "18",
+      "bbox": [
+        180,
+        525,
+        920,
+        58
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#071B33",
+      "lineColor": "#071B33",
+      "lineWidth": 1
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ahoza1gv",
+      "id": "19",
+      "bbox": [
+        250,
+        539,
+        800,
+        26
+      ],
+      "geometry": "rect",
+      "text": "จุดขายคือเปลี่ยนงานหลังบ้านที่กระจัดกระจายให้เป็นประสบการณ์บริการที่ลูกค้ารู้สึกได้",
+      "textPreview": "จุดขายคือเปลี่ยนงานหลังบ้านที่กระจัดกระจายให้เป็นประสบการณ์บริการที่ลูกค้ารู้สึกได้",
+      "resolvedFontSize": 21,
+      "resolvedTextStyle": {
+        "fontSize": 21,
+        "typeface": "+mn-lt",
+        "color": "#FFFFFF",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "จุดขายคือเปลี่ยนงานหลังบ้านที่กระจัดกระจายให้เป็นประสบการณ์บริการที่ลูกค้ารู้สึกได้"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "จุดขายคือเปลี่ยนงานหลังบ้านที่กระจัดกระจายให้เป็นประสบการณ์บริการที่ลูกค้ารู้สึกได้",
+          "resolvedTextStyle": {
+            "fontSize": 21,
+            "color": "#FFFFFF",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "จุดขายคือเปลี่ยนงานหลังบ้านที่กระจัดกระจายให้เป็นประสบการณ์บริการที่ลูกค้ารู้สึกได้",
+              "fontSize": 21,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

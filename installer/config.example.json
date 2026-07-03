@@ -1,0 +1,47 @@
+{
+  "company": {
+    "name": "Customer Company",
+    "supportPhone": "02-000-0000"
+  },
+  "admin": {
+    "username": "admin",
+    "password": "change-this-password",
+    "fullName": "ผู้ดูแลระบบ",
+    "phone": "0800000000"
+  },
+  "domain": {
+    "mode": "customer_domain",
+    "publicUrl": "https://service.customercompany.com",
+    "cloudflareTunnelName": "postsales-iot-customer"
+  },
+  "server": {
+    "port": 5000,
+    "installDir": "C:\\PostSalesIoT",
+    "uploadDir": "C:\\PostSalesIoT\\uploads",
+    "backupDir": "C:\\PostSalesIoT\\backups",
+    "jwtSecret": "",
+    "nodeExe": "node",
+    "npmCmd": "npm.cmd",
+    "mysqlExe": "mysql.exe"
+  },
+  "database": {
+    "host": "127.0.0.1",
+    "port": 3306,
+    "user": "root",
+    "password": "",
+    "name": "postsales_iot"
+  },
+  "line": {
+    "customerChannelSecret": "",
+    "customerChannelAccessToken": "",
+    "customerBasicId": "",
+    "teamChannelAccessToken": "",
+    "teamTargetId": ""
+  },
+  "license": {
+    "licenseKey": "",
+    "licenseServerUrl": "https://license.yourcompany.com",
+    "plan": "local-business",
+    "expiresAt": ""
+  }
+}

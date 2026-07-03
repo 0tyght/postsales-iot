@@ -1,0 +1,940 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/zvv37i",
+    "id": "zvv37i",
+    "slide": 10,
+    "layoutId": "2a8629f9-53d9-4cf8-b482-91422b81c9b0",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "f44a7b7d-44ec-49ef-9331-8f36ad048916",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#F6FAFD",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "2a8629f9-53d9-4cf8-b482-91422b81c9b0",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "f44a7b7d-44ec-49ef-9331-8f36ad048916",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "f44a7b7d-44ec-49ef-9331-8f36ad048916",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/j6tovaho",
+      "id": "1",
+      "bbox": [
+        52,
+        40,
+        54,
+        54
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#071B33",
+      "lineColor": "#071B33",
+      "lineWidth": 1
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/crmhk3q5",
+      "id": "2",
+      "bbox": [
+        62,
+        56,
+        34,
+        20
+      ],
+      "geometry": "rect",
+      "text": "TYT",
+      "textPreview": "TYT",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "+mn-lt",
+        "color": "#FFFFFF",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TY"
+          },
+          {
+            "index": 2,
+            "text": "T"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TYT",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "color": "#FFFFFF",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "TYT",
+              "fontSize": 14,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1cfa9w3m",
+      "id": "3",
+      "bbox": [
+        1168,
+        48,
+        42,
+        20
+      ],
+      "geometry": "rect",
+      "text": "10",
+      "textPreview": "10",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#5C6F86",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "10"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "10",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#5C6F86"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "10",
+              "fontSize": 13,
+              "color": "#5C6F86"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/uxc3ylc7",
+      "id": "4",
+      "bbox": [
+        76,
+        118,
+        820,
+        86
+      ],
+      "geometry": "rect",
+      "text": "เหมาะกับธุรกิจที่รายได้ไม่ได้จบที่การขายครั้งแรก",
+      "textPreview": "เหมาะกับธุรกิจที่รายได้ไม่ได้จบที่การขายครั้งแรก",
+      "resolvedFontSize": 40,
+      "resolvedTextStyle": {
+        "fontSize": 40,
+        "typeface": "+mn-lt",
+        "color": "#071B33",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "เหมาะกับธุรกิจที่รายได้ไม่ได้จบที่การขายครั้งแร"
+          },
+          {
+            "index": 2,
+            "text": "ก"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "เหมาะกับธุรกิจที่รายได้ไม่ได้จบที่การขายครั้งแรก",
+          "resolvedTextStyle": {
+            "fontSize": 40,
+            "color": "#071B33",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "เหมาะกับธุรกิจที่รายได้ไม่ได้จบที่การขายครั้งแรก",
+              "fontSize": 40,
+              "color": "#071B33",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ji5snelo",
+      "id": "5",
+      "bbox": [
+        78,
+        214,
+        770,
+        48
+      ],
+      "geometry": "rect",
+      "text": "โดยเฉพาะงานที่มีอุปกรณ์จริง มีการติดตั้ง มีรับประกัน และต้องกลับไปดูแลลูกค้า",
+      "textPreview": "โดยเฉพาะงานที่มีอุปกรณ์จริง มีการติดตั้ง มีรับประกัน และต้องกลับไปดูแลลูกค้า",
+      "resolvedFontSize": 20,
+      "resolvedTextStyle": {
+        "fontSize": 20,
+        "typeface": "+mn-lt",
+        "color": "#5C6F86",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "โดยเฉพาะงานที่มีอุปกรณ์จริง มีการติดตั้ง มีรับประกัน และต้องกลับไปดูแลลูกค้า"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "โดยเฉพาะงานที่มีอุปกรณ์จริง มีการติดตั้ง มีรับประกัน และต้องกลับไปดูแลลูกค้า",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "color": "#5C6F86"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "โดยเฉพาะงานที่มีอุปกรณ์จริง มีการติดตั้ง มีรับประกัน และต้องกลับไปดูแลลูกค้า",
+              "fontSize": 20,
+              "color": "#5C6F86"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/c3ylc7u5",
+      "id": "6",
+      "bbox": [
+        110,
+        185,
+        1060,
+        74
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D7E4EF",
+      "lineWidth": 1
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1kre1w7m",
+      "id": "7",
+      "bbox": [
+        110,
+        185,
+        8,
+        74
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#06C755",
+      "lineColor": "#06C755",
+      "lineWidth": 1
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/q5o7qpg3",
+      "id": "8",
+      "bbox": [
+        134,
+        209,
+        1012,
+        36
+      ],
+      "geometry": "rect",
+      "text": "ธุรกิจ IoT / Smart Farm",
+      "textPreview": "ธุรกิจ IoT / Smart Farm",
+      "resolvedFontSize": 23,
+      "resolvedTextStyle": {
+        "fontSize": 23,
+        "typeface": "+mn-lt",
+        "color": "#071B33",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ธุรกิจ IoT / Smart Farm"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ธุรกิจ IoT / Smart Farm",
+          "resolvedTextStyle": {
+            "fontSize": 23,
+            "color": "#071B33",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ธุรกิจ IoT / Smart Farm",
+              "fontSize": 23,
+              "color": "#071B33",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/jqh0fepk",
+      "id": "9",
+      "bbox": [
+        134,
+        257,
+        1012,
+        -10
+      ],
+      "geometry": "rect",
+      "text": "มีอุปกรณ์หลายตัว หลายจุดติดตั้ง และต้องดูแลต่อเนื่อง",
+      "textPreview": "มีอุปกรณ์หลายตัว หลายจุดติดตั้ง และต้องดูแลต่อเนื่อง",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#5C6F86",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "มีอุปกรณ์หลายตัว หลายจุดติดตั้ง และต้องดูแลต่อเนื่อง"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "มีอุปกรณ์หลายตัว หลายจุดติดตั้ง และต้องดูแลต่อเนื่อง",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#5C6F86"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "มีอุปกรณ์หลายตัว หลายจุดติดตั้ง และต้องดูแลต่อเนื่อง",
+              "fontSize": 18,
+              "color": "#5C6F86"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fmlkjm1c",
+      "id": "10",
+      "bbox": [
+        110,
+        283,
+        1060,
+        74
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D7E4EF",
+      "lineWidth": 1
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/q1orytsv",
+      "id": "11",
+      "bbox": [
+        110,
+        283,
+        8,
+        74
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#1666D8",
+      "lineColor": "#1666D8",
+      "lineWidth": 1
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/xs72x4na",
+      "id": "12",
+      "bbox": [
+        134,
+        307,
+        1012,
+        36
+      ],
+      "geometry": "rect",
+      "text": "บริษัทติดตั้งระบบ",
+      "textPreview": "บริษัทติดตั้งระบบ",
+      "resolvedFontSize": 23,
+      "resolvedTextStyle": {
+        "fontSize": 23,
+        "typeface": "+mn-lt",
+        "color": "#071B33",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "บริษัทติดตั้งระบบ"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "บริษัทติดตั้งระบบ",
+          "resolvedTextStyle": {
+            "fontSize": 23,
+            "color": "#071B33",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "บริษัทติดตั้งระบบ",
+              "fontSize": 23,
+              "color": "#071B33",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/87ed8bat",
+      "id": "13",
+      "bbox": [
+        134,
+        355,
+        1012,
+        -10
+      ],
+      "geometry": "rect",
+      "text": "ต้องเก็บรูปหน้างาน serial อุปกรณ์ และสรุปผลให้ลูกค้า",
+      "textPreview": "ต้องเก็บรูปหน้างาน serial อุปกรณ์ และสรุปผลให้ลูกค้า",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#5C6F86",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ต้องเก็บรูปหน้างาน serial อุปกรณ์ และสรุปผลให้ลูกค้า"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ต้องเก็บรูปหน้างาน serial อุปกรณ์ และสรุปผลให้ลูกค้า",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#5C6F86"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ต้องเก็บรูปหน้างาน serial อุปกรณ์ และสรุปผลให้ลูกค้า",
+              "fontSize": 18,
+              "color": "#5C6F86"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/je9cvixc",
+      "id": "14",
+      "bbox": [
+        110,
+        381,
+        1060,
+        74
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D7E4EF",
+      "lineWidth": 1
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qtcj6tov",
+      "id": "15",
+      "bbox": [
+        110,
+        381,
+        8,
+        74
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#F59E0B",
+      "lineColor": "#F59E0B",
+      "lineWidth": 1
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1gvy90je",
+      "id": "16",
+      "bbox": [
+        134,
+        405,
+        1012,
+        36
+      ],
+      "geometry": "rect",
+      "text": "ทีมซ่อมบำรุง",
+      "textPreview": "ทีมซ่อมบำรุง",
+      "resolvedFontSize": 23,
+      "resolvedTextStyle": {
+        "fontSize": 23,
+        "typeface": "+mn-lt",
+        "color": "#071B33",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ทีมซ่อมบำรุง"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ทีมซ่อมบำรุง",
+          "resolvedTextStyle": {
+            "fontSize": 23,
+            "color": "#071B33",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ทีมซ่อมบำรุง",
+              "fontSize": 23,
+              "color": "#071B33",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8z25kb6x",
+      "id": "17",
+      "bbox": [
+        134,
+        453,
+        1012,
+        -10
+      ],
+      "geometry": "rect",
+      "text": "ต้องรับเคส แบ่งงาน และติดตามสถานะงานรายวัน",
+      "textPreview": "ต้องรับเคส แบ่งงาน และติดตามสถานะงานรายวัน",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#5C6F86",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ต้องรับเคส แบ่งงาน และติดตามสถานะงานรายวัน"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ต้องรับเคส แบ่งงาน และติดตามสถานะงานรายวัน",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#5C6F86"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ต้องรับเคส แบ่งงาน และติดตามสถานะงานรายวัน",
+              "fontSize": 18,
+              "color": "#5C6F86"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fa9w3m94",
+      "id": "18",
+      "bbox": [
+        110,
+        479,
+        1060,
+        74
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D7E4EF",
+      "lineWidth": 1
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qpg3ex0n",
+      "id": "19",
+      "bbox": [
+        110,
+        479,
+        8,
+        74
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#12B497",
+      "lineColor": "#12B497",
+      "lineWidth": 1
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ytsvu9kn",
+      "id": "20",
+      "bbox": [
+        134,
+        503,
+        1012,
+        36
+      ],
+      "geometry": "rect",
+      "text": "ผู้ให้บริการหลังการขาย",
+      "textPreview": "ผู้ให้บริการหลังการขาย",
+      "resolvedFontSize": 23,
+      "resolvedTextStyle": {
+        "fontSize": 23,
+        "typeface": "+mn-lt",
+        "color": "#071B33",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ผู้ให้บริการหลังการขาย"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ผู้ให้บริการหลังการขาย",
+          "resolvedTextStyle": {
+            "fontSize": 23,
+            "color": "#071B33",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ผู้ให้บริการหลังการขาย",
+              "fontSize": 23,
+              "color": "#071B33",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/neloj2t8",
+      "id": "21",
+      "bbox": [
+        134,
+        551,
+        1012,
+        -10
+      ],
+      "geometry": "rect",
+      "text": "ต้องรักษาความสัมพันธ์ลูกค้าและชวนต่อ service ได้",
+      "textPreview": "ต้องรักษาความสัมพันธ์ลูกค้าและชวนต่อ service ได้",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#5C6F86",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ต้องรักษาความสัมพันธ์ลูกค้าและชวนต่อ service ได้"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ต้องรักษาความสัมพันธ์ลูกค้าและชวนต่อ service ได้",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#5C6F86"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ต้องรักษาความสัมพันธ์ลูกค้าและชวนต่อ service ได้",
+              "fontSize": 18,
+              "color": "#5C6F86"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

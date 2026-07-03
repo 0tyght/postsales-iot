@@ -1,0 +1,931 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/77il4c",
+    "id": "77il4c",
+    "slide": 11,
+    "layoutId": "2a8629f9-53d9-4cf8-b482-91422b81c9b0",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "f44a7b7d-44ec-49ef-9331-8f36ad048916",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#F6FAFD",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "2a8629f9-53d9-4cf8-b482-91422b81c9b0",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "f44a7b7d-44ec-49ef-9331-8f36ad048916",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "f44a7b7d-44ec-49ef-9331-8f36ad048916",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wra5gbq1",
+      "id": "1",
+      "bbox": [
+        52,
+        40,
+        54,
+        54
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#071B33",
+      "lineColor": "#071B33",
+      "lineWidth": 1
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/36hcrmhk",
+      "id": "2",
+      "bbox": [
+        62,
+        56,
+        34,
+        20
+      ],
+      "geometry": "rect",
+      "text": "TYT",
+      "textPreview": "TYT",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "+mn-lt",
+        "color": "#FFFFFF",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TY"
+          },
+          {
+            "index": 2,
+            "text": "T"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TYT",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "color": "#FFFFFF",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "TYT",
+              "fontSize": 14,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/eloj2t83",
+      "id": "3",
+      "bbox": [
+        1168,
+        48,
+        42,
+        20
+      ],
+      "geometry": "rect",
+      "text": "11",
+      "textPreview": "11",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#5C6F86",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "11"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "11",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#5C6F86"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "11",
+              "fontSize": 13,
+              "color": "#5C6F86"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/l0rqd4vm",
+      "id": "4",
+      "bbox": [
+        76,
+        118,
+        820,
+        86
+      ],
+      "geometry": "rect",
+      "text": "เริ่มขายได้ด้วยข้อความง่าย ๆ",
+      "textPreview": "เริ่มขายได้ด้วยข้อความง่าย ๆ",
+      "resolvedFontSize": 40,
+      "resolvedTextStyle": {
+        "fontSize": 40,
+        "typeface": "+mn-lt",
+        "color": "#071B33",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "เริ่มขายได้ด้วยข้อความง่าย ๆ"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "เริ่มขายได้ด้วยข้อความง่าย ๆ",
+          "resolvedTextStyle": {
+            "fontSize": 40,
+            "color": "#071B33",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "เริ่มขายได้ด้วยข้อความง่าย ๆ",
+              "fontSize": 40,
+              "color": "#071B33",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wfyxobm5",
+      "id": "5",
+      "bbox": [
+        78,
+        214,
+        770,
+        48
+      ],
+      "geometry": "rect",
+      "text": "ไม่ต้องพูดว่าเป็นระบบใหญ่ ให้พูดว่าเป็นเครื่องมือทำให้ทีมบริการไม่หลุดงาน",
+      "textPreview": "ไม่ต้องพูดว่าเป็นระบบใหญ่ ให้พูดว่าเป็นเครื่องมือทำให้ทีมบริการไม่หลุดงาน",
+      "resolvedFontSize": 20,
+      "resolvedTextStyle": {
+        "fontSize": 20,
+        "typeface": "+mn-lt",
+        "color": "#5C6F86",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ไม่ต้องพูดว่าเป็นระบบใหญ่ ให้พูดว่าเป็นเครื่องมือทำให้ทีมบริการไม่หลุดงาน"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ไม่ต้องพูดว่าเป็นระบบใหญ่ ให้พูดว่าเป็นเครื่องมือทำให้ทีมบริการไม่หลุดงาน",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "color": "#5C6F86"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ไม่ต้องพูดว่าเป็นระบบใหญ่ ให้พูดว่าเป็นเครื่องมือทำให้ทีมบริการไม่หลุดงาน",
+              "fontSize": 20,
+              "color": "#5C6F86"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7u54zido",
+      "id": "6",
+      "bbox": [
+        118,
+        192,
+        1044,
+        250
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#071B33",
+      "lineColor": "#071B33",
+      "lineWidth": 1
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ed8bat47",
+      "id": "7",
+      "bbox": [
+        170,
+        245,
+        930,
+        106
+      ],
+      "geometry": "rect",
+      "text": "“ระบบนี้ช่วยให้คุณรู้ทันทีว่า ลูกค้ารายไหนมีอุปกรณ์อะไร อยู่ที่ไหน ใครรับงานอยู่ มีรูปหลักฐานหรือยัง และถึงรอบดูแลเมื่อไร”",
+      "textPreview": "“ระบบนี้ช่วยให้คุณรู้ทันทีว่า ลูกค้ารายไหนมีอุปกรณ์อะไร อยู่ที่ไหน ใครรับงานอยู่ มีรูปหลักฐานหรือยัง และถึงรอบดูแลเมื่อไร”",
+      "resolvedFontSize": 34,
+      "resolvedTextStyle": {
+        "fontSize": 34,
+        "typeface": "+mn-lt",
+        "color": "#FFFFFF",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "“ระบบนี้ช่วยให้คุณรู้ทันทีว่า ลูกค้ารายไหนมีอุปกรณ์อะไร"
+          },
+          {
+            "index": 2,
+            "text": "อยู่ที่ไหน ใครรับงานอยู่ มีรูปหลักฐานหรือยัง"
+          },
+          {
+            "index": 3,
+            "text": "และถึงรอบดูแลเมื่อไร”"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "“ระบบนี้ช่วยให้คุณรู้ทันทีว่า ลูกค้ารายไหนมีอุปกรณ์อะไร อยู่ที่ไหน ใครรับงานอยู่ มีรูปหลักฐานหรือยัง และถึงรอบดูแลเมื่อไร”",
+          "resolvedTextStyle": {
+            "fontSize": 34,
+            "color": "#FFFFFF",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "“ระบบนี้ช่วยให้คุณรู้ทันทีว่า ลูกค้ารายไหนมีอุปกรณ์อะไร อยู่ที่ไหน ใครรับงานอยู่ มีรูปหลักฐานหรือยัง และถึงรอบดูแลเมื่อไร”",
+              "fontSize": 34,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/psfil0rq",
+      "id": "8",
+      "bbox": [
+        210,
+        375,
+        840,
+        28
+      ],
+      "geometry": "rect",
+      "text": "นี่คือประโยคหลักสำหรับขายงาน เพราะคนซื้อจะเห็นภาพการใช้งานจริงทันที",
+      "textPreview": "นี่คือประโยคหลักสำหรับขายงาน เพราะคนซื้อจะเห็นภาพการใช้งานจริงทันที",
+      "resolvedFontSize": 19,
+      "resolvedTextStyle": {
+        "fontSize": 19,
+        "typeface": "+mn-lt",
+        "color": "#C7D8EA",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "นี่คือประโยคหลักสำหรับขายงาน เพราะคนซื้อจะเห็นภาพการใช้งานจริงทันที"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "นี่คือประโยคหลักสำหรับขายงาน เพราะคนซื้อจะเห็นภาพการใช้งานจริงทันที",
+          "resolvedTextStyle": {
+            "fontSize": 19,
+            "color": "#C7D8EA"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "นี่คือประโยคหลักสำหรับขายงาน เพราะคนซื้อจะเห็นภาพการใช้งานจริงทันที",
+              "fontSize": 19,
+              "color": "#C7D8EA"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/w7mp0bi9",
+      "id": "9",
+      "bbox": [
+        150,
+        505,
+        280,
+        92
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D7E4EF",
+      "lineWidth": 1
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/eloj2t83",
+      "id": "10",
+      "bbox": [
+        150,
+        505,
+        8,
+        92
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#1666D8",
+      "lineColor": "#1666D8",
+      "lineWidth": 1
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/36hcrmhk",
+      "id": "11",
+      "bbox": [
+        174,
+        529,
+        232,
+        36
+      ],
+      "geometry": "rect",
+      "text": "ขายให้เจ้าของ",
+      "textPreview": "ขายให้เจ้าของ",
+      "resolvedFontSize": 21,
+      "resolvedTextStyle": {
+        "fontSize": 21,
+        "typeface": "+mn-lt",
+        "color": "#071B33",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ขายให้เจ้าของ"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ขายให้เจ้าของ",
+          "resolvedTextStyle": {
+            "fontSize": 21,
+            "color": "#071B33",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ขายให้เจ้าของ",
+              "fontSize": 21,
+              "color": "#071B33",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wra5gbq1",
+      "id": "12",
+      "bbox": [
+        174,
+        577,
+        232,
+        8
+      ],
+      "geometry": "rect",
+      "text": "ลดงานหลุดและเพิ่มความน่าเชื่อถือ",
+      "textPreview": "ลดงานหลุดและเพิ่มความน่าเชื่อถือ",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#5C6F86",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ลดงานหลุดและเพิ่มความน่าเชื่อถื"
+          },
+          {
+            "index": 2,
+            "text": "อ"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ลดงานหลุดและเพิ่มความน่าเชื่อถือ",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#5C6F86"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ลดงานหลุดและเพิ่มความน่าเชื่อถือ",
+              "fontSize": 17,
+              "color": "#5C6F86"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lc7u54zi",
+      "id": "13",
+      "bbox": [
+        500,
+        505,
+        280,
+        92
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D7E4EF",
+      "lineWidth": 1
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ed8bat47",
+      "id": "14",
+      "bbox": [
+        500,
+        505,
+        8,
+        92
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#12B497",
+      "lineColor": "#12B497",
+      "lineWidth": 1
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7u54zido",
+      "id": "15",
+      "bbox": [
+        524,
+        529,
+        232,
+        36
+      ],
+      "geometry": "rect",
+      "text": "ขายให้หัวหน้าช่าง",
+      "textPreview": "ขายให้หัวหน้าช่าง",
+      "resolvedFontSize": 21,
+      "resolvedTextStyle": {
+        "fontSize": 21,
+        "typeface": "+mn-lt",
+        "color": "#071B33",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ขายให้หัวหน้าช่าง"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ขายให้หัวหน้าช่าง",
+          "resolvedTextStyle": {
+            "fontSize": 21,
+            "color": "#071B33",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ขายให้หัวหน้าช่าง",
+              "fontSize": 21,
+              "color": "#071B33",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wfyxobm5",
+      "id": "16",
+      "bbox": [
+        524,
+        577,
+        232,
+        8
+      ],
+      "geometry": "rect",
+      "text": "ทีมทำงานง่ายและมีหลักฐานครบ",
+      "textPreview": "ทีมทำงานง่ายและมีหลักฐานครบ",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#5C6F86",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ทีมทำงานง่ายและมีหลักฐานครบ"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ทีมทำงานง่ายและมีหลักฐานครบ",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#5C6F86"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ทีมทำงานง่ายและมีหลักฐานครบ",
+              "fontSize": 17,
+              "color": "#5C6F86"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/l0rqd4vm",
+      "id": "17",
+      "bbox": [
+        850,
+        505,
+        280,
+        92
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D7E4EF",
+      "lineWidth": 1
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/e1w7mp0b",
+      "id": "18",
+      "bbox": [
+        850,
+        505,
+        8,
+        92
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#F59E0B",
+      "lineColor": "#F59E0B",
+      "lineWidth": 1
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7mp0bi9s",
+      "id": "19",
+      "bbox": [
+        874,
+        529,
+        232,
+        36
+      ],
+      "geometry": "rect",
+      "text": "ขายให้แอดมิน",
+      "textPreview": "ขายให้แอดมิน",
+      "resolvedFontSize": 21,
+      "resolvedTextStyle": {
+        "fontSize": 21,
+        "typeface": "+mn-lt",
+        "color": "#071B33",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ขายให้แอดมิน"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ขายให้แอดมิน",
+          "resolvedTextStyle": {
+            "fontSize": 21,
+            "color": "#071B33",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ขายให้แอดมิน",
+              "fontSize": 21,
+              "color": "#071B33",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zed8v6ps",
+      "id": "20",
+      "bbox": [
+        874,
+        577,
+        232,
+        8
+      ],
+      "geometry": "rect",
+      "text": "ตอบลูกค้าได้โดยไม่ต้องไล่ถาม",
+      "textPreview": "ตอบลูกค้าได้โดยไม่ต้องไล่ถาม",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#5C6F86",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ตอบลูกค้าได้โดยไม่ต้องไล่ถาม"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ตอบลูกค้าได้โดยไม่ต้องไล่ถาม",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#5C6F86"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ตอบลูกค้าได้โดยไม่ต้องไล่ถาม",
+              "fontSize": 17,
+              "color": "#5C6F86"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

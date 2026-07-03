@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Post-Sales IoT License Admin</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <span class="eyebrow">License Server</span>
+        <h1>Post-Sales IoT License Admin</h1>
+        <p>จัดการ License รายเดือน/รายปีสำหรับลูกค้าที่ติดตั้งระบบในเครื่องตัวเอง</p>
+      </div>
+      <div class="token-card">
+        <label>Admin Token</label>
+        <input id="adminToken" type="password" placeholder="LICENSE_ADMIN_TOKEN" />
+        <button id="saveToken">บันทึก Token</button>
+      </div>
+    </section>
+
+    <section class="grid">
+      <form id="createForm" class="panel">
+        <h2>สร้าง License ใหม่</h2>
+        <div class="form-grid">
+          <label>ชื่อบริษัท<input name="company_name" required placeholder="Customer Company" /></label>
+          <label>โดเมนลูกค้า<input name="domain_name" placeholder="service.customer.com" /></label>
+          <label>ผู้ติดต่อ<input name="contact_name" placeholder="คุณลูกค้า" /></label>
+          <label>เบอร์โทร<input name="contact_phone" placeholder="0800000000" /></label>
+          <label>อีเมล<input name="contact_email" type="email" placeholder="admin@example.com" /></label>
+          <label>แพ็กเกจ<input name="plan_code" value="local-business" /></label>
+          <label>สถานะ
+            <select name="status">
+              <option value="trial">trial</option>
+              <option value="active">active</option>
+              <option value="suspended">suspended</option>
+            </select>
+          </label>
+          <label>รอบบิล
+            <select name="billing_cycle">
+              <option value="monthly">monthly</option>
+              <option value="yearly">yearly</option>
+              <option value="manual">manual</option>
+            </select>
+          </label>
+          <label>เริ่มใช้งาน<input name="starts_at" type="date" /></label>
+          <label>หมดอายุ<input name="expires_at" type="date" /></label>
+          <label>ผู้ใช้สูงสุด<input name="max_users" type="number" value="10" min="1" /></label>
+          <label>ช่างสูงสุด<input name="max_technicians" type="number" value="5" min="1" /></label>
+          <label>ลูกค้าสูงสุด<input name="max_customers" type="number" value="500" min="1" /></label>
+          <label>Storage GB<input name="max_storage_gb" type="number" value="20" min="1" /></label>
+        </div>
+        <label>หมายเหตุ<textarea name="notes" rows="3" placeholder="รายละเอียดการขาย / เงื่อนไขพิเศษ"></textarea></label>
+        <button class="primary">สร้าง License</button>
+      </form>
+
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>รายการ License</h2>
+            <p id="summary">-</p>
+          </div>
+          <button id="refresh">โหลดใหม่</button>
+        </div>
+        <div id="message" class="message" hidden></div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>บริษัท</th>
+                <th>License</th>
+                <th>สถานะ</th>
+                <th>แพ็กเกจ</th>
+                <th>โดเมน</th>
+                <th>หมดอายุ</th>
+                <th>จัดการ</th>
+              </tr>
+            </thead>
+            <tbody id="licenseRows">
+              <tr><td colspan="7" class="empty">ยังไม่มีข้อมูล</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <dialog id="editDialog">
+    <form id="editForm" class="dialog-card">
+      <header>
+        <h2>แก้ไข License</h2>
+        <button type="button" id="closeDialog">×</button>
+      </header>
+      <input type="hidden" name="license_id" />
+      <label>สถานะ
+        <select name="status">
+          <option value="trial">trial</option>
+          <option value="active">active</option>
+          <option value="expired">expired</option>
+          <option value="suspended">suspended</option>
+          <option value="cancelled">cancelled</option>
+        </select>
+      </label>
+      <label>แพ็กเกจ<input name="plan_code" /></label>
+      <label>รอบบิล
+        <select name="billing_cycle">
+          <option value="monthly">monthly</option>
+          <option value="yearly">yearly</option>
+          <option value="manual">manual</option>
+          <option value="lifetime">lifetime</option>
+        </select>
+      </label>
+      <label>หมดอายุ<input name="expires_at" type="date" /></label>
+      <label>ผู้ใช้สูงสุด<input name="max_users" type="number" min="1" /></label>
+      <label>ช่างสูงสุด<input name="max_technicians" type="number" min="1" /></label>
+      <label>ลูกค้าสูงสุด<input name="max_customers" type="number" min="1" /></label>
+      <label>Storage GB<input name="max_storage_gb" type="number" min="1" /></label>
+      <label>Grace days<input name="grace_days" type="number" min="0" /></label>
+      <label>หมายเหตุ<textarea name="notes" rows="3"></textarea></label>
+      <button class="primary">บันทึกการแก้ไข</button>
+    </form>
+  </dialog>
+
+  <script src="./app.js"></script>
+</body>
+</html>

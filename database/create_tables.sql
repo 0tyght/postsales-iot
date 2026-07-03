@@ -2,6 +2,7 @@ USE postsales_iot;
 
 SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS problem_devices;
+DROP TABLE IF EXISTS system_settings;
 DROP TABLE IF EXISTS job_evidence;
 DROP TABLE IF EXISTS line_report_sessions;
 DROP TABLE IF EXISTS problem_reports;
@@ -208,4 +209,12 @@ CREATE TABLE problem_devices (
     (repair_method = 'replace' AND replacement_device_id IS NOT NULL)
     OR repair_method IN ('repair','add','remove')
   )
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE system_settings (
+  setting_key VARCHAR(120) PRIMARY KEY,
+  setting_value TEXT,
+  setting_group VARCHAR(80) NOT NULL DEFAULT 'general',
+  is_secret TINYINT(1) NOT NULL DEFAULT 0,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

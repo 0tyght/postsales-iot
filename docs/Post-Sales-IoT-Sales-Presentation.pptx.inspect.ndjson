@@ -1,0 +1,232 @@
+{"kind":"deck","id":"pr/z8y7du","name":"Deck"}
+{"kind":"layout","layoutId":"a4ffe993-f33a-4c6f-8567-efa2746cb739","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"da57c945-64c3-4acc-8bec-2814acf33ffc","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/doo987","slide":1,"title":"TYT","textShapes":7}
+{"kind":"shape","id":"sh/itgfmlkj","slide":1,"bbox":[720,0,540,720]}
+{"kind":"shape","id":"sh/pkzupwb2","slide":1,"bbox":[78,72,72,72]}
+{"kind":"textbox","id":"sh/0z61032l","slide":1,"text":"TYT","textPreview":"TYT","textChars":3,"textLines":1,"bbox":[87,88,54,24]}
+{"kind":"shape","id":"sh/72x4nap4","slide":1,"bbox":[78,176,360,34]}
+{"kind":"textbox","id":"sh/ih4byhgn","slide":1,"text":"ระบบดูแลหลังการขายสำหรับงานติดตั้งและบริการ","textPreview":"ระบบดูแลหลังการขายสำหรับงานติดตั้งและบริการ","textChars":43,"textLines":1,"bbox":[90,182,336,22]}
+{"kind":"textbox","id":"sh/p8nqxs72","slide":1,"text":"Post-Sales IoT\nSupport","textPreview":"Post-Sales IoT | Support","textChars":22,"textLines":2,"bbox":[78,230,560,145]}
+{"kind":"textbox","id":"sh/0nuxc3yl","slide":1,"text":"ดูแลลูกค้า งานติดตั้ง งานซ่อม อุปกรณ์จริง รูปหลักฐาน และ LINE OA ได้ในระบบเดียว","textPreview":"ดูแลลูกค้า งานติดตั้ง งานซ่อม อุปกรณ์จริง รูปหลักฐาน และ LINE OA ได้ในระบบเดียว","textChars":79,"textLines":1,"bbox":[82,398,540,86]}
+{"kind":"shape","id":"sh/7y1kre1w","slide":1,"bbox":[760,120,380,420]}
+{"kind":"textbox","id":"sh/ed8v6psf","slide":1,"text":"งานที่ไม่หลุด","textPreview":"งานที่ไม่หลุด","textChars":13,"textLines":1,"bbox":[810,165,260,36]}
+{"kind":"textbox","id":"sh/8v6psfil","slide":1,"text":"สถานะชัดเจน\nรูปหน้างานครบ\nติดต่อผ่าน LINE\nดูแลต่อเนื่องหลังขาย","textPreview":"สถานะชัดเจน | รูปหน้างานครบ | ติดต่อผ่าน LINE | ดูแลต่อเนื่องหลังขาย","textChars":62,"textLines":4,"bbox":[810,230,280,200]}
+{"kind":"shape","id":"sh/xczed8v6","slide":1,"bbox":[790,468,320,44]}
+{"kind":"textbox","id":"sh/qpg3ex0n","slide":1,"text":"พร้อมใช้งานแบบ Web App / PWA","textPreview":"พร้อมใช้งานแบบ Web App / PWA","textChars":28,"textLines":1,"bbox":[820,478,270,24]}
+{"kind":"notes","id":"nt/doo987","slide":1,"text":""}
+{"kind":"slide","id":"sl/8p457k","slide":2,"title":"งานหลังการขายมักพังตรงช่องว่างเล็ก ๆ","textShapes":13}
+{"kind":"textbox","id":"sh/x4nap4r6","slide":2,"text":"งานหลังการขายมักพังตรงช่องว่างเล็ก ๆ","textPreview":"งานหลังการขายมักพังตรงช่องว่างเล็ก ๆ","textChars":36,"textLines":1,"bbox":[62,44,780,48]}
+{"kind":"textbox","id":"sh/qd4vmtwr","slide":2,"text":"เมื่อข้อมูลกระจายอยู่หลายที่ ทีมจะเห็นภาพไม่พร้อมกัน","textPreview":"เมื่อข้อมูลกระจายอยู่หลายที่ ทีมจะเห็นภาพไม่พร้อมกัน","textChars":52,"textLines":1,"bbox":[64,94,820,34]}
+{"kind":"textbox","id":"sh/fyxobm58","slide":2,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[1160,48,60,24]}
+{"kind":"shape","id":"sh/8v6psfil","slide":2,"bbox":[80,180,330,140]}
+{"kind":"shape","id":"sh/xczed8v6","slide":2,"bbox":[80,180,8,140]}
+{"kind":"textbox","id":"sh/qpg3ex0n","slide":2,"text":"งานหลุด","textPreview":"งานหลุด","textChars":7,"textLines":1,"bbox":[104,202,282,32]}
+{"kind":"textbox","id":"sh/fa9w3m94","slide":2,"text":"รับแจ้งแล้วไม่มีใครเห็นสถานะล่าสุด","textPreview":"รับแจ้งแล้วไม่มีใครเห็นสถานะล่าสุด","textChars":34,"textLines":1,"bbox":[104,244,282,64]}
+{"kind":"shape","id":"sh/8z25kb6x","slide":2,"bbox":[460,180,330,140]}
+{"kind":"shape","id":"sh/1gvy90je","slide":2,"bbox":[460,180,8,140]}
+{"kind":"textbox","id":"sh/pg3ex0nu","slide":2,"text":"รูปกระจัดกระจาย","textPreview":"รูปกระจัดกระจาย","textChars":15,"textLines":1,"bbox":[484,202,282,32]}
+{"kind":"textbox","id":"sh/wval87ed","slide":2,"text":"หลักฐานอยู่ในมือถือช่างหรือแชตส่วนตัว","textPreview":"หลักฐานอยู่ในมือถือช่างหรือแชตส่วนตัว","textChars":37,"textLines":1,"bbox":[484,244,282,64]}
+{"kind":"shape","id":"sh/7adsji5s","slide":2,"bbox":[840,180,330,140]}
+{"kind":"shape","id":"sh/epkzupwb","slide":2,"bbox":[840,180,8,140]}
+{"kind":"textbox","id":"sh/psfil0rq","slide":2,"text":"ไม่รู้ว่าช่างทำถึงไหน","textPreview":"ไม่รู้ว่าช่างทำถึงไหน","textChars":21,"textLines":1,"bbox":[864,202,282,32]}
+{"kind":"textbox","id":"sh/w7mp0bi9","slide":2,"text":"แอดมินต้องโทรถามซ้ำเพื่ออัปเดตลูกค้า","textPreview":"แอดมินต้องโทรถามซ้ำเพื่ออัปเดตลูกค้า","textChars":36,"textLines":1,"bbox":[864,244,282,64]}
+{"kind":"shape","id":"sh/7mp0bi9s","slide":2,"bbox":[80,365,520,140]}
+{"kind":"shape","id":"sh/e1w7mp0b","slide":2,"bbox":[80,365,8,140]}
+{"kind":"textbox","id":"sh/l0rqd4vm","slide":2,"text":"ประกันกับรอบดูแลไม่ชัด","textPreview":"ประกันกับรอบดูแลไม่ชัด","textChars":22,"textLines":1,"bbox":[104,387,472,32]}
+{"kind":"textbox","id":"sh/wfyxobm5","slide":2,"text":"หมดระยะหรือถึงรอบ service แล้วไม่มีใครเตือน","textPreview":"หมดระยะหรือถึงรอบ service แล้วไม่มีใครเตือน","textChars":43,"textLines":1,"bbox":[104,429,472,64]}
+{"kind":"shape","id":"sh/svu9knih","slide":2,"bbox":[460,365,520,140]}
+{"kind":"shape","id":"sh/hgn29gr2","slide":2,"bbox":[460,365,8,140]}
+{"kind":"textbox","id":"sh/ap4r65wj","slide":2,"text":"ลูกค้าติดต่อยาก","textPreview":"ลูกค้าติดต่อยาก","textChars":15,"textLines":1,"bbox":[484,387,472,32]}
+{"kind":"textbox","id":"sh/za1gvy90","slide":2,"text":"ไม่รู้ว่า LINE นี้เป็นของลูกค้ารายไหน","textPreview":"ไม่รู้ว่า LINE นี้เป็นของลูกค้ารายไหน","textChars":37,"textLines":1,"bbox":[484,429,472,64]}
+{"kind":"notes","id":"nt/8p457k","slide":2,"text":""}
+{"kind":"slide","id":"sl/x1zvjm","slide":3,"title":"ระบบนี้ทำหน้าที่เป็นศูนย์กลางงานบริการ","textShapes":13}
+{"kind":"textbox","id":"sh/8jqh0fep","slide":3,"text":"ระบบนี้ทำหน้าที่เป็นศูนย์กลางงานบริการ","textPreview":"ระบบนี้ทำหน้าที่เป็นศูนย์กลางงานบริการ","textChars":38,"textLines":1,"bbox":[62,44,780,48]}
+{"kind":"textbox","id":"sh/fyxobm58","slide":3,"text":"ทุกฝ่ายเห็นข้อมูลเดียวกัน ตั้งแต่รับเรื่องจนปิดงาน","textPreview":"ทุกฝ่ายเห็นข้อมูลเดียวกัน ตั้งแต่รับเรื่องจนปิดงาน","textChars":50,"textLines":1,"bbox":[64,94,820,34]}
+{"kind":"textbox","id":"sh/qd4vmtwr","slide":3,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1160,48,60,24]}
+{"kind":"shape","id":"sh/xczed8v6","slide":3,"bbox":[458,185,360,290]}
+{"kind":"textbox","id":"sh/8v6psfil","slide":3,"text":"Post-Sales IoT","textPreview":"Post-Sales IoT","textChars":14,"textLines":1,"bbox":[510,235,260,42]}
+{"kind":"textbox","id":"sh/fa9w3m94","slide":3,"text":"ลูกค้า • จุดติดตั้ง • อุปกรณ์ • เคส • งานช่าง • รูปหลักฐาน • LINE","textPreview":"ลูกค้า • จุดติดตั้ง • อุปกรณ์ • เคส • งานช่าง • รูปหลักฐาน • LINE","textChars":65,"textLines":1,"bbox":[500,305,280,98]}
+{"kind":"shape","id":"sh/qpg3ex0n","slide":3,"bbox":[110,180,250,96]}
+{"kind":"textbox","id":"sh/1gvy90je","slide":3,"text":"แอดมิน","textPreview":"แอดมิน","textChars":6,"textLines":1,"bbox":[162,210,160,32]}
+{"kind":"shape","id":"sh/8z25kb6x","slide":3,"bbox":[110,420,250,96]}
+{"kind":"textbox","id":"sh/a9w3m94f","slide":3,"text":"ช่าง","textPreview":"ช่าง","textChars":4,"textLines":1,"bbox":[162,450,160,32]}
+{"kind":"shape","id":"sh/zupwb2hw","slide":3,"bbox":[890,180,250,96]}
+{"kind":"textbox","id":"sh/sfil0rqd","slide":3,"text":"ลูกค้า","textPreview":"ลูกค้า","textChars":6,"textLines":1,"bbox":[942,210,160,32]}
+{"kind":"shape","id":"sh/h0fepkzu","slide":3,"bbox":[890,420,250,96]}
+{"kind":"textbox","id":"sh/al87ed8b","slide":3,"text":"LINE OA","textPreview":"LINE OA","textChars":7,"textLines":1,"bbox":[942,450,160,32]}
+{"kind":"textbox","id":"sh/z61032ls","slide":3,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[380,212,46,34]}
+{"kind":"textbox","id":"sh/orytsvu9","slide":3,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[380,452,46,34]}
+{"kind":"textbox","id":"sh/hcrmhk3q","slide":3,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[830,212,46,34]}
+{"kind":"textbox","id":"sh/6xkf6dcb","slide":3,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[830,452,46,34]}
+{"kind":"notes","id":"nt/x1zvjm","slide":3,"text":""}
+{"kind":"slide","id":"sl/q6yji6","slide":4,"title":"แต่ละบทบาททำงานของตัวเองได้ชัดเจน","textShapes":11}
+{"kind":"textbox","id":"sh/re1w7mp0","slide":4,"text":"แต่ละบทบาททำงานของตัวเองได้ชัดเจน","textPreview":"แต่ละบทบาททำงานของตัวเองได้ชัดเจน","textChars":33,"textLines":1,"bbox":[62,44,780,48]}
+{"kind":"textbox","id":"sh/kzupwb2h","slide":4,"text":"ระบบแยกสิทธิ์จากบัญชี และลดงานถามซ้ำระหว่างทีม","textPreview":"ระบบแยกสิทธิ์จากบัญชี และลดงานถามซ้ำระหว่างทีม","textChars":46,"textLines":1,"bbox":[64,94,820,34]}
+{"kind":"textbox","id":"sh/9knih4by","slide":4,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1160,48,60,24]}
+{"kind":"shape","id":"sh/25kb6xkf","slide":4,"bbox":[70,170,270,340]}
+{"kind":"shape","id":"sh/rqd4vmtw","slide":4,"bbox":[70,170,8,340]}
+{"kind":"textbox","id":"sh/kb6xkf6d","slide":4,"text":"แอดมิน","textPreview":"แอดมิน","textChars":6,"textLines":1,"bbox":[94,192,222,32]}
+{"kind":"textbox","id":"sh/9w3m94fu","slide":4,"text":"ดู Dashboard\nจัดการลูกค้าและจุดติดตั้ง\nติดตามเคสแบบเรียลไทม์\nตั้งค่าข้อความ LINE","textPreview":"ดู Dashboard | จัดการลูกค้าและจุดติดตั้ง | ติดตามเคสแบบเรียลไทม์ | ตั้งค่าข้อความ LINE","textChars":80,"textLines":4,"bbox":[94,234,222,264]}
+{"kind":"shape","id":"sh/2hwfyxob","slide":4,"bbox":[370,170,270,340]}
+{"kind":"shape","id":"sh/r2p8nqxs","slide":4,"bbox":[370,170,8,340]}
+{"kind":"textbox","id":"sh/7ed8bat4","slide":4,"text":"ช่าง","textPreview":"ช่าง","textChars":4,"textLines":1,"bbox":[394,192,222,32]}
+{"kind":"textbox","id":"sh/itgfmlkj","slide":4,"text":"รับงานจากมือถือ\nเพิ่มอุปกรณ์จริงและรูป\nบันทึกผลซ่อม/ติดตั้ง\nปิดงานจากหน้างาน","textPreview":"รับงานจากมือถือ | เพิ่มอุปกรณ์จริงและรูป | บันทึกผลซ่อม/ติดตั้ง | ปิดงานจากหน้างาน","textChars":76,"textLines":4,"bbox":[394,234,222,264]}
+{"kind":"shape","id":"sh/pkzupwb2","slide":4,"bbox":[670,170,270,340]}
+{"kind":"shape","id":"sh/0z61032l","slide":4,"bbox":[670,170,8,340]}
+{"kind":"textbox","id":"sh/72x4nap4","slide":4,"text":"ลูกค้า","textPreview":"ลูกค้า","textChars":6,"textLines":1,"bbox":[694,192,222,32]}
+{"kind":"textbox","id":"sh/ih4byhgn","slide":4,"text":"ผูก LINE ด้วยรหัสสั้น\nแจ้งปัญหาและนัดหมาย\nรับข้อความดูแลตามรอบ\nติดต่อทีมได้ง่ายขึ้น","textPreview":"ผูก LINE ด้วยรหัสสั้น | แจ้งปัญหาและนัดหมาย | รับข้อความดูแลตามรอบ | ติดต่อทีมได้ง่ายขึ้น","textChars":83,"textLines":4,"bbox":[694,234,222,264]}
+{"kind":"shape","id":"sh/p8nqxs72","slide":4,"bbox":[970,170,240,340]}
+{"kind":"shape","id":"sh/0nuxc3yl","slide":4,"bbox":[970,170,8,340]}
+{"kind":"textbox","id":"sh/7y1kre1w","slide":4,"text":"LINE OA","textPreview":"LINE OA","textChars":7,"textLines":1,"bbox":[994,192,192,32]}
+{"kind":"textbox","id":"sh/ed8v6psf","slide":4,"text":"รับแจ้งปัญหา\nส่งเตือนรอบ service\nตอบกลับอัตโนมัติ\nแจ้งทีมช่างเมื่อมีเคสใหม่","textPreview":"รับแจ้งปัญหา | ส่งเตือนรอบ service | ตอบกลับอัตโนมัติ | แจ้งทีมช่างเมื่อมีเคสใหม่","textChars":75,"textLines":4,"bbox":[994,234,192,264]}
+{"kind":"notes","id":"nt/q6yji6","slide":4,"text":""}
+{"kind":"slide","id":"sl/wmwuvl","slide":5,"title":"งานติดตั้งเริ่มจากหน้างานจริง ไม่ใช่เดาจากออฟฟิศ","textShapes":22}
+{"kind":"textbox","id":"sh/oj2t83it","slide":5,"text":"งานติดตั้งเริ่มจากหน้างานจริง ไม่ใช่เดาจากออฟฟิศ","textPreview":"งานติดตั้งเริ่มจากหน้างานจริง ไม่ใช่เดาจากออฟฟิศ","textChars":48,"textLines":1,"bbox":[62,44,780,48]}
+{"kind":"textbox","id":"sh/vy90je9c","slide":5,"text":"ช่างสามารถสร้างข้อมูลที่เจอจริง แล้วระบบเก็บเป็นประวัติหลังการขาย","textPreview":"ช่างสามารถสร้างข้อมูลที่เจอจริง แล้วระบบเก็บเป็นประวัติหลังการขาย","textChars":65,"textLines":1,"bbox":[64,94,820,34]}
+{"kind":"textbox","id":"sh/6dcbulwv","slide":5,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[1160,48,60,24]}
+{"kind":"shape","id":"sh/dsji5sne","slide":5,"bbox":[72,220,195,210]}
+{"kind":"shape","id":"sh/o7qpg3ex","slide":5,"bbox":[94,242,42,42]}
+{"kind":"textbox","id":"sh/vmtwra5g","slide":5,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[107,250,16,22]}
+{"kind":"textbox","id":"sh/61032lsz","slide":5,"text":"สร้างลูกค้า / จุดติดตั้ง","textPreview":"สร้างลูกค้า / จุดติดตั้ง","textChars":24,"textLines":1,"bbox":[94,305,150,55]}
+{"kind":"textbox","id":"sh/dg7adsji","slide":5,"text":"ลูกค้าใหม่หรือเดิมก็ได้","textPreview":"ลูกค้าใหม่หรือเดิมก็ได้","textChars":23,"textLines":1,"bbox":[94,370,150,42]}
+{"kind":"textbox","id":"sh/ovahoza1","slide":5,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[268,304,36,34]}
+{"kind":"shape","id":"sh/mtwra5gb","slide":5,"bbox":[307,220,195,210]}
+{"kind":"shape","id":"sh/fepkzupw","slide":5,"bbox":[329,242,42,42]}
+{"kind":"textbox","id":"sh/4zidonyd","slide":5,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[342,250,16,22]}
+{"kind":"textbox","id":"sh/xkf6dcbu","slide":5,"text":"สร้าง Job ติดตั้งใหม่","textPreview":"สร้าง Job ติดตั้งใหม่","textChars":21,"textLines":1,"bbox":[329,305,150,55]}
+{"kind":"textbox","id":"sh/mlkjm1cf","slide":5,"text":"เป็นงานติดตั้งสำหรับ site ใหม่","textPreview":"เป็นงานติดตั้งสำหรับ site ใหม่","textChars":30,"textLines":1,"bbox":[329,370,150,42]}
+{"kind":"textbox","id":"sh/f6dcbulw","slide":5,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[503,304,36,34]}
+{"kind":"shape","id":"sh/4r65wjud","slide":5,"bbox":[542,220,195,210]}
+{"kind":"shape","id":"sh/xc3ylc7u","slide":5,"bbox":[564,242,42,42]}
+{"kind":"textbox","id":"sh/m94fu18j","slide":5,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[577,250,16,22]}
+{"kind":"textbox","id":"sh/fu18jqh0","slide":5,"text":"ช่างรับงาน","textPreview":"ช่างรับงาน","textChars":10,"textLines":1,"bbox":[564,305,150,55]}
+{"kind":"textbox","id":"sh/7qpg3ex0","slide":5,"text":"กดรับเองแล้วไปหน้างาน","textPreview":"กดรับเองแล้วไปหน้างาน","textChars":21,"textLines":1,"bbox":[564,370,150,42]}
+{"kind":"textbox","id":"sh/i5sneloj","slide":5,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[738,304,36,34]}
+{"kind":"shape","id":"sh/pwb2hwfy","slide":5,"bbox":[777,220,195,210]}
+{"kind":"shape","id":"sh/0bi9s36h","slide":5,"bbox":[799,242,42,42]}
+{"kind":"textbox","id":"sh/7y1kre1w","slide":5,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[812,250,16,22]}
+{"kind":"textbox","id":"sh/ed8v6psf","slide":5,"text":"เลือก/เพิ่มอุปกรณ์จริง","textPreview":"เลือก/เพิ่มอุปกรณ์จริง","textChars":22,"textLines":1,"bbox":[799,305,150,55]}
+{"kind":"textbox","id":"sh/p4r65wju","slide":5,"text":"ใช้ serial และวันที่ซื้อ","textPreview":"ใช้ serial และวันที่ซื้อ","textChars":24,"textLines":1,"bbox":[799,370,150,42]}
+{"kind":"textbox","id":"sh/wjudg7ad","slide":5,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[973,304,36,34]}
+{"kind":"shape","id":"sh/72x4nap4","slide":5,"bbox":[1012,220,195,210]}
+{"kind":"shape","id":"sh/ih4byhgn","slide":5,"bbox":[1034,242,42,42]}
+{"kind":"textbox","id":"sh/c3ylc7u5","slide":5,"text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[1047,250,16,22]}
+{"kind":"textbox","id":"sh/1kre1w7m","slide":5,"text":"แนบรูปและปิดงาน","textPreview":"แนบรูปและปิดงาน","textChars":15,"textLines":1,"bbox":[1034,305,150,55]}
+{"kind":"textbox","id":"sh/uxc3ylc7","slide":5,"text":"เริ่มนับระยะดูแล","textPreview":"เริ่มนับระยะดูแล","textChars":16,"textLines":1,"bbox":[1034,370,150,42]}
+{"kind":"notes","id":"nt/wmwuvl","slide":5,"text":""}
+{"kind":"slide","id":"sl/1bf5uu","slide":6,"title":"เคสซ่อมและงานบริการเดินต่อได้โดยไม่หลุดคิว","textShapes":16}
+{"kind":"textbox","id":"sh/a1gvy90j","slide":6,"text":"เคสซ่อมและงานบริการเดินต่อได้โดยไม่หลุดคิว","textPreview":"เคสซ่อมและงานบริการเดินต่อได้โดยไม่หลุดคิว","textChars":42,"textLines":1,"bbox":[62,44,780,48]}
+{"kind":"textbox","id":"sh/hoza1gvy","slide":6,"text":"ลูกค้าแจ้งเองได้ แอดมินสร้างเองได้ และช่างรับงานต่อได้ทันที","textPreview":"ลูกค้าแจ้งเองได้ แอดมินสร้างเองได้ และช่างรับงานต่อได้ทันที","textChars":59,"textLines":1,"bbox":[64,94,820,34]}
+{"kind":"textbox","id":"sh/s36hcrmh","slide":6,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[1160,48,60,24]}
+{"kind":"shape","id":"sh/za1gvy90","slide":6,"bbox":[78,180,300,145]}
+{"kind":"shape","id":"sh/ap4r65wj","slide":6,"bbox":[78,180,8,145]}
+{"kind":"textbox","id":"sh/hgn29gr2","slide":6,"text":"รับแจ้งปัญหา","textPreview":"รับแจ้งปัญหา","textChars":12,"textLines":1,"bbox":[102,202,252,32]}
+{"kind":"textbox","id":"sh/svu9knih","slide":6,"text":"ผ่าน LINE OA หรือแอดมินบันทึกให้ลูกค้า","textPreview":"ผ่าน LINE OA หรือแอดมินบันทึกให้ลูกค้า","textChars":38,"textLines":1,"bbox":[102,244,252,69]}
+{"kind":"shape","id":"sh/3ylc7u54","slide":6,"bbox":[490,180,300,145]}
+{"kind":"shape","id":"sh/adsji5sn","slide":6,"bbox":[490,180,8,145]}
+{"kind":"textbox","id":"sh/w7mp0bi9","slide":6,"text":"สร้างเคสบริการ","textPreview":"สร้างเคสบริการ","textChars":14,"textLines":1,"bbox":[514,202,252,32]}
+{"kind":"textbox","id":"sh/psfil0rq","slide":6,"text":"เลือกจุดติดตั้ง อุปกรณ์ที่มีปัญหา และเวลานัดหมาย","textPreview":"เลือกจุดติดตั้ง อุปกรณ์ที่มีปัญหา และเวลานัดหมาย","textChars":48,"textLines":1,"bbox":[514,244,252,69]}
+{"kind":"shape","id":"sh/e1w7mp0b","slide":6,"bbox":[902,180,300,145]}
+{"kind":"shape","id":"sh/7mp0bi9s","slide":6,"bbox":[902,180,8,145]}
+{"kind":"textbox","id":"sh/wval87ed","slide":6,"text":"ทีมช่างรับงาน","textPreview":"ทีมช่างรับงาน","textChars":13,"textLines":1,"bbox":[926,202,252,32]}
+{"kind":"textbox","id":"sh/pg3ex0nu","slide":6,"text":"ระบบแจ้งเตือนและช่างกดรับเคสเข้าหน้างานของฉัน","textPreview":"ระบบแจ้งเตือนและช่างกดรับเคสเข้าหน้างานของฉัน","textChars":45,"textLines":1,"bbox":[926,244,252,69]}
+{"kind":"textbox","id":"sh/epkzupwb","slide":6,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[405,230,46,34]}
+{"kind":"textbox","id":"sh/7adsji5s","slide":6,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[817,230,46,34]}
+{"kind":"shape","id":"sh/wra5gbq1","slide":6,"bbox":[180,410,390,150]}
+{"kind":"shape","id":"sh/lc7u54zi","slide":6,"bbox":[180,410,8,150]}
+{"kind":"textbox","id":"sh/p4r65wju","slide":6,"text":"บันทึกหน้างาน","textPreview":"บันทึกหน้างาน","textChars":13,"textLines":1,"bbox":[204,432,342,32]}
+{"kind":"textbox","id":"sh/wjudg7ad","slide":6,"text":"อาการซ่อม รูปหลักฐาน อุปกรณ์ที่เปลี่ยน เพิ่ม หรือลด","textPreview":"อาการซ่อม รูปหลักฐาน อุปกรณ์ที่เปลี่ยน เพิ่ม หรือลด","textChars":51,"textLines":1,"bbox":[204,474,342,74]}
+{"kind":"shape","id":"sh/7y1kre1w","slide":6,"bbox":[710,410,390,150]}
+{"kind":"shape","id":"sh/ed8v6psf","slide":6,"bbox":[710,410,8,150]}
+{"kind":"textbox","id":"sh/pwb2hwfy","slide":6,"text":"ปิดงานและดูย้อนหลัง","textPreview":"ปิดงานและดูย้อนหลัง","textChars":19,"textLines":1,"bbox":[734,432,342,32]}
+{"kind":"textbox","id":"sh/0bi9s36h","slide":6,"text":"แอดมินเห็นสถานะ รูป และสรุปงานแบบเรียลไทม์","textPreview":"แอดมินเห็นสถานะ รูป และสรุปงานแบบเรียลไทม์","textChars":42,"textLines":1,"bbox":[734,474,342,74]}
+{"kind":"textbox","id":"sh/7qpg3ex0","slide":6,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[602,462,46,34]}
+{"kind":"notes","id":"nt/1bf5uu","slide":6,"text":""}
+{"kind":"slide","id":"sl/cgbscy","slide":7,"title":"LINE OA ทำให้ลูกค้าเข้าระบบได้โดยไม่ต้องลงแอปใหม่","textShapes":11}
+{"kind":"textbox","id":"sh/t47y1kre","slide":7,"text":"LINE OA ทำให้ลูกค้าเข้าระบบได้โดยไม่ต้องลงแอปใหม่","textPreview":"LINE OA ทำให้ลูกค้าเข้าระบบได้โดยไม่ต้องลงแอปใหม่","textChars":49,"textLines":1,"bbox":[62,44,780,48]}
+{"kind":"textbox","id":"sh/idonyd0z","slide":7,"text":"ใช้ QR เพิ่มเพื่อนและรหัส TYTC0000 เพื่อผูกลูกค้าให้ถูกคน","textPreview":"ใช้ QR เพิ่มเพื่อนและรหัส TYTC0000 เพื่อผูกลูกค้าให้ถูกคน","textChars":57,"textLines":1,"bbox":[64,94,820,34]}
+{"kind":"textbox","id":"sh/byhgn29g","slide":7,"text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[1160,48,60,24]}
+{"kind":"shape","id":"sh/0rqd4vmt","slide":7,"bbox":[90,175,300,360]}
+{"kind":"textbox","id":"sh/tcj6tova","slide":7,"text":"LINE OA","textPreview":"LINE OA","textChars":7,"textLines":1,"bbox":[145,220,190,40]}
+{"kind":"textbox","id":"sh/il0rqd4v","slide":7,"text":"QR เพิ่มเพื่อน\nรหัสผูกบัญชี\nแจ้งเตือนรอบดูแล\nเมนูแจ้งปัญหา","textPreview":"QR เพิ่มเพื่อน | รหัสผูกบัญชี | แจ้งเตือนรอบดูแล | เมนูแจ้งปัญหา","textChars":58,"textLines":4,"bbox":[140,300,180,160]}
+{"kind":"shape","id":"sh/b6xkf6dc","slide":7,"bbox":[470,165,650,104]}
+{"kind":"shape","id":"sh/032lszqt","slide":7,"bbox":[470,165,8,104]}
+{"kind":"textbox","id":"sh/tovahoza","slide":7,"text":"ผูกลูกค้าถูกคน","textPreview":"ผูกลูกค้าถูกคน","textChars":14,"textLines":1,"bbox":[494,187,602,32]}
+{"kind":"textbox","id":"sh/l87ed8ba","slide":7,"text":"ลูกค้าส่งรหัสสั้น TYTC0000 ระบบบันทึก LINE User ID","textPreview":"ลูกค้าส่งรหัสสั้น TYTC0000 ระบบบันทึก LINE User ID","textChars":50,"textLines":1,"bbox":[494,229,602,28]}
+{"kind":"shape","id":"sh/sneloj2t","slide":7,"bbox":[470,293,650,104]}
+{"kind":"shape","id":"sh/32lszqtc","slide":7,"bbox":[470,293,8,104]}
+{"kind":"textbox","id":"sh/ahoza1gv","slide":7,"text":"ถามอาการตามรอบ service","textPreview":"ถามอาการตามรอบ service","textChars":22,"textLines":1,"bbox":[494,315,602,32]}
+{"kind":"textbox","id":"sh/lkjm1cfa","slide":7,"text":"ข้อความอัตโนมัติถามว่ามีปัญหาหรือไม่","textPreview":"ข้อความอัตโนมัติถามว่ามีปัญหาหรือไม่","textChars":36,"textLines":1,"bbox":[494,357,602,28]}
+{"kind":"shape","id":"sh/szqtcj6t","slide":7,"bbox":[470,421,650,104]}
+{"kind":"shape","id":"sh/3ex0nuxc","slide":7,"bbox":[470,421,8,104]}
+{"kind":"textbox","id":"sh/at47y1kr","slide":7,"text":"แจ้งเคสเข้าไลน์ทีมช่าง","textPreview":"แจ้งเคสเข้าไลน์ทีมช่าง","textChars":22,"textLines":1,"bbox":[494,443,602,32]}
+{"kind":"textbox","id":"sh/loj2t83i","slide":7,"text":"เมื่อมีปัญหาใหม่ ทีมเห็นทันทีและรับงานได้เร็ว","textPreview":"เมื่อมีปัญหาใหม่ ทีมเห็นทันทีและรับงานได้เร็ว","textChars":45,"textLines":1,"bbox":[494,485,602,28]}
+{"kind":"notes","id":"nt/cgbscy","slide":7,"text":""}
+{"kind":"slide","id":"sl/fzyiqz","slide":8,"title":"แอดมินเห็นงานทั้งหมดโดยไม่ต้องไล่ถามทีละคน","textShapes":10}
+{"kind":"textbox","id":"sh/xc3ylc7u","slide":8,"text":"แอดมินเห็นงานทั้งหมดโดยไม่ต้องไล่ถามทีละคน","textPreview":"แอดมินเห็นงานทั้งหมดโดยไม่ต้องไล่ถามทีละคน","textChars":42,"textLines":1,"bbox":[62,44,780,48]}
+{"kind":"textbox","id":"sh/mlkjm1cf","slide":8,"text":"หน้าบ้านออกแบบให้ดูสถานะและหลักฐานได้เร็ว","textPreview":"หน้าบ้านออกแบบให้ดูสถานะและหลักฐานได้เร็ว","textChars":41,"textLines":1,"bbox":[64,94,820,34]}
+{"kind":"textbox","id":"sh/f6dcbulw","slide":8,"text":"08","textPreview":"08","textChars":2,"textLines":1,"bbox":[1160,48,60,24]}
+{"kind":"shape","id":"sh/4zidonyd","slide":8,"bbox":[82,170,330,160]}
+{"kind":"shape","id":"sh/xkf6dcbu","slide":8,"bbox":[82,170,8,160]}
+{"kind":"textbox","id":"sh/mtwra5gb","slide":8,"text":"Dashboard งานวันนี้","textPreview":"Dashboard งานวันนี้","textChars":19,"textLines":1,"bbox":[106,192,282,32]}
+{"kind":"textbox","id":"sh/fepkzupw","slide":8,"text":"เห็นลูกค้า จุดติดตั้ง อุปกรณ์ เคสค้าง และงานใกล้ครบระยะดูแล","textPreview":"เห็นลูกค้า จุดติดตั้ง อุปกรณ์ เคสค้าง และงานใกล้ครบระยะดูแล","textChars":59,"textLines":1,"bbox":[106,234,282,84]}
+{"kind":"shape","id":"sh/83itgfml","slide":8,"bbox":[472,170,330,160]}
+{"kind":"shape","id":"sh/xobm58z2","slide":8,"bbox":[472,170,8,160]}
+{"kind":"textbox","id":"sh/dcbulwva","slide":8,"text":"สถานะงานเรียลไทม์","textPreview":"สถานะงานเรียลไทม์","textChars":17,"textLines":1,"bbox":[496,192,282,32]}
+{"kind":"textbox","id":"sh/kre1w7mp","slide":8,"text":"ดูงานรอรับ กำลังทำ และปิดงานแล้ว พร้อมรูปจากช่าง","textPreview":"ดูงานรอรับ กำลังทำ และปิดงานแล้ว พร้อมรูปจากช่าง","textChars":48,"textLines":1,"bbox":[496,234,282,84]}
+{"kind":"shape","id":"sh/val87ed8","slide":8,"bbox":[862,170,330,160]}
+{"kind":"shape","id":"sh/6psfil0r","slide":8,"bbox":[862,170,8,160]}
+{"kind":"textbox","id":"sh/donyd0z6","slide":8,"text":"ข้อมูลลูกค้าเป็นระบบ","textPreview":"ข้อมูลลูกค้าเป็นระบบ","textChars":20,"textLines":1,"bbox":[886,192,282,32]}
+{"kind":"textbox","id":"sh/k3q5o7qp","slide":8,"text":"จัดการลูกค้า จุดติดตั้ง อุปกรณ์จริง ประกัน และรอบดูแล","textPreview":"จัดการลูกค้า จุดติดตั้ง อุปกรณ์จริง ประกัน และรอบดูแล","textChars":53,"textLines":1,"bbox":[886,234,282,84]}
+{"kind":"shape","id":"sh/vixczed8","slide":8,"bbox":[120,410,1040,100]}
+{"kind":"textbox","id":"sh/2x4nap4r","slide":8,"text":"ผลลัพธ์: ตอบลูกค้าเร็วขึ้น ลดงานตกหล่น และมีหลักฐานหน้างานย้อนดูได้","textPreview":"ผลลัพธ์: ตอบลูกค้าเร็วขึ้น ลดงานตกหล่น และมีหลักฐานหน้างานย้อนดูได้","textChars":67,"textLines":1,"bbox":[170,440,940,36]}
+{"kind":"notes","id":"nt/fzyiqz","slide":8,"text":""}
+{"kind":"slide","id":"sl/8cft07","slide":9,"title":"ช่างทำงานผ่านมือถือได้เหมือนแอป","textShapes":16}
+{"kind":"textbox","id":"sh/wra5gbq1","slide":9,"text":"ช่างทำงานผ่านมือถือได้เหมือนแอป","textPreview":"ช่างทำงานผ่านมือถือได้เหมือนแอป","textChars":31,"textLines":1,"bbox":[62,44,780,48]}
+{"kind":"textbox","id":"sh/36hcrmhk","slide":9,"text":"เหมาะกับทีมเล็กที่ต้องเริ่มใช้งานจริงเร็ว โดยยังไม่ต้องทำแอป iOS เต็มรูปแบบ","textPreview":"เหมาะกับทีมเล็กที่ต้องเริ่มใช้งานจริงเร็ว โดยยังไม่ต้องทำแอป iOS เต็มรูปแบบ","textChars":75,"textLines":1,"bbox":[64,94,820,34]}
+{"kind":"textbox","id":"sh/eloj2t83","slide":9,"text":"09","textPreview":"09","textChars":2,"textLines":1,"bbox":[1160,48,60,24]}
+{"kind":"shape","id":"sh/l0rqd4vm","slide":9,"bbox":[90,160,330,440]}
+{"kind":"shape","id":"sh/wfyxobm5","slide":9,"bbox":[125,200,260,48]}
+{"kind":"textbox","id":"sh/7u54zido","slide":9,"text":"งานของฉัน","textPreview":"งานของฉัน","textChars":9,"textLines":1,"bbox":[152,212,160,26]}
+{"kind":"shape","id":"sh/ed8bat47","slide":9,"bbox":[125,280,260,50]}
+{"kind":"shape","id":"sh/psfil0rq","slide":9,"bbox":[125,280,8,50]}
+{"kind":"textbox","id":"sh/w7mp0bi9","slide":9,"text":"รับเคส","textPreview":"รับเคส","textChars":6,"textLines":1,"bbox":[149,302,212,32]}
+{"kind":"shape","id":"sh/eloj2t83","slide":9,"bbox":[125,350,260,50]}
+{"kind":"shape","id":"sh/36hcrmhk","slide":9,"bbox":[125,350,8,50]}
+{"kind":"textbox","id":"sh/wra5gbq1","slide":9,"text":"เพิ่มอุปกรณ์","textPreview":"เพิ่มอุปกรณ์","textChars":12,"textLines":1,"bbox":[149,372,212,32]}
+{"kind":"shape","id":"sh/lc7u54zi","slide":9,"bbox":[125,420,260,50]}
+{"kind":"shape","id":"sh/ed8bat47","slide":9,"bbox":[125,420,8,50]}
+{"kind":"textbox","id":"sh/7u54zido","slide":9,"text":"ถ่ายรูปหลักฐาน","textPreview":"ถ่ายรูปหลักฐาน","textChars":14,"textLines":1,"bbox":[149,442,212,32]}
+{"kind":"shape","id":"sh/wfyxobm5","slide":9,"bbox":[125,490,260,50]}
+{"kind":"shape","id":"sh/l0rqd4vm","slide":9,"bbox":[125,490,8,50]}
+{"kind":"textbox","id":"sh/e1w7mp0b","slide":9,"text":"ปิดงาน","textPreview":"ปิดงาน","textChars":6,"textLines":1,"bbox":[149,512,212,32]}
+{"kind":"shape","id":"sh/7mp0bi9s","slide":9,"bbox":[500,180,290,150]}
+{"kind":"shape","id":"sh/zed8v6ps","slide":9,"bbox":[500,180,8,150]}
+{"kind":"textbox","id":"sh/6xkf6dcb","slide":9,"text":"รับงานเอง","textPreview":"รับงานเอง","textChars":9,"textLines":1,"bbox":[524,202,242,32]}
+{"kind":"textbox","id":"sh/hk3q5o7q","slide":9,"text":"ช่างเห็นเคสทั้งหมดและกดรับเข้าหน้างานของฉัน","textPreview":"ช่างเห็นเคสทั้งหมดและกดรับเข้าหน้างานของฉัน","textChars":43,"textLines":1,"bbox":[524,244,242,74]}
+{"kind":"shape","id":"sh/oza1gvy9","slide":9,"bbox":[840,180,290,150]}
+{"kind":"shape","id":"sh/zqtcj6to","slide":9,"bbox":[840,180,8,150]}
+{"kind":"textbox","id":"sh/65wjudg7","slide":9,"text":"เพิ่มข้อมูลจริง","textPreview":"เพิ่มข้อมูลจริง","textChars":15,"textLines":1,"bbox":[864,202,242,32]}
+{"kind":"textbox","id":"sh/hwfyxobm","slide":9,"text":"เพิ่มลูกค้า จุดติดตั้ง โมเดล และอุปกรณ์จากหน้างาน","textPreview":"เพิ่มลูกค้า จุดติดตั้ง โมเดล และอุปกรณ์จากหน้างาน","textChars":49,"textLines":1,"bbox":[864,244,242,74]}
+{"kind":"shape","id":"sh/obm58z25","slide":9,"bbox":[500,405,290,150]}
+{"kind":"shape","id":"sh/zupwb2hw","slide":9,"bbox":[500,405,8,150]}
+{"kind":"textbox","id":"sh/a9w3m94f","slide":9,"text":"เก็บหลักฐานครบ","textPreview":"เก็บหลักฐานครบ","textChars":14,"textLines":1,"bbox":[524,427,242,32]}
+{"kind":"textbox","id":"sh/0rqd4vmt","slide":9,"text":"แนบรูปก่อนซ่อม ระหว่างซ่อม และหลังจบงาน","textPreview":"แนบรูปก่อนซ่อม ระหว่างซ่อม และหลังจบงาน","textChars":39,"textLines":1,"bbox":[524,469,242,74]}
+{"kind":"shape","id":"sh/tcj6tova","slide":9,"bbox":[840,405,290,150]}
+{"kind":"shape","id":"sh/il0rqd4v","slide":9,"bbox":[840,405,8,150]}
+{"kind":"textbox","id":"sh/b6xkf6dc","slide":9,"text":"ใช้ง่ายบนมือถือ","textPreview":"ใช้ง่ายบนมือถือ","textChars":15,"textLines":1,"bbox":[864,427,242,32]}
+{"kind":"textbox","id":"sh/0je9cvix","slide":9,"text":"เปิดผ่าน PWA หรือ APK สำหรับ Android","textPreview":"เปิดผ่าน PWA หรือ APK สำหรับ Android","textChars":36,"textLines":1,"bbox":[864,469,242,74]}
+{"kind":"notes","id":"nt/8cft07","slide":9,"text":""}
+{"kind":"slide","id":"sl/e84ojk","slide":10,"title":"เริ่มใช้ระบบได้จากข้อมูลพื้นฐาน แล้วค่อยขยายตามงานจริง","textShapes":8}
+{"kind":"textbox","id":"sh/3q5o7qpg","slide":10,"text":"เริ่มใช้ระบบได้จากข้อมูลพื้นฐาน แล้วค่อยขยายตามงานจริง","textPreview":"เริ่มใช้ระบบได้จากข้อมูลพื้นฐาน แล้วค่อยขยายตามงานจริง","textChars":54,"textLines":1,"bbox":[62,44,780,48]}
+{"kind":"textbox","id":"sh/wb2hwfyx","slide":10,"text":"เหมาะกับธุรกิจที่ต้องดูแลลูกค้าหลังติดตั้งอย่างต่อเนื่อง","textPreview":"เหมาะกับธุรกิจที่ต้องดูแลลูกค้าหลังติดตั้งอย่างต่อเนื่อง","textChars":56,"textLines":1,"bbox":[64,94,820,34]}
+{"kind":"textbox","id":"sh/lwval87e","slide":10,"text":"10","textPreview":"10","textChars":2,"textLines":1,"bbox":[1160,48,60,24]}
+{"kind":"textbox","id":"sh/ex0nuxc3","slide":10,"text":"สิ่งที่ระบบช่วยให้ดีขึ้น","textPreview":"สิ่งที่ระบบช่วยให้ดีขึ้น","textChars":24,"textLines":1,"bbox":[92,165,440,42]}
+{"kind":"textbox","id":"sh/3itgfmlk","slide":10,"text":"ลดงานหลุด\nเห็นสถานะตรงกัน\nมีรูปหลักฐานครบ\nดูแลลูกค้าตามรอบ\nติดต่อผ่าน LINE ได้ถูกคน","textPreview":"ลดงานหลุด | เห็นสถานะตรงกัน | มีรูปหลักฐานครบ | ดูแลลูกค้าตามรอบ | ติดต่อผ่าน LINE ได้ถูกคน","textChars":83,"textLines":5,"bbox":[105,230,450,230]}
+{"kind":"shape","id":"sh/w3m94fu1","slide":10,"bbox":[660,160,455,330]}
+{"kind":"textbox","id":"sh/loj2t83i","slide":10,"text":"ขั้นตอนเริ่มต้น","textPreview":"ขั้นตอนเริ่มต้น","textChars":15,"textLines":1,"bbox":[710,208,250,36]}
+{"kind":"textbox","id":"sh/at47y1kr","slide":10,"text":"1. เพิ่มผู้ใช้และทีมช่าง\n2. เพิ่มลูกค้าและจุดติดตั้ง\n3. ลงทะเบียนโมเดลและอุปกรณ์จริง\n4. เชื่อม LINE OA\n5. ทดลองสร้างงานติดตั้งและเคสซ่อม","textPreview":"1. เพิ่มผู้ใช้และทีมช่าง | 2. เพิ่มลูกค้าและจุดติดตั้ง | 3. ลงทะเบียนโมเดลและอุปกรณ์จริง | 4. เชื่อม LINE OA | 5. ทดลองสร้างงานติดตั้งและ...","textChars":136,"textLines":5,"bbox":[712,275,330,180]}
+{"kind":"shape","id":"sh/3ex0nuxc","slide":10,"bbox":[88,565,1030,60]}
+{"kind":"textbox","id":"sh/3itgfmlk","slide":10,"text":"Post-Sales IoT Support เปลี่ยนงานบริการหลังขายให้ติดตามได้จริงตั้งแต่วันแรก","textPreview":"Post-Sales IoT Support เปลี่ยนงานบริการหลังขายให้ติดตามได้จริงตั้งแต่วันแรก","textChars":75,"textLines":1,"bbox":[150,580,910,30]}
+{"kind":"notes","id":"nt/e84ojk","slide":10,"text":""}
