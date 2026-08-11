@@ -10,6 +10,9 @@ export default function LineSettingsPage(){
  useEffect(()=>{load()},[]);
  const groups=useMemo(()=>[...new Set(templates.map(x=>x.template_group))], [templates]);
  const visible=templates.filter(x=>x.template_group===activeGroup);
+ const customerLine=status?.customer_oa||{};
+ const teamLine=status?.technician_team||{};
+ const webhookHealth=customerLine.webhook_health||{};
  const send=async e=>{e.preventDefault();setSending(true);setError('');setMessage('');try{await api('/line/push',{method:'POST',body:JSON.stringify(form)});setMessage('ส่งข้อความ LINE แล้ว');setForm({...form,text:''})}catch(x){setError(x.message)}finally{setSending(false)}};
  const saveTemplate=async e=>{e.preventDefault();setSending(true);setError('');setMessage('');try{await api(`/line/templates/${editing.template_key}`,{method:'PUT',body:JSON.stringify(editing)});setMessage('บันทึกข้อความ LINE แล้ว');setEditing(null);await load()}catch(x){setError(x.message)}finally{setSending(false)}};
  return <section>
@@ -18,25 +21,26 @@ export default function LineSettingsPage(){
   <div className="dashboard-grid line-settings-grid">
    <div className="panel">
     <h2>สถานะ LINE Official Account</h2>
-    <div className="metric-row"><span>Channel Secret</span><strong>{status?.channel_secret?'พร้อม':'ยังไม่ตั้งค่า'}</strong></div>
-    <div className="metric-row"><span>Channel Access Token</span><strong>{status?.access_token?'พร้อม':'ยังไม่ตั้งค่า'}</strong></div>
+    <div className="metric-row"><span>Channel Secret</span><strong>{customerLine.channel_secret?'พร้อม':'ยังไม่ตั้งค่า'}</strong></div>
+    <div className="metric-row"><span>Channel Access Token</span><strong>{customerLine.access_token?'พร้อม':'ยังไม่ตั้งค่า'}</strong></div>
+    <div className="metric-row"><span>LINE Basic ID</span><strong>{customerLine.basic_id?'พร้อม':'ยังไม่ตั้งค่า'}</strong></div>
     <p className="muted">Webhook URL ที่ต้องตั้งใน LINE Developers</p>
-    <code>{status?.webhook_url||'ยังไม่ได้ตั้งค่า LINE Webhook URL'}</code>
-    <div className={`webhook-health ${status?.webhook_health?.connected_to_this_server?'ok':'bad'}`}>
-     <b>{status?.webhook_health?.connected_to_this_server?'Webhook พร้อมใช้งาน':'Webhook ยังไม่เข้าระบบนี้'}</b>
-     <span>{status?.webhook_health?.message||'กำลังตรวจสอบสถานะ webhook...'}</span>
-     {status?.webhook_health?.response_preview&&<small>ตอบกลับ: {status.webhook_health.response_preview}</small>}
+    <code>{customerLine.webhook_url||'ยังไม่ได้ตั้งค่า LINE Webhook URL'}</code>
+    <div className={`webhook-health ${webhookHealth.connected_to_this_server?'ok':'bad'}`}>
+     <b>{webhookHealth.connected_to_this_server?'Webhook พร้อมใช้งาน':'Webhook ยังไม่เข้าระบบนี้'}</b>
+     <span>{webhookHealth.message||'ยังไม่มีข้อมูลตรวจสอบ webhook ให้กดรีเฟรชหรือตรวจสอบ URL ในหน้าเซิร์ฟเวอร์และโดเมน'}</span>
+     {webhookHealth.response_preview&&<small>ตอบกลับ: {webhookHealth.response_preview}</small>}
     </div>
     <div className="line-admin-qr"><img src={asset('line-add-friend-qr.jpg')} alt="QR code เพิ่มเพื่อน LINE Official Account"/><span>QR เพิ่มเพื่อน LINE Official Account ใช้ QR เดียวกันทุกคน แล้วแยกตัวลูกค้าด้วยรหัส TYTC</span></div>
     <div className="workflow-note"><b>ขั้นตอนใช้งานจริง</b><ol><li>ช่างหรือแอดมินเพิ่มลูกค้า</li><li>ระบบสร้างรหัส เช่น TYTC0005</li><li>ลูกค้าเพิ่มเพื่อน LINE OA และส่งรหัสในแชต</li><li>ระบบผูก LINE User ID เข้ากับลูกค้าอัตโนมัติ</li></ol></div>
-    <div className="workflow-note"><b>LINE ทีมช่าง</b><ol><li>ตั้งค่า Channel Access Token ของ OA ทีมช่างใน <code>LINE_TECH_CHANNEL_ACCESS_TOKEN</code></li><li>ตั้งค่า Group/User ID ปลายทางใน <code>LINE_TECH_TARGET_ID</code></li><li>เมื่อมีเคสบริการใหม่ ระบบจะ push แจ้งทีมช่างทันที</li></ol><p className={status?.technician_team?.configured?'line-ok':'line-bad'}>{status?.technician_team?.configured?'พร้อมแจ้งเตือนทีมช่าง':'ยังไม่ได้ตั้งค่าแจ้งเตือนทีมช่าง'}</p></div>
+    <div className="workflow-note"><b>LINE ทีมช่าง</b><ol><li>ตั้งค่า Channel Access Token ของ OA ทีมช่างในหน้าเซิร์ฟเวอร์และโดเมน</li><li>ตั้งค่า Group/User ID ปลายทางในช่อง Target ID</li><li>เมื่อมีเคสบริการใหม่ ระบบจะ push แจ้งทีมช่างทันที</li></ol><p className={teamLine.configured?'line-ok':'line-bad'}>{teamLine.configured?'พร้อมแจ้งเตือนทีมช่าง':`ยังไม่พร้อม: ${(teamLine.missing||[]).join(', ')||'ยังไม่ได้ตั้งค่า Token หรือ Target ID'}`}</p></div>
    </div>
    <div className="panel">
     <h2>ส่งข้อความหาลูกค้า</h2>
     <form onSubmit={send}>
      <label className="form-field">ลูกค้าที่ผูก LINE แล้ว<select value={form.customer_id} onChange={e=>setForm({...form,customer_id:e.target.value})} required><option value="">-- เลือกลูกค้า --</option>{customers.map(x=><option key={x.customer_id} value={x.customer_id}>{x.customer_name}</option>)}</select></label>
      <label className="form-field">ข้อความ<textarea rows="5" value={form.text} onChange={e=>setForm({...form,text:e.target.value})} required placeholder="เช่น แจ้งนัดหมาย แจ้งสถานะงาน หรือข้อความติดตาม"/></label>
-     <div className="modal-actions"><button className="btn primary" disabled={sending||!status?.configured}>{sending?'กำลังส่ง...':'ส่งข้อความ LINE'}</button></div>
+     <div className="modal-actions"><button className="btn primary" disabled={sending||!customerLine.configured}>{sending?'กำลังส่ง...':'ส่งข้อความ LINE'}</button></div>
     </form>
     <p className="muted">ลูกค้าที่ผูก LINE แล้ว {customers.length} ราย</p>
    </div>

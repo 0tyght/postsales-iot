@@ -195,6 +195,10 @@ exports.pushTeamText=async text=>{
 exports.configSummary=async()=>{
   const customer=await customerLineConfig();
   const team=await teamLineConfig();
+  const teamMissing=[
+    !team.channelAccessToken&&'Channel Access Token',
+    !team.targetId&&'Target ID',
+  ].filter(Boolean);
   return {
     customer_oa:{
       configured:Boolean(customer.channelSecret&&customer.channelAccessToken),
@@ -208,6 +212,7 @@ exports.configSummary=async()=>{
       configured:Boolean(team.channelAccessToken&&team.targetId),
       access_token:Boolean(team.channelAccessToken),
       target_id:Boolean(team.targetId),
+      missing:teamMissing,
     },
   };
 };

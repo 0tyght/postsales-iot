@@ -91,7 +91,7 @@ th,td{padding:15px 16px}
 tbody tr{transition:background .12s ease}
 tbody tr:hover{background:#f8fcff}
 .badge{font-weight:750;border-radius:999px;padding:5px 10px}
-.badge-active,.badge-completed{background:#def8ef;color:#11765e}.badge-created,.badge-installation,.badge-admin{background:#e8f3ff;color:#2168ac}.badge-in_progress,.badge-repair,.badge-technician{background:#fff2d9;color:#955d00}.badge-cancelled,.badge-inactive{background:#eef1f4;color:#64707c}
+.badge-active,.badge-completed{background:#def8ef;color:#11765e}.badge-created,.badge-installation,.badge-admin{background:#e8f3ff;color:#2168ac}.badge-in_progress,.badge-repair,.badge-technician{background:#fff2d9;color:#955d00}.badge-cancelled,.badge-inactive{background:#eef1f4;color:#64707c}.badge-stock{background:#edf7ff;color:#1f5f95}
 .modal-backdrop{background:#0a1b2ab0;backdrop-filter:blur(7px)}
 .modal{border-radius:24px;border:1px solid #ffffff66;box-shadow:0 30px 90px #07192d55}
 .modal-head{padding:22px 26px;background:linear-gradient(135deg,#fff,#f5fbff)}

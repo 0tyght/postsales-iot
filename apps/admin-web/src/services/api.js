@@ -1,9 +1,14 @@
 import {getApiBase} from '../runtime-config';
 const token=()=>localStorage.getItem('portal_token')||localStorage.getItem('admin_token');
 const expireSession=()=>{['portal_token','portal_user','admin_token','admin_user'].forEach(key=>localStorage.removeItem(key));window.dispatchEvent(new Event('auth-expired'))};
+const fetchTimeout=(url,options={},timeoutMs=15000)=>{
+ const controller=new AbortController();
+ const timer=setTimeout(()=>controller.abort(),timeoutMs);
+ return fetch(url,{...options,signal:controller.signal}).finally(()=>clearTimeout(timer));
+};
 
 export async function api(path,options={}){
- const request=base=>fetch(`${base}${path}`,{...options,headers:{'Content-Type':'application/json',...(token()?{Authorization:`Bearer ${token()}`}:{ }),...options.headers}});
+ const request=base=>fetchTimeout(`${base}${path}`,{...options,headers:{'Content-Type':'application/json',...(token()?{Authorization:`Bearer ${token()}`}:{ }),...options.headers}});
  let response;try{response=await request(await getApiBase())}catch{try{response=await request(await getApiBase(true))}catch{throw new Error('เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ กรุณาตรวจสอบอินเทอร์เน็ตแล้วลองอีกครั้ง')}}
  const payload=await response.json().catch(()=>({success:false,message:'เซิร์ฟเวอร์ตอบกลับไม่ถูกต้อง'}));
  if(response.status===401)expireSession();
@@ -12,7 +17,7 @@ export async function api(path,options={}){
 }
 
 export async function apiBlob(path){
- const response=await fetch(`${await getApiBase()}${path}`,{headers:token()?{Authorization:`Bearer ${token()}`}:{}});
+ const response=await fetchTimeout(`${await getApiBase()}${path}`,{headers:token()?{Authorization:`Bearer ${token()}`}:{}});
  if(response.status===401)expireSession();
  if(!response.ok)throw new Error('ไม่สามารถโหลดรูปภาพได้');
  return response.blob();

@@ -25,6 +25,7 @@ const secretKeys = new Set([
   'line_customer_channel_secret',
   'line_customer_channel_access_token',
   'line_team_channel_access_token',
+  'line_team_target_id',
 ]);
 
 export default function ServerSettingsPage() {

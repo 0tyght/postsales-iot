@@ -6,10 +6,15 @@ const expireSession=()=>{
  ['portal_token','portal_user','tech_token','tech_user'].forEach(key=>localStorage.removeItem(key));
  window.dispatchEvent(new Event('auth-expired'));
 };
+const fetchTimeout=(url,options={},timeoutMs=15000)=>{
+ const controller=new AbortController();
+ const timer=setTimeout(()=>controller.abort(),timeoutMs);
+ return fetch(url,{...options,signal:controller.signal}).finally(()=>clearTimeout(timer));
+};
 
 const request=async(path,options={},forceConfig=false)=>{
  const isForm=options.body instanceof FormData;
- return fetch(`${await getApiBase(forceConfig)}${path}`,{
+ return fetchTimeout(`${await getApiBase(forceConfig)}${path}`,{
   ...options,
   headers:{
    ...(isForm?{}:{'Content-Type':'application/json'}),
