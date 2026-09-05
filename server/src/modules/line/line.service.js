@@ -141,6 +141,11 @@ const problemFollowupMenu={
     {type:'action',action:{type:'message',label:'ติดต่อเจ้าหน้าที่',text:'ติดต่อเจ้าหน้าที่'}},
   ],
 };
+const registrationMenu={
+  items:[
+    {type:'action',action:{type:'message',label:'ติดต่อเจ้าหน้าที่',text:'ติดต่อเจ้าหน้าที่'}},
+  ],
+};
 const reportStartMenu={
   items:[
     {type:'action',action:{type:'message',label:'แจ้งซ่อมตอนนี้',text:'แจ้งปัญหา'}},
@@ -229,6 +234,15 @@ const help=async customer=>textFrom('help',{
 แจ้งปัญหา: พิมพ์ “แจ้งปัญหา” ตามด้วยอาการ
 ดูสถานะ: พิมพ์ “สถานะ”
 หากมีหลายจุดติดตั้ง ให้พิมพ์ “#รหัสจุดติดตั้ง อาการ”`);
+
+const unboundHelp=()=>textFrom(
+  'unbound_help',
+  {sample_code:'TYTC0001',support_phone:SUPPORT_PHONE},
+  `ยังไม่พบข้อมูลลูกค้าที่ผูกกับ LINE นี้ครับ
+กรุณาส่งรหัสยืนยันที่ได้รับจากช่าง เช่น TYTC0001 ในแชตนี้
+หากยังไม่มีรหัส กรุณากด “ติดต่อเจ้าหน้าที่” ด้านล่างครับ`,
+);
+const replyUnbound=async event=>exports.replyMenu(event.replyToken,await unboundHelp(),registrationMenu);
 
 const statusLabel={open:'รอตรวจสอบ',assigned:'รับเคสแล้ว',resolved:'ปิดเคสแล้ว',cancelled:'ยกเลิก'};
 const formatThaiDateTime=value=>{
@@ -397,16 +411,17 @@ exports.bindInfo=async customerId=>{
 exports.handleEvent=async event=>{
   await repo.ensureTemplates();
   const lineUserId=event.source?.userId;
-  if(!lineUserId||!event.replyToken)return;
-  const customer=await repo.customerByLineId(lineUserId);
+  if(!event.replyToken)return;
+  const customer=lineUserId?await repo.customerByLineId(lineUserId):null;
 
   if(event.type==='follow'){
     const message=customer
       ?await help(customer)
       :await textFrom('follow_unbound',{company_name:COMPANY_NAME,sample_code:'TYTC0001'},'ขอบคุณที่เพิ่มเพื่อน\n\nกรุณาส่งรหัสลงทะเบียน เช่น TYTC0001');
-    return exports.replyMenu(event.replyToken,message);
+    return exports.replyMenu(event.replyToken,message,customer?quickMenu:registrationMenu);
   }
   if(event.type==='postback'){
+    if(!customer)return replyUnbound(event);
     const session=await repo.getReportSession(lineUserId);
     if(event.postback?.data==='repair:appointment:pick'&&session?.step==='appointment'){
       const datetime=event.postback.params?.datetime;
@@ -416,13 +431,17 @@ exports.handleEvent=async event=>{
     }
     return exports.replyMenu(event.replyToken,await help(customer));
   }
-  if(event.type!=='message'||event.message?.type!=='text'){
+  if(event.type!=='message')return;
+
+  if(event.message?.type!=='text'){
+    if(!customer)return replyUnbound(event);
     return exports.replyText(event.replyToken,await textFrom('unsupported_message',{},'ตอนนี้ระบบรับข้อความตัวอักษรก่อนนะครับ'));
   }
 
   const text=event.message.text.trim();
   const registration=text.match(/^(?:ลงทะเบียน\s+)?(TYTC\d{4})$/i);
   if(registration){
+    if(!lineUserId)return replyUnbound(event);
     const customerId=verifyCode(registration[1]);
     if(!customerId)return exports.replyText(event.replyToken,await textFrom('bind_not_found',{bind_code:registration[1]},'รหัสลงทะเบียนไม่ถูกต้อง'));
     const result=await repo.bindLineId(customerId,lineUserId);
@@ -435,7 +454,14 @@ exports.handleEvent=async event=>{
   }
 
   if(!customer){
-    return exports.replyMenu(event.replyToken,await textFrom('unbound_help',{},'กรุณาขอรหัส TYTC จากช่าง แล้วส่งรหัสกลับมาในแชตนี้'));
+    if(text==='ติดต่อเจ้าหน้าที่'){
+      return exports.replyMenu(event.replyToken,await textFrom(
+        'contact_staff',
+        {support_phone:SUPPORT_PHONE},
+        `กรุณาติดต่อเจ้าหน้าที่ได้ที่ ${SUPPORT_PHONE} เพื่อขอรหัสผูกบัญชี LINE ครับ`,
+      ),registrationMenu);
+    }
+    return replyUnbound(event);
   }
 
   if(/^แจ้งปัญหา$/i.test(text)||/^แจ้งซ่อม$/i.test(text))return askSite(event,lineUserId,customer);
