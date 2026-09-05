@@ -78,9 +78,18 @@ while ((-not (Test-Port 5000)) -and (Get-Date) -lt $deadline) {
 }
 if (-not (Test-Port 5000)) { throw 'API server failed to start' }
 
-Get-Process cloudflared -ErrorAction SilentlyContinue | Stop-Process -Force
+$projectCloudflaredPath = [IO.Path]::GetFullPath($cloudflared)
+Get-Process cloudflared -ErrorAction SilentlyContinue |
+  Where-Object { $_.Path -and ([IO.Path]::GetFullPath($_.Path) -eq $projectCloudflaredPath) } |
+  Stop-Process -Force
 if ($UseLineNgrok -and (-not $SkipLineNgrok)) {
-  Get-Process ngrok -ErrorAction SilentlyContinue | Stop-Process -Force
+  $projectNgrok = Find-Ngrok
+  if ($projectNgrok) {
+    $projectNgrokPath = [IO.Path]::GetFullPath($projectNgrok)
+    Get-Process ngrok -ErrorAction SilentlyContinue |
+      Where-Object { $_.Path -and ([IO.Path]::GetFullPath($_.Path) -eq $projectNgrokPath) } |
+      Stop-Process -Force
+  }
 }
 $url = $null
 $lastTunnelError = $null
@@ -242,9 +251,9 @@ Write-Host 'You can also press Ctrl+C; the script will attempt to stop all servi
 try {
   while ($true) {
     $apiState = if (Test-Port 5000) { 'ONLINE' } else { 'OFFLINE' }
-    $tunnelState = if (Get-Process cloudflared -ErrorAction SilentlyContinue) { 'ONLINE' } else { 'OFFLINE' }
+    $tunnelState = if ($tunnelProcess -and (-not $tunnelProcess.HasExited)) { 'ONLINE' } else { 'OFFLINE' }
     $lineState = if ($UseLineNgrok -and (-not $SkipLineNgrok)) {
-      if (Get-Process ngrok -ErrorAction SilentlyContinue) { 'NGROK ONLINE' } else { 'NGROK OFFLINE' }
+      if ($lineNgrokProcess -and (-not $lineNgrokProcess.HasExited)) { 'NGROK ONLINE' } else { 'NGROK OFFLINE' }
     } else {
       'USE CLOUDFLARE URL ABOVE'
     }
@@ -267,8 +276,8 @@ try {
   Write-Host 'Stop requested.' -ForegroundColor Yellow
 } finally {
   Write-Host 'Stopping public test server...' -ForegroundColor Yellow
-  Get-Process cloudflared -ErrorAction SilentlyContinue | Stop-Process -Force
-  if ($UseLineNgrok -and (-not $SkipLineNgrok)) { Get-Process ngrok -ErrorAction SilentlyContinue | Stop-Process -Force }
+  if ($tunnelProcess -and (-not $tunnelProcess.HasExited)) { Stop-Process -Id $tunnelProcess.Id -Force -ErrorAction SilentlyContinue }
+  if ($lineNgrokProcess -and (-not $lineNgrokProcess.HasExited)) { Stop-Process -Id $lineNgrokProcess.Id -Force -ErrorAction SilentlyContinue }
   Stop-PortProcess 5000
   Write-Host 'API and tunnels are stopped.' -ForegroundColor Green
 }
