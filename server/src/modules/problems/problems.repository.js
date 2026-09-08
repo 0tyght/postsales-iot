@@ -1,8 +1,10 @@
 const db=require('../../config/db');
 const channelFromSource=source=>({line_chat:'line',customer_call:'phone',service_contact:'dashboard'}[source]||'dashboard');
+exports.deviceAtSite=async(siteId,deviceId)=>Boolean((await db.query('SELECT 1 FROM device_units WHERE device_id=? AND site_id=?',[deviceId,siteId]))[0][0]);
+exports.findById=async id=>(await db.query('SELECT * FROM problem_reports WHERE problem_id=?',[id]))[0][0];
 exports.list=async actor=> (await db.query(
  `SELECT p.*,s.site_name,c.customer_name,c.phone customer_phone,u.full_name recorded_by_name,j.job_status,tu.full_name technician_name,
-  d.serial_number reported_device_serial,m.model_name reported_device_model,m.brand reported_device_brand
+  d.serial_number reported_device_serial,m.device_type reported_device_type,m.model_name reported_device_model,m.brand reported_device_brand
   FROM problem_reports p JOIN customer_sites s ON s.site_id=p.site_id JOIN customers c ON c.customer_id=s.customer_id
   LEFT JOIN users u ON u.user_id=p.recorded_by LEFT JOIN jobs j ON j.job_id=p.job_id LEFT JOIN users tu ON tu.user_id=j.technician_id
   LEFT JOIN device_units d ON d.device_id=p.reported_device_id LEFT JOIN device_models m ON m.model_id=d.model_id

@@ -59,6 +59,7 @@ CREATE TABLE customer_sites (
 
 CREATE TABLE device_models (
   model_id INT AUTO_INCREMENT PRIMARY KEY,
+  device_type VARCHAR(80) NOT NULL DEFAULT 'ยังไม่ระบุประเภท',
   model_name VARCHAR(150) NOT NULL,
   brand VARCHAR(100),
   description TEXT,

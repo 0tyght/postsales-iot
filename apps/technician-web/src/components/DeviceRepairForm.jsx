@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {api} from '../services/api';
 
 const methodLabels={repair:'ซ่อม/ตั้งค่า',replace:'เปลี่ยนอุปกรณ์',add:'เพิ่มอุปกรณ์',remove:'ถอดอุปกรณ์'};
-const deviceName=device=>`${device.brand?`${device.brand} `:''}${device.model_name} · ${device.serial_number}`;
+const deviceName=device=>`${device.device_type||'ยังไม่ระบุประเภท'} · ${device.brand?`${device.brand} `:''}${device.model_name} · ${device.serial_number}`;
 
 export default function DeviceRepairForm({job,item,onReload,onError}){
  const[editing,setEditing]=useState(false),[saving,setSaving]=useState(false);

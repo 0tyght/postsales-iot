@@ -88,7 +88,7 @@ exports.customerByLineId=async lineUserId=>{
 };
 
 exports.siteDevices=async siteId=>(await db.query(
-  `SELECT d.device_id,d.serial_number,m.model_name,m.brand
+  `SELECT d.device_id,d.serial_number,m.model_name,m.device_type,m.brand
    FROM device_units d JOIN device_models m ON m.model_id=d.model_id
    WHERE d.site_id=? AND d.device_status='active'
    ORDER BY m.model_name,d.serial_number`,
@@ -163,7 +163,7 @@ exports.createProblem=async(siteId,problem)=>{
 
 exports.problemNotificationContext=async problemId=>(await db.query(
   `SELECT p.*,s.site_name,c.customer_name,c.phone customer_phone,
-   d.serial_number reported_device_serial,m.model_name reported_device_model,m.brand reported_device_brand
+   d.serial_number reported_device_serial,m.device_type reported_device_type,m.model_name reported_device_model,m.brand reported_device_brand
    FROM problem_reports p JOIN customer_sites s ON s.site_id=p.site_id JOIN customers c ON c.customer_id=s.customer_id
    LEFT JOIN device_units d ON d.device_id=p.reported_device_id LEFT JOIN device_models m ON m.model_id=d.model_id
    WHERE p.problem_id=?`,

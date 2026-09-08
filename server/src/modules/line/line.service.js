@@ -1,5 +1,6 @@
 const crypto=require('crypto');
 const repo=require('./line.repository');
+const {LineCards}=require('./line.cards');
 
 const LINE_API='https://api.line.me/v2/bot/message';
 const COMPANY_NAME=process.env.COMPANY_NAME||'Post-Sales IoT';
@@ -153,9 +154,9 @@ const reportStartMenu={
   ],
 };
 const issueTypes=['ใช้งานไม่ได้','สัญญาณหาย','ภาพ/เสียงผิดปกติ','ไฟไม่เข้า','แจ้งเตือนผิดปกติ','อื่นๆ'];
-const deviceLabel=device=>`${device.brand?`${device.brand} `:''}${device.model_name} ${device.serial_number}`.trim();
+const deviceLabel=device=>`${device.device_type||'ยังไม่ระบุประเภท'} · ${device.brand?`${device.brand} `:''}${device.model_name} · SN ${device.serial_number}`.trim();
 const shortLabel=text=>String(text||'').slice(0,20);
-const quickMessageItems=items=>({items:items.slice(0,13).map(item=>({type:'action',action:{type:'message',label:shortLabel(item.label),text:item.text}}))});
+const quickMessageItems=items=>({items:items.slice(0,13).map(item=>({type:'action',fullLabel:item.label,action:{type:'message',label:shortLabel(item.label),text:item.text}}))});
 const appointmentMenu={
   items:[
     {type:'action',action:{type:'datetimepicker',label:'เลือกวันเวลา',data:'repair:appointment:pick',mode:'datetime'}},
@@ -165,35 +166,20 @@ const appointmentMenu={
   ],
 };
 const detailMenu={items:[{type:'action',action:{type:'message',label:'ไม่มีรายละเอียดเพิ่ม',text:'ข้ามรายละเอียด'}}]};
+const withCancel=menu=>({items:[...menu.items,{type:'action',action:{type:'message',label:'ยกเลิกการแจ้งซ่อม',text:'ยกเลิก'}}]});
 
-const textMessage=(text,menu=false)=>({
-  type:'text',
-  text:String(text||'').slice(0,5000),
-  ...(menu?{quickReply:menu===true?quickMenu:menu}:{}),
-});
-const serviceCareButtons=()=>({
-  type:'template',
-  altText:'กรุณาเลือกสถานะการใช้งาน',
-  template:{
-    type:'buttons',
-    title:'สถานะการใช้งาน',
-    text:'ตอนนี้ระบบใช้งานเป็นอย่างไรบ้างครับ',
-    actions:[
-      {type:'message',label:'มีปัญหา',text:'มีปัญหา'},
-      {type:'message',label:'ไม่มีปัญหา',text:'ไม่มีปัญหา'},
-    ],
-  },
-});
+const cards=new LineCards({brand:COMPANY_NAME});
+const textMessage=(text,menu=false,options={})=>cards.message(text,menu===true?quickMenu:menu,{phone:SUPPORT_PHONE,...options});
 
-exports.replyText=(replyToken,text,withMenu=false)=>send('reply',{replyToken,messages:[textMessage(text,withMenu)]});
-exports.replyMenu=(replyToken,text,menu=true)=>exports.replyText(replyToken,text,menu);
+exports.replyText=(replyToken,text,withMenu=false,options={})=>send('reply',{replyToken,messages:[textMessage(text,withMenu,options)]});
+exports.replyMenu=(replyToken,text,menu=true,options={})=>exports.replyText(replyToken,text,menu,options);
 exports.pushText=(to,text,menu=false)=>send('push',{to,messages:[textMessage(text,menu)]});
-const pushServiceCare=async(to,text)=>send('push',{to,messages:[textMessage(text,serviceCareMenu),serviceCareButtons()]});
+const pushServiceCare=async(to,text)=>send('push',{to,messages:[textMessage(text,serviceCareMenu,{title:'ถึงรอบดูแล · ขอสอบถามการใช้งาน'})]});
 exports.teamConfigured=async()=>{const cfg=await teamLineConfig();return Boolean(cfg.channelAccessToken&&cfg.targetId);};
 exports.pushTeamText=async text=>{
   const cfg=await teamLineConfig();
   if(!cfg.channelAccessToken||!cfg.targetId)return {sent:false,skipped:true,reason:'ยังไม่ได้ตั้งค่า LINE ทีมช่าง'};
-  await sendWithToken(cfg.channelAccessToken,'push',{to:cfg.targetId,messages:[textMessage(text)]});
+  await sendWithToken(cfg.channelAccessToken,'push',{to:cfg.targetId,messages:[textMessage(text,false,{title:'แจ้งงานทีมช่าง'})]});
   return {sent:true,to:cfg.targetId};
 };
 
@@ -273,7 +259,7 @@ const notifyTeamNewProblem=async problemId=>{
   if(!await exports.teamConfigured())return {sent:false,skipped:true};
   const item=await repo.problemNotificationContext(problemId);
   if(!item)return {sent:false,skipped:true,reason:'problem_not_found'};
-  const device=item.reported_device_id?`${item.reported_device_brand||''} ${item.reported_device_model||''} · ${item.reported_device_serial||''}`.trim():'ไม่ระบุ/ไม่แน่ใจ';
+  const device=item.reported_device_id?`${item.reported_device_type||'ยังไม่ระบุประเภท'} · ${item.reported_device_brand||''} ${item.reported_device_model||''} · SN ${item.reported_device_serial||''}`.trim():'ไม่ระบุ/ไม่แน่ใจ';
   const text=[
     `มีเคสบริการใหม่ #${item.problem_id}`,
     `ลูกค้า: ${item.customer_name}`,
@@ -293,7 +279,7 @@ const askSite=async(event,lineUserId,customer)=>{
   if(!customer.sites.length)return exports.replyText(event.replyToken,await textFrom('no_active_site',{},'บัญชีของคุณยังไม่มีจุดติดตั้งที่เปิดใช้งาน'));
   if(customer.sites.length===1)return askDevice(event,lineUserId,customer,{site_id:customer.sites[0].site_id,site_name:customer.sites[0].site_name});
   await repo.saveReportSession(lineUserId,customer.customer_id,'site',{});
-  return exports.replyMenu(event.replyToken,'ต้องการแจ้งซ่อมจุดติดตั้งไหนครับ',quickMessageItems(customer.sites.map(site=>({label:site.site_name,text:`เลือกจุดติดตั้ง #${site.site_id}`}))));
+  return exports.replyMenu(event.replyToken,'ต้องการแจ้งซ่อมจุดติดตั้งไหนครับ',withCancel(quickMessageItems(customer.sites.map(site=>({label:site.site_name,text:`เลือกจุดติดตั้ง #${site.site_id}`})))),{title:'แจ้งซ่อม 1/5 · จุดติดตั้ง'});
 };
 
 const askDevice=async(event,lineUserId,customer,data)=>{
@@ -303,22 +289,22 @@ const askDevice=async(event,lineUserId,customer,data)=>{
     ...devices.map(device=>({label:deviceLabel(device),text:`เลือกอุปกรณ์ #${device.device_id}`})),
     {label:'ไม่แน่ใจ',text:'อุปกรณ์ไม่แน่ใจ'},
   ];
-  return exports.replyMenu(event.replyToken,`จุดติดตั้ง: ${data.site_name}\nอุปกรณ์ชิ้นไหนมีปัญหาครับ`,quickMessageItems(options));
+  return exports.replyMenu(event.replyToken,`จุดติดตั้ง: ${data.site_name}\nอุปกรณ์ชิ้นไหนมีปัญหาครับ`,withCancel(quickMessageItems(options)),{title:'แจ้งซ่อม 2/5 · เลือกอุปกรณ์'});
 };
 
 const askIssue=async(event,lineUserId,customer,data)=>{
   await repo.saveReportSession(lineUserId,customer.customer_id,'issue',data);
-  return exports.replyMenu(event.replyToken,`อุปกรณ์: ${data.device_label||'ไม่แน่ใจ'}\nลักษณะปัญหาเป็นแบบไหนครับ`,quickMessageItems(issueTypes.map(label=>({label,text:`ประเภท:${label}`}))));
+  return exports.replyMenu(event.replyToken,`อุปกรณ์: ${data.device_label||'ไม่แน่ใจ'}\nลักษณะปัญหาเป็นแบบไหนครับ`,withCancel(quickMessageItems(issueTypes.map(label=>({label,text:`ประเภท:${label}`})))),{title:'แจ้งซ่อม 3/5 · อาการที่พบ'});
 };
 
 const askAppointment=async(event,lineUserId,customer,data)=>{
   await repo.saveReportSession(lineUserId,customer.customer_id,'appointment',data);
-  return exports.replyMenu(event.replyToken,'สะดวกให้ช่างติดต่อ/เข้าดูหน้างานวันเวลาไหนครับ',appointmentMenu);
+  return exports.replyMenu(event.replyToken,'สะดวกให้ช่างติดต่อ/เข้าดูหน้างานวันเวลาไหนครับ\nเวลาที่เลือกเป็นเวลาที่คุณสะดวก ทีมงานจะติดต่อยืนยันนัดอีกครั้งครับ',withCancel(appointmentMenu),{title:'แจ้งซ่อม 4/5 · เวลาที่สะดวก'});
 };
 
 const askDetail=async(event,lineUserId,customer,data)=>{
   await repo.saveReportSession(lineUserId,customer.customer_id,'detail',data);
-  return exports.replyMenu(event.replyToken,'มีรายละเอียดเพิ่มเติมไหมครับ เช่น เกิดตั้งแต่เมื่อไหร่ มีไฟสถานะอะไรขึ้น หรือพื้นที่ที่ติดตั้งอยู่ตรงไหน\nถ้าไม่มี กด “ไม่มีรายละเอียดเพิ่ม” ได้เลยครับ',detailMenu);
+  return exports.replyMenu(event.replyToken,'พิมพ์รายละเอียดเพิ่มเติม เช่น เริ่มมีปัญหาเมื่อไหร่ หรือไฟสถานะที่เห็น\nข้อความถัดไปจะถูกส่งเป็นรายละเอียดการแจ้งซ่อม หากไม่มี กด “ไม่มีรายละเอียดเพิ่ม” ครับ',withCancel(detailMenu),{title:'แจ้งซ่อม 5/5 · รายละเอียด'});
 };
 
 const finishReport=async(event,lineUserId,customer,data,detail)=>{

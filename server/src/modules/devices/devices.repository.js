@@ -9,18 +9,19 @@ const warrantyEnd=(purchaseDate,years)=>{
   return date.toISOString().slice(0,10);
 };
 const optionalId=value=>value===undefined||value===null||value===''?null:value;
+exports.installationSite=async jobId=>(await db.query(`SELECT j.site_id FROM installation_jobs i JOIN jobs j ON j.job_id=i.job_id WHERE i.job_id=?`,[jobId]))[0][0];
 exports.models=async()=> (await db.query(`SELECT m.*,COUNT(d.device_id) device_count
   FROM device_models m LEFT JOIN device_units d ON d.model_id=m.model_id
   GROUP BY m.model_id ORDER BY m.model_id DESC`))[0];
-exports.createModel=async d=>(await db.query('INSERT INTO device_models (model_name,brand,description,specification) VALUES (?,?,?,?)',[d.model_name,d.brand||null,d.description||null,d.specification||null]))[0].insertId;
-exports.updateModel=async(id,d)=>db.query('UPDATE device_models SET model_name=?,brand=?,description=?,specification=? WHERE model_id=?',[d.model_name,d.brand||null,d.description||null,d.specification||null,id]);
+exports.createModel=async d=>(await db.query('INSERT INTO device_models (model_name,brand,description,specification,device_type) VALUES (?,?,?,?,?)',[d.model_name,d.brand||null,d.description||null,d.specification||null,d.device_type||'ยังไม่ระบุประเภท']))[0].insertId;
+exports.updateModel=async(id,d)=>db.query('UPDATE device_models SET model_name=?,brand=?,description=?,specification=?,device_type=COALESCE(?,device_type) WHERE model_id=?',[d.model_name,d.brand||null,d.description||null,d.specification||null,d.device_type||null,id]);
 exports.removeModel=async id=>{
   const [[usage]]=await db.query('SELECT COUNT(*) device_count FROM device_units WHERE model_id=?',[id]);
   if(Number(usage.device_count)>0)throw Object.assign(new Error('ลบโมเดลไม่ได้ เพราะมีอุปกรณ์จริงที่ใช้โมเดลนี้อยู่'),{status:400});
   await db.query('DELETE FROM device_models WHERE model_id=?',[id]);
 };
 exports.units=async()=> (await db.query(
- `SELECT d.*,m.model_name,m.brand,s.site_name,c.customer_name,c.phone customer_phone,
+ `SELECT d.*,m.model_name,m.device_type,m.brand,s.site_name,c.customer_name,c.phone customer_phone,
   COUNT(pd.problem_device_id) problem_device_count
   FROM device_units d JOIN device_models m ON m.model_id=d.model_id
   LEFT JOIN customer_sites s ON s.site_id=d.site_id LEFT JOIN customers c ON c.customer_id=s.customer_id
@@ -50,7 +51,7 @@ exports.removeUnit=async id=>{
   await db.query('DELETE FROM device_units WHERE device_id=?',[id]);
 };
 exports.warrantyAlerts=async()=> (await db.query(
- `SELECT d.*,m.model_name,m.brand,s.site_name,c.customer_name,DATEDIFF(d.warranty_end_date,CURDATE()) days_remaining
+ `SELECT d.*,m.model_name,m.device_type,m.brand,s.site_name,c.customer_name,DATEDIFF(d.warranty_end_date,CURDATE()) days_remaining
   FROM device_units d JOIN device_models m ON m.model_id=d.model_id LEFT JOIN customer_sites s ON s.site_id=d.site_id
   LEFT JOIN customers c ON c.customer_id=s.customer_id
   WHERE d.warranty_end_date IS NOT NULL ORDER BY d.warranty_end_date`

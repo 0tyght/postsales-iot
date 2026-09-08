@@ -37,6 +37,7 @@ export default function DeviceUnitsPage(){
    {key:'warranty',label:'ประกัน',predicate:warrantyFilter,options:[{value:'expired',label:'หมดประกันแล้ว'},{value:'soon',label:'หมดภายใน 90 วัน'},{value:'valid',label:'มากกว่า 90 วัน'},{value:'none',label:'ไม่ระบุ'}]},
   ]}
   columns={[
+   {key:'device_type',label:'ประเภท',render:r=>r.device_type||'ยังไม่ระบุประเภท'},
    {key:'serial_number',label:'Serial Number'},
    {key:'model_name',label:'รุ่น'},
    {key:'customer_name',label:'ลูกค้า',render:r=>r.customer_name||'ยังไม่ติดตั้ง'},
@@ -47,7 +48,7 @@ export default function DeviceUnitsPage(){
    {key:'warranty_end_date',label:'หมดประกัน',render:r=>fmtDate(r.warranty_end_date)},
   ]}
   fields={[
-   {name:'model_id',label:'โมเดล',type:'select',required:true,options:l=>l.models?.map(x=>({value:x.model_id,label:`${x.brand||''} ${x.model_name}`.trim()}))||[]},
+   {name:'model_id',label:'ประเภท / รุ่น',type:'select',required:true,options:l=>l.models?.map(x=>({value:x.model_id,label:`${x.device_type||'ยังไม่ระบุประเภท'} · ${x.brand||''} ${x.model_name}`.trim()}))||[]},
    {name:'serial_number',label:'Serial Number',required:true,scanSerial:true,help:'หมายเลขต้องไม่ซ้ำกับอุปกรณ์ชิ้นอื่น ตรวจเลขก่อนบันทึก'},
    {name:'purchase_date',label:'วันที่ซื้อ',type:'date',required:true},
    {name:'warranty_years',label:'ระยะเวลาประกันสินค้า (ปี)',type:'number',min:1,required:true,placeholder:'เช่น 1, 2, 3',help:'ระบบจะคำนวณวันหมดประกันให้อัตโนมัติจากวันที่ซื้อ'},

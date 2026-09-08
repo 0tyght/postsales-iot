@@ -4,7 +4,7 @@ import SerialScanButton from '../components/SerialScanButton';
 
 const emptyDevice={model_id:'',serial_number:'',purchase_date:'',warranty_years:1};
 const dateValue=value=>value?String(value).slice(0,10):'';
-const deviceName=item=>`${item.brand?`${item.brand} `:''}${item.model_name||'อุปกรณ์'} · SN: ${item.serial_number}`;
+const deviceName=item=>`${item.device_type||'ยังไม่ระบุประเภท'} · ${item.brand?`${item.brand} `:''}${item.model_name||'อุปกรณ์'} · SN: ${item.serial_number}`;
 
 function InstalledDeviceRow({item,job,models,editable,onReload,onError}){
  const[editing,setEditing]=useState(false);
@@ -45,7 +45,7 @@ function InstalledDeviceRow({item,job,models,editable,onReload,onError}){
     <label>โมเดล
      <select required value={form.model_id} onChange={e=>setForm({...form,model_id:e.target.value})}>
       <option value="">-- เลือกโมเดล --</option>
-      {models.map(model=><option value={model.model_id} key={model.model_id}>{model.brand} {model.model_name}</option>)}
+      {models.map(model=><option value={model.model_id} key={model.model_id}>{model.device_type||'ยังไม่ระบุประเภท'} · {model.brand} {model.model_name}</option>)}
      </select>
     </label>
     <label>Serial Number<input required value={form.serial_number} onChange={e=>setForm({...form,serial_number:e.target.value})}/><SerialScanButton onScan={value=>setForm(current=>({...current,serial_number:value}))}/></label>
@@ -109,7 +109,7 @@ function AddInventoryDeviceDialog({models,onClose,onCreated,onError}){
     <label>โมเดล
      <select required value={form.model_id} onChange={e=>setForm({...form,model_id:e.target.value})}>
       <option value="">-- เลือกโมเดล --</option>
-      {models.map(model=><option value={model.model_id} key={model.model_id}>{model.brand} {model.model_name}</option>)}
+      {models.map(model=><option value={model.model_id} key={model.model_id}>{model.device_type||'ยังไม่ระบุประเภท'} · {model.brand} {model.model_name}</option>)}
      </select>
     </label>
     <label>Serial Number<input required value={form.serial_number} onChange={e=>setForm({...form,serial_number:e.target.value})}/><SerialScanButton onScan={value=>setForm(current=>({...current,serial_number:value}))}/></label>

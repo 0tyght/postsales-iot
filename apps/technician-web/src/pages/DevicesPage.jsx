@@ -3,7 +3,7 @@ import {api} from '../services/api';
 import SerialScanButton from '../components/SerialScanButton';
 
 const emptyDevice={model_id:'',serial_number:'',purchase_date:'',warranty_years:1};
-const emptyModel={brand:'',model_name:'',description:'',specification:''};
+const emptyModel={device_type:'',brand:'',model_name:'',description:'',specification:''};
 const dateText=value=>value?new Date(value).toLocaleDateString('th-TH'):'-';
 const modelName=(models,id)=>{
  const model=models.find(item=>String(item.model_id)===String(id));
@@ -23,7 +23,7 @@ export default function DevicesPage({devices,models,onChanged}){
  const visible=useMemo(()=>devices.filter(item=>{
   const inStock=!item.site_id&&!item.installation_job_id;
   const matchFilter=filter==='all'||(filter==='stock'?inStock:!inStock);
-  const text=[item.serial_number,item.model_name,item.brand,item.customer_name,item.site_name].join(' ').toLowerCase();
+  const text=[item.device_type,item.serial_number,item.model_name,item.brand,item.customer_name,item.site_name].join(' ').toLowerCase();
   return matchFilter&&(!search||text.includes(search.toLowerCase()));
  }),[devices,filter,search]);
 
@@ -80,7 +80,7 @@ export default function DevicesPage({devices,models,onChanged}){
     <label>โมเดล
      <select required value={form.model_id} onChange={e=>setForm({...form,model_id:e.target.value})}>
       <option value="">-- เลือกโมเดล --</option>
-      {models.map(model=><option value={model.model_id} key={model.model_id}>{model.brand} {model.model_name}</option>)}
+      {models.map(model=><option value={model.model_id} key={model.model_id}>{model.device_type||'ยังไม่ระบุประเภท'} · {model.brand} {model.model_name}</option>)}
      </select>
     </label>
     <label>Serial Number<input required value={form.serial_number} onChange={e=>setForm({...form,serial_number:e.target.value})}/><SerialScanButton onScan={value=>setForm(current=>({...current,serial_number:value}))}/></label>
@@ -94,6 +94,7 @@ export default function DevicesPage({devices,models,onChanged}){
     <div className="sheet-head"><h2>เพิ่มโมเดล</h2><button type="button" className="icon" onClick={()=>setAddingModel(false)}>×</button></div>
     <p>โมเดลคือข้อมูลรุ่น/สเปกกลาง ใช้เลือกตอนเพิ่มอุปกรณ์จริง</p>
     <div className="form-grid">
+     <label>ประเภทอุปกรณ์<input required maxLength="80" placeholder="เช่น กล้องวงจรปิด, สวิตช์, NVR, HDD" value={modelForm.device_type} onChange={e=>setModelForm({...modelForm,device_type:e.target.value})}/></label>
      <label>ชื่อโมเดล<input required value={modelForm.model_name} onChange={e=>setModelForm({...modelForm,model_name:e.target.value})}/></label>
      <label>ยี่ห้อ<input value={modelForm.brand} onChange={e=>setModelForm({...modelForm,brand:e.target.value})}/></label>
      <label className="wide">รายละเอียด<textarea rows="2" value={modelForm.description} onChange={e=>setModelForm({...modelForm,description:e.target.value})}/></label>
@@ -118,7 +119,7 @@ export default function DevicesPage({devices,models,onChanged}){
    <div className="inventory-list">
     {visible.map(item=><article className="inventory-item" key={item.device_id}>
      <div>
-      <b>{item.brand?`${item.brand} `:''}{item.model_name||modelName(models,item.model_id)}</b>
+      <b>{item.device_type||'ยังไม่ระบุประเภท'} · {item.brand?`${item.brand} `:''}{item.model_name||modelName(models,item.model_id)}</b>
       <small>SN: {item.serial_number}</small>
       <small>ซื้อ {dateText(item.purchase_date)} · ประกัน {item.warranty_years||'-'} ปี</small>
      </div>

@@ -8,9 +8,9 @@ exports.detail=async(id,actor)=>{const access=allowed(actor);const [rows]=await 
  LEFT JOIN users u ON u.user_id=j.technician_id LEFT JOIN installation_jobs i ON i.job_id=j.job_id
  LEFT JOIN repair_jobs r ON r.job_id=j.job_id LEFT JOIN problem_reports p ON p.job_id=j.job_id
  WHERE j.job_id=? AND ${access.sql}`,[id,...access.params]);if(!rows[0])return null;
- const [devices]=await db.query(`SELECT d.*,m.model_name,m.brand FROM device_units d JOIN device_models m ON m.model_id=d.model_id WHERE d.site_id=? ORDER BY d.device_id DESC`,[rows[0].site_id]);
- const [availableDevices]=await db.query(`SELECT d.*,m.model_name,m.brand FROM device_units d JOIN device_models m ON m.model_id=d.model_id WHERE d.site_id IS NULL AND d.installation_job_id IS NULL AND d.device_status='active' ORDER BY d.device_id DESC`);
- const [problemDevices]=await db.query(`SELECT pd.*,d.serial_number,m.model_name,m.brand,rd.serial_number replacement_serial,rm.model_name replacement_model_name
+ const [devices]=await db.query(`SELECT d.*,m.model_name,m.device_type,m.brand FROM device_units d JOIN device_models m ON m.model_id=d.model_id WHERE d.site_id=? ORDER BY d.device_id DESC`,[rows[0].site_id]);
+ const [availableDevices]=await db.query(`SELECT d.*,m.model_name,m.device_type,m.brand FROM device_units d JOIN device_models m ON m.model_id=d.model_id WHERE d.site_id IS NULL AND d.installation_job_id IS NULL AND d.device_status='active' ORDER BY d.device_id DESC`);
+ const [problemDevices]=await db.query(`SELECT pd.*,d.serial_number,m.model_name,m.device_type,m.brand,rd.serial_number replacement_serial,rm.model_name replacement_model_name
  FROM problem_devices pd JOIN device_units d ON d.device_id=pd.device_id JOIN device_models m ON m.model_id=d.model_id
  LEFT JOIN device_units rd ON rd.device_id=pd.replacement_device_id LEFT JOIN device_models rm ON rm.model_id=rd.model_id
  WHERE pd.job_id=?`,[id]);
