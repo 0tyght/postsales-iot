@@ -1,0 +1,12 @@
+.serial-scan-button{margin-top:6px;min-height:44px;white-space:normal}
+.serial-scanner-dialog{box-sizing:border-box;width:min(94vw,520px);max-height:90dvh;overflow:auto;overscroll-behavior:contain;border:0;border-radius:16px;padding:20px;background:#fff;color:#102c40;box-shadow:0 15px 60px #0005}
+.serial-scanner-dialog::backdrop{background:#0009}
+.serial-scanner-dialog h2{margin:0 0 12px;font-size:1.25rem}
+.serial-scanner-dialog p{line-height:1.5}
+.serial-scanner-dialog video{width:100%;max-height:40dvh;object-fit:contain;background:#111;border-radius:8px}
+.serial-scanner-dialog label{display:grid;gap:8px}
+.serial-scanner-dialog input{box-sizing:border-box;width:100%;min-width:0;font-size:16px;padding:12px;border:1px solid #aabcc9;border-radius:8px}
+.serial-scanner-dialog [role=alert]{color:#a32626;overflow-wrap:anywhere}
+.serial-scanner-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.serial-scanner-actions button{flex:1;min-height:44px;padding:10px;border:1px solid #9eb4c2;border-radius:8px;cursor:pointer}
+.serial-scanner-actions button:disabled{opacity:.5;cursor:not-allowed}

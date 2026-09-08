@@ -1,5 +1,6 @@
 import {useMemo,useState} from 'react';
 import {api} from '../services/api';
+import SerialScanButton from '../components/SerialScanButton';
 
 const emptyDevice={model_id:'',serial_number:'',purchase_date:'',warranty_years:1};
 const emptyModel={brand:'',model_name:'',description:'',specification:''};
@@ -82,7 +83,7 @@ export default function DevicesPage({devices,models,onChanged}){
       {models.map(model=><option value={model.model_id} key={model.model_id}>{model.brand} {model.model_name}</option>)}
      </select>
     </label>
-    <label>Serial Number<input required value={form.serial_number} onChange={e=>setForm({...form,serial_number:e.target.value})}/></label>
+    <label>Serial Number<input required value={form.serial_number} onChange={e=>setForm({...form,serial_number:e.target.value})}/><SerialScanButton onScan={value=>setForm(current=>({...current,serial_number:value}))}/></label>
     <label>วันที่ซื้อ<input required type="date" value={form.purchase_date} onChange={e=>setForm({...form,purchase_date:e.target.value})}/></label>
     <label>ระยะประกันสินค้า (ปี)<input required min="1" type="number" value={form.warranty_years} onChange={e=>setForm({...form,warranty_years:e.target.value})}/></label>
     <button className="primary full" disabled={creating}>{creating?'กำลังเพิ่มอุปกรณ์...':'เพิ่มอุปกรณ์เข้าคลัง'}</button>

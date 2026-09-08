@@ -6,7 +6,7 @@ import {env} from 'node:process'
 export default defineConfig({
   base: env.VITE_BASE_PATH || '/',
   plugins: [react()],
-  resolve: { dedupe: ['react', 'react-dom'] },
+  resolve: { dedupe: ['react', 'react-dom', '@zxing/browser', '@zxing/library'] },
   server: {
     host: '0.0.0.0',
     port: 5173,

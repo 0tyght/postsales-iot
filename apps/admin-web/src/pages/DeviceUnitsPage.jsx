@@ -48,7 +48,7 @@ export default function DeviceUnitsPage(){
   ]}
   fields={[
    {name:'model_id',label:'โมเดล',type:'select',required:true,options:l=>l.models?.map(x=>({value:x.model_id,label:`${x.brand||''} ${x.model_name}`.trim()}))||[]},
-   {name:'serial_number',label:'Serial Number',required:true,help:'หมายเลขต้องไม่ซ้ำกับอุปกรณ์ชิ้นอื่น'},
+   {name:'serial_number',label:'Serial Number',required:true,scanSerial:true,help:'หมายเลขต้องไม่ซ้ำกับอุปกรณ์ชิ้นอื่น ตรวจเลขก่อนบันทึก'},
    {name:'purchase_date',label:'วันที่ซื้อ',type:'date',required:true},
    {name:'warranty_years',label:'ระยะเวลาประกันสินค้า (ปี)',type:'number',min:1,required:true,placeholder:'เช่น 1, 2, 3',help:'ระบบจะคำนวณวันหมดประกันให้อัตโนมัติจากวันที่ซื้อ'},
    {name:'device_status',label:'สถานะอุปกรณ์',type:'select',required:true,options:[{value:'active',label:'พร้อมใช้งาน / ติดตั้งแล้วใช้งานได้'},{value:'inactive',label:'เลิกใช้งาน / ถูกเปลี่ยนแล้ว'}]},

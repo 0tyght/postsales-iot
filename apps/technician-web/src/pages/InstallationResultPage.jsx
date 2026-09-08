@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import {api} from '../services/api';
+import SerialScanButton from '../components/SerialScanButton';
 
 const emptyDevice={model_id:'',serial_number:'',purchase_date:'',warranty_years:1};
 const dateValue=value=>value?String(value).slice(0,10):'';
@@ -47,7 +48,7 @@ function InstalledDeviceRow({item,job,models,editable,onReload,onError}){
       {models.map(model=><option value={model.model_id} key={model.model_id}>{model.brand} {model.model_name}</option>)}
      </select>
     </label>
-    <label>Serial Number<input required value={form.serial_number} onChange={e=>setForm({...form,serial_number:e.target.value})}/></label>
+    <label>Serial Number<input required value={form.serial_number} onChange={e=>setForm({...form,serial_number:e.target.value})}/><SerialScanButton onScan={value=>setForm(current=>({...current,serial_number:value}))}/></label>
     <label>วันที่ซื้อ<input required type="date" value={form.purchase_date} onChange={e=>setForm({...form,purchase_date:e.target.value})}/></label>
     <label>ระยะประกันสินค้า (ปี)<input required type="number" min="1" value={form.warranty_years} onChange={e=>setForm({...form,warranty_years:e.target.value})}/></label>
     <label>สถานะ
@@ -111,7 +112,7 @@ function AddInventoryDeviceDialog({models,onClose,onCreated,onError}){
       {models.map(model=><option value={model.model_id} key={model.model_id}>{model.brand} {model.model_name}</option>)}
      </select>
     </label>
-    <label>Serial Number<input required value={form.serial_number} onChange={e=>setForm({...form,serial_number:e.target.value})}/></label>
+    <label>Serial Number<input required value={form.serial_number} onChange={e=>setForm({...form,serial_number:e.target.value})}/><SerialScanButton onScan={value=>setForm(current=>({...current,serial_number:value}))}/></label>
     <label>วันที่ซื้อ<input required type="date" value={form.purchase_date} onChange={e=>setForm({...form,purchase_date:e.target.value})}/></label>
     <label>ระยะประกันสินค้า (ปี)<input required type="number" min="1" value={form.warranty_years} onChange={e=>setForm({...form,warranty_years:e.target.value})}/></label>
    </div>

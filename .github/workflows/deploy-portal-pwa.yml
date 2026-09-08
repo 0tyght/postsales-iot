@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - "apps/admin-web/**"
+      - "apps/shared/**"
       - "apps/technician-web/src/**"
       - "apps/technician-web/public/icon-*.png"
       - "scripts/copy-pwa-assets.mjs"
